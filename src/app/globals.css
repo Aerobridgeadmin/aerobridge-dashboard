@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --font-display: 'Instrument Serif', serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  --font-body: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
@@ -22,8 +22,8 @@ html {
 
 body {
   font-family: var(--font-body);
-  background-color: #f8fafc;
-  color: #0f172a;
+  background-color: #f8f9fa;
+  color: #212529;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -39,12 +39,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #dee2e6;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #adb5bd;
 }
 
 /* Stagger animation delays */
@@ -55,37 +55,30 @@ body {
 .stagger-5 { animation-delay: 0.25s; }
 .stagger-6 { animation-delay: 0.3s; }
 
-/* Noise texture overlay */
-.noise-bg::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 0;
-}
-
 @layer components {
   .card {
-    @apply bg-white rounded-xl border border-surface-200/60 shadow-card transition-all duration-200;
+    @apply bg-white rounded-xl border border-gray-200 shadow-card transition-all duration-200;
   }
   .card:hover {
-    @apply shadow-card-hover border-surface-200;
+    @apply shadow-card-hover border-gray-300;
   }
   .badge {
     @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
   }
   .badge-blue {
-    @apply bg-brand-50 text-brand-700;
+    background-color: rgba(11, 61, 145, 0.08);
+    color: #0B3D91;
   }
   .badge-green {
-    @apply bg-emerald-50 text-emerald-700;
+    background-color: rgba(40, 167, 69, 0.1);
+    color: #28a745;
   }
   .badge-amber {
-    @apply bg-amber-50 text-amber-700;
+    background-color: rgba(255, 193, 7, 0.15);
+    color: #856404;
   }
   .badge-rose {
-    @apply bg-rose-50 text-rose-700;
+    background-color: rgba(214, 69, 65, 0.1);
+    color: #D64541;
   }
 }

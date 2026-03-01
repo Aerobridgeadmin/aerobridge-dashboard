@@ -14,29 +14,29 @@ interface StatCardProps {
 
 const colorMap = {
   blue: {
-    bg: 'bg-brand-50',
-    icon: 'text-brand-500',
-    ring: 'ring-brand-100',
+    bg: 'rgba(11, 61, 145, 0.08)',
+    icon: '#0B3D91',
+    ring: 'rgba(11, 61, 145, 0.04)',
   },
   emerald: {
-    bg: 'bg-emerald-50',
-    icon: 'text-emerald-500',
-    ring: 'ring-emerald-100',
+    bg: 'rgba(40, 167, 69, 0.1)',
+    icon: '#28a745',
+    ring: 'rgba(40, 167, 69, 0.05)',
   },
   amber: {
-    bg: 'bg-amber-50',
-    icon: 'text-amber-500',
-    ring: 'ring-amber-100',
+    bg: 'rgba(255, 193, 7, 0.12)',
+    icon: '#e0a800',
+    ring: 'rgba(255, 193, 7, 0.06)',
   },
   rose: {
-    bg: 'bg-rose-50',
-    icon: 'text-rose-500',
-    ring: 'ring-rose-100',
+    bg: 'rgba(214, 69, 65, 0.08)',
+    icon: '#D64541',
+    ring: 'rgba(214, 69, 65, 0.04)',
   },
   violet: {
-    bg: 'bg-violet-50',
-    icon: 'text-violet-500',
-    ring: 'ring-violet-100',
+    bg: 'rgba(135, 206, 235, 0.15)',
+    icon: '#17a2b8',
+    ring: 'rgba(135, 206, 235, 0.08)',
   },
 }
 
@@ -50,20 +50,23 @@ export default function StatCard({ title, value, change, changeType = 'neutral',
     >
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-xs font-medium uppercase tracking-wider text-surface-500">{title}</p>
-          <p className="mt-2 font-display text-3xl text-surface-900">{value}</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wider text-surface-500">{title}</p>
+          <p className="mt-2 text-3xl font-extrabold text-surface-800">{value}</p>
           {change && (
             <p className={`mt-1.5 text-xs font-medium ${
-              changeType === 'positive' ? 'text-emerald-600' :
-              changeType === 'negative' ? 'text-rose-600' :
+              changeType === 'positive' ? 'text-success-500' :
+              changeType === 'negative' ? 'text-danger-500' :
               'text-surface-500'
             }`}>
               {change}
             </p>
           )}
         </div>
-        <div className={`flex h-10 w-10 items-center justify-center rounded-xl ${colors.bg} ring-4 ${colors.ring}`}>
-          <Icon className={`h-5 w-5 ${colors.icon}`} />
+        <div
+          className="flex h-11 w-11 items-center justify-center rounded-xl"
+          style={{ backgroundColor: colors.bg, boxShadow: `0 0 0 4px ${colors.ring}` }}
+        >
+          <Icon className="h-5 w-5" style={{ color: colors.icon }} />
         </div>
       </div>
     </div>

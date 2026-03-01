@@ -30,10 +30,10 @@ const activityIcons: Record<string, any> = {
 
 const activityColors: Record<string, string> = {
   enrollment: 'bg-brand-50 text-brand-500',
-  completion: 'bg-emerald-50 text-emerald-500',
-  quiz: 'bg-violet-50 text-violet-500',
-  certificate: 'bg-amber-50 text-amber-500',
-  batch: 'bg-rose-50 text-rose-500',
+  completion: 'bg-success-50 text-success-500',
+  quiz: 'bg-info-50 text-info-500',
+  certificate: 'bg-warning-50 text-warning-500',
+  batch: 'bg-cta-500/10 text-cta-500',
 }
 
 export default function DashboardPage() {
@@ -130,7 +130,7 @@ export default function DashboardPage() {
                   Enrollments
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
+                  <span className="h-2.5 w-2.5 rounded-full bg-success-500"></span>
                   Completions
                 </span>
               </div>
@@ -149,7 +149,7 @@ export default function DashboardPage() {
                       }}
                     ></div>
                     <div
-                      className="w-5 rounded-t-md bg-emerald-400 transition-all duration-500"
+                      className="w-5 rounded-t-md bg-success-500 transition-all duration-500"
                       style={{
                         height: `${(d.completions / maxEnrollment) * 100}%`,
                         animationDelay: `${350 + i * 80}ms`,
@@ -179,7 +179,7 @@ export default function DashboardPage() {
                   <path
                     d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831"
                     fill="none"
-                    stroke="#0c8ce8"
+                    stroke="#0B3D91"
                     strokeWidth="3"
                     strokeDasharray={`${stats.completionRate}, 100`}
                     strokeLinecap="round"
@@ -187,17 +187,17 @@ export default function DashboardPage() {
                   />
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <span className="font-display text-3xl text-surface-900">{stats.completionRate}%</span>
+                  <span className="text-3xl font-extrabold text-surface-900">{stats.completionRate}%</span>
                 </div>
               </div>
 
               <div className="mt-4 grid w-full grid-cols-2 gap-3">
                 <div className="rounded-lg bg-surface-50 p-3 text-center">
-                  <p className="font-display text-lg text-surface-900">{stats.certificatesIssued}</p>
+                  <p className="text-lg font-bold text-surface-900">{stats.certificatesIssued}</p>
                   <p className="text-[10px] uppercase tracking-wider text-surface-500">Completed</p>
                 </div>
                 <div className="rounded-lg bg-surface-50 p-3 text-center">
-                  <p className="font-display text-lg text-surface-900">{stats.totalStudents - stats.certificatesIssued}</p>
+                  <p className="text-lg font-bold text-surface-900">{stats.totalStudents - stats.certificatesIssued}</p>
                   <p className="text-[10px] uppercase tracking-wider text-surface-500">In Progress</p>
                 </div>
               </div>
@@ -211,7 +211,7 @@ export default function DashboardPage() {
           <div className="card col-span-2 animate-slide-up p-6" style={{ animationDelay: '350ms', animationFillMode: 'both' }}>
             <div className="mb-4 flex items-center justify-between">
               <h3 className="text-sm font-semibold text-surface-900">Top Courses by Enrollment</h3>
-              <a href="/courses" className="flex items-center gap-1 text-xs font-medium text-brand-600 hover:text-brand-700">
+              <a href="/courses" className="flex items-center gap-1 text-xs font-medium text-brand-500 hover:text-brand-600">
                 View all <ArrowUpRight className="h-3 w-3" />
               </a>
             </div>

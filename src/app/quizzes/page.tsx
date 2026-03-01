@@ -19,9 +19,9 @@ export default function QuizzesPage() {
         <div className="mb-6 flex items-center justify-between">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" />
-            <input type="text" placeholder="Search quizzes..." className="h-10 w-72 rounded-lg border border-surface-200 bg-white pl-9 pr-4 text-sm outline-none transition-all placeholder:text-surface-400 focus:border-brand-300 focus:ring-2 focus:ring-brand-100" />
+            <input type="text" placeholder="Search quizzes..." className="h-10 w-72 rounded-lg border border-surface-200 bg-white pl-9 pr-4 text-sm outline-none transition-all placeholder:text-surface-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-50" />
           </div>
-          <button className="flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-all hover:bg-brand-700 hover:shadow-md active:scale-[0.98]">
+          <button className="flex items-center gap-2 rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-all hover:bg-brand-600 hover:shadow-md active:scale-[0.98]">
             <Plus className="h-4 w-4" /> Create Quiz
           </button>
         </div>
@@ -55,11 +55,11 @@ export default function QuizzesPage() {
               <div className="mt-4">
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-surface-500">Avg Score</span>
-                  <span className={`font-semibold ${quiz.avg_score >= quiz.passing_score ? 'text-emerald-600' : 'text-rose-600'}`}>{quiz.avg_score}%</span>
+                  <span className={`font-semibold ${quiz.avg_score >= quiz.passing_score ? 'text-success-500' : 'text-cta-500'}`}>{quiz.avg_score}%</span>
                 </div>
                 <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-surface-100">
                   <div className="relative h-full overflow-hidden rounded-full">
-                    <div className={`h-full rounded-full transition-all duration-700 ${quiz.avg_score >= quiz.passing_score ? 'bg-emerald-500' : 'bg-rose-400'}`} style={{ width: `${quiz.avg_score}%` }}></div>
+                    <div className={`h-full rounded-full transition-all duration-700 ${quiz.avg_score >= quiz.passing_score ? 'bg-success-500' : 'bg-cta-500'}`} style={{ width: `${quiz.avg_score}%` }}></div>
                     <div className="absolute top-0 h-full w-0.5 bg-surface-900/30" style={{ left: `${quiz.passing_score}%` }}></div>
                   </div>
                 </div>

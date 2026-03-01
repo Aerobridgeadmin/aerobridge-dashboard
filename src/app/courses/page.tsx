@@ -27,9 +27,9 @@ export default function CoursesPage() {
         <div className="mb-6 flex items-center justify-between">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" />
-            <input type="text" placeholder="Search courses..." className="h-10 w-72 rounded-lg border border-surface-200 bg-white pl-9 pr-4 text-sm outline-none transition-all placeholder:text-surface-400 focus:border-brand-300 focus:ring-2 focus:ring-brand-100" />
+            <input type="text" placeholder="Search courses..." className="h-10 w-72 rounded-lg border border-surface-200 bg-white pl-9 pr-4 text-sm outline-none transition-all placeholder:text-surface-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-50" />
           </div>
-          <button className="flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-all hover:bg-brand-700 hover:shadow-md active:scale-[0.98]">
+          <button className="flex items-center gap-2 rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-all hover:bg-brand-600 hover:shadow-md active:scale-[0.98]">
             <Plus className="h-4 w-4" /> New Course
           </button>
         </div>
@@ -40,11 +40,11 @@ export default function CoursesPage() {
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
           {courses.map((course, i) => (
             <div key={course.id} className="card group animate-slide-up overflow-hidden" style={{ animationDelay: `${i * 60}ms`, animationFillMode: 'both' }}>
-              <div className="relative h-36 bg-gradient-to-br from-brand-600 via-brand-500 to-brand-400 p-5">
+              <div className="relative h-36 bg-gradient-to-br from-brand-500 via-brand-600 to-brand-700 p-5">
                 <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ccircle%20cx%3D%221%22%20cy%3D%221%22%20r%3D%221%22%20fill%3D%22rgba(255%2C255%2C255%2C0.08)%22%2F%3E%3C%2Fsvg%3E')]"></div>
                 <div className="relative z-10">
                   <span className={`badge ${categoryColors[course.category] || 'badge-blue'} !bg-white/20 !text-white backdrop-blur-sm`}>{course.category}</span>
-                  <h3 className="mt-3 font-display text-xl leading-tight text-white">{course.title}</h3>
+                  <h3 className="mt-3 text-xl font-bold leading-tight text-white">{course.title}</h3>
                 </div>
                 {!course.published && (
                   <div className="absolute right-3 top-3 rounded-full bg-surface-900/60 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white backdrop-blur-sm">Draft</div>

@@ -7,8 +7,8 @@ import { Batch } from '@/lib/supabase'
 import { Plus, Search, Calendar, Users, ArrowRight, Loader2 } from 'lucide-react'
 
 const statusStyles: Record<string, string> = {
-  active: 'bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200',
-  upcoming: 'bg-brand-50 text-brand-700 ring-1 ring-brand-200',
+  active: 'bg-success-50 text-success-500 ring-1 ring-success-500/20',
+  upcoming: 'bg-brand-50 text-brand-500 ring-1 ring-brand-500/20',
   completed: 'bg-surface-100 text-surface-500 ring-1 ring-surface-200',
 }
 
@@ -25,9 +25,9 @@ export default function BatchesPage() {
         <div className="mb-6 flex items-center justify-between">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" />
-            <input type="text" placeholder="Search batches..." className="h-10 w-72 rounded-lg border border-surface-200 bg-white pl-9 pr-4 text-sm outline-none transition-all placeholder:text-surface-400 focus:border-brand-300 focus:ring-2 focus:ring-brand-100" />
+            <input type="text" placeholder="Search batches..." className="h-10 w-72 rounded-lg border border-surface-200 bg-white pl-9 pr-4 text-sm outline-none transition-all placeholder:text-surface-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-50" />
           </div>
-          <button className="flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-all hover:bg-brand-700 hover:shadow-md active:scale-[0.98]">
+          <button className="flex items-center gap-2 rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-all hover:bg-brand-600 hover:shadow-md active:scale-[0.98]">
             <Plus className="h-4 w-4" /> Create Batch
           </button>
         </div>
@@ -66,7 +66,7 @@ export default function BatchesPage() {
               </div>
               <div className="mt-4">
                 <div className="h-1.5 overflow-hidden rounded-full bg-surface-100">
-                  <div className={`h-full rounded-full transition-all duration-700 ${batch.student_count / batch.max_students > 0.9 ? 'bg-rose-500' : batch.student_count / batch.max_students > 0.7 ? 'bg-amber-500' : 'bg-brand-500'}`} style={{ width: `${(batch.student_count / batch.max_students) * 100}%` }}></div>
+                  <div className={`h-full rounded-full transition-all duration-700 ${batch.student_count / batch.max_students > 0.9 ? 'bg-cta-500' : batch.student_count / batch.max_students > 0.7 ? 'bg-warning-500' : 'bg-brand-500'}`} style={{ width: `${(batch.student_count / batch.max_students) * 100}%` }}></div>
                 </div>
                 <p className="mt-1 text-[10px] text-surface-400">{Math.round((batch.student_count / batch.max_students) * 100)}% capacity</p>
               </div>
