@@ -46,7 +46,7 @@ onMounted(() => {
 })
 
 const certificates = createListResource({
-	doctype: 'LMS Certificate',
+	doctype: 'Aerobridge Certificate',
 	filters: {
 		member: props.profile.data?.name,
 	},
@@ -56,7 +56,7 @@ const certificates = createListResource({
 
 const openCertificate = (certificate) => {
 	window.open(
-		`/api/method/frappe.utils.print_format.download_pdf?doctype=LMS+Certificate&name=${
+		`/api/method/frappe.utils.print_format.download_pdf?doctype=Aerobridge+Certificate&name=${
 			certificate.name
 		}&format=${encodeURIComponent(certificate.template)}`
 	)

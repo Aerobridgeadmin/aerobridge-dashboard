@@ -24,7 +24,7 @@
 					<Link
 						v-if="type == 'quiz'"
 						v-model="quiz"
-						doctype="LMS Quiz"
+						doctype="Aerobridge Quiz"
 						:label="__('Select a quiz')"
 						placeholder=" "
 						:onCreate="(value, close) => redirectToForm()"
@@ -33,7 +33,7 @@
 						<Link
 							v-if="filterAssignmentsByCourse"
 							v-model="assignment"
-							doctype="LMS Assignment"
+							doctype="Aerobridge Assignment"
 							:filters="{
 								course: route.params.courseName,
 							}"
@@ -44,7 +44,7 @@
 						<Link
 							v-else
 							v-model="assignment"
-							doctype="LMS Assignment"
+							doctype="Aerobridge Assignment"
 							placeholder=" "
 							:label="__('Select an Assignment')"
 							:onCreate="(value, close) => redirectToForm()"

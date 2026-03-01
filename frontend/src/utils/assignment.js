@@ -47,7 +47,7 @@ export class Assignment {
 		if (this.readOnly) {
 			const { userResource } = usersStore()
 			call('frappe.client.get_value', {
-				doctype: 'LMS Assignment Submission',
+				doctype: 'Aerobridge Assignment Submission',
 				filters: {
 					assignment: assignment,
 					member: userResource.data?.name,
@@ -63,7 +63,7 @@ export class Assignment {
 			return
 		}
 		call('frappe.client.get_value', {
-			doctype: 'LMS Assignment',
+			doctype: 'Aerobridge Assignment',
 			filters: {
 				name: assignment,
 			},

@@ -123,7 +123,7 @@ const props = defineProps<{
 }>()
 
 const statistics = createListResource({
-	doctype: 'LMS Video Watch Duration',
+	doctype: 'Aerobridge Video Watch Duration',
 	filters: {
 		lesson: props.lessonName,
 	},

@@ -78,7 +78,7 @@ onMounted(() => {
 })
 
 const programs = createListResource({
-	doctype: 'LMS Program',
+	doctype: 'Aerobridge Program',
 	cache: ['program'],
 	fields: [
 		'name',

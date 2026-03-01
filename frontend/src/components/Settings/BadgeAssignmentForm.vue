@@ -27,7 +27,7 @@
 					:required="true"
 				/>
 				<Link
-					doctype="LMS Badge"
+					doctype="Aerobridge Badge"
 					v-model="badgeAssignment.badge"
 					:label="__('Badge')"
 					:required="true"

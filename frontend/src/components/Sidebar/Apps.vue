@@ -46,13 +46,13 @@ const apps = createResource({
 		let _apps = [
 			{
 				name: 'frappe',
-				logo: '/assets/lms/images/desk.png',
+				logo: '/assets/aerobridge/images/desk.png',
 				title: __('Desk'),
-				route: '/desk/lms',
+				route: '/desk/aerobridge',
 			},
 		]
 		data.map((app) => {
-			if (app.name === 'lms') return
+			if (app.name === 'aerobridge') return
 			_apps.push({
 				name: app.name,
 				logo: app.logo,

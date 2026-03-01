@@ -82,7 +82,7 @@ watch(tabIndex, () => {
 })
 
 const course = createResource({
-	url: 'lms.lms.utils.get_course_details',
+	url: 'aerobridge.aerobridge.utils.get_course_details',
 	cache: ['course', props.courseName],
 	makeParams() {
 		return {

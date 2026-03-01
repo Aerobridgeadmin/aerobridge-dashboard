@@ -157,7 +157,7 @@ const lesson = reactive({
 })
 
 const lessonDetails = createResource({
-	url: 'lms.lms.utils.get_lesson_creation_details',
+	url: 'aerobridge.aerobridge.utils.get_lesson_creation_details',
 	params: {
 		course: props.courseName,
 		chapter: props.chapterNumber,

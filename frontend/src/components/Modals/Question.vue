@@ -99,7 +99,7 @@
 					<Link
 						v-model="existingQuestion.question"
 						:label="__('Select a question')"
-						doctype="LMS Question"
+						doctype="Aerobridge Question"
 					/>
 					<FormControl
 						v-model="existingQuestion.marks"
@@ -176,7 +176,7 @@ const questionData = createResource({
 	url: 'frappe.client.get',
 	makeParams() {
 		return {
-			doctype: 'LMS Question',
+			doctype: 'Aerobridge Question',
 			name: props.questionDetail.question,
 		}
 	},
@@ -220,10 +220,10 @@ const questionRow = createResource({
 	makeParams(values) {
 		return {
 			doc: {
-				doctype: 'LMS Quiz Question',
+				doctype: 'Aerobridge Quiz Question',
 				parent: quiz.value.doc.name,
 				parentfield: 'questions',
-				parenttype: 'LMS Quiz',
+				parenttype: 'Aerobridge Quiz',
 				...values,
 			},
 		}
@@ -235,7 +235,7 @@ const questionCreation = createResource({
 	makeParams(values) {
 		return {
 			doc: {
-				doctype: 'LMS Question',
+				doctype: 'Aerobridge Question',
 				...question,
 			},
 		}
@@ -299,7 +299,7 @@ const questionUpdate = createResource({
 	auto: false,
 	makeParams(values) {
 		return {
-			doctype: 'LMS Question',
+			doctype: 'Aerobridge Question',
 			name: questionData.data?.name,
 			fieldname: {
 				...question,
@@ -313,7 +313,7 @@ const marksUpdate = createResource({
 	auto: false,
 	makeParams(values) {
 		return {
-			doctype: 'LMS Quiz Question',
+			doctype: 'Aerobridge Quiz Question',
 			name: props.questionDetail.name,
 			fieldname: {
 				marks: question.marks,

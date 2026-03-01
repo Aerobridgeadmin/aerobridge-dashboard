@@ -20,7 +20,7 @@
 				>
 					{{ __('Open the ') }}
 					{{
-						transactionData.payment_for_document_type == 'LMS Course'
+						transactionData.payment_for_document_type == 'Aerobridge Course'
 							? __('Course')
 							: __('Batch')
 					}}
@@ -65,7 +65,7 @@
 				<Link
 					:label="__('Source')"
 					v-model="transactionData.source"
-					doctype="LMS Source"
+					doctype="Aerobridge Source"
 				/>
 				<FormControl
 					type="select"
@@ -216,9 +216,9 @@ const openDetails = () => {
 		const docName = props.data.payment_for_document
 		if (docType && docName) {
 			router.push({
-				name: docType == 'LMS Course' ? 'CourseDetail' : 'BatchDetail',
+				name: docType == 'Aerobridge Course' ? 'CourseDetail' : 'BatchDetail',
 				params: {
-					[docType == 'LMS Course' ? 'courseName' : 'batchName']: docName,
+					[docType == 'Aerobridge Course' ? 'courseName' : 'batchName']: docName,
 				},
 			})
 		}
@@ -261,11 +261,11 @@ const documentTypeOptions = computed(() => {
 	return [
 		{
 			label: __('Course'),
-			value: 'LMS Course',
+			value: 'Aerobridge Course',
 		},
 		{
 			label: __('Batch'),
-			value: 'LMS Batch',
+			value: 'Aerobridge Batch',
 		},
 	]
 })

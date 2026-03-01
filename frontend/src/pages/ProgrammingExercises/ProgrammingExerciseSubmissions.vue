@@ -15,7 +15,7 @@
 			</div>
 			<div v-if="submissions.data?.length" class="grid grid-cols-3 gap-5">
 				<Link
-					doctype="LMS Programming Exercise"
+					doctype="Aerobridge Programming Exercise"
 					v-model="filters.exercise"
 					:placeholder="__('Filter by Exercise')"
 					class="w-40"
@@ -197,7 +197,7 @@ const fetchBasedOnRole = () => {
 }
 
 const submissions = createListResource({
-	doctype: 'LMS Programming Exercise Submission',
+	doctype: 'Aerobridge Programming Exercise Submission',
 	fields: [
 		'name',
 		'exercise',

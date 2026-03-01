@@ -275,7 +275,7 @@ onBeforeUnmount(() => {
 })
 
 const quizDetails = createDocumentResource({
-	doctype: 'LMS Quiz',
+	doctype: 'Aerobridge Quiz',
 	name: props.quizID,
 	auto: false,
 })
@@ -353,10 +353,10 @@ const openQuestionModal = (question = null) => {
 }
 
 const deleteQuestionResource = createResource({
-	url: 'lms.lms.api.delete_documents',
+	url: 'aerobridge.aerobridge.api.delete_documents',
 	makeParams(values) {
 		return {
-			doctype: 'LMS Quiz Question',
+			doctype: 'Aerobridge Quiz Question',
 			documents: values.questions,
 		}
 	},

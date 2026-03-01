@@ -87,12 +87,12 @@ onMounted(() => {
 
 const checkIfEnrolled = () => {
 	call('frappe.client.get_value', {
-		doctype: 'LMS Program Member',
+		doctype: 'Aerobridge Program Member',
 		filters: {
 			member: user.data.name,
 			parent: props.programName,
 		},
-		parent: 'LMS Program',
+		parent: 'Aerobridge Program',
 		fieldname: 'name',
 	}).then((data: { name: string }) => {
 		if (data.name) {
@@ -104,7 +104,7 @@ const checkIfEnrolled = () => {
 }
 
 const program = createResource({
-	url: 'lms.lms.utils.get_program_details',
+	url: 'aerobridge.aerobridge.utils.get_program_details',
 	params: {
 		program_name: props.programName,
 	},

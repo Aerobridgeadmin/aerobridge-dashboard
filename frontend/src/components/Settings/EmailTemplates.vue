@@ -119,7 +119,7 @@ const emailTemplates = createListResource({
 })
 
 const removeTemplate = (selections, unselectAll) => {
-	call('lms.lms.api.delete_documents', {
+	call('aerobridge.aerobridge.api.delete_documents', {
 		doctype: 'Email Template',
 		documents: Array.from(selections),
 	})

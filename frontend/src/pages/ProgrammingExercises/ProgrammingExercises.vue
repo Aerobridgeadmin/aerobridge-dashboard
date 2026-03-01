@@ -179,7 +179,7 @@ const validatePermissions = () => {
 
 const getExerciseCount = (filters: any = {}) => {
 	call('frappe.client.get_count', {
-		doctype: 'LMS Programming Exercise',
+		doctype: 'Aerobridge Programming Exercise',
 		filters: filters,
 	})
 		.then((count: number) => {
@@ -191,7 +191,7 @@ const getExerciseCount = (filters: any = {}) => {
 }
 
 const exercises = createListResource({
-	doctype: 'LMS Programming Exercise',
+	doctype: 'Aerobridge Programming Exercise',
 	cache: ['programmingExercises'],
 	fields: ['name', 'title', 'language', 'problem_statement', 'modified'],
 	auto: true,
@@ -243,7 +243,7 @@ const showDeleteConfirmation = (
 
 const deleteExercises = (selections: Set<string>, unselectAll: () => void) => {
 	Array.from(selections).forEach(async (exerciseName) => {
-		call('lms.lms.api.delete_programming_exercise', {
+		call('aerobridge.aerobridge.api.delete_programming_exercise', {
 			exercise: exerciseName,
 		})
 			.then(() => {

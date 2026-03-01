@@ -2,7 +2,7 @@ describe("Batch Creation", () => {
 	it("creates a new batch", () => {
 		cy.login();
 		cy.wait(500);
-		cy.visit("/lms/batches");
+		cy.visit("/aerobridge/batches");
 		cy.closeOnboardingModal();
 
 		// Open Settings
@@ -47,7 +47,7 @@ describe("Batch Creation", () => {
 		cy.get("button").contains("Add").click();
 		cy.get("div").contains(randomEvaluator).should("be.visible").click();
 
-		cy.visit("/lms/batches");
+		cy.visit("/aerobridge/batches");
 		cy.closeOnboardingModal();
 
 		// Create a batch
@@ -100,10 +100,10 @@ describe("Batch Creation", () => {
 
 		// View Batch
 		cy.wait(1000);
-		cy.visit("/lms/batches");
+		cy.visit("/aerobridge/batches");
 		cy.closeOnboardingModal();
 
-		cy.url().should("include", "/lms/batches");
+		cy.url().should("include", "/aerobridge/batches");
 
 		cy.get('[id^="headlessui-radiogroup-v-"]')
 			.find("span")
@@ -112,7 +112,7 @@ describe("Batch Creation", () => {
 			.click();
 
 		cy.get("@batchName").then((batchName) => {
-			cy.get(`a[href='/lms/batches/${batchName}'`).within(() => {
+			cy.get(`a[href='/aerobridge/batches/${batchName}'`).within(() => {
 				cy.get("div").contains("Test Batch").should("be.visible");
 				cy.get("div")
 					.contains("Test Batch Short Description to test the UI")
@@ -129,7 +129,7 @@ describe("Batch Creation", () => {
 					"be.visible"
 				);
 			});
-			cy.get(`a[href='/lms/batches/${batchName}'`).click();
+			cy.get(`a[href='/aerobridge/batches/${batchName}'`).click();
 		});
 
 		cy.get("div").contains("Test Batch").should("be.visible");

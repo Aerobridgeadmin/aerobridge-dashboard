@@ -42,7 +42,7 @@
 							class="w-[90%] lg:w-[75%] mx-auto mt-5"
 						>
 							<Discussions
-								doctype="LMS Batch"
+								doctype="Aerobridge Batch"
 								:docname="batch.data.name"
 								:title="__('Discussions')"
 								:key="batch.data.name"
@@ -146,7 +146,7 @@ watch(tabIndex, () => {
 })
 
 const batch = createResource({
-	url: 'lms.lms.utils.get_batch_details',
+	url: 'aerobridge.aerobridge.utils.get_batch_details',
 	cache: ['batch', props.batchName],
 	params: {
 		batch: props.batchName,

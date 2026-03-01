@@ -86,7 +86,7 @@ const chapter = createDocumentResource({
 })
 
 const enrollment = createListResource({
-	doctype: 'LMS Enrollment',
+	doctype: 'Aerobridge Enrollment',
 	fields: ['member', 'course'],
 	filters: {
 		course: props.courseName,
@@ -148,7 +148,7 @@ const saveDataToLMS = (key, value) => {
 }
 
 const saveProgress = (scormDetails = null) => {
-	call('lms.lms.doctype.course_lesson.course_lesson.save_progress', {
+	call('aerobridge.aerobridge.doctype.course_lesson.course_lesson.save_progress', {
 		lesson: chapter.doc.lessons[0].lesson,
 		course: props.courseName,
 		scorm_details: scormDetails,
@@ -159,7 +159,7 @@ const progress = createResource({
 	url: 'frappe.client.get_value',
 	makeParams(values) {
 		return {
-			doctype: 'LMS Course Progress',
+			doctype: 'Aerobridge Course Progress',
 			fieldname: ['status', 'scorm_content'],
 			filters: {
 				member: user.data?.name,

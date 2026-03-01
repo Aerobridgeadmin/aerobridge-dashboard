@@ -52,7 +52,7 @@ const props = defineProps({
 })
 
 const branding = createResource({
-	url: 'lms.lms.api.get_branding',
+	url: 'aerobridge.aerobridge.api.get_branding',
 	auto: true,
 	cache: 'brand',
 })

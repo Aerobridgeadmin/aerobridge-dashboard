@@ -187,7 +187,7 @@ function enrollStudent() {
 	} else {
 		call('frappe.client.insert', {
 			doc: {
-				doctype: 'LMS Enrollment',
+				doctype: 'Aerobridge Enrollment',
 				course: props.course.data.name,
 				member: user.data.name,
 			},
@@ -236,7 +236,7 @@ const canGetCertificate = computed(() => {
 })
 
 const certificate = createResource({
-	url: 'lms.lms.doctype.lms_certificate.lms_certificate.create_certificate',
+	url: 'aerobridge.aerobridge.doctype.aerobridge_certificate.aerobridge_certificate.create_certificate',
 	makeParams(values) {
 		return {
 			course: values.course,
@@ -244,7 +244,7 @@ const certificate = createResource({
 	},
 	onSuccess(data) {
 		window.open(
-			`/api/method/frappe.utils.print_format.download_pdf?doctype=LMS+Certificate&name=${
+			`/api/method/frappe.utils.print_format.download_pdf?doctype=Aerobridge+Certificate&name=${
 				data.name
 			}&format=${encodeURIComponent(data.template)}`,
 			'_blank'

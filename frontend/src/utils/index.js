@@ -840,7 +840,7 @@ export const cleanError = (message) => {
 }
 
 export const getMetaInfo = (type, route, meta) => {
-	call('lms.lms.api.get_meta_info', {
+	call('aerobridge.aerobridge.api.get_meta_info', {
 		type: type,
 		route: route,
 	}).then((data) => {
@@ -857,7 +857,7 @@ export const getMetaInfo = (type, route, meta) => {
 }
 
 export const updateMetaInfo = (type, route, meta) => {
-	call('lms.lms.api.update_meta_info', {
+	call('aerobridge.aerobridge.api.update_meta_info', {
 		meta_type: type,
 		route: route,
 		meta_tags: [

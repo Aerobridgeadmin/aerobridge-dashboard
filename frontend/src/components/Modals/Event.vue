@@ -134,7 +134,7 @@
 								doctype="Print Format"
 								:disabled="!userIsEvaluator()"
 								:filters="{
-									doc_type: 'LMS Certificate',
+									doc_type: 'Aerobridge Certificate',
 								}"
 							/>
 							<FormControl
@@ -222,7 +222,7 @@ const defaultTemplate = createResource({
 			doctype: 'Property Setter',
 			fieldname: 'value',
 			filters: {
-				doc_type: 'LMS Certificate',
+				doc_type: 'Aerobridge Certificate',
 				property: 'default_print_format',
 			},
 		}
@@ -237,7 +237,7 @@ const openCallLink = (link) => {
 }
 
 const evaluationResource = createResource({
-	url: 'lms.lms.api.save_evaluation_details',
+	url: 'aerobridge.aerobridge.api.save_evaluation_details',
 	makeParams(values) {
 		return {
 			member: props.event.member,
@@ -262,7 +262,7 @@ const evaluationDetails = createResource({
 	url: 'frappe.client.get',
 	makeParams(values) {
 		return {
-			doctype: 'LMS Certificate Evaluation',
+			doctype: 'Aerobridge Certificate Evaluation',
 			filters: {
 				member: props.event.member,
 				course: props.event.course,
@@ -299,7 +299,7 @@ const saveEvaluation = () => {
 }
 
 const certificateResource = createResource({
-	url: 'lms.lms.api.save_certificate_details',
+	url: 'aerobridge.aerobridge.api.save_certificate_details',
 	makeParams(values) {
 		return {
 			member: props.event.member,
@@ -325,7 +325,7 @@ const certificateDetails = createResource({
 	url: 'frappe.client.get',
 	makeParams(values) {
 		return {
-			doctype: 'LMS Certificate',
+			doctype: 'Aerobridge Certificate',
 			filters: {
 				member: props.event.member,
 				course: props.event.course,
@@ -377,7 +377,7 @@ watch(show, () => {
 
 const openCertificate = (certificate) => {
 	window.open(
-		`/api/method/frappe.utils.print_format.download_pdf?doctype=LMS+Certificate&name=${
+		`/api/method/frappe.utils.print_format.download_pdf?doctype=Aerobridge+Certificate&name=${
 			certificate.name
 		}&format=${encodeURIComponent(certificate.template)}`
 	)
@@ -386,9 +386,9 @@ const openCertificate = (certificate) => {
 const openLink = (type, name) => {
 	let url = ''
 	if (type === 'course') {
-		url = `/lms/courses/${name}`
+		url = `/aerobridge/courses/${name}`
 	} else if (type === 'batch') {
-		url = `/lms/batches/${name}#students`
+		url = `/aerobridge/batches/${name}#students`
 	}
 	window.open(url, '_blank')
 }

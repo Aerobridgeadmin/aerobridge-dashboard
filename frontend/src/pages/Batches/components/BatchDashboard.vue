@@ -109,7 +109,7 @@ const props = defineProps({
 })
 
 const progressList = createListResource({
-	doctype: 'LMS Enrollment',
+	doctype: 'Aerobridge Enrollment',
 	filters: {
 		member: user.data?.name,
 		course: ['in', props.batch.data?.courses?.map((c) => c.course)],

@@ -202,7 +202,7 @@ const checkIfCanAddProgram = async () => {
 	if (isModerator.value || isInstructor.value) {
 		return true
 	}
-	const programs = await call('lms.lms.utils.get_programs')
+	const programs = await call('aerobridge.aerobridge.utils.get_programs')
 	return programs.enrolled.length > 0 || programs.published.length > 0
 }
 

@@ -1,5 +1,5 @@
 export function getLmsBasePath() {
-	return window.lms_path || 'lms'
+	return window.aerobridge_path || 'aerobridge'
 }
 
 export function getLmsRoute(path = '') {

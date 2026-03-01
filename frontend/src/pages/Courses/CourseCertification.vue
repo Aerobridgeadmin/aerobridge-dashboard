@@ -64,7 +64,7 @@ onMounted(() => {
 const certificate = createResource({
 	url: 'frappe.client.get_value',
 	params: {
-		doctype: 'LMS Certificate',
+		doctype: 'Aerobridge Certificate',
 		filters: {
 			member: user.data?.name,
 			course: props.courseName,
@@ -76,7 +76,7 @@ const certificate = createResource({
 
 const fetchEnrollmentDetails = () => {
 	call('frappe.client.get_value', {
-		doctype: 'LMS Enrollment',
+		doctype: 'Aerobridge Enrollment',
 		filters: { member: user.data?.name, course: props.courseName },
 		fieldname: ['purchased_certificate'],
 	}).then((data) => {
@@ -93,7 +93,7 @@ const fetchEnrollmentDetails = () => {
 
 const fetchCourseDetails = () => {
 	call('frappe.client.get_value', {
-		doctype: 'LMS Course',
+		doctype: 'Aerobridge Course',
 		filters: { name: props.courseName },
 		fieldname: ['title', 'evaluator'],
 	}).then((data) => {
@@ -115,7 +115,7 @@ const populateCourses = () => {
 
 const openCertificate = (certificate) => {
 	window.open(
-		`/api/method/frappe.utils.print_format.download_pdf?doctype=LMS+Certificate&name=${
+		`/api/method/frappe.utils.print_format.download_pdf?doctype=Aerobridge+Certificate&name=${
 			certificate.name
 		}&format=${encodeURIComponent(certificate.template)}`,
 		'_blank'

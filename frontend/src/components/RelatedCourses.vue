@@ -33,7 +33,7 @@ const props = defineProps({
 })
 
 const relatedCourses = createResource({
-	url: 'lms.lms.utils.get_related_courses',
+	url: 'aerobridge.aerobridge.utils.get_related_courses',
 	cache: ['related_courses', props.courseName],
 	makeParams() {
 		return {

@@ -150,7 +150,7 @@ const submit = debounce(() => {
 }, 500)
 
 const search = createResource({
-	url: 'lms.command_palette.search_sqlite',
+	url: 'aerobridge.command_palette.search_sqlite',
 	makeParams: () => ({
 		query: query.value,
 	}),
@@ -185,14 +185,14 @@ const sortResults = () => {
 }
 
 const navigate = (result: any) => {
-	if (result.doctype == 'LMS Course') {
+	if (result.doctype == 'Aerobridge Course') {
 		router.push({
 			name: 'CourseDetail',
 			params: {
 				courseName: result.name,
 			},
 		})
-	} else if (result.doctype == 'LMS Batch') {
+	} else if (result.doctype == 'Aerobridge Batch') {
 		router.push({
 			name: 'BatchDetail',
 			params: {
@@ -229,9 +229,9 @@ watch(
 )
 
 const getDocTypeTitle = (doctype: string) => {
-	if (doctype === 'LMS Course') {
+	if (doctype === 'Aerobridge Course') {
 		return __('Course')
-	} else if (doctype === 'LMS Batch') {
+	} else if (doctype === 'Aerobridge Batch') {
 		return __('Batch')
 	} else if (doctype === 'Job Opportunity') {
 		return __('Job')

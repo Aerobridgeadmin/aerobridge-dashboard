@@ -15,7 +15,7 @@
 								@input="makeFormDirty()"
 							/>
 							<Link
-								doctype="LMS Category"
+								doctype="Aerobridge Category"
 								v-model="courseResource.doc.category"
 								:label="__('Category')"
 								:onCreate="(value, close) => openSettings('Categories', close)"
@@ -172,7 +172,7 @@
 
 						<MultiSelect
 							v-model="related_courses"
-							doctype="LMS Course"
+							doctype="Aerobridge Course"
 							:label="__('Related Courses')"
 							:filters="{ name: ['!=', courseResource.doc?.name] }"
 							:onCreate="
@@ -335,7 +335,7 @@ onMounted(() => {
 })
 
 const courseResource = createDocumentResource({
-	doctype: 'LMS Course',
+	doctype: 'Aerobridge Course',
 	name: props.course.data?.name,
 	auto: true,
 })
@@ -435,7 +435,7 @@ onBeforeUnmount(() => {
 })
 
 const deleteCourse = createResource({
-	url: 'lms.lms.api.delete_course',
+	url: 'aerobridge.aerobridge.api.delete_course',
 	makeParams(values) {
 		return {
 			course: courseResource.doc?.name,

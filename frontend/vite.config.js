@@ -17,7 +17,7 @@ export default defineConfig(async ({ mode }) => {
 				lucideIcons: true,
 				jinjaBootData: true,
 				buildConfig: {
-					indexHtmlPath: '../lms/www/_lms.html',
+					indexHtmlPath: '../aerobridge/www/_aerobridge.html',
 				},
 			}),
 			vue(),
@@ -29,7 +29,7 @@ export default defineConfig(async ({ mode }) => {
 				workbox: {
 					cleanupOutdatedCaches: true,
 					maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
-					globDirectory: '/assets/lms/frontend',
+					globDirectory: '/assets/aerobridge/frontend',
 					globPatterns: ['**/*.{js,ts,css,html,svg}'],
 					runtimeCaching: [
 						{

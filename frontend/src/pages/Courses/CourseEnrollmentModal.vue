@@ -28,7 +28,7 @@
 				/>
 				<Link
 					v-if="purchasedCertificate"
-					doctype="LMS Payment"
+					doctype="Aerobridge Payment"
 					:label="__('Payment')"
 					placeholder=" "
 					v-model="payment"
@@ -72,7 +72,7 @@ const enrollStudent = (close: () => void) => {
 
 	call('frappe.client.insert', {
 		doc: {
-			doctype: 'LMS Enrollment',
+			doctype: 'Aerobridge Enrollment',
 			course: props.course.data?.name,
 			member: student.value,
 			payment: purchasedCertificate.value ? payment.value : null,

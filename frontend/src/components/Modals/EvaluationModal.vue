@@ -116,7 +116,7 @@ function submitEvaluation(close) {
 	}
 	call('frappe.client.insert', {
 		doc: {
-			doctype: 'LMS Certificate Request',
+			doctype: 'Aerobridge Certificate Request',
 			batch_name: evaluation.value.batch,
 			...evaluation.value,
 		},
@@ -150,7 +150,7 @@ const getCourses = () => {
 }
 
 const slots = createResource({
-	url: 'lms.lms.doctype.course_evaluator.course_evaluator.get_schedule',
+	url: 'aerobridge.aerobridge.doctype.course_evaluator.course_evaluator.get_schedule',
 	makeParams(values) {
 		return {
 			course: values.course,

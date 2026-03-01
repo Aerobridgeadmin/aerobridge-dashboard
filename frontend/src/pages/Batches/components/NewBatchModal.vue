@@ -28,7 +28,7 @@
 							:required="true"
 						/>
 						<Link
-							doctype="LMS Category"
+							doctype="Aerobridge Category"
 							v-model="batch.category"
 							:label="__('Category')"
 							:allowCreate="true"

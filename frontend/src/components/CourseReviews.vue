@@ -89,7 +89,7 @@ const hasReviewed = createResource({
 	url: 'frappe.client.get_count',
 	cache: ['eligible_to_review', props.courseName, props.membership?.member],
 	params: {
-		doctype: 'LMS Course Review',
+		doctype: 'Aerobridge Course Review',
 		filters: {
 			course: props.courseName,
 			owner: props.membership?.member,
@@ -99,7 +99,7 @@ const hasReviewed = createResource({
 })
 
 const reviews = createResource({
-	url: 'lms.lms.utils.get_reviews',
+	url: 'aerobridge.aerobridge.utils.get_reviews',
 	cache: ['course_reviews', props.courseName],
 	makeParams() {
 		return {

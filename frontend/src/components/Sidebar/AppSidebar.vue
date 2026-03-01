@@ -323,7 +323,7 @@ onMounted(() => {
 	setUpOnboarding()
 	addKeyboardShortcut()
 	updateSidebarLinks()
-	socket.on('publish_lms_notifications', (data) => {
+	socket.on('publish_aerobridge_notifications', (data) => {
 		unreadNotifications.reload()
 	})
 })
@@ -399,8 +399,8 @@ const openPageModal = (link) => {
 }
 
 const deletePage = (link) => {
-	call('lms.lms.api.delete_documents', {
-		doctype: 'LMS Sidebar Item',
+	call('aerobridge.aerobridge.api.delete_documents', {
+		doctype: 'Aerobridge Sidebar Item',
 		documents: [link.name],
 	}).then(() => {
 		sidebarSettings.reload()
@@ -427,13 +427,13 @@ const toggleWebPages = () => {
 const getFirstCourse = async () => {
 	let firstCourse = localStorage.getItem('firstCourse')
 	if (firstCourse) return firstCourse
-	return await call('lms.lms.onboarding.get_first_course')
+	return await call('aerobridge.aerobridge.onboarding.get_first_course')
 }
 
 const getFirstBatch = async () => {
 	let firstBatch = localStorage.getItem('firstBatch')
 	if (firstBatch) return firstBatch
-	return await call('lms.lms.onboarding.get_first_batch')
+	return await call('aerobridge.aerobridge.onboarding.get_first_batch')
 }
 
 const steps = reactive([
@@ -679,6 +679,6 @@ const profileIsComplete = computed(() => {
 })
 
 onUnmounted(() => {
-	socket.off('publish_lms_notifications')
+	socket.off('publish_aerobridge_notifications')
 })
 </script>

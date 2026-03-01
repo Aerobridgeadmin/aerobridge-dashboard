@@ -122,7 +122,7 @@ const props = defineProps({
 })
 
 const assessments = createResource({
-	url: 'lms.lms.utils.get_assessments',
+	url: 'aerobridge.aerobridge.utils.get_assessments',
 	params: {
 		batch: props.batch,
 	},
@@ -130,10 +130,10 @@ const assessments = createResource({
 })
 
 const deleteAssessments = createResource({
-	url: 'lms.lms.api.delete_documents',
+	url: 'aerobridge.aerobridge.api.delete_documents',
 	makeParams(values) {
 		return {
-			doctype: 'LMS Assessment',
+			doctype: 'Aerobridge Assessment',
 			documents: values.assessments,
 		}
 	},
@@ -152,7 +152,7 @@ const removeAssessments = (selections, unselectAll) => {
 }
 
 const getRowRoute = (row) => {
-	if (row.assessment_type == 'LMS Assignment') {
+	if (row.assessment_type == 'Aerobridge Assignment') {
 		if (row.submission) {
 			return {
 				name: 'AssignmentSubmission',
@@ -170,7 +170,7 @@ const getRowRoute = (row) => {
 				},
 			}
 		}
-	} else if (row.assessment_type == 'LMS Programming Exercise') {
+	} else if (row.assessment_type == 'Aerobridge Programming Exercise') {
 		if (row.submission) {
 			return {
 				name: 'ProgrammingExerciseSubmission',
@@ -238,11 +238,11 @@ const getStatusTheme = (status) => {
 }
 
 const getAssessmentTypeLabel = (type) => {
-	if (type == 'LMS Assignment') {
+	if (type == 'Aerobridge Assignment') {
 		return __('Assignment')
-	} else if (type == 'LMS Quiz') {
+	} else if (type == 'Aerobridge Quiz') {
 		return __('Quiz')
-	} else if (type == 'LMS Programming Exercise') {
+	} else if (type == 'Aerobridge Programming Exercise') {
 		return __('Programming Exercise')
 	}
 }

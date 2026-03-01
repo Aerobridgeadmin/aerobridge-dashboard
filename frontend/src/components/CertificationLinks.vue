@@ -67,7 +67,7 @@ const props = defineProps({
 })
 
 const certification = createResource({
-	url: 'lms.lms.api.get_certification_details',
+	url: 'aerobridge.aerobridge.api.get_certification_details',
 	makeParams(values) {
 		return {
 			course: props.courseName,
@@ -78,7 +78,7 @@ const certification = createResource({
 
 const downloadCertificate = () => {
 	window.open(
-		`/api/method/frappe.utils.print_format.download_pdf?doctype=LMS+Certificate&name=${
+		`/api/method/frappe.utils.print_format.download_pdf?doctype=Aerobridge+Certificate&name=${
 			certification.data.certificate.name
 		}&format=${encodeURIComponent(certification.data.certificate.template)}`
 	)

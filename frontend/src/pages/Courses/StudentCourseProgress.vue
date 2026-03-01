@@ -173,7 +173,7 @@ const props = defineProps<{
 }>()
 
 const lessonProgress = createListResource({
-	doctype: 'LMS Course Progress',
+	doctype: 'Aerobridge Course Progress',
 	filters: {
 		course: ['=', props.course.data?.name],
 		member: ['=', props.student?.member],
@@ -183,7 +183,7 @@ const lessonProgress = createListResource({
 })
 
 const assessmentProgress = createResource({
-	url: 'lms.lms.api.get_course_assessment_progress',
+	url: 'aerobridge.aerobridge.api.get_course_assessment_progress',
 	params: {
 		course: props.course.data?.name,
 		member: props.student?.member,

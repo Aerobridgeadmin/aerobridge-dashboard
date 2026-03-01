@@ -29,7 +29,7 @@
 					:required="true"
 				/>
 				<Link
-					doctype="LMS Payment"
+					doctype="Aerobridge Payment"
 					v-model="payment"
 					placeholder=" "
 					:label="__('Payment')"

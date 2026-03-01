@@ -179,7 +179,7 @@ watch(search, () => {
 })
 
 const quizzes = createListResource({
-	doctype: 'LMS Quiz',
+	doctype: 'Aerobridge Quiz',
 	filters: quizFilters,
 	fields: [
 		'name',

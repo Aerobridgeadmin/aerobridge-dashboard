@@ -19,7 +19,7 @@
 					<Link
 						v-model="quiz.quiz"
 						:label="__('Quiz')"
-						doctype="LMS Quiz"
+						doctype="Aerobridge Quiz"
 						class="flex-1"
 					/>
 					<Button @click="addQuiz()" variant="solid">

@@ -148,10 +148,10 @@ const getRecordingOptions = () => {
 }
 
 const createLiveClass = createResource({
-	url: 'lms.lms.doctype.lms_batch.lms_batch.create_live_class',
+	url: 'aerobridge.aerobridge.doctype.aerobridge_batch.aerobridge_batch.create_live_class',
 	makeParams(values) {
 		return {
-			doctype: 'LMS Live Class',
+			doctype: 'Aerobridge Live Class',
 			batch_name: values.batch,
 			zoom_account: props.zoomAccount,
 			...values,

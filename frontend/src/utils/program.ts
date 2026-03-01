@@ -66,7 +66,7 @@ export class Program {
         if (this.readOnly) {
             const { userResource } = usersStore()
             call('frappe.client.get_value', {
-                doctype: 'LMS Programming Exercise Submission',
+                doctype: 'Aerobridge Programming Exercise Submission',
                 filters: {
                     exercise: exercise,
                     member: userResource.data?.name,
@@ -82,7 +82,7 @@ export class Program {
             return
         } 
         call("frappe.client.get_value", {
-            doctype: 'LMS Programming Exercise',
+            doctype: 'Aerobridge Programming Exercise',
             filters: {
                 name: exercise
             },

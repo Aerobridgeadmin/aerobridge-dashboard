@@ -79,7 +79,7 @@ const search = ref(null)
 const emit = defineEmits(['select'])
 
 const images = createResource({
-	url: 'lms.lms.api.get_unsplash_photos',
+	url: 'aerobridge.aerobridge.api.get_unsplash_photos',
 	makeParams: () => {
 		return {
 			keyword: search.value,

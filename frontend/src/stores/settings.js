@@ -8,19 +8,19 @@ export const useSettings = defineStore('settings', () => {
 	const activeTab = ref(null)
 
 	const settings = createResource({
-		url: 'lms.lms.api.get_lms_settings',
+		url: 'aerobridge.aerobridge.api.get_aerobridge_settings',
 		auto: true,
-		cache: 'LMS Settings',
+		cache: 'Aerobridge Settings',
 	})
 
 	const sidebarSettings = createResource({
-		url: 'lms.lms.api.get_sidebar_settings',
+		url: 'aerobridge.aerobridge.api.get_sidebar_settings',
 		cache: 'Sidebar Settings',
 		auto: false,
 	})
 
 	const programs = createResource({
-		url: 'lms.lms.utils.get_programs',
+		url: 'aerobridge.aerobridge.utils.get_programs',
 		auto: false,
 	})
 

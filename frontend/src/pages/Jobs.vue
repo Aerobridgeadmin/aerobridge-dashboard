@@ -204,7 +204,7 @@ const tabs = computed(() => {
 })
 
 const jobs = createResource({
-	url: 'lms.lms.api.get_job_opportunities',
+	url: 'aerobridge.aerobridge.api.get_job_opportunities',
 	cache: ['jobs'],
 })
 

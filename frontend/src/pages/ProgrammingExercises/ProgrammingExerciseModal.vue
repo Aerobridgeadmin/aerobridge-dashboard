@@ -19,7 +19,7 @@
 			<div class="text-base">
 				<Link
 					v-model="exercise"
-					doctype="LMS Programming Exercise"
+					doctype="Aerobridge Programming Exercise"
 					:label="__('Select a Programming Exercise')"
 				/>
 			</div>

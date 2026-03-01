@@ -80,7 +80,7 @@ const props = defineProps<{
 }>()
 
 const participants = createListResource({
-	doctype: 'LMS Live Class Participant',
+	doctype: 'Aerobridge Live Class Participant',
 	filter: {
 		live_class: props.live_class?.name,
 	},

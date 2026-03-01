@@ -38,7 +38,7 @@ onMounted(() => {
 })
 
 const heatmap = createResource({
-	url: 'lms.lms.api.get_heatmap_data',
+	url: 'aerobridge.aerobridge.api.get_heatmap_data',
 	makeParams(values) {
 		return {
 			member: values.member,

@@ -15,7 +15,7 @@
 						:required="true"
 					/>
 					<Link
-						doctype="LMS Category"
+						doctype="Aerobridge Category"
 						v-model="course.category"
 						:label="__('Category')"
 						:onCreate="

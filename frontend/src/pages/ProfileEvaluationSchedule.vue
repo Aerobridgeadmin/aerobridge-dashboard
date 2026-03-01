@@ -55,7 +55,7 @@ const props = defineProps({
 })
 
 const evaluations = createListResource({
-	doctype: 'LMS Certificate Request',
+	doctype: 'Aerobridge Certificate Request',
 	filters: {
 		evaluator: props.profile.data?.name,
 		status: ['!=', 'Cancelled'],

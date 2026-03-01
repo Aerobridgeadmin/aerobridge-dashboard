@@ -190,7 +190,7 @@ const newSlot = reactive({
 })
 
 const evaluator = createResource({
-	url: 'lms.lms.api.get_evaluator_details',
+	url: 'aerobridge.aerobridge.api.get_evaluator_details',
 	params: {
 		evaluator: props.profile.data?.name,
 	},

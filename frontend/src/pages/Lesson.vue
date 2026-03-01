@@ -454,7 +454,7 @@ onBeforeUnmount(() => {
 })
 
 const lesson = createResource({
-	url: 'lms.lms.utils.get_lesson',
+	url: 'aerobridge.aerobridge.utils.get_lesson',
 	makeParams(values) {
 		return {
 			course: props.courseName,
@@ -536,7 +536,7 @@ const markProgress = () => {
 }
 
 const progress = createResource({
-	url: 'lms.lms.doctype.course_lesson.course_lesson.save_progress',
+	url: 'aerobridge.aerobridge.doctype.course_lesson.course_lesson.save_progress',
 	makeParams() {
 		return {
 			lesson: lesson.data.name,
@@ -549,7 +549,7 @@ const progress = createResource({
 })
 
 const notes = createListResource({
-	doctype: 'LMS Lesson Note',
+	doctype: 'Aerobridge Lesson Note',
 	filters: {
 		lesson: lesson.data?.name,
 		member: user.data?.name,
@@ -635,7 +635,7 @@ const trackVideoWatchDuration = () => {
 	if (!lesson.data.membership) return
 	let videoDetails = getVideoDetails()
 	videoDetails = videoDetails.concat(getPlyrSourceDetails())
-	call('lms.lms.api.track_video_watch_duration', {
+	call('aerobridge.aerobridge.api.track_video_watch_duration', {
 		lesson: lesson.data.name,
 		videos: videoDetails,
 	})
@@ -796,7 +796,7 @@ const enrollment = createResource({
 	makeParams() {
 		return {
 			doc: {
-				doctype: 'LMS Enrollment',
+				doctype: 'Aerobridge Enrollment',
 				course: props.courseName,
 				member: user.data?.name,
 			},

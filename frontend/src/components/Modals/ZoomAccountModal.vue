@@ -178,7 +178,7 @@ const updateAccount = async (close: () => void) => {
 
 const renameDoc = async () => {
 	await call('frappe.client.rename_doc', {
-		doctype: 'LMS Zoom Settings',
+		doctype: 'Aerobridge Zoom Settings',
 		old_name: props.accountID,
 		new_name: account.name,
 	})

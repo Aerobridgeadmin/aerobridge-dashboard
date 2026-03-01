@@ -79,7 +79,7 @@ const announcementResource = createResource({
 			bcc: props.students.join(', '),
 			subject: announcement.subject,
 			content: announcement.announcement,
-			doctype: 'LMS Batch',
+			doctype: 'Aerobridge Batch',
 			name: props.batch,
 			send_email: 1,
 		}

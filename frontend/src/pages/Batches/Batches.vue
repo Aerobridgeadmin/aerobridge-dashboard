@@ -19,7 +19,7 @@
 					onClick() {
 						router.push({
 							name: 'NewDataImport',
-							params: { doctype: 'LMS Batch' },
+							params: { doctype: 'Aerobridge Batch' },
 						})
 					},
 				},
@@ -169,8 +169,8 @@ const setFiltersFromQuery = () => {
 }
 
 const batches = createListResource({
-	doctype: 'LMS Batch',
-	url: 'lms.lms.utils.get_batches',
+	doctype: 'Aerobridge Batch',
+	url: 'aerobridge.aerobridge.utils.get_batches',
 	cache: ['batches', user.data?.name],
 	pageLength: pageLength.value,
 	start: start.value,

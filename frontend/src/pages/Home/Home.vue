@@ -52,7 +52,7 @@ const showStreakModal = ref(false)
 
 const fetchEvalCount = () => {
 	call('frappe.client.get_count', {
-		doctype: 'LMS Certificate Request',
+		doctype: 'Aerobridge Certificate Request',
 		filters: {
 			member: user?.data?.name,
 			status: 'Upcoming',
@@ -81,22 +81,22 @@ onMounted(() => {
 })
 
 const myLiveClasses = createResource({
-	url: 'lms.lms.api.get_my_live_classes',
+	url: 'aerobridge.aerobridge.api.get_my_live_classes',
 	auto: !isAdmin.value ? true : false,
 })
 
 const adminLiveClasses = createResource({
-	url: 'lms.lms.api.get_admin_live_classes',
+	url: 'aerobridge.aerobridge.api.get_admin_live_classes',
 	auto: isAdmin.value ? true : false,
 })
 
 const adminEvals = createResource({
-	url: 'lms.lms.api.get_admin_evals',
+	url: 'aerobridge.aerobridge.api.get_admin_evals',
 	auto: isAdmin.value ? true : false,
 })
 
 const streakInfo = createResource({
-	url: 'lms.lms.api.get_streak_info',
+	url: 'aerobridge.aerobridge.api.get_streak_info',
 	auto: true,
 })
 

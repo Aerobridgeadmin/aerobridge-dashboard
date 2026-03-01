@@ -208,14 +208,14 @@ const fetchSubmission = (name: string = '') => {
 }
 
 const exercise = createDocumentResource({
-	doctype: 'LMS Programming Exercise',
+	doctype: 'Aerobridge Programming Exercise',
 	name: props.exerciseID,
 	cache: ['programmingExercise', props.exerciseID],
 	auto: true,
 })
 
 const submission = createDocumentResource({
-	doctype: 'LMS Programming Exercise Submission',
+	doctype: 'Aerobridge Programming Exercise Submission',
 	name: props.submissionID,
 	auto: false,
 	onError(error: any) {
@@ -343,7 +343,7 @@ const createSubmission = () => {
 	if (!testCases.value.length) return
 	let codeToSave = code.value?.replace(boilerplate.value, '') || ''
 
-	call('lms.lms.api.create_programming_exercise_submission', {
+	call('aerobridge.aerobridge.api.create_programming_exercise_submission', {
 		exercise: props.exerciseID,
 		submission: props.submissionID,
 		code: codeToSave,

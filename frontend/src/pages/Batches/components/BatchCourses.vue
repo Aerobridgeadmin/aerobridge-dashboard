@@ -99,10 +99,10 @@ const courses = createListResource({
 	doctype: 'Batch Course',
 	filters: {
 		parent: props.batch.data?.name,
-		parenttype: 'LMS Batch',
+		parenttype: 'Aerobridge Batch',
 	},
 	fields: ['name', 'course', 'title', 'evaluator'],
-	parent: 'LMS Batch',
+	parent: 'Aerobridge Batch',
 	orderBy: 'idx',
 	auto: true,
 })

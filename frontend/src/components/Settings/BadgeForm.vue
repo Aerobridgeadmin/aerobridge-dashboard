@@ -143,7 +143,7 @@ const updateBadge = async (close: () => void) => {
 
 const renameDoc = async () => {
 	await call('frappe.client.rename_doc', {
-		doctype: 'LMS Badge',
+		doctype: 'Aerobridge Badge',
 		old_name: props.badgeName,
 		new_name: badge.value?.title,
 	})
@@ -191,17 +191,17 @@ const createBadge = (close: () => void) => {
 
 const referenceDoctypeOptions = computed(() => {
 	return [
-		{ label: __('Course'), value: 'LMS Course' },
-		{ label: __('Batch'), value: 'LMS Batch' },
+		{ label: __('Course'), value: 'Aerobridge Course' },
+		{ label: __('Batch'), value: 'Aerobridge Batch' },
 		{ label: __('User'), value: 'Member' },
-		{ label: __('Quiz Submission'), value: 'LMS Quiz Submission' },
-		{ label: __('Assignment Submission'), value: 'LMS Assignment Submission' },
+		{ label: __('Quiz Submission'), value: 'Aerobridge Quiz Submission' },
+		{ label: __('Assignment Submission'), value: 'Aerobridge Assignment Submission' },
 		{
 			label: __('Programming Exercise Submission'),
-			value: 'LMS Programming Exercise Submission',
+			value: 'Aerobridge Programming Exercise Submission',
 		},
-		{ label: __('Course Enrollment'), value: 'LMS Enrollment' },
-		{ label: __('Batch Enrollment'), value: 'LMS Batch Enrollment' },
+		{ label: __('Course Enrollment'), value: 'Aerobridge Enrollment' },
+		{ label: __('Batch Enrollment'), value: 'Aerobridge Batch Enrollment' },
 	]
 })
 

@@ -72,7 +72,7 @@
 							/>
 
 							<Link
-								doctype="LMS Category"
+								doctype="Aerobridge Category"
 								:label="__('Category')"
 								v-model="batchDetail.doc.category"
 								:onCreate="(value, close) => openSettings('Categories', close)"
@@ -167,7 +167,7 @@
 						</div>
 						<div class="space-y-5">
 							<Link
-								doctype="LMS Zoom Settings"
+								doctype="Aerobridge Zoom Settings"
 								:label="__('Zoom Account')"
 								v-model="batchDetail.doc.zoom_account"
 								:onCreate="
@@ -331,7 +331,7 @@ onBeforeUnmount(() => {
 })
 
 const batchDetail = createDocumentResource({
-	doctype: 'LMS Batch',
+	doctype: 'Aerobridge Batch',
 	name: props.batch.data?.name,
 	auto: true,
 })
@@ -452,7 +452,7 @@ const deleteBatch = () => {
 }
 
 const trashBatch = (close) => {
-	call('lms.lms.api.delete_batch', {
+	call('aerobridge.aerobridge.api.delete_batch', {
 		batch: props.batch.data.name,
 	}).then(() => {
 		toast.success(__('Batch deleted successfully'))

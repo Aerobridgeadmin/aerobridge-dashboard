@@ -30,7 +30,7 @@ app.provide('$allUsers', allUsers)
 
 watch(userResource, () => {
 	if (userResource.data) {
-		app.use(telemetryPlugin, { app_name: 'lms' })
+		app.use(telemetryPlugin, { app_name: 'aerobridge' })
 	}
 })
 

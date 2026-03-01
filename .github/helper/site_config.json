@@ -1,8 +1,8 @@
 {
     "db_host": "127.0.0.1",
     "db_port": 3306,
-    "db_name": "test_lms",
-    "db_password": "test_lms",
+    "db_name": "test_aerobridge",
+    "db_password": "test_aerobridge",
     "allow_tests": true,
     "enable_ui_tests": true,
     "db_type": "mariadb",
@@ -13,7 +13,7 @@
     "admin_password": "admin",
     "root_login": "root",
     "root_password": "123",
-    "host_name": "http://lms.test:8000",
+    "host_name": "http://aerobridge.test:8000",
     "monitor": 1,
     "server_script_enabled": true,
     "mute_emails": true

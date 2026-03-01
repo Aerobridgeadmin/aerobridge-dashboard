@@ -144,7 +144,7 @@ const assignmentFilter = computed(() => {
 })
 
 const assignments = createListResource({
-	doctype: 'LMS Assignment',
+	doctype: 'Aerobridge Assignment',
 	fields: ['name', 'title', 'type', 'creation', 'question', 'course'],
 	orderBy: 'modified desc',
 	cache: ['assignments'],
@@ -182,7 +182,7 @@ const assignmentColumns = computed(() => {
 
 const getAssignmentCount = () => {
 	call('frappe.client.get_count', {
-		doctype: 'LMS Assignment',
+		doctype: 'Aerobridge Assignment',
 	}).then((data) => {
 		assignmentCount.value = data
 	})

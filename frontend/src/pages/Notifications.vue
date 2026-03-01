@@ -66,7 +66,7 @@
 				>
 					<iframe
 						v-if="
-							log.document_type == 'LMS Course' &&
+							log.document_type == 'Aerobridge Course' &&
 							log.document_details.video_link
 						"
 						:src="`https://www.youtube.com/embed/${log.document_details.video_link}`"
@@ -74,7 +74,7 @@
 					/>
 					<video
 						v-else-if="
-							log.document_type == 'LMS Batch' &&
+							log.document_type == 'Aerobridge Batch' &&
 							log.document_details.video_link
 						"
 						:src="log.document_details.video_link"
@@ -85,7 +85,7 @@
 							class="bg-surface-violet-1 w-fit py-1 px-1.5 rounded-full text-ink-violet-1 text-sm mb-2"
 						>
 							{{
-								log.document_type === 'LMS Course'
+								log.document_type === 'Aerobridge Course'
 									? __('New Course')
 									: __('New Batch')
 							}}
@@ -170,7 +170,7 @@ const router = useRouter()
 onMounted(() => {
 	if (!user.data) router.push({ name: 'Courses' })
 
-	socket.on('publish_lms_notifications', (data) => {
+	socket.on('publish_aerobridge_notifications', (data) => {
 		unReadNotifications.reload()
 	})
 })
@@ -183,7 +183,7 @@ const notifications = computed(() => {
 
 const unReadNotifications = createListResource({
 	doctype: 'Notification Log',
-	url: 'lms.lms.api.get_notifications',
+	url: 'aerobridge.aerobridge.api.get_notifications',
 	filters: {
 		read: 0,
 	},
@@ -193,7 +193,7 @@ const unReadNotifications = createListResource({
 
 const readNotifications = createListResource({
 	doctype: 'Notification Log',
-	url: 'lms.lms.api.get_notifications',
+	url: 'aerobridge.aerobridge.api.get_notifications',
 	filters: {
 		read: 1,
 	},
@@ -273,13 +273,13 @@ const isMentionOrComment = (log) => {
 
 const showDetails = (log) => {
 	return (
-		['LMS Course', 'LMS Batch'].includes(log.document_type) &&
+		['Aerobridge Course', 'Aerobridge Batch'].includes(log.document_type) &&
 		log.document_details
 	)
 }
 
 onUnmounted(() => {
-	socket.off('publish_lms_notifications')
+	socket.off('publish_aerobridge_notifications')
 })
 
 const breadcrumbs = computed(() => {

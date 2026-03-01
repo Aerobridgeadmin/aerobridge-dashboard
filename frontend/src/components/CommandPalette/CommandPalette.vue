@@ -86,7 +86,7 @@ const query = ref<string>('')
 const searchResults = ref<Array<any>>([])
 
 const search = createResource({
-	url: 'lms.command_palette.search_sqlite',
+	url: 'aerobridge.command_palette.search_sqlite',
 	makeParams: () => ({
 		query: query.value,
 	}),
@@ -110,9 +110,9 @@ const generateSearchResults = () => {
 		let result: { title: string; items: any[] } = { title: '', items: [] }
 		result.title = type.title
 		type.items.forEach((item: any) => {
-			let paramName = item.doctype === 'LMS Course' ? 'courseName' : 'batchName'
+			let paramName = item.doctype === 'Aerobridge Course' ? 'courseName' : 'batchName'
 			item.route = {
-				name: item.doctype === 'LMS Course' ? 'CourseDetail' : 'BatchDetail',
+				name: item.doctype === 'Aerobridge Course' ? 'CourseDetail' : 'BatchDetail',
 				params: {
 					[paramName]: item.name,
 				},

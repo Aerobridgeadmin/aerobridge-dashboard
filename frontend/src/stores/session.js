@@ -3,7 +3,7 @@ import { createResource } from 'frappe-ui'
 import { usersStore } from './user'
 import { computed, reactive, ref } from 'vue'
 
-export const sessionStore = defineStore('lms-session', () => {
+export const sessionStore = defineStore('aerobridge-session', () => {
 	let { userResource } = usersStore()
 	const brand = reactive({})
 
@@ -31,14 +31,14 @@ export const sessionStore = defineStore('lms-session', () => {
 	})
 
 	const branding = createResource({
-		url: 'lms.lms.api.get_branding',
+		url: 'aerobridge.aerobridge.api.get_branding',
 		cache: 'brand',
 		auto: true,
 		onSuccess(data) {
 			brand.name = data.app_name
 			brand.logo = data.app_logo
 			brand.favicon =
-				data.favicon?.file_url || '/assets/lms/frontend/learning.svg'
+				data.favicon?.file_url || '/assets/aerobridge/frontend/learning.svg'
 		},
 	})
 

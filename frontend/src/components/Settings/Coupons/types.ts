@@ -13,11 +13,11 @@ export interface Coupon {
 }
 
 export type ApplicableItem = {
-    reference_doctype: "LMS Course" | "LMS Batch";
+    reference_doctype: "Aerobridge Course" | "Aerobridge Batch";
     reference_name: string;
     name: string;
     parent: string;
-    parenttype: "LMS Coupon";
+    parenttype: "Aerobridge Coupon";
     parentfield: "applicable_items";
 }
 

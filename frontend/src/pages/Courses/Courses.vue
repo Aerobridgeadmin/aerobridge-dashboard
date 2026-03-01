@@ -22,7 +22,7 @@
 					onClick() {
 						router.push({
 							name: 'NewDataImport',
-							params: { doctype: 'LMS Course' },
+							params: { doctype: 'Aerobridge Course' },
 						})
 					},
 				},
@@ -170,8 +170,8 @@ const setFiltersFromQuery = () => {
 }
 
 const courses = createListResource({
-	doctype: 'LMS Course',
-	url: 'lms.lms.utils.get_courses',
+	doctype: 'Aerobridge Course',
+	url: 'aerobridge.aerobridge.utils.get_courses',
 	cache: ['courses', user.data?.name],
 	pageLength: pageLength.value,
 	start: start.value,
@@ -189,7 +189,7 @@ const setCategories = (data) => {
 
 const isPersonaCaptured = async () => {
 	let persona = await call('frappe.client.get_single_value', {
-		doctype: 'LMS Settings',
+		doctype: 'Aerobridge Settings',
 		field: 'persona_captured',
 	})
 	return persona
@@ -211,7 +211,7 @@ const getCourseCount = () => {
 	if (!user.data) return
 	if (!user.data.is_moderator) return
 	call('frappe.client.get_count', {
-		doctype: 'LMS Course',
+		doctype: 'Aerobridge Course',
 	}).then((data) => {
 		courseCount.value = data
 		identifyUserPersona()

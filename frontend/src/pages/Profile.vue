@@ -189,7 +189,7 @@ onMounted(() => {
 })
 
 const profile = createResource({
-	url: 'lms.lms.api.get_profile_details',
+	url: 'aerobridge.aerobridge.api.get_profile_details',
 	makeParams() {
 		return {
 			username: props.username,

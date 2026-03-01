@@ -43,7 +43,7 @@
 					:label="__('Template')"
 					doctype="Print Format"
 					:filters="{
-						doc_type: 'LMS Certificate',
+						doc_type: 'Aerobridge Certificate',
 					}"
 				/>
 				<Switch
@@ -87,7 +87,7 @@ const createCertificate = createResource({
 	makeParams(values) {
 		return {
 			doc: {
-				doctype: 'LMS Certificate',
+				doctype: 'Aerobridge Certificate',
 				issue_date: details.issue_date,
 				expiry_date: details.expiry_date,
 				template: details.template,

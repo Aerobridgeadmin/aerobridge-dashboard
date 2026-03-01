@@ -154,7 +154,7 @@
 								:required="true"
 							/>
 							<Link
-								doctype="LMS Source"
+								doctype="Aerobridge Source"
 								:value="billingDetails.source"
 								@change="(option) => (billingDetails.source = option)"
 								:label="__('Where did you hear about us?')"
@@ -267,7 +267,7 @@ const props = defineProps({
 })
 
 const access = createResource({
-	url: 'lms.lms.api.validate_billing_access',
+	url: 'aerobridge.aerobridge.api.validate_billing_access',
 	params: {
 		billing_type: props.type,
 		name: props.name,
@@ -279,10 +279,10 @@ const access = createResource({
 })
 
 const orderSummary = createResource({
-	url: 'lms.lms.utils.get_order_summary',
+	url: 'aerobridge.aerobridge.utils.get_order_summary',
 	makeParams(values) {
 		return {
-			doctype: props.type == 'batch' ? 'LMS Batch' : 'LMS Course',
+			doctype: props.type == 'batch' ? 'Aerobridge Batch' : 'Aerobridge Course',
 			docname: props.name,
 			country: billingDetails.country,
 			coupon: appliedCoupon.value,
@@ -311,10 +311,10 @@ const setBillingDetails = (data) => {
 }
 
 const paymentLink = createResource({
-	url: 'lms.lms.payments.get_payment_link',
+	url: 'aerobridge.aerobridge.payments.get_payment_link',
 	makeParams(values) {
 		let data = {
-			doctype: props.type == 'batch' ? 'LMS Batch' : 'LMS Course',
+			doctype: props.type == 'batch' ? 'Aerobridge Batch' : 'Aerobridge Course',
 			docname: props.name,
 			title: orderSummary.data.title,
 			amount: orderSummary.data.original_amount,

@@ -46,7 +46,7 @@ const updateStep = (newStep: 'list' | 'new' | 'edit', newData: any) => {
 }
 
 const transactions = createListResource({
-	doctype: 'LMS Payment',
+	doctype: 'Aerobridge Payment',
 	fields: [
 		'name',
 		'member',

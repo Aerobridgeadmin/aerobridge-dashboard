@@ -26,18 +26,18 @@ onMounted(() => {
 })
 
 const doctypeMap = {
-	'LMS Course': {
+	'Aerobridge Course': {
 		title: 'Courses',
 		listRoute: '/courses',
 		pageRoute: `/courses/docname`,
 	},
-	'LMS Batch': {
+	'Aerobridge Batch': {
 		title: 'Batches',
 		listRoute: '/batches',
 	},
-	'LMS Category': {
+	'Aerobridge Category': {
 		title: 'Categories',
-		listRoute: '/lms',
+		listRoute: '/aerobridge',
 	},
 }
 

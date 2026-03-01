@@ -151,7 +151,7 @@ const evaluators = createListResource({
 })
 
 const addEvaluator = (close: () => void) => {
-	call('lms.lms.api.add_an_evaluator', {
+	call('aerobridge.aerobridge.api.add_an_evaluator', {
 		email: email.value,
 	})
 		.then(() => {

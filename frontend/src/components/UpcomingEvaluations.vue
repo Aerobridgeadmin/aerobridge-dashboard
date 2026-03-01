@@ -149,7 +149,7 @@ const props = defineProps({
 })
 
 const upcoming_evals = createListResource({
-	doctype: 'LMS Certificate Request',
+	doctype: 'Aerobridge Certificate Request',
 	filters: {
 		course: props.courses?.length
 			? ['in', props.courses.map((course) => course.course)]
@@ -211,7 +211,7 @@ const cancelEvaluation = (evl) => {
 				theme: 'red',
 				variant: 'solid',
 				onClick(close) {
-					call('lms.lms.api.cancel_evaluation', { evaluation: evl })
+					call('aerobridge.aerobridge.api.cancel_evaluation', { evaluation: evl })
 						.then(() => {
 							upcoming_evals.reload()
 							toast.success(__('Evaluation cancelled successfully'))

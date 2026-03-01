@@ -1,0 +1,262 @@
+# Copyright (c) 2022, Frappe and contributors
+# For license information, please see license.txt
+
+import json
+
+import frappe
+from frappe import _
+from frappe.model.document import Document
+from frappe.model.mapper import get_mapped_doc
+from frappe.utils import (
+	add_to_date,
+	format_date,
+	format_time,
+	get_datetime,
+	get_fullname,
+	get_system_timezone,
+	get_time,
+	getdate,
+	nowtime,
+)
+
+from aerobridge.aerobridge.utils import get_evaluator
+
+
+class LMSCertificateRequest(Document):
+	def validate(self):
+		self.set_evaluator()
+		self.validate_unavailability()
+		self.validate_slot()
+		self.validate_if_existing_requests()
+		self.validate_evaluation_end_date()
+		self.validate_timezone()
+
+	def after_insert(self):
+		self.send_notification()
+
+	def set_evaluator(self):
+		if not self.evaluator:
+			self.evaluator = get_evaluator(self.course, self.batch_name)
+			self.evaluator_name = get_fullname(self.evaluator)
+
+	def validate_unavailability(self):
+		if self.evaluator:
+			unavailable = frappe.db.get_value(
+				"Course Evaluator",
+				self.evaluator,
+				["unavailable_from", "unavailable_to"],
+				as_dict=1,
+			)
+			if (
+				unavailable.unavailable_from
+				and unavailable.unavailable_to
+				and getdate(self.date) >= unavailable.unavailable_from
+				and getdate(self.date) <= unavailable.unavailable_to
+			):
+				frappe.throw(
+					_(
+						"The evaluator of this course is unavailable from {0} to {1}. Please select a date after {1}"
+					).format(
+						format_date(unavailable.unavailable_from, "medium"),
+						format_date(unavailable.unavailable_to, "medium"),
+					)
+				)
+
+	def validate_slot(self):
+		if frappe.db.exists(
+			"Aerobridge Certificate Request",
+			{
+				"evaluator": self.evaluator,
+				"date": self.date,
+				"status": ["!=", "Cancelled"],
+				"start_time": self.start_time,
+				"member": ["!=", self.member],
+			},
+		):
+			frappe.throw(_("The slot is already booked by another participant."))
+
+	def validate_if_existing_requests(self):
+		existing_requests = frappe.get_all(
+			"Aerobridge Certificate Request",
+			{
+				"member": self.member,
+				"course": self.course,
+				"name": ["!=", self.name],
+				"status": "Upcoming",
+			},
+			["date", "start_time", "course"],
+		)
+
+		for req in existing_requests:
+			if (
+				req.date == getdate(self.date)
+				or getdate() < getdate(req.date)
+				or (getdate() == getdate(req.date) and get_time(nowtime()) < get_time(req.start_time))
+			):
+				course_title = frappe.db.get_value("Aerobridge Course", req.course, "title")
+				frappe.throw(
+					_("You already have an evaluation on {0} at {1} for the course {2}.").format(
+						format_date(req.date, "medium"),
+						format_time(req.start_time, "short"),
+						course_title,
+					)
+				)
+		if getdate() == getdate(self.date) and get_time(self.start_time) < get_time(nowtime()):
+			frappe.throw(_("You cannot schedule evaluations for past slots."))
+
+	def validate_evaluation_end_date(self):
+		if self.batch_name:
+			evaluation_end_date = frappe.db.get_value("Aerobridge Batch", self.batch_name, "evaluation_end_date")
+
+			if evaluation_end_date:
+				if getdate(self.date) > getdate(evaluation_end_date):
+					frappe.throw(
+						_("You cannot schedule evaluations after {0}.").format(
+							format_date(evaluation_end_date, "medium")
+						)
+					)
+
+	def validate_timezone(self):
+		if self.timezone:
+			return
+		self.timezone = get_system_timezone()
+
+	def send_notification(self):
+		outgoing_email_account = frappe.get_cached_value(
+			"Email Account", {"default_outgoing": 1, "enable_outgoing": 1}, "name"
+		)
+		if outgoing_email_account or frappe.conf.get("mail_login"):
+			subject = _("Your evaluation slot has been booked")
+			template = "certificate_request_notification"
+
+			args = {
+				"course": self.course_title,
+				"timezone": self.timezone if self.batch_name else "",
+				"date": format_date(self.date, "medium"),
+				"member_name": self.member_name,
+				"start_time": format_time(self.start_time, "short"),
+				"evaluator": self.evaluator_name,
+			}
+
+			frappe.sendmail(
+				recipients=[self.member],
+				cc=[self.evaluator],
+				subject=subject,
+				template=template,
+				args=args,
+				header=[subject, "green"],
+				retry=3,
+			)
+
+
+def schedule_evals():
+	if frappe.db.get_single_value("Aerobridge Settings", "send_calendar_invite_for_evaluations"):
+		timelapse = add_to_date(get_datetime(), hours=-5)
+		evals = frappe.get_all(
+			"Aerobridge Certificate Request",
+			{
+				"creation": [">=", timelapse],
+				"google_meet_link": ["is", "not set"],
+				"status": "Upcoming",
+			},
+			["name", "member", "member_name", "evaluator", "date", "start_time", "end_time"],
+		)
+		for eval in evals:
+			setup_calendar_event(eval)
+
+
+@frappe.whitelist()
+def setup_calendar_event(eval: str):
+	if isinstance(eval, str):
+		eval = frappe._dict(json.loads(eval))
+
+	is_member = eval.member == frappe.session.user
+	roles = frappe.get_roles(frappe.session.user)
+	is_admin = "Moderator" in roles or "Batch Evaluator" in roles
+
+	if not is_member and not is_admin:
+		frappe.throw(
+			_("You do not have permission to set up calendar events for this evaluation."),
+			frappe.PermissionError,
+		)
+
+	calendar = frappe.db.get_value("Google Calendar", {"user": eval.evaluator, "enable": 1}, "name")
+
+	if calendar:
+		event = create_event(eval)
+		add_participants(eval, event)
+		update_meeting_details(eval, event, calendar)
+
+
+def create_event(eval: dict):
+	event = frappe.get_doc(
+		{
+			"doctype": "Event",
+			"subject": f"Evaluation of {eval.member_name}",
+			"starts_on": f"{eval.date} {eval.start_time}",
+			"ends_on": f"{eval.date} {eval.end_time}",
+		}
+	)
+	event.save()
+	return event
+
+
+def add_participants(eval: dict, event: Document):
+	participants = [eval.member, eval.evaluator]
+	for participant in participants:
+		contact_name = frappe.db.get_value("Contact", {"email_id": participant}, "name")
+		frappe.get_doc(
+			{
+				"doctype": "Event Participants",
+				"reference_doctype": "Contact",
+				"reference_docname": contact_name,
+				"email": participant,
+				"parent": event.name,
+				"parenttype": "Event",
+				"parentfield": "event_participants",
+			}
+		).save()
+
+
+def update_meeting_details(eval: dict, event: Document, calendar: str):
+	event.reload()
+	event.update(
+		{
+			"sync_with_google_calendar": 1,
+			"add_video_conferencing": 1,
+			"google_calendar": calendar,
+		}
+	)
+
+	event.save()
+	event.reload()
+	frappe.db.set_value("Aerobridge Certificate Request", eval.name, "google_meet_link", event.google_meet_link)
+
+
+@frappe.whitelist()
+def create_aerobridge_certificate_evaluation(source_name: str, target_doc: dict = None):
+	frappe.only_for(["Moderator", "Batch Evaluator", "System Manager"])
+	doc = get_mapped_doc(
+		"Aerobridge Certificate Request",
+		source_name,
+		{"Aerobridge Certificate Request": {"doctype": "Aerobridge Certificate Evaluation"}},
+		target_doc,
+	)
+	return doc
+
+
+def mark_eval_as_completed():
+	requests = frappe.get_all(
+		"Aerobridge Certificate Request",
+		{
+			"status": "Upcoming",
+			"date": ["<=", getdate()],
+		},
+		["name", "end_time", "date"],
+	)
+
+	for req in requests:
+		if req.date < getdate():
+			frappe.db.set_value("Aerobridge Certificate Request", req.name, "status", "Completed")
+		elif req.date == getdate() and get_time(req.end_time) < get_time(nowtime()):
+			frappe.db.set_value("Aerobridge Certificate Request", req.name, "status", "Completed")

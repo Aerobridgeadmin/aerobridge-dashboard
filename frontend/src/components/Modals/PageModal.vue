@@ -51,7 +51,7 @@ const props = defineProps({
 })
 
 const webPage = createResource({
-	url: 'lms.lms.api.update_sidebar_item',
+	url: 'aerobridge.aerobridge.api.update_sidebar_item',
 	makeParams(values) {
 		return {
 			webpage: page.webpage,

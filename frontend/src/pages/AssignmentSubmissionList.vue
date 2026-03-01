@@ -7,7 +7,7 @@
 	<div class="md:w-3/4 md:mx-auto py-5 mx-5">
 		<div class="grid grid-cols-3 gap-5 mb-5">
 			<Link
-				doctype="LMS Assignment"
+				doctype="Aerobridge Assignment"
 				v-model="assignmentID"
 				:placeholder="__('Assignment')"
 			/>
@@ -125,7 +125,7 @@ const getAssignmentFilters = () => {
 }
 
 const submissions = createListResource({
-	doctype: 'LMS Assignment Submission',
+	doctype: 'Aerobridge Assignment Submission',
 	fields: [
 		'name',
 		'assignment',

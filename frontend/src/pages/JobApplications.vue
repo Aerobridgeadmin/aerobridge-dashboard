@@ -201,7 +201,7 @@ onMounted(() => {
 
 const getApplicationCount = () => {
 	call('frappe.client.get_count', {
-		doctype: 'LMS Job Application',
+		doctype: 'Aerobridge Job Application',
 		filters: { job: props.job },
 	}).then((count) => {
 		applicationCount.value = count
@@ -209,7 +209,7 @@ const getApplicationCount = () => {
 }
 
 const applications = createListResource({
-	doctype: 'LMS Job Application',
+	doctype: 'Aerobridge Job Application',
 	fields: [
 		'name',
 		'user.user_image as user_image',
@@ -233,7 +233,7 @@ const emailResource = createResource({
 			cc: emailForm.replyTo,
 			subject: emailForm.subject,
 			content: emailForm.message,
-			doctype: 'LMS Job Application',
+			doctype: 'Aerobridge Job Application',
 			name: selectedApplicant.value.name,
 			send_email: 1,
 			now: true,

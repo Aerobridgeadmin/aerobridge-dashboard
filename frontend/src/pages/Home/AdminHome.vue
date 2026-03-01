@@ -222,12 +222,12 @@ const props = defineProps<{
 }>()
 
 const createdCourses = createResource({
-	url: 'lms.lms.api.get_created_courses',
+	url: 'aerobridge.aerobridge.api.get_created_courses',
 	auto: true,
 })
 
 const createdBatches = createResource({
-	url: 'lms.lms.api.get_created_batches',
+	url: 'aerobridge.aerobridge.api.get_created_batches',
 	auto: true,
 })
 

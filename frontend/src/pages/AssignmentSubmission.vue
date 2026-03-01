@@ -37,7 +37,7 @@ const props = defineProps({
 const title = createResource({
 	url: 'frappe.client.get_value',
 	params: {
-		doctype: 'LMS Assignment',
+		doctype: 'Aerobridge Assignment',
 		fieldname: 'title',
 		filters: {
 			name: props.assignmentID,

@@ -303,7 +303,7 @@ type Filters = {
 }
 
 const chartDetails = createResource({
-	url: 'lms.lms.api.get_course_progress_distribution',
+	url: 'aerobridge.aerobridge.api.get_course_progress_distribution',
 	makeParams() {
 		return {
 			course: props.course.data?.name,
@@ -313,7 +313,7 @@ const chartDetails = createResource({
 })
 
 const progressList = createListResource({
-	doctype: 'LMS Enrollment',
+	doctype: 'Aerobridge Enrollment',
 	filters: {
 		course: props.course.data?.name,
 	},
@@ -332,7 +332,7 @@ const progressList = createListResource({
 })
 
 const lessonProgress = createResource({
-	url: 'lms.lms.api.get_lesson_completion_stats',
+	url: 'aerobridge.aerobridge.api.get_lesson_completion_stats',
 	params: {
 		course: props.course.data?.name,
 	},

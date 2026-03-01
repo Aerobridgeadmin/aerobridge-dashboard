@@ -30,7 +30,7 @@
 					<Link
 						v-model="assignment.course"
 						:label="__('Course')"
-						doctype="LMS Course"
+						doctype="Aerobridge Course"
 						placeholder=" "
 					/>
 					<div>

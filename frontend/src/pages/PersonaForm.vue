@@ -75,7 +75,7 @@ const submitPersona = () => {
 		role: persona.role,
 		use_case: persona.useCase,
 	}
-	call('lms.lms.api.capture_user_persona', {
+	call('aerobridge.aerobridge.api.capture_user_persona', {
 		responses: JSON.stringify(responses),
 	}).then(() => {
 		router.push({
@@ -86,7 +86,7 @@ const submitPersona = () => {
 
 const skipPersonaForm = () => {
 	call('frappe.client.set_value', {
-		doctype: 'LMS Settings',
+		doctype: 'Aerobridge Settings',
 		name: null,
 		fieldname: 'persona_captured',
 		value: 1,

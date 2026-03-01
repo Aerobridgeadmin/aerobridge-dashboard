@@ -59,7 +59,7 @@
 						</div>
 						<div
 							class="flex items-center text-ink-gray-9 space-x-1 bg-surface-gray-2 px-2 py-1.5 rounded-md"
-							v-if="member.role && member.role !== 'LMS Student'"
+							v-if="member.role && member.role !== 'Aerobridge Student'"
 						>
 							<Shield class="size-4 stroke-1.5" />
 							<span class="text-sm">
@@ -169,7 +169,7 @@ const props = defineProps({
 })
 
 const members = createResource({
-	url: 'lms.lms.api.get_members',
+	url: 'aerobridge.aerobridge.api.get_members',
 	makeParams: () => {
 		return {
 			search: search.value,
@@ -228,7 +228,7 @@ watch(search, () => {
 
 const getRole = (role: string) => {
 	const map: Record<string, string> = {
-		'LMS Student': 'Student',
+		'Aerobridge Student': 'Student',
 		'Course Creator': 'Instructor',
 		Moderator: 'Moderator',
 		'Batch Evaluator': 'Evaluator',

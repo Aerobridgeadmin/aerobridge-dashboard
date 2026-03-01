@@ -139,7 +139,7 @@ const props = defineProps({
 })
 
 const badges = createResource({
-	url: 'lms.lms.api.get_badges',
+	url: 'aerobridge.aerobridge.api.get_badges',
 	params: {
 		member: props.profile.data.name,
 	},

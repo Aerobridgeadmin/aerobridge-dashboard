@@ -79,7 +79,7 @@ import ZoomSettings from '@/components/Settings/ZoomSettings.vue'
 import Badges from '@/components/Settings/Badges.vue'
 
 const show = defineModel()
-const doctype = ref('LMS Settings')
+const doctype = ref('Aerobridge Settings')
 const activeTab = ref(null)
 const settingsStore = useSettings()
 

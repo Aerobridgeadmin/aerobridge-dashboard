@@ -1,6 +1,6 @@
 <div align="center" markdown="1">
 
-<img src=".github/lms-logo.png" alt="Frappe Learning logo" width="80" height="80"/>
+<img src=".github/aerobridge-logo.png" alt="Frappe Learning logo" width="80" height="80"/>
 <h1>Frappe Learning</h1>
 
 **Easy to use, open source, Learning Management System**
@@ -82,7 +82,7 @@ You can try [Frappe Cloud](https://frappecloud.com), a simple, user-friendly and
 It takes care of installation, setup, upgrades, monitoring, maintenance and support of your Frappe deployments. It is a fully featured developer platform with an ability to manage and control multiple Frappe deployments.
 
 <div>
-	<a href="https://frappecloud.com/lms/signup" target="_blank">
+	<a href="https://frappecloud.com/aerobridge/signup" target="_blank">
 		<picture>
 			<source media="(prefers-color-scheme: dark)" srcset="https://frappe.io/files/try-on-fc-white.png">
 			<img src="https://frappe.io/files/try-on-fc-black.png" alt="Try on Frappe Cloud" height="28" />
@@ -106,9 +106,9 @@ wget https://frappe.io/easy-install.py
 python3 ./easy-install.py deploy \
     --project=learning_prod_setup \
     --email=your_email.example.com \
-    --image=ghcr.io/frappe/lms \
+    --image=ghcr.io/Aerobridgeadmin/aerobridge-dashboard \
     --version=stable \
-    --app=lms \
+    --app=aerobridge \
     --sitename subdomain.domain.tld
 ```
 
@@ -134,16 +134,16 @@ You need Docker, docker-compose and git setup on your machine. Refer [Docker doc
     cd frappe-learning
 
     # Download the docker-compose file
-    wget -O docker-compose.yml https://raw.githubusercontent.com/frappe/lms/develop/docker/docker-compose.yml
+    wget -O docker-compose.yml https://raw.githubusercontent.com/frappe/aerobridge/develop/docker/docker-compose.yml
 
     # Download the setup script
-    wget -O init.sh https://raw.githubusercontent.com/frappe/lms/develop/docker/init.sh
+    wget -O init.sh https://raw.githubusercontent.com/frappe/aerobridge/develop/docker/init.sh
 
 **Step 2**: Run the container and daemonize it
 
     docker compose up -d
 
-**Step 3**: The site [http://lms.localhost:8000/lms](http://lms.localhost:8000/lms) should now be available. The default credentials are:
+**Step 3**: The site [http://aerobridge.localhost:8000/aerobridge](http://aerobridge.localhost:8000/aerobridge) should now be available. The default credentials are:
 - Username: Administrator
 - Password: admin
 
@@ -155,14 +155,14 @@ To setup the repository locally follow the steps mentioned below:
 1. Start the server by running `bench start`
 1. In a separate terminal window, create a new site by running `bench new-site learning.test`
 1. Map your site to localhost with the command `bench --site learning.test add-to-hosts`
-1. Get the Learning app. Run `bench get-app https://github.com/frappe/lms`
-1. Run `bench --site learning.test install-app lms`.
-1. Now open the URL `http://learning.test:8000/lms` in your browser, you should see the app running
+1. Get the Learning app. Run `bench get-app https://github.com/Aerobridgeadmin/aerobridge-dashboard`
+1. Run `bench --site learning.test install-app aerobridge`.
+1. Now open the URL `http://learning.test:8000/aerobridge` in your browser, you should see the app running
 
 ## Learn and connect
 
 - [Telegram Public Group](https://t.me/frappelms)
-- [Discuss Forum](https://discuss.frappe.io/c/lms/70)
+- [Discuss Forum](https://discuss.frappe.io/c/aerobridge/70)
 - [Documentation](https://docs.frappe.io/learning)
 - [YouTube](https://www.youtube.com/channel/UCn3bV5kx77HsVwtnlCeEi_A)
 

@@ -159,13 +159,13 @@ const breadcrumbs = computed(() => {
 })
 
 const chartDetails = createResource({
-	url: 'lms.lms.api.get_chart_details',
+	url: 'aerobridge.aerobridge.api.get_chart_details',
 	cache: ['statistics'],
 	auto: true,
 })
 
 const signupsChart = createResource({
-	url: 'lms.lms.utils.get_chart_data',
+	url: 'aerobridge.aerobridge.utils.get_chart_data',
 	params: {
 		chart_name: 'New Signups',
 	},
@@ -181,7 +181,7 @@ const signupsChart = createResource({
 })
 
 const enrollmentChart = createResource({
-	url: 'lms.lms.utils.get_chart_data',
+	url: 'aerobridge.aerobridge.utils.get_chart_data',
 	cache: ['enrollments'],
 	params: {
 		chart_name: 'Course Enrollments',
@@ -198,7 +198,7 @@ const enrollmentChart = createResource({
 })
 
 const certification = createResource({
-	url: 'lms.lms.utils.get_chart_data',
+	url: 'aerobridge.aerobridge.utils.get_chart_data',
 	cache: ['certifications'],
 	params: {
 		chart_name: 'Certification',
@@ -215,7 +215,7 @@ const certification = createResource({
 })
 
 const courseCompletion = createResource({
-	url: 'lms.lms.utils.get_course_completion_data',
+	url: 'aerobridge.aerobridge.utils.get_course_completion_data',
 	auto: true,
 	cache: ['courseCompletion'],
 })

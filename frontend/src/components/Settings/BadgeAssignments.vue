@@ -130,7 +130,7 @@ const props = defineProps<{
 }>()
 
 const assignments = createListResource({
-	doctype: 'LMS Badge Assignment',
+	doctype: 'Aerobridge Badge Assignment',
 	fields: [
 		'name',
 		'member',

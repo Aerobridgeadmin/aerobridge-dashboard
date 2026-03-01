@@ -36,9 +36,9 @@
 			/>
 			<FormControl
 				:label="__('Student')"
-				v-model="lms_student"
+				v-model="aerobridge_student"
 				type="checkbox"
-				@change.stop="changeRole('lms_student')"
+				@change.stop="changeRole('aerobridge_student')"
 			/>
 		</div>
 	</div>
@@ -52,7 +52,7 @@ import { CircleAlert } from 'lucide-vue-next'
 const moderator = ref(false)
 const course_creator = ref(false)
 const batch_evaluator = ref(false)
-const lms_student = ref(false)
+const aerobridge_student = ref(false)
 const readOnlyMode = window.read_only_mode
 
 const props = defineProps({
@@ -63,7 +63,7 @@ const props = defineProps({
 })
 
 const roles = createResource({
-	url: 'lms.lms.utils.get_roles',
+	url: 'aerobridge.aerobridge.utils.get_roles',
 	makeParams(values) {
 		return {
 			name: values.member,
@@ -74,7 +74,7 @@ const roles = createResource({
 			'moderator',
 			'course_creator',
 			'batch_evaluator',
-			'lms_student',
+			'aerobridge_student',
 		]
 		for (let role of roles) {
 			if (data[role]) eval(role).value = true
@@ -93,7 +93,7 @@ watch(
 )
 
 const updateRole = createResource({
-	url: 'lms.lms.api.save_role',
+	url: 'aerobridge.aerobridge.api.save_role',
 	makeParams(values) {
 		return {
 			user: props.profile.data?.name,
@@ -107,8 +107,8 @@ const changeRole = (role) => {
 	updateRole.submit(
 		{
 			role:
-				role == 'lms_student'
-					? 'LMS Student'
+				role == 'aerobridge_student'
+					? 'Aerobridge Student'
 					: convertToTitleCase(role.split('_').join(' ')),
 			value: eval(role).value,
 		},

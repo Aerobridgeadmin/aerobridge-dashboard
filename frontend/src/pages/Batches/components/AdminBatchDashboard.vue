@@ -203,7 +203,7 @@ const props = defineProps<{
 }>()
 
 const chartData = createResource({
-	url: 'lms.lms.utils.get_batch_chart_data',
+	url: 'aerobridge.aerobridge.utils.get_batch_chart_data',
 	cache: ['batch_chart_data', props.batch?.data?.name],
 	params: { batch: props.batch?.data?.name },
 	auto: true,
@@ -213,14 +213,14 @@ const certificationCount = createResource({
 	url: 'frappe.client.get_count',
 	cache: ['batch_certificate_count', props.batch?.data?.name],
 	params: {
-		doctype: 'LMS Certificate',
+		doctype: 'Aerobridge Certificate',
 		filters: { batch_name: props.batch?.data?.name },
 	},
 	auto: true,
 })
 
 const students = createListResource({
-	doctype: 'LMS Batch Enrollment',
+	doctype: 'Aerobridge Batch Enrollment',
 	filters: {
 		batch: props.batch?.data?.name,
 	},

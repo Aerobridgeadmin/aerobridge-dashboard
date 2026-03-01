@@ -259,7 +259,7 @@ onBeforeUnmount(() => {
 const assignment = createResource({
 	url: 'frappe.client.get',
 	params: {
-		doctype: 'LMS Assignment',
+		doctype: 'Aerobridge Assignment',
 		name: props.assignmentID,
 	},
 	auto: true,
@@ -271,7 +271,7 @@ const assignment = createResource({
 })
 
 const submissionResource = createDocumentResource({
-	doctype: 'LMS Assignment Submission',
+	doctype: 'Aerobridge Assignment Submission',
 	name: props.submissionName,
 	auto: false,
 	onError(err) {
@@ -303,7 +303,7 @@ const submitAssignment = () => {
 
 const addNewSubmission = () => {
 	let doc = {
-		doctype: 'LMS Assignment Submission',
+		doctype: 'Aerobridge Assignment Submission',
 		assignment: props.assignmentID,
 		member: user.data?.name,
 	}
@@ -378,7 +378,7 @@ const markLessonProgress = () => {
 		let chapterNumber = router.currentRoute.value.params.chapterNumber
 		let lessonNumber = router.currentRoute.value.params.lessonNumber
 
-		call('lms.lms.api.mark_lesson_progress', {
+		call('aerobridge.aerobridge.api.mark_lesson_progress', {
 			course: courseName,
 			chapter_number: chapterNumber,
 			lesson_number: lessonNumber,
