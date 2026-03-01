@@ -1,8 +1,10 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Header from '@/components/Header'
 import StatCard from '@/components/StatCard'
-import { stats, revenueData, courses, activityFeed } from '@/lib/data'
+import { getDashboardStats, getCourses, getActivityFeed, revenueData } from '@/lib/data'
+import { DashboardStats, Course } from '@/lib/supabase'
 import {
   Users,
   BookOpen,
@@ -15,6 +17,7 @@ import {
   MessageSquare,
   ClipboardCheck,
   ArrowUpRight,
+  Loader2,
 } from 'lucide-react'
 
 const activityIcons: Record<string, any> = {
@@ -34,7 +37,38 @@ const activityColors: Record<string, string> = {
 }
 
 export default function DashboardPage() {
+  const [stats, setStats] = useState<DashboardStats | null>(null)
+  const [courses, setCourses] = useState<Course[]>([])
+  const [activityFeed, setActivityFeed] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function loadData() {
+      const [s, c, a] = await Promise.all([
+        getDashboardStats(),
+        getCourses(),
+        getActivityFeed(),
+      ])
+      setStats(s)
+      setCourses(c)
+      setActivityFeed(a)
+      setLoading(false)
+    }
+    loadData()
+  }, [])
+
   const maxEnrollment = Math.max(...revenueData.map((d) => d.enrollments))
+
+  if (loading || !stats) {
+    return (
+      <div className="min-h-screen bg-surface-50">
+        <Header title="Dashboard" subtitle="Welcome back — here's what's happening today" />
+        <div className="flex items-center justify-center p-20">
+          <Loader2 className="h-8 w-8 animate-spin text-brand-500" />
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-surface-50">
@@ -46,7 +80,7 @@ export default function DashboardPage() {
           <StatCard
             title="Total Students"
             value={stats.totalStudents.toLocaleString()}
-            change="+156 this month"
+            change={`+${stats.recentEnrollments} this month`}
             changeType="positive"
             icon={Users}
             color="blue"
@@ -159,11 +193,11 @@ export default function DashboardPage() {
 
               <div className="mt-4 grid w-full grid-cols-2 gap-3">
                 <div className="rounded-lg bg-surface-50 p-3 text-center">
-                  <p className="font-display text-lg text-surface-900">1,893</p>
+                  <p className="font-display text-lg text-surface-900">{stats.certificatesIssued}</p>
                   <p className="text-[10px] uppercase tracking-wider text-surface-500">Completed</p>
                 </div>
                 <div className="rounded-lg bg-surface-50 p-3 text-center">
-                  <p className="font-display text-lg text-surface-900">519</p>
+                  <p className="font-display text-lg text-surface-900">{stats.totalStudents - stats.certificatesIssued}</p>
                   <p className="text-[10px] uppercase tracking-wider text-surface-500">In Progress</p>
                 </div>
               </div>
@@ -188,7 +222,7 @@ export default function DashboardPage() {
                 .sort((a, b) => b.enrolled_count - a.enrolled_count)
                 .slice(0, 4)
                 .map((course, i) => {
-                  const maxEnrolled = courses[0].enrolled_count || 1
+                  const topEnrolled = courses.reduce((max, c) => Math.max(max, c.enrolled_count), 1)
                   return (
                     <div key={course.id} className="group flex items-center gap-4 rounded-lg p-3 transition-colors hover:bg-surface-50">
                       <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-surface-100 font-mono text-sm font-semibold text-surface-500">
@@ -202,7 +236,7 @@ export default function DashboardPage() {
                         <div className="h-1.5 overflow-hidden rounded-full bg-surface-100">
                           <div
                             className="h-full rounded-full bg-brand-500 transition-all duration-700"
-                            style={{ width: `${(course.enrolled_count / 728) * 100}%` }}
+                            style={{ width: `${(course.enrolled_count / topEnrolled) * 100}%` }}
                           ></div>
                         </div>
                       </div>

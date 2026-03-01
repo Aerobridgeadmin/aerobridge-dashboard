@@ -1,10 +1,16 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Header from '@/components/Header'
-import { certificates } from '@/lib/data'
-import { Search, Download, ExternalLink, Award, Copy } from 'lucide-react'
+import { getCertificates } from '@/lib/data'
+import { Certificate } from '@/lib/supabase'
+import { Search, Download, ExternalLink, Award, Copy, Loader2 } from 'lucide-react'
 
 export default function CertificatesPage() {
+  const [certificates, setCertificates] = useState<Certificate[]>([])
+  const [loading, setLoading] = useState(true)
+  useEffect(() => { getCertificates().then(d => { setCertificates(d); setLoading(false) }) }, [])
+
   return (
     <div className="min-h-screen bg-surface-50">
       <Header title="Certificates" subtitle="View and manage issued certificates" />
@@ -13,18 +19,16 @@ export default function CertificatesPage() {
         <div className="mb-6 flex items-center justify-between">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" />
-            <input
-              type="text"
-              placeholder="Search certificates..."
-              className="h-10 w-72 rounded-lg border border-surface-200 bg-white pl-9 pr-4 text-sm outline-none transition-all placeholder:text-surface-400 focus:border-brand-300 focus:ring-2 focus:ring-brand-100"
-            />
+            <input type="text" placeholder="Search certificates..." className="h-10 w-72 rounded-lg border border-surface-200 bg-white pl-9 pr-4 text-sm outline-none transition-all placeholder:text-surface-400 focus:border-brand-300 focus:ring-2 focus:ring-brand-100" />
           </div>
           <button className="flex items-center gap-2 rounded-lg border border-surface-200 bg-white px-4 py-2.5 text-sm font-medium text-surface-700 shadow-sm transition-all hover:bg-surface-50">
-            <Download className="h-4 w-4" />
-            Export All
+            <Download className="h-4 w-4" /> Export All
           </button>
         </div>
 
+        {loading ? (
+          <div className="flex justify-center p-12"><Loader2 className="h-8 w-8 animate-spin text-brand-500" /></div>
+        ) : (
         <div className="card overflow-hidden">
           <table className="w-full">
             <thead>
@@ -38,11 +42,7 @@ export default function CertificatesPage() {
             </thead>
             <tbody>
               {certificates.map((cert, i) => (
-                <tr
-                  key={cert.id}
-                  className="animate-slide-up border-b border-surface-100 transition-colors last:border-0 hover:bg-surface-50/50"
-                  style={{ animationDelay: `${i * 40}ms`, animationFillMode: 'both' }}
-                >
+                <tr key={cert.id} className="animate-slide-up border-b border-surface-100 transition-colors last:border-0 hover:bg-surface-50/50" style={{ animationDelay: `${i * 40}ms`, animationFillMode: 'both' }}>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
                       <Award className="h-4 w-4 text-amber-500" />
@@ -58,20 +58,12 @@ export default function CertificatesPage() {
                     </div>
                   </td>
                   <td className="px-6 py-4 text-sm text-surface-600">{cert.course_title}</td>
-                  <td className="px-6 py-4 text-sm text-surface-500">
-                    {new Date(cert.issued_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
-                  </td>
+                  <td className="px-6 py-4 text-sm text-surface-500">{new Date(cert.issued_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-1">
-                      <button className="rounded-lg p-2 text-surface-400 transition-colors hover:bg-surface-100 hover:text-surface-600" title="Copy link">
-                        <Copy className="h-3.5 w-3.5" />
-                      </button>
-                      <button className="rounded-lg p-2 text-surface-400 transition-colors hover:bg-surface-100 hover:text-surface-600" title="Download">
-                        <Download className="h-3.5 w-3.5" />
-                      </button>
-                      <button className="rounded-lg p-2 text-surface-400 transition-colors hover:bg-surface-100 hover:text-surface-600" title="View">
-                        <ExternalLink className="h-3.5 w-3.5" />
-                      </button>
+                      <button className="rounded-lg p-2 text-surface-400 transition-colors hover:bg-surface-100 hover:text-surface-600" title="Copy link"><Copy className="h-3.5 w-3.5" /></button>
+                      <button className="rounded-lg p-2 text-surface-400 transition-colors hover:bg-surface-100 hover:text-surface-600" title="Download"><Download className="h-3.5 w-3.5" /></button>
+                      <button className="rounded-lg p-2 text-surface-400 transition-colors hover:bg-surface-100 hover:text-surface-600" title="View"><ExternalLink className="h-3.5 w-3.5" /></button>
                     </div>
                   </td>
                 </tr>
@@ -79,6 +71,7 @@ export default function CertificatesPage() {
             </tbody>
           </table>
         </div>
+        )}
       </div>
     </div>
   )
