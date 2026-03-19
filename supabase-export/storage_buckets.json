@@ -1,0 +1,45 @@
+[
+  {
+    "id": "hriq-documents",
+    "name": "hriq-documents",
+    "owner": "",
+    "public": false,
+    "type": "STANDARD",
+    "file_size_limit": 20971520,
+    "allowed_mime_types": [
+      "image/jpeg",
+      "image/png",
+      "image/gif",
+      "image/webp",
+      "application/pdf",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "text/plain",
+      "text/csv"
+    ],
+    "created_at": "2026-02-16T13:31:06.689Z",
+    "updated_at": "2026-02-16T13:31:06.689Z"
+  },
+  {
+    "id": "org-documents",
+    "name": "org-documents",
+    "owner": "",
+    "public": false,
+    "type": "STANDARD",
+    "file_size_limit": 10485760,
+    "allowed_mime_types": [
+      "image/jpeg",
+      "image/png",
+      "image/gif",
+      "image/webp",
+      "image/svg+xml",
+      "application/pdf",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "text/html"
+    ],
+    "created_at": "2026-02-17T16:27:06.194Z",
+    "updated_at": "2026-02-17T16:27:06.194Z"
+  }
+]

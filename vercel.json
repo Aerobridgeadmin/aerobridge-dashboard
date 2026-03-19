@@ -1,1 +1,66 @@
-{"version": 2}
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "buildCommand": "pnpm turbo build --filter=app",
+  "installCommand": "pnpm install",
+  "outputDirectory": "apps/app/.next",
+  "regions": ["pdx1"],
+  "crons": [
+    {
+      "path": "/api/cron/timesheet-reminders",
+      "schedule": "0 15 * * 1"
+    },
+    {
+      "path": "/api/cron/td-sync-before-close",
+      "schedule": "30 0,8,16 * * *"
+    },
+    {
+      "path": "/api/cron/auto-submit-timesheets",
+      "schedule": "0 8 * * *"
+    },
+    {
+      "path": "/api/cron/auto-close-periods",
+      "schedule": "0 5 * * *"
+    },
+    {
+      "path": "/api/cron/auto-approve-timesheets",
+      "schedule": "0 6 * * *"
+    },
+    {
+      "path": "/api/cron/rsvp-sync",
+      "schedule": "*/10 * * * *"
+    },
+    {
+      "path": "/api/cron/auto-paystub-on-lock",
+      "schedule": "0 8 * * *"
+    },
+    {
+      "path": "/api/cron/cleanup-auth",
+      "schedule": "0 3 * * *"
+    },
+    {
+      "path": "/api/cron/offboarded-cleanup",
+      "schedule": "0 4 * * *"
+    },
+    {
+      "path": "/api/cron/offboarding-process",
+      "schedule": "*/15 * * * *"
+    },
+    {
+      "path": "/api/cron/offboarding-audit",
+      "schedule": "0 6,14,22 * * *"
+    },
+    {
+      "path": "/api/cron/sync-rl-accounts",
+      "schedule": "0 0,8,16 * * *"
+    },
+    {
+      "path": "/api/cron/ach-collection",
+      "schedule": "0 12 * * *"
+    },
+    {
+      "path": "/api/cron/gws-email-sync",
+      "schedule": "0 2,10,18 * * *"
+    }
+  ]
+}

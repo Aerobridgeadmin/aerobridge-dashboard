@@ -1,0 +1,1538 @@
+{
+  "app_users": {
+    "columns": {
+      "id": "string",
+      "supabase_user_id": "string",
+      "email": "string",
+      "display_name": "string",
+      "profile_picture": "string",
+      "is_active": "boolean",
+      "last_login_at": "string",
+      "login_count": "integer",
+      "created_at": "string"
+    },
+    "required": [
+      "id",
+      "supabase_user_id",
+      "email",
+      "is_active",
+      "login_count",
+      "created_at"
+    ]
+  },
+  "approved_emails": {
+    "columns": {
+      "id": "string",
+      "email": "string",
+      "role": "string",
+      "added_by_user_id": "string",
+      "invite_sent_at": "string",
+      "added_at": "string",
+      "organization_id": "string"
+    },
+    "required": [
+      "id",
+      "email",
+      "role",
+      "added_at"
+    ]
+  },
+  "background_checks": {
+    "columns": {
+      "id": "string",
+      "employee_id": "string",
+      "status": "string",
+      "cra_name": "string",
+      "cra_order_id": "string",
+      "cra_report_url": "string",
+      "disclosure_sent_at": "string",
+      "disclosure_signed_at": "string",
+      "disclosure_document_id": "string",
+      "authorization_signed_at": "string",
+      "authorization_document_id": "string",
+      "check_ordered_at": "string",
+      "check_completed_at": "string",
+      "check_result": "string",
+      "check_summary": "string",
+      "pre_adverse_notice_sent_at": "string",
+      "pre_adverse_report_sent_at": "string",
+      "pre_adverse_wait_until": "string",
+      "candidate_disputed_at": "string",
+      "candidate_dispute_notes": "string",
+      "adverse_notice_sent_at": "string",
+      "adverse_reason": "string",
+      "final_decision": "string",
+      "decision_date": "string",
+      "decision_by_user_id": "string",
+      "decision_by_name": "string",
+      "decision_notes": "string",
+      "assessment_notes": "string",
+      "notes": "string",
+      "created_at": "string",
+      "updated_at": "string"
+    },
+    "required": [
+      "id",
+      "employee_id",
+      "status",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "client_invoice_line_items": {
+    "columns": {
+      "id": "string",
+      "client_invoice_id": "string",
+      "employee_id": "string",
+      "description": "string",
+      "hours_worked": "number",
+      "hourly_rate": "number",
+      "amount": "number",
+      "currency": "string",
+      "created_at": "string",
+      "updated_at": "string",
+      "stripe_checkout_session_id": "string",
+      "stripe_payment_intent_id": "string",
+      "payment_link": "string",
+      "payment_status": "string",
+      "paid_at": "string"
+    },
+    "required": [
+      "id",
+      "client_invoice_id",
+      "employee_id",
+      "amount",
+      "currency",
+      "created_at",
+      "updated_at",
+      "payment_status"
+    ]
+  },
+  "client_invoices": {
+    "columns": {
+      "id": "string",
+      "organization_id": "string",
+      "invoice_number": "string",
+      "period_start": "string",
+      "period_end": "string",
+      "period_name": "string",
+      "subtotal": "number",
+      "rl_fee_type": "string",
+      "rl_fee_amount": "number",
+      "rl_fee_total": "number",
+      "total_amount": "number",
+      "currency": "string",
+      "status": "string",
+      "paid_at": "string",
+      "payment_method": "string",
+      "payment_reference": "string",
+      "stripe_checkout_session_id": "string",
+      "stripe_payment_intent_id": "string",
+      "payment_link": "string",
+      "qb_invoice_id": "string",
+      "qb_synced_at": "string",
+      "notes": "string",
+      "invoice_url": "string",
+      "created_by_user_id": "string",
+      "created_by_name": "string",
+      "created_at": "string",
+      "updated_at": "string"
+    },
+    "required": [
+      "id",
+      "organization_id",
+      "invoice_number",
+      "period_start",
+      "period_end",
+      "subtotal",
+      "rl_fee_total",
+      "total_amount",
+      "currency",
+      "status",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "contract_signing_requests": {
+    "columns": {
+      "id": "string",
+      "employee_id": "string",
+      "template_id": "string",
+      "docuseal_submission_id": "string",
+      "docuseal_submitter_slug": "string",
+      "status": "string",
+      "sent_at": "string",
+      "viewed_at": "string",
+      "signed_at": "string",
+      "declined_at": "string",
+      "expires_at": "string",
+      "signed_document_url": "string",
+      "signed_document_id": "string",
+      "signer_email": "string",
+      "signer_name": "string",
+      "created_by_user_id": "string",
+      "created_at": "string",
+      "updated_at": "string"
+    },
+    "required": [
+      "id",
+      "employee_id",
+      "template_id",
+      "status",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "contract_templates": {
+    "columns": {
+      "id": "string",
+      "organization_id": "string",
+      "name": "string",
+      "description": "string",
+      "docuseal_template_id": "string",
+      "category": "string",
+      "is_active": "boolean",
+      "created_by_user_id": "string",
+      "created_at": "string",
+      "updated_at": "string"
+    },
+    "required": [
+      "id",
+      "organization_id",
+      "name",
+      "category",
+      "is_active",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "custom_dropdown_options": {
+    "columns": {
+      "id": "string",
+      "category": "string",
+      "value": "string",
+      "label": "string",
+      "created_at": "string",
+      "created_by": "string"
+    },
+    "required": [
+      "id",
+      "category",
+      "value",
+      "label"
+    ]
+  },
+  "expense_items": {
+    "columns": {
+      "id": "string",
+      "report_id": "string",
+      "category": "string",
+      "description": "string",
+      "amount": "number",
+      "currency": "string",
+      "date": "string",
+      "receipt_url": "string",
+      "created_at": "string"
+    },
+    "required": [
+      "id",
+      "report_id",
+      "category",
+      "description",
+      "amount",
+      "currency",
+      "date",
+      "created_at"
+    ]
+  },
+  "expense_reports": {
+    "columns": {
+      "id": "string",
+      "employee_id": "string",
+      "organization_id": "string",
+      "title": "string",
+      "description": "string",
+      "total_amount": "number",
+      "currency": "string",
+      "status": "string",
+      "submitted_at": "string",
+      "approved_by": "string",
+      "approved_at": "string",
+      "rejected_reason": "string",
+      "created_at": "string",
+      "updated_at": "string"
+    },
+    "required": [
+      "id",
+      "employee_id",
+      "organization_id",
+      "title",
+      "total_amount",
+      "currency",
+      "status",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "fcra_actions": {
+    "columns": {
+      "id": "string",
+      "background_check_id": "string",
+      "action_type": "string",
+      "description": "string",
+      "document_url": "string",
+      "performed_by_user_id": "string",
+      "performed_by_name": "string",
+      "created_at": "string"
+    },
+    "required": [
+      "id",
+      "background_check_id",
+      "action_type",
+      "created_at"
+    ]
+  },
+  "hriq_access_provisioning": {
+    "columns": {
+      "id": "string",
+      "employee_id": "string",
+      "system_name": "string",
+      "system_category": "string",
+      "access_level": "string",
+      "status": "string",
+      "provisioned_at": "string",
+      "provisioned_by_user_id": "string",
+      "deprovisioned_at": "string",
+      "deprovisioned_by_user_id": "string",
+      "revocation_priority": "integer",
+      "notes": "string",
+      "metadata": "jsonb",
+      "created_at": "string",
+      "updated_at": "string"
+    },
+    "required": [
+      "id",
+      "employee_id",
+      "system_name",
+      "status",
+      "revocation_priority",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "hriq_ach_collections": {
+    "columns": {
+      "id": "string",
+      "organization_id": "string",
+      "pay_period": "string",
+      "amount": "string",
+      "scheduled_date": "string",
+      "payout_date": "string",
+      "status": "string",
+      "qb_charge_id": "string",
+      "qb_invoice_id": "string",
+      "retry_count": "integer",
+      "failure_reason": "string",
+      "collected_at": "string",
+      "idempotency_key": "string",
+      "created_at": "string",
+      "updated_at": "string"
+    },
+    "required": [
+      "id",
+      "organization_id",
+      "pay_period",
+      "amount",
+      "scheduled_date",
+      "payout_date",
+      "status",
+      "retry_count",
+      "idempotency_key",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "hriq_audit_log": {
+    "columns": {
+      "id": "string",
+      "timestamp": "string",
+      "actor_type": "string",
+      "actor_user_id": "string",
+      "actor_description": "string",
+      "action": "string",
+      "object_type": "string",
+      "object_id": "string",
+      "old_value": "jsonb",
+      "new_value": "jsonb",
+      "reason": "string",
+      "ip_address": "string",
+      "user_agent": "string",
+      "organization_id": "string"
+    },
+    "required": [
+      "id",
+      "timestamp",
+      "actor_type",
+      "action",
+      "object_type",
+      "object_id"
+    ]
+  },
+  "hriq_batch_sessions": {
+    "columns": {
+      "id": "string",
+      "title": "string",
+      "description": "string",
+      "zoom_meeting_id": "string",
+      "zoom_meeting_link": "string",
+      "zoom_join_url": "string",
+      "zoom_start_url": "string",
+      "zoom_meeting_password": "string",
+      "zoom_meeting_date": "string",
+      "zoom_duration": "integer",
+      "status": "string",
+      "created_by_user_id": "string",
+      "created_by_name": "string",
+      "created_at": "string",
+      "updated_at": "string",
+      "organization_id": "string",
+      "calendar_organizer_email": "string",
+      "google_calendar_event_id": "string"
+    },
+    "required": [
+      "id",
+      "title",
+      "zoom_duration",
+      "status",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "hriq_commissions": {
+    "columns": {
+      "id": "string",
+      "commission_type": "string",
+      "employee_id": "string",
+      "qb_payment_ref": "string",
+      "qb_vendor_name": "string",
+      "qb_payment_amount": "number",
+      "qb_payment_date": "string",
+      "qb_invoice_number": "string",
+      "commission_rate": "number",
+      "commission_amount": "number",
+      "currency": "string",
+      "status": "string",
+      "assigned_by_user_id": "string",
+      "assigned_by_name": "string",
+      "approved_by_user_id": "string",
+      "approved_by_name": "string",
+      "approved_at": "string",
+      "rejected_at": "string",
+      "rejection_reason": "string",
+      "timesheet_submission_id": "string",
+      "description": "string",
+      "notes": "string",
+      "created_at": "string",
+      "updated_at": "string",
+      "commission_tier": "string",
+      "client_name": "string",
+      "revenue_amount": "number"
+    },
+    "required": [
+      "id",
+      "commission_type",
+      "employee_id",
+      "commission_amount",
+      "currency",
+      "status",
+      "created_at",
+      "updated_at",
+      "commission_tier"
+    ]
+  },
+  "hriq_contacts": {
+    "columns": {
+      "id": "string",
+      "organization_id": "string",
+      "full_name": "string",
+      "email": "string",
+      "phone": "string",
+      "job_title": "string",
+      "role": "string",
+      "notes": "string",
+      "is_active": "boolean",
+      "created_at": "string",
+      "updated_at": "string",
+      "created_by_user_id": "string",
+      "created_by_name": "string"
+    },
+    "required": [
+      "id",
+      "organization_id",
+      "full_name"
+    ]
+  },
+  "hriq_documents": {
+    "columns": {
+      "id": "string",
+      "employee_id": "string",
+      "document_type": "string",
+      "document_name": "string",
+      "description": "string",
+      "file_url": "string",
+      "file_name": "string",
+      "file_size": "integer",
+      "mime_type": "string",
+      "issued_date": "string",
+      "expiry_date": "string",
+      "is_expired": "boolean",
+      "status": "string",
+      "verified_by_user_id": "string",
+      "verified_at": "string",
+      "is_confidential": "boolean",
+      "uploaded_by_user_id": "string",
+      "uploaded_by_name": "string",
+      "created_at": "string",
+      "updated_at": "string",
+      "rejection_reason": "string",
+      "file_path": "string",
+      "folder": "string"
+    },
+    "required": [
+      "id",
+      "employee_id",
+      "document_type",
+      "document_name",
+      "is_expired",
+      "status",
+      "is_confidential",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "hriq_email_template_versions": {
+    "columns": {
+      "id": "string",
+      "template_id": "string",
+      "subject": "string",
+      "blocks": "jsonb",
+      "footer_text": "string",
+      "edited_by": "string",
+      "created_at": "string"
+    },
+    "required": [
+      "id",
+      "template_id",
+      "subject",
+      "blocks",
+      "created_at"
+    ]
+  },
+  "hriq_email_templates": {
+    "columns": {
+      "id": "string",
+      "slug": "string",
+      "name": "string",
+      "category": "string",
+      "description": "string",
+      "subject": "string",
+      "blocks": "jsonb",
+      "footer_text": "string",
+      "available_variables": "jsonb",
+      "is_active": "boolean",
+      "is_system": "boolean",
+      "updated_by": "string",
+      "created_at": "string",
+      "updated_at": "string"
+    },
+    "required": [
+      "id",
+      "slug",
+      "name",
+      "category",
+      "subject",
+      "blocks",
+      "available_variables",
+      "is_active",
+      "is_system",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "hriq_employees": {
+    "columns": {
+      "id": "string",
+      "employee_number": "string",
+      "legal_first_name": "string",
+      "legal_last_name": "string",
+      "preferred_name": "string",
+      "personal_email": "string",
+      "work_email": "string",
+      "phone_number": "string",
+      "employment_type": "string",
+      "department": "string",
+      "role": "string",
+      "manager_id": "string",
+      "location": "string",
+      "timezone": "string",
+      "payment_platform": "string",
+      "payment_account_info": "string",
+      "hourly_rate": "number",
+      "currency": "string",
+      "date_of_birth": "string",
+      "street_address": "string",
+      "city": "string",
+      "state_province": "string",
+      "postal_code": "string",
+      "country": "string",
+      "mobile_number": "string",
+      "home_phone": "string",
+      "bank_name": "string",
+      "bank_account_number": "string",
+      "bank_account_name": "string",
+      "bank_swift_code": "string",
+      "bank_address": "string",
+      "emergency_contact_name": "string",
+      "emergency_contact_phone": "string",
+      "emergency_contact_relation": "string",
+      "daily_hours_target": "string",
+      "time_doctor_email": "string",
+      "start_date": "string",
+      "end_date": "string",
+      "employment_status": "string",
+      "onboarding_status": "string",
+      "offboarding_status": "string",
+      "hriq_role": "string",
+      "linked_user_id": "string",
+      "recruit_crm_id": "string",
+      "recruit_crm_slug": "string",
+      "recruit_crm_synced_at": "string",
+      "is_locked": "boolean",
+      "created_at": "string",
+      "updated_at": "string",
+      "created_by_user_id": "string",
+      "organization_id": "string",
+      "google_sheet_id": "string",
+      "photo_url": "string",
+      "info_approval_status": "string",
+      "second_name": "string",
+      "second_last_name": "string",
+      "bank_routing_number": "string",
+      "debit_card_number": "string",
+      "self_service_token": "string",
+      "slack_invite_token": "string",
+      "stripe_account_id": "string",
+      "stripe_account_status": "string",
+      "wise_recipient_id": "integer",
+      "wise_recipient_currency": "string",
+      "wise_recipient_type": "string",
+      "wise_recipient_synced_at": "string",
+      "qb_vendor_id": "string",
+      "veriff_session_id": "string",
+      "veriff_status": "string",
+      "veriff_decision": "jsonb",
+      "veriff_verified_at": "string",
+      "veriff_verified_name": "string",
+      "veriff_document_type": "string",
+      "veriff_document_country": "string",
+      "veriff_rejection_reason": "string",
+      "bank_extra_data": "jsonb",
+      "username": "string",
+      "wise_gate_required": "boolean",
+      "cadana_person_id": "string",
+      "cadana_person_status": "string",
+      "cadana_synced_at": "string",
+      "cadana_gate_required": "boolean",
+      "compensation_type": "string",
+      "monthly_salary": "number",
+      "preferred_payment_method": "string",
+      "payment_method_verified": "boolean",
+      "wise_tag": "string"
+    },
+    "required": [
+      "id",
+      "employee_number",
+      "legal_first_name",
+      "legal_last_name",
+      "employment_type",
+      "currency",
+      "daily_hours_target",
+      "employment_status",
+      "onboarding_status",
+      "offboarding_status",
+      "hriq_role",
+      "is_locked",
+      "created_at",
+      "updated_at",
+      "wise_gate_required",
+      "cadana_gate_required",
+      "compensation_type",
+      "payment_method_verified"
+    ]
+  },
+  "hriq_jotform_templates": {
+    "columns": {
+      "id": "string",
+      "name": "string",
+      "description": "string",
+      "form_url": "string",
+      "form_type": "string",
+      "is_required": "boolean",
+      "sort_order": "integer",
+      "is_active": "boolean",
+      "created_at": "string",
+      "updated_at": "string",
+      "organization_id": "string"
+    },
+    "required": [
+      "id",
+      "name",
+      "form_url",
+      "form_type",
+      "is_required",
+      "sort_order",
+      "is_active",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "hriq_manager_notes": {
+    "columns": {
+      "id": "string",
+      "employee_id": "string",
+      "author_user_id": "string",
+      "author_name": "string",
+      "note_type": "string",
+      "content": "string",
+      "is_private": "boolean",
+      "created_at": "string",
+      "updated_at": "string"
+    },
+    "required": [
+      "id",
+      "employee_id",
+      "note_type",
+      "content",
+      "is_private",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "hriq_offboarding_audit_results": {
+    "columns": {
+      "id": "string",
+      "audit_run_id": "string",
+      "service_name": "string",
+      "user_found": "boolean",
+      "user_status": "string",
+      "user_email_matched": "string",
+      "user_id_on_service": "string",
+      "is_flagged": "boolean",
+      "flag_reason": "string",
+      "raw_response": "jsonb",
+      "checked_at": "string"
+    },
+    "required": [
+      "id",
+      "service_name",
+      "user_found",
+      "is_flagged",
+      "checked_at"
+    ]
+  },
+  "hriq_offboarding_audit_runs": {
+    "columns": {
+      "id": "string",
+      "employee_id": "string",
+      "employee_email": "string",
+      "employee_name": "string",
+      "run_status": "string",
+      "initiated_by": "string",
+      "started_at": "string",
+      "completed_at": "string",
+      "total_services_checked": "integer",
+      "total_flags": "integer",
+      "summary": "jsonb",
+      "created_at": "string"
+    },
+    "required": [
+      "id",
+      "run_status",
+      "created_at"
+    ]
+  },
+  "hriq_onboarding_sessions": {
+    "columns": {
+      "id": "string",
+      "employee_id": "string",
+      "batch_session_id": "string",
+      "recruitcrm_candidate_id": "string",
+      "status": "string",
+      "current_step": "string",
+      "overall_progress": "integer",
+      "zoom_meeting_link": "string",
+      "zoom_meeting_id": "string",
+      "zoom_meeting_date": "string",
+      "zoom_invite_sent": "boolean",
+      "zoom_invite_sent_at": "string",
+      "zoom_invite_accepted": "boolean",
+      "zoom_invite_accepted_at": "string",
+      "zoom_attended": "boolean",
+      "zoom_attended_at": "string",
+      "jotform_links": "string",
+      "jotforms_sent": "boolean",
+      "jotforms_sent_at": "string",
+      "jotforms_sent_data": "string",
+      "jotforms_completed": "boolean",
+      "jotforms_completed_at": "string",
+      "documents_required": "string",
+      "documents_uploaded": "boolean",
+      "documents_uploaded_at": "string",
+      "started_at": "string",
+      "completed_at": "string",
+      "started_by_user_id": "string",
+      "started_by_name": "string",
+      "created_at": "string",
+      "updated_at": "string",
+      "google_calendar_event_id": "string",
+      "zoom_rsvp_status": "string"
+    },
+    "required": [
+      "id",
+      "employee_id",
+      "status",
+      "current_step",
+      "overall_progress",
+      "zoom_invite_sent",
+      "zoom_invite_accepted",
+      "zoom_attended",
+      "jotforms_sent",
+      "jotforms_completed",
+      "documents_uploaded",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "hriq_onboarding_steps": {
+    "columns": {
+      "id": "string",
+      "session_id": "string",
+      "step_type": "string",
+      "step_name": "string",
+      "description": "string",
+      "sort_order": "integer",
+      "status": "string",
+      "is_required": "boolean",
+      "form_url": "string",
+      "form_submission_id": "string",
+      "document_type": "string",
+      "document_id": "string",
+      "completed_at": "string",
+      "completed_by_user_id": "string",
+      "completed_by_name": "string",
+      "notes": "string",
+      "created_at": "string",
+      "updated_at": "string"
+    },
+    "required": [
+      "id",
+      "session_id",
+      "step_type",
+      "step_name",
+      "sort_order",
+      "status",
+      "is_required",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "hriq_org_onboarding_sessions": {
+    "columns": {
+      "id": "string",
+      "token": "string",
+      "organization_id": "string",
+      "status": "string",
+      "current_step": "integer",
+      "total_steps": "integer",
+      "company_name": "string",
+      "industry": "string",
+      "company_size": "string",
+      "website": "string",
+      "country": "string",
+      "address": "string",
+      "contact_name": "string",
+      "contact_email": "string",
+      "contact_phone": "string",
+      "contact_title": "string",
+      "billing_email": "string",
+      "payment_method": "string",
+      "notes": "string",
+      "preferences": "jsonb",
+      "completed_at": "string",
+      "expires_at": "string",
+      "created_by_user_id": "string",
+      "created_by_name": "string",
+      "created_at": "string",
+      "updated_at": "string"
+    },
+    "required": [
+      "id",
+      "token",
+      "status",
+      "current_step",
+      "total_steps",
+      "expires_at",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "hriq_payments": {
+    "columns": {
+      "id": "string",
+      "employee_id": "string",
+      "payment_type": "string",
+      "amount": "string",
+      "currency": "string",
+      "period_start": "string",
+      "period_end": "string",
+      "payment_date": "string",
+      "payment_method": "string",
+      "transaction_id": "string",
+      "status": "string",
+      "payout_provider": "string",
+      "payout_reference": "string",
+      "payout_receipt_url": "string",
+      "payout_confirmed_at": "string",
+      "payout_confirmed_by": "string",
+      "wise_transfer_id": "integer",
+      "wise_quote_id": "string",
+      "wise_transfer_status": "string",
+      "wise_source_amount": "number",
+      "wise_target_amount": "number",
+      "wise_target_currency": "string",
+      "wise_exchange_rate": "number",
+      "wise_fee": "number",
+      "wise_estimated_delivery": "string",
+      "wise_funded_at": "string",
+      "qb_bill_id": "string",
+      "qb_bill_payment_id": "string",
+      "qb_vendor_id": "string",
+      "qb_synced_at": "string",
+      "invoice_url": "string",
+      "invoice_number": "string",
+      "hours_worked": "string",
+      "hourly_rate": "string",
+      "description": "string",
+      "notes": "string",
+      "processed_by_user_id": "string",
+      "processed_by_name": "string",
+      "created_at": "string",
+      "updated_at": "string"
+    },
+    "required": [
+      "id",
+      "employee_id",
+      "payment_type",
+      "amount",
+      "currency",
+      "status",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "hriq_qb_tokens": {
+    "columns": {
+      "id": "string",
+      "company_id": "string",
+      "access_token": "string",
+      "refresh_token": "string",
+      "access_token_expires_at": "string",
+      "refresh_token_expires_at": "string",
+      "connected_at": "string",
+      "updated_at": "string"
+    },
+    "required": [
+      "id",
+      "company_id",
+      "access_token",
+      "refresh_token",
+      "access_token_expires_at",
+      "refresh_token_expires_at",
+      "connected_at",
+      "updated_at"
+    ]
+  },
+  "hriq_service_api_configs": {
+    "columns": {
+      "id": "string",
+      "service_name": "string",
+      "service_category": "string",
+      "api_base_url": "string",
+      "api_key_encrypted": "string",
+      "auth_type": "string",
+      "is_active": "boolean",
+      "supports_user_list": "boolean",
+      "user_list_endpoint": "string",
+      "notes": "string",
+      "metadata": "jsonb",
+      "created_at": "string",
+      "updated_at": "string"
+    },
+    "required": [
+      "id",
+      "service_name",
+      "service_category",
+      "auth_type",
+      "is_active",
+      "supports_user_list",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "hriq_task_templates": {
+    "columns": {
+      "id": "string",
+      "workflow_template_id": "string",
+      "task_type": "string",
+      "title": "string",
+      "description": "string",
+      "owner_role": "string",
+      "phase": "string",
+      "sort_order": "integer",
+      "is_blocking": "boolean",
+      "due_days_from_start": "integer",
+      "created_at": "string"
+    },
+    "required": [
+      "id",
+      "workflow_template_id",
+      "task_type",
+      "title",
+      "owner_role",
+      "phase",
+      "sort_order",
+      "is_blocking",
+      "created_at"
+    ]
+  },
+  "hriq_tasks": {
+    "columns": {
+      "id": "string",
+      "employee_id": "string",
+      "task_type": "string",
+      "title": "string",
+      "description": "string",
+      "owner_role": "string",
+      "assigned_to_user_id": "string",
+      "due_date": "string",
+      "status": "string",
+      "is_blocking": "boolean",
+      "completed_at": "string",
+      "completed_by_user_id": "string",
+      "phase": "string",
+      "notes": "string",
+      "metadata": "jsonb",
+      "created_at": "string",
+      "updated_at": "string"
+    },
+    "required": [
+      "id",
+      "employee_id",
+      "task_type",
+      "title",
+      "status",
+      "is_blocking",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "hriq_workflow_templates": {
+    "columns": {
+      "id": "string",
+      "name": "string",
+      "workflow_type": "string",
+      "employment_type": "string",
+      "department": "string",
+      "is_active": "boolean",
+      "created_at": "string",
+      "updated_at": "string",
+      "organization_id": "string"
+    },
+    "required": [
+      "id",
+      "name",
+      "workflow_type",
+      "is_active",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "login_verifications": {
+    "columns": {
+      "id": "string",
+      "email": "string",
+      "code": "string",
+      "expires_at": "string",
+      "used_at": "string",
+      "created_at": "string"
+    },
+    "required": [
+      "id",
+      "email",
+      "code",
+      "expires_at",
+      "created_at"
+    ]
+  },
+  "mv_org_dashboard_stats": {
+    "columns": {
+      "organization_id": "string",
+      "active_employees": "integer",
+      "inactive_employees": "integer",
+      "terminated_employees": "integer",
+      "pending_onboarding": "integer",
+      "completed_onboarding": "integer",
+      "department_count": "integer",
+      "employees_by_department": "jsonb",
+      "refreshed_at": "string"
+    },
+    "required": []
+  },
+  "org_profiles": {
+    "columns": {
+      "id": "string",
+      "organization_id": "string",
+      "industry": "string",
+      "company_size": "string",
+      "website": "string",
+      "country": "string",
+      "address": "string",
+      "admin_name": "string",
+      "admin_email": "string",
+      "admin_phone": "string",
+      "admin_title": "string",
+      "billing_email": "string",
+      "payment_terms": "string",
+      "doc_checklist": "jsonb",
+      "created_at": "string",
+      "updated_at": "string",
+      "kyc_status": "string",
+      "kyc_provider": "string",
+      "veriff_session_id": "string",
+      "veriff_decision": "jsonb",
+      "kyc_verified_at": "string",
+      "kyc_verified_name": "string",
+      "kyc_document_type": "string",
+      "kyc_document_country": "string",
+      "kyc_rejection_reason": "string",
+      "kyc_session_url": "string",
+      "kyc_initiated_at": "string",
+      "kyc_initiated_by": "string",
+      "payment_method": "string",
+      "va_seats": "integer",
+      "plan_type": "string",
+      "suppress_invite_email": "boolean",
+      "suppress_kyc_email": "boolean",
+      "ppp_invoice": "jsonb",
+      "billing_method": "string"
+    },
+    "required": [
+      "id",
+      "organization_id",
+      "created_at",
+      "updated_at",
+      "suppress_invite_email",
+      "suppress_kyc_email"
+    ]
+  },
+  "organization_invitations": {
+    "columns": {
+      "id": "string",
+      "organization_id": "string",
+      "email": "string",
+      "role": "string",
+      "invited_by": "string",
+      "token": "string",
+      "expires_at": "string",
+      "accepted_at": "string",
+      "created_at": "string"
+    },
+    "required": [
+      "id",
+      "organization_id",
+      "email",
+      "role",
+      "invited_by",
+      "token",
+      "expires_at",
+      "created_at"
+    ]
+  },
+  "organization_members": {
+    "columns": {
+      "id": "string",
+      "user_id": "string",
+      "organization_id": "string",
+      "role": "string",
+      "created_at": "string",
+      "updated_at": "string"
+    },
+    "required": [
+      "id",
+      "user_id",
+      "organization_id",
+      "role",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "organizations": {
+    "columns": {
+      "id": "string",
+      "name": "string",
+      "slug": "string",
+      "logo_url": "string",
+      "created_at": "string",
+      "updated_at": "string",
+      "stripe_customer_id": "string",
+      "stripe_connect_account_id": "string",
+      "stripe_connect_status": "string",
+      "qb_customer_id": "string",
+      "qb_bank_account_token": "string",
+      "qb_bank_account_last4": "string",
+      "ach_authorized_at": "string"
+    },
+    "required": [
+      "id",
+      "name",
+      "slug",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "pay_run_items": {
+    "columns": {
+      "id": "string",
+      "pay_run_id": "string",
+      "employee_id": "string",
+      "timesheet_submission_id": "string",
+      "description": "string",
+      "hours_worked": "number",
+      "hourly_rate": "number",
+      "gross_amount": "number",
+      "deductions": "number",
+      "net_amount": "number",
+      "notes": "string",
+      "payment_id": "string",
+      "created_at": "string",
+      "updated_at": "string"
+    },
+    "required": [
+      "id",
+      "pay_run_id",
+      "employee_id",
+      "gross_amount",
+      "deductions",
+      "net_amount",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "pay_runs": {
+    "columns": {
+      "id": "string",
+      "organization_id": "string",
+      "name": "string",
+      "period_start": "string",
+      "period_end": "string",
+      "status": "string",
+      "total_amount": "number",
+      "currency": "string",
+      "rl_fee_type": "string",
+      "rl_fee_amount": "number",
+      "rl_fee_total": "number",
+      "grand_total": "number",
+      "notes": "string",
+      "created_by_user_id": "string",
+      "created_by_name": "string",
+      "approved_by_user_id": "string",
+      "approved_by_name": "string",
+      "approved_at": "string",
+      "rejected_at": "string",
+      "rejection_reason": "string",
+      "paid_at": "string",
+      "stripe_payment_intent_id": "string",
+      "stripe_invoice_id": "string",
+      "payment_link": "string",
+      "created_at": "string",
+      "updated_at": "string",
+      "summary_doc_path": "string",
+      "summary_doc_url": "string"
+    },
+    "required": [
+      "id",
+      "organization_id",
+      "name",
+      "period_start",
+      "period_end",
+      "status",
+      "total_amount",
+      "currency",
+      "grand_total",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "pending_hires": {
+    "columns": {
+      "id": "string",
+      "recruit_crm_slug": "string",
+      "first_name": "string",
+      "last_name": "string",
+      "email": "string",
+      "phone": "string",
+      "position": "string",
+      "city": "string",
+      "country": "string",
+      "current_salary": "string",
+      "salary_expectation": "string",
+      "linkedin": "string",
+      "skills": "string",
+      "source": "string",
+      "recruit_crm_data": "jsonb",
+      "status": "string",
+      "reviewed_by": "string",
+      "reviewed_at": "string",
+      "rejection_reason": "string",
+      "created_employee_id": "string",
+      "created_at": "string",
+      "updated_at": "string"
+    },
+    "required": [
+      "id",
+      "first_name",
+      "last_name",
+      "status",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "service_agreements": {
+    "columns": {
+      "id": "string",
+      "organization_id": "string",
+      "name": "string",
+      "fee_type": "string",
+      "fee_amount": "number",
+      "billing_cycle": "string",
+      "status": "string",
+      "start_date": "string",
+      "end_date": "string",
+      "notes": "string",
+      "created_by_user_id": "string",
+      "created_at": "string",
+      "updated_at": "string"
+    },
+    "required": [
+      "id",
+      "organization_id",
+      "name",
+      "fee_type",
+      "fee_amount",
+      "billing_cycle",
+      "status",
+      "start_date",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "time_off_balances": {
+    "columns": {
+      "id": "string",
+      "employee_id": "string",
+      "policy_id": "string",
+      "year": "integer",
+      "total_days": "number",
+      "used_days": "number",
+      "remaining_days": "number",
+      "created_at": "string",
+      "updated_at": "string"
+    },
+    "required": [
+      "id",
+      "employee_id",
+      "policy_id",
+      "year",
+      "total_days",
+      "used_days",
+      "remaining_days",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "time_off_policies": {
+    "columns": {
+      "id": "string",
+      "organization_id": "string",
+      "name": "string",
+      "type": "string",
+      "days_per_year": "integer",
+      "carry_over_max": "integer",
+      "is_active": "boolean",
+      "created_at": "string",
+      "updated_at": "string"
+    },
+    "required": [
+      "id",
+      "organization_id",
+      "name",
+      "type",
+      "days_per_year",
+      "carry_over_max",
+      "is_active",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "time_off_requests": {
+    "columns": {
+      "id": "string",
+      "employee_id": "string",
+      "policy_id": "string",
+      "start_date": "string",
+      "end_date": "string",
+      "total_days": "number",
+      "reason": "string",
+      "status": "string",
+      "approved_by": "string",
+      "approved_at": "string",
+      "rejected_reason": "string",
+      "created_at": "string",
+      "updated_at": "string"
+    },
+    "required": [
+      "id",
+      "employee_id",
+      "policy_id",
+      "start_date",
+      "end_date",
+      "total_days",
+      "status",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "timesheet_periods": {
+    "columns": {
+      "id": "string",
+      "organization_id": "string",
+      "name": "string",
+      "start_date": "string",
+      "end_date": "string",
+      "status": "string",
+      "created_at": "string",
+      "updated_at": "string"
+    },
+    "required": [
+      "id",
+      "organization_id",
+      "name",
+      "start_date",
+      "end_date",
+      "status",
+      "created_at",
+      "updated_at"
+    ]
+  },
+  "timesheet_submissions": {
+    "columns": {
+      "id": "string",
+      "employee_id": "string",
+      "period_id": "string",
+      "monday_hours": "number",
+      "tuesday_hours": "number",
+      "wednesday_hours": "number",
+      "thursday_hours": "number",
+      "friday_hours": "number",
+      "saturday_hours": "number",
+      "sunday_hours": "number",
+      "total_hours": "number",
+      "notes": "string",
+      "status": "string",
+      "submitted_at": "string",
+      "approved_at": "string",
+      "rejected_at": "string",
+      "auto_approve_at": "string",
+      "approved_by_user_id": "string",
+      "approved_by_name": "string",
+      "rejection_reason": "string",
+      "created_at": "string",
+      "updated_at": "string",
+      "bonuses": "jsonb",
+      "bonus_total": "number",
+      "monday_start": "string",
+      "tuesday_start": "string",
+      "wednesday_start": "string",
+      "thursday_start": "string",
+      "friday_start": "string",
+      "saturday_start": "string",
+      "sunday_start": "string",
+      "daily_entries": "jsonb",
+      "adjustment_status": "string",
+      "adjustment_note": "string",
+      "adjustment_approved_at": "string",
+      "adjustment_approved_by": "string"
+    },
+    "required": [
+      "id",
+      "employee_id",
+      "period_id",
+      "monday_hours",
+      "tuesday_hours",
+      "wednesday_hours",
+      "thursday_hours",
+      "friday_hours",
+      "saturday_hours",
+      "sunday_hours",
+      "total_hours",
+      "status",
+      "created_at",
+      "updated_at",
+      "bonus_total"
+    ]
+  },
+  "trusted_devices": {
+    "columns": {
+      "id": "string",
+      "email": "string",
+      "token_hash": "string",
+      "user_agent": "string",
+      "expires_at": "string",
+      "created_at": "string"
+    },
+    "required": [
+      "id",
+      "email",
+      "token_hash",
+      "expires_at",
+      "created_at"
+    ]
+  },
+  "vercel_logs": {
+    "columns": {
+      "id": "integer",
+      "timestamp": "string",
+      "level": "string",
+      "message": "string",
+      "source": "string",
+      "request_path": "string",
+      "status_code": "integer",
+      "deployment_id": "string",
+      "raw": "jsonb",
+      "created_at": "string"
+    },
+    "required": [
+      "id"
+    ]
+  }
+}

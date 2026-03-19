@@ -1,0 +1,1583 @@
+// HRiq Platform — Prisma Schema
+// Ported from Drizzle ORM with multi-tenancy via organizationId
+// Existing tables use @map() to match snake_case column names in Supabase
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─────────────────────────────────────────────
+// Multi-Tenancy: Organizations (NEW tables)
+// ─────────────────────────────────────────────
+
+model Organization {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  logoUrl            String?  @map("logo_url")
+  stripeCustomerId          String?  @map("stripe_customer_id")
+  stripeConnectAccountId    String?  @map("stripe_connect_account_id")
+  stripeConnectStatus       String?  @map("stripe_connect_status")
+  qbCustomerId              String?  @map("qb_customer_id")
+  // ACH collection (COR clients)
+  qbBankAccountToken        String?  @map("qb_bank_account_token")
+  qbBankAccountLast4        String?  @map("qb_bank_account_last4")
+  achAuthorizedAt           DateTime? @map("ach_authorized_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  members           OrganizationMember[]
+  invitations       OrganizationInvitation[]
+  employees         Employee[]
+  batchSessions     BatchSession[]
+  auditLogs         AuditLog[]
+  workflowTemplates WorkflowTemplate[]
+  jotformTemplates  JotformTemplate[]
+  approvedEmails    ApprovedEmail[]
+  contractTemplates ContractTemplate[]
+  timesheetPeriods  TimesheetPeriod[]
+  timeOffPolicies   TimeOffPolicy[]
+  expenseReports    ExpenseReport[]
+  payRuns           PayRun[]
+  serviceAgreements ServiceAgreement[]
+  clientInvoices    ClientInvoice[]
+  contacts          Contact[]
+  orgOnboardingSessions OrgOnboardingSession[]
+  achCollections        AchCollection[]
+
+  profile OrganizationProfile?
+
+  @@map("organizations")
+}
+
+model OrganizationProfile {
+  id             String  @id @default(cuid())
+  organizationId String  @unique @map("organization_id")
+  industry       String?
+  companySize    String? @map("company_size")
+  website        String?
+  country        String?
+  address        String?
+  adminName      String? @map("admin_name")
+  adminEmail     String? @map("admin_email")
+  adminPhone     String? @map("admin_phone")
+  adminTitle     String? @map("admin_title")
+  billingEmail   String? @map("billing_email")
+  billingMethod  String? @default("ach") @map("billing_method")  // ach | credit_card | wire
+  paymentTerms   String? @default("net_30") @map("payment_terms")
+  docChecklist   Json?   @default("{}") @map("doc_checklist")
+
+  // Payment method: ppp (client→contractor via Stripe Connect)
+  //                 cor (client→RL via QuickBooks, RL→contractor via Wise)
+  paymentMethod  String? @default("ppp") @map("payment_method")
+
+  // Veriff KYC verification
+  kycStatus          String?   @default("pending") @map("kyc_status")
+  kycProvider        String?   @map("kyc_provider")
+  veriffSessionId    String?   @map("veriff_session_id")
+  veriffDecision     Json?     @map("veriff_decision")
+  kycVerifiedAt      DateTime? @map("kyc_verified_at")
+  kycVerifiedName    String?   @map("kyc_verified_name")
+  kycDocumentType    String?   @map("kyc_document_type")
+  kycDocumentCountry String?   @map("kyc_document_country")
+  kycRejectionReason String?   @map("kyc_rejection_reason")
+  kycSessionUrl      String?   @map("kyc_session_url")
+  kycInitiatedAt     DateTime? @map("kyc_initiated_at")
+  kycInitiatedBy     String?   @map("kyc_initiated_by")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  // Email suppression flags — set at org creation, respected throughout lifecycle
+  suppressInviteEmail Boolean @default(false) @map("suppress_invite_email") // skip dashboard invite email on create
+  suppressKycEmail    Boolean @default(false) @map("suppress_kyc_email")    // skip KYC verification email at first login
+
+  // Seat / subscription info — set when org is created
+  vaSeats   Int?    @map("va_seats")    // number of VA seats purchased
+  planType  String? @map("plan_type")   // "ppp" | "cor" | "both"
+
+  // PPP Invoice — QB invoice attached during org creation as proof of payment
+  pppInvoice Json? @map("ppp_invoice")  // { id, docNumber, txnDate, totalAmount, customerName, status }
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([veriffSessionId])
+  @@index([kycStatus])
+  @@map("org_profiles")
+}
+
+model OrganizationMember {
+  id             String   @id @default(cuid())
+  userId         String   @map("user_id")
+  organizationId String   @map("organization_id")
+  role           String   @default("member")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt      @map("updated_at")
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, organizationId])
+  @@index([userId])
+  @@index([organizationId])
+  @@map("organization_members")
+}
+
+model OrganizationInvitation {
+  id             String    @id @default(cuid())
+  organizationId String    @map("organization_id")
+  email          String
+  role           String    @default("member")
+  invitedBy      String    @map("invited_by")
+  token          String    @unique @default(cuid())
+  expiresAt      DateTime  @map("expires_at")
+  acceptedAt     DateTime? @map("accepted_at")
+  createdAt      DateTime  @default(now()) @map("created_at")
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([email])
+  @@index([organizationId])
+  @@map("organization_invitations")
+}
+
+// ─────────────────────────────────────────────
+// Auth: Users & Access Control
+// ─────────────────────────────────────────────
+
+model AppUser {
+  id             String    @id @default(cuid())
+  supabaseUserId String    @unique @map("supabase_user_id")
+  email          String    @unique
+  displayName    String?   @map("display_name")
+  profilePicture String?   @map("profile_picture")
+  isActive       Boolean   @default(true) @map("is_active")
+  lastLoginAt    DateTime? @map("last_login_at")
+  loginCount     Int       @default(0)    @map("login_count")
+  createdAt      DateTime  @default(now()) @map("created_at")
+
+  @@map("app_users")
+}
+
+model ApprovedEmail {
+  id             String    @id @default(cuid())
+  email          String
+  role           String    @default("member")
+  organizationId String?   @map("organization_id")
+  addedByUserId  String?   @map("added_by_user_id")
+  inviteSentAt   DateTime? @map("invite_sent_at")
+  addedAt        DateTime  @default(now()) @map("added_at")
+
+  organization Organization? @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+
+  @@unique([email, organizationId])
+  @@index([organizationId])
+  @@map("approved_emails")
+}
+
+// ─────────────────────────────────────────────
+// HRiq: Employees (EXISTING table — all fields @map)
+// ─────────────────────────────────────────────
+
+model Employee {
+  id             String  @id @default(cuid())
+  organizationId String? @map("organization_id")
+
+  // Core Identity
+  employeeNumber String  @unique @map("employee_number")
+  legalFirstName String  @map("legal_first_name")
+  secondName     String? @map("second_name")
+  legalLastName  String  @map("legal_last_name")
+  secondLastName String? @map("second_last_name")
+  preferredName  String? @map("preferred_name")
+  photoUrl       String? @map("photo_url")
+  personalEmail  String? @map("personal_email")
+  workEmail      String? @unique @map("work_email")
+  username       String? @unique @map("username")
+  phoneNumber    String? @map("phone_number")
+
+  // Employment Details
+  employmentType   String  @map("employment_type")
+  department       String?
+  jobTitle         String? @map("role")
+  managerId        String? @map("manager_id")
+  location         String?
+  timezone         String?
+
+  // Payment & Compensation
+  paymentPlatform        String? @map("payment_platform")
+  paymentAccountInfo     String? @map("payment_account_info")
+  compensationType       String  @default("hourly") @map("compensation_type")     // hourly | monthly
+  hourlyRate             Decimal? @map("hourly_rate") @db.Decimal(8, 2)
+  monthlySalary          Decimal? @map("monthly_salary") @db.Decimal(10, 2)
+  currency               String  @default("USD")
+  preferredPaymentMethod String? @map("preferred_payment_method")                  // cadana | wise
+  paymentMethodVerified  Boolean @default(false) @map("payment_method_verified")
+
+  // Personal Info
+  dateOfBirth      DateTime? @map("date_of_birth")
+  streetAddress    String?   @map("street_address")
+  city             String?
+  stateProvince    String?   @map("state_province")
+  postalCode       String?   @map("postal_code")
+  country          String?
+  mobileNumber     String?   @map("mobile_number")
+  homePhone        String?   @map("home_phone")
+
+  // Bank/Payment Details
+  bankName          String? @map("bank_name")
+  bankAccountNumber String? @map("bank_account_number")
+  bankAccountName   String? @map("bank_account_name")
+  bankSwiftCode     String? @map("bank_swift_code")
+  bankRoutingNumber String? @map("bank_routing_number")
+  debitCardNumber   String? @map("debit_card_number")
+  bankAddress       String? @map("bank_address")
+  bankExtraData     Json?   @map("bank_extra_data")
+
+  // Emergency Contact
+  emergencyContactName     String? @map("emergency_contact_name")
+  emergencyContactPhone    String? @map("emergency_contact_phone")
+  emergencyContactRelation String? @map("emergency_contact_relation")
+
+  // Time Tracking
+  // NOTE: String intentionally — Prisma Decimal breaks RSC serialization.
+  dailyHoursTarget String  @default("7.25") @map("daily_hours_target")
+  timeDoctorEmail  String? @map("time_doctor_email")
+
+  // Slack
+  slackInviteToken String? @map("slack_invite_token")
+  googleSheetId    String? @map("google_sheet_id")
+
+  // Stripe Connect (contractor payouts)
+  stripeAccountId     String? @map("stripe_account_id")      // acct_xxx Connected Account ID
+  stripeAccountStatus String? @map("stripe_account_status")  // pending | onboarding | verified | restricted | disabled
+
+  // Wise (international contractor payouts)
+  wiseRecipientId       Int?      @map("wise_recipient_id")
+  wiseRecipientCurrency String?   @map("wise_recipient_currency")
+  wiseRecipientType     String?   @map("wise_recipient_type")
+  wiseRecipientSyncedAt DateTime? @map("wise_recipient_synced_at")
+  wiseGateRequired      Boolean   @default(false) @map("wise_gate_required")
+  wiseTag               String?   @map("wise_tag") // Wise username/email tag (e.g. @suhey or suhey@email.com) — can send money without full bank details
+
+  // Cadana (global payroll — internal contractors)
+  cadanaPersonId       String?   @map("cadana_person_id")
+  cadanaPersonStatus   String?   @map("cadana_person_status")
+  cadanaSyncedAt       DateTime? @map("cadana_synced_at")
+  cadanaGateRequired   Boolean   @default(false) @map("cadana_gate_required")
+
+  // QuickBooks
+  qbVendorId String? @map("qb_vendor_id")
+
+  // Dates
+  startDate DateTime? @map("start_date")
+  endDate   DateTime? @map("end_date")
+
+  // Status Tracking
+  employmentStatus  String @default("pre_hire")    @map("employment_status")
+  onboardingStatus  String @default("not_started") @map("onboarding_status")
+  offboardingStatus String @default("not_started") @map("offboarding_status")
+  infoApprovalStatus String? @map("info_approval_status")  // null | pending_review | approved | rejected
+
+  // HRIQ Role
+  hriqRole String @default("employee") @map("hriq_role")
+
+  // Relations to users / external systems
+  linkedUserId       String?   @map("linked_user_id")
+  recruitCrmId       String?   @map("recruit_crm_id")
+  recruitCrmSlug     String?   @map("recruit_crm_slug")
+  recruitCrmSyncedAt DateTime? @map("recruit_crm_synced_at")
+
+  // Veriff KYC (contractor identity verification)
+  veriffSessionId      String?   @map("veriff_session_id")
+  veriffStatus         String?   @map("veriff_status")          // created | started | submitted | approved | declined | resubmission_requested
+  veriffDecision       Json?     @map("veriff_decision")
+  veriffVerifiedAt     DateTime? @map("veriff_verified_at")
+  veriffVerifiedName   String?   @map("veriff_verified_name")
+  veriffDocumentType   String?   @map("veriff_document_type")
+  veriffDocumentCountry String?  @map("veriff_document_country")
+  veriffRejectionReason String?  @map("veriff_rejection_reason")
+
+  // Metadata
+  isLocked        Boolean  @default(false)  @map("is_locked")
+  selfServiceToken String? @unique @map("self_service_token")
+
+  createdByUserId String?  @map("created_by_user_id")
+  createdAt       DateTime @default(now())  @map("created_at")
+  updatedAt       DateTime @updatedAt       @map("updated_at")
+
+  // Self-reference
+  manager  Employee?  @relation("EmployeeManager", fields: [managerId], references: [id])
+  reports  Employee[] @relation("EmployeeManager")
+
+  // Org relation (nullable for existing rows without org)
+  organization Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  // Child records
+  tasks                   Task[]
+  documents               Document[]
+  payments                Payment[]
+  accessProvisioning      AccessProvisioning[]
+  managerNotes            ManagerNote[]
+  onboardingSessions      OnboardingSession[]
+  contractSigningRequests ContractSigningRequest[]
+  timesheetSubmissions    TimesheetSubmission[]
+  timeOffRequests         TimeOffRequest[]
+  timeOffBalances         TimeOffBalance[]
+  expenseReports          ExpenseReport[]
+  payRunItems             PayRunItem[]
+  clientInvoiceLineItems  ClientInvoiceLineItem[]
+  backgroundChecks        BackgroundCheck[]
+  commissions             Commission[]
+
+  @@index([organizationId])
+  @@index([employmentStatus])
+  @@index([onboardingStatus])
+  @@index([managerId])
+  @@index([linkedUserId])
+  @@index([personalEmail])
+  @@index([workEmail])
+  @@index([organizationId, employmentStatus])
+  @@index([organizationId, infoApprovalStatus])
+  // NOTE: idx_employees_email_org unique index pending — resolve v.mariajose.r@gmail.com dupe in org_rl_001 first
+  // @@unique([personalEmail, organizationId]) — target constraint
+  @@map("hriq_employees")
+}
+
+// ─────────────────────────────────────────────
+// HRiq: Tasks (EXISTING)
+// ─────────────────────────────────────────────
+
+model Task {
+  id         String @id @default(cuid())
+  employeeId String @map("employee_id")
+
+  taskType    String  @map("task_type")
+  title       String
+  description String?
+
+  ownerRole        String? @map("owner_role")
+  assignedToUserId String? @map("assigned_to_user_id")
+
+  dueDate DateTime? @map("due_date")
+
+  status     String  @default("pending") @map("status")
+  isBlocking Boolean @default(false)     @map("is_blocking")
+
+  completedAt       DateTime? @map("completed_at")
+  completedByUserId String?   @map("completed_by_user_id")
+
+  phase String?
+
+  notes    String?
+  metadata Json?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+
+  @@index([employeeId])
+  @@index([status])
+  @@index([assignedToUserId])
+  @@index([employeeId, status])
+  @@map("hriq_tasks")
+}
+
+// ─────────────────────────────────────────────
+// HRiq: Documents (EXISTING)
+// ─────────────────────────────────────────────
+
+model Document {
+  id         String @id @default(cuid())
+  employeeId String @map("employee_id")
+
+  documentType String @map("document_type")
+  documentName String @map("document_name")
+  description  String?
+
+  fileUrl  String? @map("file_url")
+  filePath String? @map("file_path")   // Supabase storage path for regenerating signed URLs
+  fileName String? @map("file_name")
+  fileSize Int?    @map("file_size")
+  mimeType String? @map("mime_type")
+
+  issuedDate DateTime? @map("issued_date")
+  expiryDate DateTime? @map("expiry_date")
+  isExpired  Boolean   @default(false) @map("is_expired")
+
+  status           String    @default("pending")
+  rejectionReason  String?   @map("rejection_reason")
+  verifiedByUserId String?   @map("verified_by_user_id")
+  verifiedAt       DateTime? @map("verified_at")
+
+  isConfidential Boolean @default(false) @map("is_confidential")
+
+  folder String @default("other") @map("folder") // contracts, pay, identity, tax, banking, other
+
+  uploadedByUserId String?  @map("uploaded_by_user_id")
+  uploadedByName   String?  @map("uploaded_by_name")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt      @map("updated_at")
+
+  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+
+  @@index([employeeId])
+  @@index([documentType])
+  @@index([status])
+  @@index([employeeId, status])
+  @@index([employeeId, documentType])
+  @@index([employeeId, folder])
+  @@map("hriq_documents")
+}
+
+// ─────────────────────────────────────────────
+// HRiq: Payments (EXISTING)
+// ─────────────────────────────────────────────
+
+model Payment {
+  id         String @id @default(cuid())
+  employeeId String @map("employee_id")
+
+  paymentType String @default("salary") @map("payment_type")
+  // NOTE: amount/hoursWorked/hourlyRate are String intentionally — Prisma Decimal
+  // breaks RSC serialization across server/client boundary (hydration mismatch #418).
+  amount      String
+  currency    String @default("USD")
+
+  periodStart DateTime? @map("period_start")
+  periodEnd   DateTime? @map("period_end")
+
+  paymentDate   DateTime? @map("payment_date")
+  paymentMethod String?   @map("payment_method")
+  transactionId String?   @map("transaction_id")
+
+  status String @default("pending")
+
+  // Payout tracking (Wise, bank transfer, PayPal, etc.)
+  payoutProvider    String?   @map("payout_provider")      // wise | bank_transfer | paypal | crypto | other
+  payoutReference   String?   @map("payout_reference")     // external transaction ID
+  payoutReceiptUrl  String?   @map("payout_receipt_url")   // screenshot or receipt link
+  payoutConfirmedAt DateTime? @map("payout_confirmed_at")
+  payoutConfirmedBy String?   @map("payout_confirmed_by")  // userId who confirmed
+
+  // Wise API transfer tracking
+  wiseTransferId        Int?      @map("wise_transfer_id")
+  wiseQuoteId           String?   @map("wise_quote_id")
+  wiseTransferStatus    String?   @map("wise_transfer_status")
+  wiseSourceAmount      Decimal?  @map("wise_source_amount") @db.Decimal(12, 2)
+  wiseTargetAmount      Decimal?  @map("wise_target_amount") @db.Decimal(12, 2)
+  wiseTargetCurrency    String?   @map("wise_target_currency")
+  wiseExchangeRate      Decimal?  @map("wise_exchange_rate") @db.Decimal(16, 6)
+  wiseFee               Decimal?  @map("wise_fee") @db.Decimal(12, 2)
+  wiseEstimatedDelivery DateTime? @map("wise_estimated_delivery")
+  wiseFundedAt          DateTime? @map("wise_funded_at")
+
+  // QuickBooks sync
+  qbBillId        String?   @map("qb_bill_id")
+  qbBillPaymentId String?   @map("qb_bill_payment_id")
+  qbVendorId      String?   @map("qb_vendor_id")
+  qbSyncedAt      DateTime? @map("qb_synced_at")
+
+  // Invoice
+  invoiceUrl    String? @map("invoice_url")
+  invoiceNumber String? @map("invoice_number")
+
+  hoursWorked String? @map("hours_worked")
+  hourlyRate  String? @map("hourly_rate")
+
+  description String?
+  notes       String?
+
+  processedByUserId String?  @map("processed_by_user_id")
+  processedByName   String?  @map("processed_by_name")
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt      @map("updated_at")
+
+  employee    Employee     @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  payRunItems PayRunItem[]
+
+  @@index([employeeId])
+  @@index([status])
+  @@index([status, employeeId])
+  @@index([employeeId, periodStart, periodEnd])
+  @@index([createdAt])
+  @@map("hriq_payments")
+}
+
+// ─────────────────────────────────────────────
+// HRiq: Commissions (Hiring Manager commissions from QB payments)
+// ─────────────────────────────────────────────
+
+model Commission {
+  id             String @id @default(cuid())
+  commissionType String @default("hiring_manager") @map("commission_type")
+  employeeId     String @map("employee_id")
+
+  // Commission tier: standard(0.6%) | bundle(1%) | ae(1.2%) | bundle_ae(2%) | ppp(2%) | bundle_fill($20 flat)
+  commissionTier String @default("standard") @map("commission_tier")
+
+  // Client + revenue reference
+  clientName    String?  @map("client_name")
+  revenueAmount Decimal? @db.Decimal(12, 2) @map("revenue_amount")
+
+  // QuickBooks payment reference
+  qbPaymentRef         String?   @map("qb_payment_ref")
+  qbVendorName         String?   @map("qb_vendor_name")
+  qbPaymentAmount      Decimal?  @db.Decimal(12, 2) @map("qb_payment_amount")
+  qbPaymentDate        DateTime? @map("qb_payment_date")
+  qbInvoiceNumber      String?   @map("qb_invoice_number")
+
+  // Commission calculation
+  commissionRate   Decimal @default(0.006) @db.Decimal(5, 4) @map("commission_rate")
+  commissionAmount Decimal @db.Decimal(12, 2) @map("commission_amount")
+  currency         String  @default("USD")
+
+  // Workflow
+  status String @default("pending") // pending | approved | rejected | paid
+
+  assignedByUserId String? @map("assigned_by_user_id")
+  assignedByName   String? @map("assigned_by_name")
+
+  approvedByUserId String?   @map("approved_by_user_id")
+  approvedByName   String?   @map("approved_by_name")
+  approvedAt       DateTime? @map("approved_at")
+
+  rejectedAt      DateTime? @map("rejected_at")
+  rejectionReason String?   @map("rejection_reason")
+
+  timesheetSubmissionId String? @map("timesheet_submission_id")
+
+  description String?
+  notes       String?
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  employee            Employee             @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  timesheetSubmission TimesheetSubmission? @relation(fields: [timesheetSubmissionId], references: [id], onDelete: SetNull)
+
+  @@index([employeeId])
+  @@index([status])
+  @@index([commissionType])
+  @@index([createdAt])
+  @@map("hriq_commissions")
+}
+
+// ─────────────────────────────────────────────
+// HRiq: Access Provisioning (EXISTING)
+// ─────────────────────────────────────────────
+
+model AccessProvisioning {
+  id         String @id @default(cuid())
+  employeeId String @map("employee_id")
+
+  systemName     String  @map("system_name")
+  systemCategory String? @map("system_category")
+  accessLevel    String? @map("access_level")
+
+  status                String    @default("pending")
+  provisionedAt         DateTime? @map("provisioned_at")
+  provisionedByUserId   String?   @map("provisioned_by_user_id")
+  deprovisionedAt       DateTime? @map("deprovisioned_at")
+  deprovisionedByUserId String?   @map("deprovisioned_by_user_id")
+
+  revocationPriority Int @default(100) @map("revocation_priority")
+
+  notes    String?
+  metadata Json?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+
+  @@index([employeeId])
+  @@index([status])
+  @@map("hriq_access_provisioning")
+}
+
+// ─────────────────────────────────────────────
+// HRiq: Manager Notes (EXISTING)
+// ─────────────────────────────────────────────
+
+model ManagerNote {
+  id         String @id @default(cuid())
+  employeeId String @map("employee_id")
+
+  authorUserId String? @map("author_user_id")
+  authorName   String? @map("author_name")
+
+  noteType  String  @default("general") @map("note_type")
+  content   String
+  isPrivate Boolean @default(false) @map("is_private")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+
+  @@index([employeeId])
+  @@map("hriq_manager_notes")
+}
+
+// ─────────────────────────────────────────────
+// HRiq: Audit Log (EXISTING)
+// ─────────────────────────────────────────────
+
+model AuditLog {
+  id             String  @id @default(cuid())
+  organizationId String? @map("organization_id")
+
+  timestamp DateTime @default(now())
+
+  actorType        String  @map("actor_type")
+  actorUserId      String? @map("actor_user_id")
+  actorDescription String? @map("actor_description")
+
+  action String
+
+  objectType String @map("object_type")
+  objectId   String @map("object_id")
+
+  oldValue Json? @map("old_value")
+  newValue Json? @map("new_value")
+
+  reason    String?
+  ipAddress String? @map("ip_address")
+  userAgent String? @map("user_agent")
+
+  organization Organization? @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId])
+  @@index([objectType, objectId])
+  @@index([actorUserId])
+  @@index([timestamp])
+  @@index([organizationId, timestamp])
+  @@index([organizationId, action])
+  @@map("hriq_audit_log")
+}
+
+// ─────────────────────────────────────────────
+// HRiq: Batch Onboarding Sessions (EXISTING)
+// ─────────────────────────────────────────────
+
+model BatchSession {
+  id             String  @id @default(cuid())
+  organizationId String? @map("organization_id")
+
+  title       String
+  description String?
+
+  zoomMeetingId       String?   @map("zoom_meeting_id")
+  zoomMeetingLink     String?   @map("zoom_meeting_link")
+  zoomJoinUrl         String?   @map("zoom_join_url")
+  zoomStartUrl        String?   @map("zoom_start_url")
+  zoomMeetingPassword String?   @map("zoom_meeting_password")
+  zoomMeetingDate     DateTime? @map("zoom_meeting_date")
+  zoomDuration        Int       @default(60) @map("zoom_duration")
+
+  calendarOrganizerEmail  String? @map("calendar_organizer_email")
+  googleCalendarEventId   String? @map("google_calendar_event_id")
+
+  status String @default("scheduled")
+
+  createdByUserId String?  @map("created_by_user_id")
+  createdByName   String?  @map("created_by_name")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt      @map("updated_at")
+
+  organization       Organization?       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  onboardingSessions OnboardingSession[]
+
+  @@index([organizationId])
+  @@index([status])
+  @@map("hriq_batch_sessions")
+}
+
+// ─────────────────────────────────────────────
+// HRiq: Individual Onboarding Sessions (EXISTING)
+// ─────────────────────────────────────────────
+
+model OnboardingSession {
+  id         String @id @default(cuid())
+  employeeId String @map("employee_id")
+
+  batchSessionId        String? @map("batch_session_id")
+  recruitCrmCandidateId String? @map("recruitcrm_candidate_id")
+
+  status          String @default("not_started")
+  currentStep     String @default("zoom_invite") @map("current_step")
+  overallProgress Int    @default(0)             @map("overall_progress")
+
+  zoomMeetingLink      String?   @map("zoom_meeting_link")
+  zoomMeetingId        String?   @map("zoom_meeting_id")
+  zoomMeetingDate      DateTime? @map("zoom_meeting_date")
+  zoomInviteSent       Boolean   @default(false) @map("zoom_invite_sent")
+  zoomInviteSentAt     DateTime? @map("zoom_invite_sent_at")
+  zoomInviteAccepted   Boolean   @default(false) @map("zoom_invite_accepted")
+  zoomInviteAcceptedAt DateTime? @map("zoom_invite_accepted_at")
+  zoomRsvpStatus       String    @default("pending") @map("zoom_rsvp_status")
+  zoomAttended         Boolean   @default(false) @map("zoom_attended")
+  zoomAttendedAt       DateTime? @map("zoom_attended_at")
+
+  jotformLinks        String?   @map("jotform_links")
+  jotformsSent        Boolean   @default(false) @map("jotforms_sent")
+  jotformsSentAt      DateTime? @map("jotforms_sent_at")
+  jotformsSentData    String?   @map("jotforms_sent_data")
+  jotformsCompleted   Boolean   @default(false) @map("jotforms_completed")
+  jotformsCompletedAt DateTime? @map("jotforms_completed_at")
+
+  googleCalendarEventId String? @map("google_calendar_event_id")
+
+  documentsRequired   String?   @map("documents_required")
+  documentsUploaded   Boolean   @default(false) @map("documents_uploaded")
+  documentsUploadedAt DateTime? @map("documents_uploaded_at")
+
+  startedAt       DateTime? @map("started_at")
+  completedAt     DateTime? @map("completed_at")
+  startedByUserId String?   @map("started_by_user_id")
+  startedByName   String?   @map("started_by_name")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt      @map("updated_at")
+
+  employee     Employee      @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  batchSession BatchSession? @relation(fields: [batchSessionId], references: [id], onDelete: SetNull)
+  steps        OnboardingStep[]
+
+  @@index([employeeId])
+  @@index([batchSessionId])
+  @@index([status])
+  @@index([status, employeeId])
+  @@map("hriq_onboarding_sessions")
+}
+
+// ─────────────────────────────────────────────
+// HRiq: Onboarding Steps (EXISTING)
+// ─────────────────────────────────────────────
+
+model OnboardingStep {
+  id        String @id @default(cuid())
+  sessionId String @map("session_id")
+
+  stepType    String  @map("step_type")
+  stepName    String  @map("step_name")
+  description String?
+  sortOrder   Int     @default(0) @map("sort_order")
+
+  status     String  @default("pending")
+  isRequired Boolean @default(true) @map("is_required")
+
+  formUrl          String? @map("form_url")
+  formSubmissionId String? @map("form_submission_id")
+
+  documentType String? @map("document_type")
+  documentId   String? @map("document_id")
+
+  completedAt       DateTime? @map("completed_at")
+  completedByUserId String?   @map("completed_by_user_id")
+  completedByName   String?   @map("completed_by_name")
+
+  notes String?
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  session OnboardingSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@index([stepType])
+  @@index([sessionId, stepType])
+  @@map("hriq_onboarding_steps")
+}
+
+// ─────────────────────────────────────────────
+// HRiq: Workflow Templates (EXISTING)
+// ─────────────────────────────────────────────
+
+model WorkflowTemplate {
+  id             String  @id @default(cuid())
+  organizationId String? @map("organization_id")
+
+  name           String
+  workflowType   String  @map("workflow_type")
+  employmentType String? @map("employment_type")
+  department     String?
+
+  isActive Boolean @default(true) @map("is_active")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  organization  Organization?  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  taskTemplates TaskTemplate[]
+
+  @@index([organizationId])
+  @@map("hriq_workflow_templates")
+}
+
+// ─────────────────────────────────────────────
+// HRiq: Task Templates (EXISTING)
+// ─────────────────────────────────────────────
+
+model TaskTemplate {
+  id                 String @id @default(cuid())
+  workflowTemplateId String @map("workflow_template_id")
+
+  taskType    String @map("task_type")
+  title       String
+  description String?
+  ownerRole   String @map("owner_role")
+
+  phase     String
+  sortOrder Int    @default(0) @map("sort_order")
+
+  isBlocking       Boolean @default(false) @map("is_blocking")
+  dueDaysFromStart Int?    @map("due_days_from_start")
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  workflowTemplate WorkflowTemplate @relation(fields: [workflowTemplateId], references: [id], onDelete: Cascade)
+
+  @@index([workflowTemplateId])
+  @@map("hriq_task_templates")
+}
+
+// ─────────────────────────────────────────────
+// HRiq: JotForm Templates (EXISTING)
+// ─────────────────────────────────────────────
+
+model JotformTemplate {
+  id             String  @id @default(cuid())
+  organizationId String? @map("organization_id")
+
+  name        String
+  description String?
+  formUrl     String  @map("form_url")
+  formType    String  @map("form_type")
+
+  isRequired Boolean @default(true) @map("is_required")
+  sortOrder  Int     @default(0)    @map("sort_order")
+  isActive   Boolean @default(true) @map("is_active")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  organization Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId])
+  @@map("hriq_jotform_templates")
+}
+
+// ─────────────────────────────────────────────
+// DocuSeal: Contract Templates & Signing (NEW)
+// ─────────────────────────────────────────────
+
+model ContractTemplate {
+  id             String @id @default(cuid())
+  organizationId String @map("organization_id")
+
+  name               String
+  description        String?
+  docusealTemplateId String? @map("docuseal_template_id")
+  category           String  @default("general")
+  isActive           Boolean @default(true) @map("is_active")
+
+  createdByUserId String?  @map("created_by_user_id")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt      @map("updated_at")
+
+  organization    Organization              @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  signingRequests ContractSigningRequest[]
+
+  @@index([organizationId])
+  @@map("contract_templates")
+}
+
+model ContractSigningRequest {
+  id         String @id @default(cuid())
+  employeeId String @map("employee_id")
+  templateId String @map("template_id")
+
+  docusealSubmissionId  String? @map("docuseal_submission_id")
+  docusealSubmitterSlug String? @map("docuseal_submitter_slug")
+
+  status     String    @default("pending")
+  sentAt     DateTime? @map("sent_at")
+  viewedAt   DateTime? @map("viewed_at")
+  signedAt   DateTime? @map("signed_at")
+  declinedAt DateTime? @map("declined_at")
+  expiresAt  DateTime? @map("expires_at")
+
+  signedDocumentUrl String? @map("signed_document_url")
+  signedDocumentId  String? @map("signed_document_id")
+
+  signerEmail     String?  @map("signer_email")
+  signerName      String?  @map("signer_name")
+  createdByUserId String?  @map("created_by_user_id")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt      @map("updated_at")
+
+  employee Employee         @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  template ContractTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
+
+  @@index([employeeId])
+  @@index([templateId])
+  @@index([status])
+  @@map("contract_signing_requests")
+}
+
+// ─────────────────────────────────────────────
+// Timesheets: Submission & Approval (NEW)
+// ─────────────────────────────────────────────
+
+model TimesheetPeriod {
+  id             String @id @default(cuid())
+  organizationId String @map("organization_id")
+
+  name      String
+  startDate DateTime @map("start_date")
+  endDate   DateTime @map("end_date")
+  status    String   @default("open")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  organization Organization          @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  submissions  TimesheetSubmission[]
+
+  @@index([organizationId])
+  @@index([startDate, endDate])
+  @@index([organizationId, status])
+  @@map("timesheet_periods")
+}
+
+model TimesheetSubmission {
+  id         String @id @default(cuid())
+  employeeId String @map("employee_id")
+  periodId   String @map("period_id")
+
+  mondayHours    Decimal @default(0) @db.Decimal(5, 2) @map("monday_hours")
+  tuesdayHours   Decimal @default(0) @db.Decimal(5, 2) @map("tuesday_hours")
+  wednesdayHours Decimal @default(0) @db.Decimal(5, 2) @map("wednesday_hours")
+  thursdayHours  Decimal @default(0) @db.Decimal(5, 2) @map("thursday_hours")
+  fridayHours    Decimal @default(0) @db.Decimal(5, 2) @map("friday_hours")
+  saturdayHours  Decimal @default(0) @db.Decimal(5, 2) @map("saturday_hours")
+  sundayHours    Decimal @default(0) @db.Decimal(5, 2) @map("sunday_hours")
+  totalHours     Decimal @default(0) @db.Decimal(6, 2) @map("total_hours")
+
+  // Start times per day (e.g. "09:00", "08:30")
+  mondayStart    String? @map("monday_start")
+  tuesdayStart   String? @map("tuesday_start")
+  wednesdayStart String? @map("wednesday_start")
+  thursdayStart  String? @map("thursday_start")
+  fridayStart    String? @map("friday_start")
+  saturdayStart  String? @map("saturday_start")
+  sundayStart    String? @map("sunday_start")
+
+  // Bonuses / commissions — JSON array of { description: string, amount: number }
+  bonuses    Json?   @db.JsonB @map("bonuses")
+  bonusTotal Decimal @default(0) @db.Decimal(10, 2) @map("bonus_total")
+
+  // Per-date entries — JSON array of { date: string, timeIn?: string, timeOut?: string, hours: number }
+  // Stores the full period's daily breakdown (replaces legacy Mon-Sun fields for new submissions)
+  dailyEntries Json? @db.JsonB @map("daily_entries")
+
+  notes String?
+
+  status        String    @default("draft")
+  submittedAt   DateTime? @map("submitted_at")
+  approvedAt    DateTime? @map("approved_at")
+  rejectedAt    DateTime? @map("rejected_at")
+  autoApproveAt DateTime? @map("auto_approve_at")
+
+  approvedByUserId String? @map("approved_by_user_id")
+  approvedByName   String? @map("approved_by_name")
+  rejectionReason  String? @map("rejection_reason")
+
+  // Adjustment request flow: contractor requests edit → admin approves → contractor re-edits
+  adjustmentStatus     String?   @map("adjustment_status")      // null | requested | approved | denied
+  adjustmentNote       String?   @map("adjustment_note")        // contractor's reason for edit
+  adjustmentApprovedAt DateTime? @map("adjustment_approved_at")
+  adjustmentApprovedBy String?   @map("adjustment_approved_by")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  employee    Employee        @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  period      TimesheetPeriod @relation(fields: [periodId], references: [id], onDelete: Cascade)
+  payRunItems PayRunItem[]
+  commissions Commission[]
+
+  @@unique([employeeId, periodId])
+  @@index([employeeId])
+  @@index([periodId])
+  @@index([status])
+  @@index([status, employeeId])
+  @@map("timesheet_submissions")
+}
+
+// ─────────────────────────────────────────────
+// PTO / Time-Off Management
+// ─────────────────────────────────────────────
+
+model TimeOffPolicy {
+  id             String @id @default(cuid())
+  organizationId String @map("organization_id")
+  name           String
+  type           String @default("vacation") // vacation, sick, personal, parental, bereavement, other
+  daysPerYear    Int    @default(0) @map("days_per_year")
+  carryOverMax   Int    @default(0) @map("carry_over_max")
+  isActive       Boolean @default(true) @map("is_active")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  organization Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  requests     TimeOffRequest[]
+  balances     TimeOffBalance[]
+
+  @@index([organizationId])
+  @@map("time_off_policies")
+}
+
+model TimeOffRequest {
+  id             String   @id @default(cuid())
+  employeeId     String   @map("employee_id")
+  policyId       String   @map("policy_id")
+  startDate      DateTime @map("start_date")
+  endDate        DateTime @map("end_date")
+  totalDays      Decimal  @db.Decimal(4, 1) @map("total_days")
+  reason         String?
+  status         String   @default("pending") // pending, approved, rejected, cancelled
+  approvedBy     String?  @map("approved_by")
+  approvedAt     DateTime? @map("approved_at")
+  rejectedReason String?  @map("rejected_reason")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  employee Employee       @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  policy   TimeOffPolicy  @relation(fields: [policyId], references: [id], onDelete: Cascade)
+
+  @@index([employeeId])
+  @@index([policyId])
+  @@index([status])
+  @@map("time_off_requests")
+}
+
+model TimeOffBalance {
+  id             String @id @default(cuid())
+  employeeId     String @map("employee_id")
+  policyId       String @map("policy_id")
+  year           Int
+  totalDays      Decimal @db.Decimal(5, 1) @map("total_days")
+  usedDays       Decimal @default(0) @db.Decimal(5, 1) @map("used_days")
+  remainingDays  Decimal @db.Decimal(5, 1) @map("remaining_days")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  employee Employee      @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  policy   TimeOffPolicy @relation(fields: [policyId], references: [id], onDelete: Cascade)
+
+  @@unique([employeeId, policyId, year])
+  @@index([employeeId])
+  @@map("time_off_balances")
+}
+
+// ─────────────────────────────────────────────
+// Expense Management
+// ─────────────────────────────────────────────
+
+model ExpenseReport {
+  id             String   @id @default(cuid())
+  employeeId     String   @map("employee_id")
+  organizationId String   @map("organization_id")
+  title          String
+  description    String?
+  totalAmount    Decimal  @default(0) @db.Decimal(10, 2) @map("total_amount")
+  currency       String   @default("USD")
+  status         String   @default("draft") // draft, submitted, approved, rejected, reimbursed
+  submittedAt    DateTime? @map("submitted_at")
+  approvedBy     String?  @map("approved_by")
+  approvedAt     DateTime? @map("approved_at")
+  rejectedReason String?  @map("rejected_reason")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  employee     Employee      @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  organization Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  items        ExpenseItem[]
+
+  @@index([employeeId])
+  @@index([organizationId])
+  @@index([status])
+  @@map("expense_reports")
+}
+
+model ExpenseItem {
+  id          String   @id @default(cuid())
+  reportId    String   @map("report_id")
+  category    String   // travel, meals, supplies, software, equipment, other
+  description String
+  amount      Decimal  @db.Decimal(10, 2)
+  currency    String   @default("USD")
+  date        DateTime
+  receiptUrl  String?  @map("receipt_url")
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  report ExpenseReport @relation(fields: [reportId], references: [id], onDelete: Cascade)
+
+  @@index([reportId])
+  @@map("expense_items")
+}
+
+// ─────────────────────────────────────────────
+// Login Verification (Email OTP for password-based logins)
+// ─────────────────────────────────────────────
+
+model LoginVerification {
+  id        String    @id @default(cuid())
+  email     String
+  code      String
+  expiresAt DateTime  @map("expires_at")
+  usedAt    DateTime? @map("used_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  @@index([email, code])
+  @@index([expiresAt])
+  @@map("login_verifications")
+}
+
+model TrustedDevice {
+  id        String   @id @default(cuid())
+  email     String
+  tokenHash String   @map("token_hash")
+  userAgent String?  @map("user_agent")
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([email])
+  @@index([tokenHash])
+  @@index([expiresAt])
+  @@map("trusted_devices")
+}
+
+// ── Pay Run (client payroll batches) ─────────────────
+model PayRun {
+  id             String  @id @default(cuid())
+  organizationId String  @map("organization_id")
+
+  name        String
+  periodStart DateTime @map("period_start")
+  periodEnd   DateTime @map("period_end")
+
+  // draft → pending_approval → approved → processing → completed → cancelled
+  status String @default("draft")
+
+  totalAmount   Decimal  @default(0) @map("total_amount") @db.Decimal(12, 2)
+  currency      String   @default("USD")
+  rlFeeType     String?  @map("rl_fee_type")     // flat | percentage | per_contractor
+  rlFeeAmount   Decimal? @map("rl_fee_amount") @db.Decimal(12, 2)
+  rlFeeTotal    Decimal? @map("rl_fee_total") @db.Decimal(12, 2)
+  grandTotal    Decimal  @default(0) @map("grand_total") @db.Decimal(12, 2)
+
+  notes String?
+
+  createdByUserId  String?   @map("created_by_user_id")
+  createdByName    String?   @map("created_by_name")
+  approvedByUserId String?   @map("approved_by_user_id")
+  approvedByName   String?   @map("approved_by_name")
+  approvedAt       DateTime? @map("approved_at")
+  rejectedAt       DateTime? @map("rejected_at")
+  rejectionReason  String?   @map("rejection_reason")
+  paidAt           DateTime? @map("paid_at")
+
+  stripePaymentIntentId String? @map("stripe_payment_intent_id")
+  stripeInvoiceId       String? @map("stripe_invoice_id")
+  paymentLink           String? @map("payment_link")
+
+  summaryDocPath String? @map("summary_doc_path")  // Supabase storage path for auto-generated summary
+  summaryDocUrl  String? @map("summary_doc_url")   // Signed URL (refreshed on access)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  items        PayRunItem[]
+
+  @@index([organizationId])
+  @@index([status])
+  @@map("pay_runs")
+}
+
+model PayRunItem {
+  id       String @id @default(cuid())
+  payRunId String @map("pay_run_id")
+
+  employeeId            String  @map("employee_id")
+  timesheetSubmissionId String? @map("timesheet_submission_id")
+
+  description String?
+  hoursWorked Decimal? @map("hours_worked") @db.Decimal(8, 2)
+  hourlyRate  Decimal? @map("hourly_rate") @db.Decimal(8, 2)
+  grossAmount Decimal  @map("gross_amount") @db.Decimal(12, 2)
+  deductions  Decimal  @default(0) @db.Decimal(12, 2)
+  netAmount   Decimal  @map("net_amount") @db.Decimal(12, 2)
+
+  notes String?
+
+  paymentId String? @map("payment_id") // created when pay run completes
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  payRun   PayRun              @relation(fields: [payRunId], references: [id], onDelete: Cascade)
+  employee Employee            @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  timesheet TimesheetSubmission? @relation(fields: [timesheetSubmissionId], references: [id], onDelete: SetNull)
+  payment  Payment?            @relation(fields: [paymentId], references: [id], onDelete: SetNull)
+
+  @@index([payRunId])
+  @@index([employeeId])
+  @@index([paymentId])
+  @@index([timesheetSubmissionId])
+  @@map("pay_run_items")
+}
+
+// ── Service Agreement (RL fee config per client) ─
+model ServiceAgreement {
+  id             String  @id @default(cuid())
+  organizationId String  @map("organization_id")
+
+  name     String  @default("Default")
+  feeType  String  @map("fee_type")    // percentage | per_contractor | flat
+  feeAmount Decimal @map("fee_amount") @db.Decimal(12, 2)
+
+  billingCycle String @default("per_pay_run") @map("billing_cycle") // per_pay_run | monthly
+
+  status    String   @default("active") // active | paused | cancelled
+  startDate DateTime @default(now()) @map("start_date")
+  endDate   DateTime? @map("end_date")
+
+  notes String?
+
+  createdByUserId String? @map("created_by_user_id")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt      @map("updated_at")
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId])
+  @@index([organizationId, status])
+  @@map("service_agreements")
+}
+
+// ─────────────────────────────────────────────
+// HRiq: Client Invoices
+// Generated when timesheets are approved — charges the client org for contractor costs
+// ─────────────────────────────────────────────
+
+model ClientInvoice {
+  id             String  @id @default(cuid())
+  organizationId String  @map("organization_id")
+
+  invoiceNumber  String  @unique @map("invoice_number")
+  periodStart    DateTime @map("period_start")
+  periodEnd      DateTime @map("period_end")
+  periodName     String?  @map("period_name")
+
+  // Amounts
+  subtotal     Decimal @map("subtotal") @db.Decimal(12, 2)       // sum of contractor costs
+  rlFeeType    String? @map("rl_fee_type")                        // percentage | flat | per_contractor
+  rlFeeAmount  Decimal? @map("rl_fee_amount") @db.Decimal(12, 2)  // fee config value
+  rlFeeTotal   Decimal  @default(0) @map("rl_fee_total") @db.Decimal(12, 2) // calculated fee
+  totalAmount  Decimal  @map("total_amount") @db.Decimal(12, 2)   // subtotal + fee
+  currency     String   @default("USD")
+
+  // Status: draft → sent → paid → void
+  status String @default("draft")
+
+  // Payment tracking
+  paidAt          DateTime? @map("paid_at")
+  paymentMethod   String?   @map("payment_method")
+  paymentReference String?  @map("payment_reference")
+
+  // Stripe
+  stripeCheckoutSessionId String? @map("stripe_checkout_session_id")
+  stripePaymentIntentId   String? @map("stripe_payment_intent_id")
+  paymentLink             String? @map("payment_link")
+
+  // QuickBooks sync
+  qbInvoiceId  String?   @map("qb_invoice_id")
+  qbSyncedAt   DateTime? @map("qb_synced_at")
+
+  notes       String?
+  invoiceUrl  String? @map("invoice_url")
+
+  createdByUserId  String?  @map("created_by_user_id")
+  createdByName    String?  @map("created_by_name")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt      @map("updated_at")
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  lineItems    ClientInvoiceLineItem[]
+
+  @@index([organizationId])
+  @@index([status])
+  @@index([periodStart, periodEnd])
+  @@index([organizationId, status])
+  @@index([qbInvoiceId])
+  @@map("client_invoices")
+}
+
+model ClientInvoiceLineItem {
+  id              String @id @default(cuid())
+  clientInvoiceId String @map("client_invoice_id")
+  employeeId      String @map("employee_id")
+
+  description  String?
+  hoursWorked  Decimal? @map("hours_worked") @db.Decimal(8, 2)
+  hourlyRate   Decimal? @map("hourly_rate") @db.Decimal(8, 2)
+  amount       Decimal  @db.Decimal(12, 2)
+  currency     String   @default("USD")
+
+  // PPP per-contractor payment tracking (direct charge on contractor's Express account)
+  stripeCheckoutSessionId String?   @map("stripe_checkout_session_id")
+  stripePaymentIntentId   String?   @map("stripe_payment_intent_id")
+  paymentLink             String?   @map("payment_link")
+  paymentStatus           String    @default("pending") @map("payment_status")
+  paidAt                  DateTime? @map("paid_at")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  clientInvoice ClientInvoice @relation(fields: [clientInvoiceId], references: [id], onDelete: Cascade)
+  employee      Employee      @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+
+  @@index([clientInvoiceId])
+  @@index([employeeId])
+  @@map("client_invoice_line_items")
+}
+
+// ─────────────────────────────────────────────
+// HRiq: FCRA Background Check Compliance
+// Tracks the full FCRA workflow for each candidate
+// ─────────────────────────────────────────────
+
+model BackgroundCheck {
+  id         String  @id @default(cuid())
+  employeeId String  @map("employee_id")
+
+  // Status: pending_disclosure → disclosure_sent → authorized → check_ordered →
+  //         check_complete → clear | pre_adverse_sent → adverse_sent | withdrawn
+  status String @default("pending_disclosure")
+
+  // CRA (Consumer Reporting Agency) info
+  craName      String? @map("cra_name")       // e.g. "Checkr", "Sterling", "GoodHire"
+  craOrderId   String? @map("cra_order_id")    // external reference
+  craReportUrl String? @map("cra_report_url")  // link to full report
+
+  // Disclosure & Authorization
+  disclosureSentAt     DateTime? @map("disclosure_sent_at")
+  disclosureSignedAt   DateTime? @map("disclosure_signed_at")
+  disclosureDocumentId String?   @map("disclosure_document_id")  // link to stored PDF
+  authorizationSignedAt DateTime? @map("authorization_signed_at")
+  authorizationDocumentId String? @map("authorization_document_id")
+
+  // Check results
+  checkOrderedAt  DateTime? @map("check_ordered_at")
+  checkCompletedAt DateTime? @map("check_completed_at")
+  checkResult     String?   @map("check_result")  // clear | review | adverse
+  checkSummary    String?   @map("check_summary")  // brief summary of findings
+
+  // Pre-Adverse Action
+  preAdverseNoticeSentAt DateTime? @map("pre_adverse_notice_sent_at")
+  preAdverseReportSentAt DateTime? @map("pre_adverse_report_sent_at")
+  preAdverseWaitUntil    DateTime? @map("pre_adverse_wait_until")  // typically 5 business days
+  candidateDisputedAt    DateTime? @map("candidate_disputed_at")
+  candidateDisputeNotes  String?   @map("candidate_dispute_notes")
+
+  // Adverse Action
+  adverseNoticeSentAt DateTime? @map("adverse_notice_sent_at")
+  adverseReason       String?   @map("adverse_reason")
+
+  // Final decision
+  finalDecision   String?   @map("final_decision")  // proceed | reject | withdrawn
+  decisionDate    DateTime? @map("decision_date")
+  decisionByUserId String?  @map("decision_by_user_id")
+  decisionByName  String?   @map("decision_by_name")
+  decisionNotes   String?   @map("decision_notes")
+
+  // Individualized assessment notes (required for ban-the-box / fair chance)
+  assessmentNotes String? @map("assessment_notes")
+
+  notes     String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  actions  FcraAction[]
+
+  @@index([employeeId])
+  @@index([status])
+  @@map("background_checks")
+}
+
+model FcraAction {
+  id               String @id @default(cuid())
+  backgroundCheckId String @map("background_check_id")
+
+  // Type: disclosure_sent | authorization_received | check_ordered | check_completed |
+  //       pre_adverse_sent | dispute_received | adverse_sent | decision_made | note
+  actionType  String  @map("action_type")
+  description String?
+  documentUrl String? @map("document_url")  // any attached document
+
+  performedByUserId String? @map("performed_by_user_id")
+  performedByName   String? @map("performed_by_name")
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  backgroundCheck BackgroundCheck @relation(fields: [backgroundCheckId], references: [id], onDelete: Cascade)
+
+  @@index([backgroundCheckId])
+  @@map("fcra_actions")
+}
+
+model CustomDropdownOption {
+  id        String   @id @default(cuid())
+  category  String
+  value     String
+  label     String
+  createdAt DateTime @default(now()) @map("created_at")
+  createdBy String?  @map("created_by")
+
+  @@unique([category, value])
+  @@index([category])
+  @@map("custom_dropdown_options")
+}
+
+model QbToken {
+  id                     String   @id
+  companyId              String   @unique @map("company_id")
+  accessToken            String   @map("access_token")
+  refreshToken           String   @map("refresh_token")
+  accessTokenExpiresAt   DateTime @map("access_token_expires_at")
+  refreshTokenExpiresAt  DateTime @map("refresh_token_expires_at")
+  connectedAt            DateTime @map("connected_at")
+  updatedAt              DateTime @map("updated_at")
+
+  @@map("hriq_qb_tokens")
+}
+
+model Contact {
+  id               String    @id @default(cuid())
+  organizationId   String    @map("organization_id")
+  organization     Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  fullName         String    @map("full_name")
+  email            String?
+  phone            String?
+  jobTitle         String?   @map("job_title")
+  role             String?   @default("primary")   // primary, billing, technical, other
+  notes            String?
+  isActive         Boolean   @default(true) @map("is_active")
+  createdAt        DateTime  @default(now()) @map("created_at")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
+  createdByUserId  String?   @map("created_by_user_id")
+  createdByName    String?   @map("created_by_name")
+
+  @@index([organizationId])
+  @@index([email])
+  @@map("hriq_contacts")
+}
+
+// Client-facing org onboarding — external multi-step wizard
+model OrgOnboardingSession {
+  id               String    @id @default(cuid())
+  token            String    @unique @default(cuid())
+  organizationId   String?   @map("organization_id")
+  organization     Organization? @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+
+  // Status: draft, in_progress, completed, expired
+  status           String    @default("draft")
+  currentStep      Int       @default(1) @map("current_step")
+  totalSteps       Int       @default(5) @map("total_steps")
+
+  // Step 1: Company Info
+  companyName      String?   @map("company_name")
+  industry         String?
+  companySize      String?   @map("company_size")
+  website          String?
+  country          String?
+  address          String?
+
+  // Step 2: Primary Contact
+  contactName      String?   @map("contact_name")
+  contactEmail     String?   @map("contact_email")
+  contactPhone     String?   @map("contact_phone")
+  contactTitle     String?   @map("contact_title")
+  billingEmail     String?   @map("billing_email")
+
+  // Step 3: Payment Method
+  paymentMethod    String?   @map("payment_method")  // ppp, cor, both
+
+  // Step 4: Documents / Preferences
+  notes            String?
+  preferences      Json?     @default("{}")
+
+  // Metadata
+  completedAt      DateTime? @map("completed_at")
+  expiresAt        DateTime  @map("expires_at")
+  createdByUserId  String?   @map("created_by_user_id")
+  createdByName    String?   @map("created_by_name")
+  createdAt        DateTime  @default(now()) @map("created_at")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
+
+  @@index([token])
+  @@index([organizationId])
+  @@index([status])
+  @@map("hriq_org_onboarding_sessions")
+}
+
+// ─── ACH Collection (COR clients) ───────────────────────────────────────────────
+
+model AchCollection {
+  id             String   @id @default(cuid())
+  organizationId String   @map("organization_id")
+
+  // Period identifier: "A-2026-03" (6th–20th payout 30th) or "B-2026-03" (21st–5th payout 15th)
+  payPeriod      String   @map("pay_period")
+
+  // Amount to collect from client (String per platform pattern)
+  amount         String
+
+  scheduledDate  DateTime @map("scheduled_date")   // 3 business days before payoutDate
+  payoutDate     DateTime @map("payout_date")       // 30th or 15th
+
+  // SCHEDULED → PROCESSING → COLLECTED | FAILED → PERMANENTLY_FAILED
+  status         String   @default("SCHEDULED")
+
+  qbChargeId     String?  @map("qb_charge_id")      // returned by QB Payments API
+  qbInvoiceId    String?  @map("qb_invoice_id")      // linked QB accounting invoice
+
+  retryCount     Int      @default(0) @map("retry_count")
+  failureReason  String?  @map("failure_reason")
+  collectedAt    DateTime? @map("collected_at")      // webhook settlement timestamp
+  idempotencyKey String   @default("") @map("idempotency_key")  // unique per charge attempt
+
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt      @map("updated_at")
+
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  @@unique([organizationId, payPeriod])
+  @@index([status, scheduledDate])
+  @@index([organizationId])
+  @@map("hriq_ach_collections")
+}
+

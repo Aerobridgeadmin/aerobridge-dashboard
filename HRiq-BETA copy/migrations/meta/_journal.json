@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1767288504825,
+      "tag": "0000_add_user_profile_fields",
+      "breakpoints": true
+    }
+  ]
+}

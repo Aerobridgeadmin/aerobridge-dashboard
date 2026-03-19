@@ -1,0 +1,14 @@
+[
+  "rpc/rls_auto_enable",
+  "rpc/promote_import_batch",
+  "rpc/check_email_approved",
+  "rpc/generate_timesheet_submissions_for_period",
+  "rpc/refresh_dashboard_stats",
+  "rpc/prune_vercel_logs",
+  "rpc/auto_link_employee",
+  "rpc/generate_timesheet_periods_for_year",
+  "rpc/add_email_identity_to_user",
+  "rpc/lookup_auth_user_by_email",
+  "rpc/cleanup_old_vercel_logs",
+  "rpc/cleanup_vercel_logs"
+]

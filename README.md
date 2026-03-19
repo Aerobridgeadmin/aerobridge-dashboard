@@ -1,39 +1,72 @@
-# AeroBridge Dashboard
+# HRIQ — Remote Leverage HR Platform
 
-A modern Learning Management System dashboard built with Next.js, Tailwind CSS, and Supabase. Designed for deployment on Vercel.
+> **v1.0.0** · Internal HR and contractor management platform for Remote Leverage
 
-## Features
+## Overview
 
-- **Dashboard** — Overview stats, enrollment charts, completion rates, activity feed
-- **Courses** — Manage courses with chapters, lessons, and enrollment tracking
-- **Students** — Track learner profiles, progress, and completions
-- **Batches** — Group learners into cohorts with capacity management
-- **Quizzes** — Create assessments with scoring and pass rate analytics
-- **Certificates** — Issue and manage completion certificates
+HRIQ manages the full lifecycle of international contractors: hiring pipeline, onboarding workflows, document management, payments, timesheets, and day-to-day operations across multiple client organizations.
 
-## Tech Stack
+## Stack
 
-- **Next.js 14** (App Router)
-- **TypeScript**
-- **Tailwind CSS**
-- **Supabase** (Auth + Database)
-- **Lucide Icons**
+- **Framework:** Next.js 16 (App Router, Turbopack)
+- **Database:** Supabase PostgreSQL + Prisma ORM
+- **Auth:** Supabase Auth (Google OAuth)
+- **Storage:** Supabase Storage
+- **Hosting:** Vercel
+- **UI:** shadcn/ui + Tailwind CSS
 
 ## Getting Started
 
-1. Clone the repository
-2. Install dependencies: `npm install`
-3. Copy `.env.local.example` to `.env.local` and fill in your Supabase credentials
-4. Run the dev server: `npm run dev`
-5. Open [http://localhost:3000](http://localhost:3000)
+```bash
+# Install dependencies
+pnpm install
 
-## Deploy to Vercel
+# Set up environment variables
+cp apps/app/.env.example apps/app/.env.local
 
-1. Push to GitHub
-2. Import the repo on [vercel.com](https://vercel.com)
-3. Add your environment variables in Vercel project settings
-4. Deploy
+# Generate Prisma client
+pnpm db:generate
+
+# Run development server
+pnpm dev
+```
+
+## Project Structure
+
+```
+apps/app/              → Main Next.js application
+packages/auth/         → Auth middleware & session management
+packages/database/     → Prisma schema & database client
+packages/design-system/→ Shared UI components
+packages/integrations/ → Zoom, Google Sheets integrations
+packages/next-config/  → Shared Next.js configuration
+```
+
+## Roles
+
+| Role | Access |
+|------|--------|
+| Super Admin | Full platform access, all organizations |
+| Admin | Organization management, hiring, onboarding |
+| Manager | Contractor oversight, approvals |
+| Bookkeeper | Payments, timesheets |
+| VA | Self-service tasks, timesheets, documents |
+
+## Key Features
+
+- Multi-org contractor management (222+ contractors)
+- Hiring pipeline with RecruitCRM integration
+- JotForm-powered onboarding with auto-step-completion
+- Zoom batch orientation sessions
+- Contractor self-service portal (no login required)
+- Smart document management with search/filter/group
+- Google Sheets timesheet sync
+- Payment tracking and approval workflows
+
+## Deploy Notes
+
+See [DEPLOY_NOTES.md](./DEPLOY_NOTES.md) for the full v1.0.0 release notes.
 
 ## License
 
-AGPL-3.0
+Proprietary — Remote Leverage LLC

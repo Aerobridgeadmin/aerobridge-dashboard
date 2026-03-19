@@ -1,0 +1,35 @@
+{
+  "name": "@repo/integrations",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./timedoctor": "./timedoctor.ts",
+    "./jotform": "./jotform.ts",
+    "./zoom": "./zoom.ts",
+    "./pdf": "./pdf.ts",
+    "./google-calendar": "./google-calendar.ts",
+    "./google-sheets": "./google-sheets.ts",
+    "./quickbooks": "./quickbooks.ts",
+    "./wise": "./wise.ts",
+    "./cadana": "./cadana.ts"
+  },
+  "scripts": {
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+  },
+  "dependencies": {
+    "@pdfme/common": "^5.5.8",
+    "@pdfme/generator": "^5.5.8",
+    "@pdfme/schemas": "^5.5.9",
+    "google-auth-library": "^10.5.0",
+    "server-only": "^0.0.1"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "24.10.1",
+    "typescript": "^5.9.3"
+  }
+}
