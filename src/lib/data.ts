@@ -237,27 +237,6 @@ export async function createQuizQuestion(q: Partial<QuizQuestion>) {
   return data
 }
 
-// ── BULK SEED ──
-export async function bulkInsertCourses(courses: Partial<Course>[]) {
-  const { data, error } = await supabase.from('courses').insert(courses).select()
-  if (error) throw error
-  return data
-}
-export async function bulkInsertQuizzes(quizzes: Partial<Quiz>[]) {
-  const { data, error } = await supabase.from('quizzes').insert(quizzes).select()
-  if (error) throw error
-  return data
-}
-export async function bulkInsertCourseContent(content: Partial<CourseContent>[]) {
-  const { data, error } = await supabase.from('course_content').insert(content).select()
-  if (error) throw error
-  return data
-}
-export async function bulkInsertQuizQuestions(questions: Partial<QuizQuestion>[]) {
-  const { data, error } = await supabase.from('quiz_questions').insert(questions).select()
-  if (error) throw error
-  return data
-}
 
 // ── EMAIL TEMPLATES ──
 export async function getEmailTemplates(): Promise<EmailTemplate[]> {
