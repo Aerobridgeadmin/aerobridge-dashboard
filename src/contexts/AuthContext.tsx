@@ -100,11 +100,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { error }
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || (typeof window !== 'undefined' ? window.location.origin : '')
+
   const signInWithGoogle = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
+        redirectTo: `${siteUrl}/auth/callback`,
         queryParams: { access_type: 'offline', prompt: 'consent' },
       },
     })
@@ -128,7 +130,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const resetPassword = async (email: string) => {
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/settings`,
+      redirectTo: `${siteUrl}/settings`,
     })
     return { error }
   }
