@@ -26,6 +26,17 @@ export async function GET(request: NextRequest) {
     const { error } = await supabase.auth.exchangeCodeForSession(code)
 
     if (!error) {
+      const { data: { user } } = await supabase.auth.getUser()
+      const email = user?.email || ''
+
+      // Enforce @aerobridge.cl domain for Google SSO
+      if (user?.app_metadata?.provider === 'google' && !email.endsWith('@aerobridge.cl')) {
+        await supabase.auth.signOut()
+        redirectTo.pathname = '/login'
+        redirectTo.searchParams.set('error', 'domain_restricted')
+        return NextResponse.redirect(redirectTo)
+      }
+
       redirectTo.pathname = '/'
       redirectTo.searchParams.delete('code')
       return NextResponse.redirect(redirectTo)

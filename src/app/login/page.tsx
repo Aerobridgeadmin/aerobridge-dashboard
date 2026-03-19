@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, FormEvent } from 'react'
+import { useState, useEffect, FormEvent } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
 import { Mail, Lock, Loader2, Eye, EyeOff, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
@@ -24,6 +25,13 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false)
   const [googleLoading, setGoogleLoading] = useState(false)
   const [error, setError] = useState('')
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    const err = searchParams.get('error')
+    if (err === 'domain_restricted') setError('Google sign-in is restricted to @aerobridge.cl accounts.')
+    else if (err === 'oauth_failed') setError('Sign-in failed. Please try again.')
+  }, [searchParams])
 
   const handleGoogle = async () => {
     setError('')

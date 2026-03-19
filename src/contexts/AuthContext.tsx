@@ -55,12 +55,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { data: { user: authUser } } = await supabase.auth.getUser()
     if (authUser) {
       const meta = authUser.user_metadata
+      const email = authUser.email || ''
+      const isAerobridgeDomain = email.endsWith('@aerobridge.cl')
+
       const newProfile = {
         id: userId,
-        email: authUser.email,
-        full_name: meta?.full_name || meta?.name || authUser.email?.split('@')[0] || 'User',
+        email,
+        full_name: meta?.full_name || meta?.name || email.split('@')[0] || 'User',
         avatar_url: meta?.avatar_url || meta?.picture,
-        role: 'student',
+        role: isAerobridgeDomain ? 'admin' : 'student',
         onboarding_complete: false,
       }
       const { data: created } = await supabase.from('profiles').insert(newProfile).select().single()
@@ -107,7 +110,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       provider: 'google',
       options: {
         redirectTo: `${siteUrl}/auth/callback`,
-        queryParams: { access_type: 'offline', prompt: 'consent' },
+        queryParams: { access_type: 'offline', prompt: 'consent', hd: 'aerobridge.cl' },
       },
     })
     return { error }
