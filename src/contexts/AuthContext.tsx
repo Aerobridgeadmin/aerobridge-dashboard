@@ -22,6 +22,7 @@ interface AuthContextType {
   profile: Profile | null
   loading: boolean
   signIn: (email: string, password: string) => Promise<{ error: any }>
+  signInWithGoogle: () => Promise<{ error: any }>
   signUp: (email: string, password: string, meta: { full_name: string; role?: string }) => Promise<{ error: any }>
   signOut: () => Promise<void>
   resetPassword: (email: string) => Promise<{ error: any }>
@@ -44,8 +45,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .select('*')
       .eq('id', userId)
       .single()
-    if (data) setProfile(data as Profile)
-    return data
+
+    if (data) {
+      setProfile(data as Profile)
+      return data
+    }
+
+    // Auto-create profile for OAuth users (Google SSO)
+    const { data: { user: authUser } } = await supabase.auth.getUser()
+    if (authUser) {
+      const meta = authUser.user_metadata
+      const newProfile = {
+        id: userId,
+        email: authUser.email,
+        full_name: meta?.full_name || meta?.name || authUser.email?.split('@')[0] || 'User',
+        avatar_url: meta?.avatar_url || meta?.picture,
+        role: 'student',
+        onboarding_complete: false,
+      }
+      const { data: created } = await supabase.from('profiles').insert(newProfile).select().single()
+      if (created) setProfile(created as Profile)
+      return created
+    }
+    return null
   }
 
   useEffect(() => {
@@ -75,6 +97,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signIn = async (email: string, password: string) => {
     const { error } = await supabase.auth.signInWithPassword({ email, password })
+    return { error }
+  }
+
+  const signInWithGoogle = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+        queryParams: { access_type: 'offline', prompt: 'consent' },
+      },
+    })
     return { error }
   }
 
@@ -117,6 +150,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         profile,
         loading,
         signIn,
+        signInWithGoogle,
         signUp,
         signOut,
         resetPassword,
