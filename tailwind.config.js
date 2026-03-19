@@ -1,9 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/contexts/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
@@ -67,9 +67,8 @@ module.exports = {
         sunset: '#FF6B35',
       },
       fontFamily: {
-        display: ['var(--font-display)'],
-        body: ['var(--font-body)'],
-        mono: ['var(--font-mono)', 'monospace'],
+        display: ['var(--font-display)', 'Montserrat', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        mono: ['var(--font-mono)', 'JetBrains Mono', 'monospace'],
       },
       boxShadow: {
         'card': '0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04)',

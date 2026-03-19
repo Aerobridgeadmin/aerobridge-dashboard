@@ -2,7 +2,7 @@
 
 import { useState, FormEvent } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
-import { Plane, Mail, Lock, Loader2, Eye, EyeOff, ArrowRight } from 'lucide-react'
+import { Mail, Lock, Loader2, Eye, EyeOff, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 
 export default function LoginPage() {
@@ -29,16 +29,13 @@ export default function LoginPage() {
       {/* Left panel — brand */}
       <div className="hidden w-[480px] flex-col justify-between bg-gradient-to-br from-brand-500 via-brand-600 to-brand-700 p-10 lg:flex">
         <div>
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15"><Plane className="h-5 w-5 text-white" /></div>
-            <h1 className="text-xl font-extrabold uppercase tracking-wide text-white">AeroBridge</h1>
-          </div>
-          <p className="mt-2 text-sm font-medium text-white/60">Learning Management System</p>
+          <img src="/images/logo-light.png" alt="AeroBridge" className="h-10 object-contain" />
+          <p className="mt-2 text-sm font-medium text-white/60">Aviation Education Platform</p>
         </div>
         <div>
-          <h2 className="text-3xl font-extrabold leading-tight text-white">Elevate your<br />training program</h2>
+          <h2 className="text-3xl font-extrabold leading-tight text-white">Clear English.<br />Confident flights.</h2>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/70">
-            Manage courses, track progress, schedule live classes, and issue certificates — all from one powerful platform.
+            From classroom to cockpit, in one clear language. Manage courses, track certifications, and prepare for ICAO/FAA tests.
           </p>
         </div>
         <div className="text-xs text-white/30">© {new Date().getFullYear()} AeroBridge. All rights reserved.</div>
@@ -47,9 +44,8 @@ export default function LoginPage() {
       {/* Right panel — form */}
       <div className="flex flex-1 items-center justify-center bg-surface-50 px-6">
         <div className="w-full max-w-sm">
-          <div className="mb-8 lg:hidden flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl" style={{ backgroundColor: '#0B3D91' }}><Plane className="h-4 w-4 text-white" /></div>
-            <h1 className="text-lg font-extrabold uppercase tracking-wide text-surface-800">AeroBridge</h1>
+          <div className="mb-8 lg:hidden">
+            <img src="/images/logo.png" alt="AeroBridge" className="h-10 object-contain" />
           </div>
 
           <h2 className="text-2xl font-extrabold text-surface-800">Welcome back</h2>

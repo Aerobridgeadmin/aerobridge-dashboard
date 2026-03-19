@@ -4,7 +4,7 @@ import { useAuth } from '@/contexts/AuthContext'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
-import { Loader2, Plane } from 'lucide-react'
+import { Loader2 } from 'lucide-react'
 
 const publicRoutes = ['/login', '/signup', '/forgot-password', '/auth/confirm']
 
@@ -31,10 +31,8 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-surface-50">
-        <div className="flex flex-col items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-600">
-            <Plane className="h-6 w-6 text-white" />
-          </div>
+        <div className="flex flex-col items-center gap-4">
+          <img src="/images/logo.png" alt="AeroBridge" className="h-12 object-contain" />
           <Loader2 className="h-6 w-6 animate-spin text-brand-500" />
         </div>
       </div>

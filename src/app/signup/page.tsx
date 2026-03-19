@@ -2,7 +2,7 @@
 
 import { useState, FormEvent } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
-import { Plane, Mail, Lock, User, Loader2, Eye, EyeOff, ArrowRight, CheckCircle } from 'lucide-react'
+import { Mail, Lock, User, Loader2, Eye, EyeOff, ArrowRight, CheckCircle } from 'lucide-react'
 import Link from 'next/link'
 
 export default function SignupPage() {
@@ -44,14 +44,11 @@ export default function SignupPage() {
     <div className="flex min-h-screen">
       <div className="hidden w-[480px] flex-col justify-between bg-gradient-to-br from-brand-500 via-brand-600 to-brand-700 p-10 lg:flex">
         <div>
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15"><Plane className="h-5 w-5 text-white" /></div>
-            <h1 className="text-xl font-extrabold uppercase tracking-wide text-white">AeroBridge</h1>
-          </div>
+          <img src="/images/logo-light.png" alt="AeroBridge" className="h-10 object-contain" />
         </div>
         <div>
-          <h2 className="text-3xl font-extrabold leading-tight text-white">Join the<br />learning platform</h2>
-          <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/70">Create your account and get started with courses, quizzes, live classes, and more.</p>
+          <h2 className="text-3xl font-extrabold leading-tight text-white">Bridge the gap between<br />training and takeoff</h2>
+          <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/70">Create your account and start your aviation English journey with courses, live classes, and certification prep.</p>
           <div className="mt-8 space-y-3">
             {['Personalized learning paths', 'Live virtual classrooms', 'Certificates on completion', 'Discussion forums'].map(f => (
               <div key={f} className="flex items-center gap-2.5 text-sm text-white/80"><CheckCircle className="h-4 w-4 text-white/50" />{f}</div>
