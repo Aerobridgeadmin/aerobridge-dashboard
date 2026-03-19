@@ -1,1 +1,21 @@
-{"data":"aW1wb3J0IHR5cGUgeyBNZXRhZGF0YSB9IGZyb20gJ25leHQnCmltcG9ydCAnLi9nbG9iYWxzLmNzcycKaW1wb3J0IFNpZGViYXIgZnJvbSAnQC9jb21wb25lbnRzL1NpZGViYXInCgpleHBvcnQgY29uc3QgbWV0YWRhdGE6IE1ldGFkYXRhID0gewogIHRpdGxlOiAnQWVyb0JyaWRnZSBEYXNoYm9hcmQnLAogIGRlc2NyaXB0aW9uOiAnTGVhcm5pbmcgTWFuYWdlbWVudCBTeXN0ZW0g4oCUIEFlcm9CcmlkZ2UnLAp9CgpleHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBSb290TGF5b3V0KHsgY2hpbGRyZW4gfTogeyBjaGlsZHJlbjogUmVhY3QuUmVhY3ROb2RlIH0pIHsKICByZXR1cm4gKAogICAgPGh0bWwgbGFuZz0iZW4iPgogICAgICA8Ym9keSBjbGFzc05hbWU9ImFudGlhbGlhc2VkIj4KICAgICAgICA8ZGl2IGNsYXNzTmFtZT0iZmxleCBtaW4taC1zY3JlZW4iPgogICAgICAgICAgPFNpZGViYXIgLz4KICAgICAgICAgIDxtYWluIGNsYXNzTmFtZT0ibWwtWzI2MHB4XSBmbGV4LTEgdHJhbnNpdGlvbi1hbGwgZHVyYXRpb24tMzAwIj4KICAgICAgICAgICAge2NoaWxkcmVufQogICAgICAgICAgPC9tYWluPgogICAgICAgIDwvZGl2PgogICAgICA8L2JvZHk+CiAgICA8L2h0bWw+CiAgKQp9Cg=="}
+import type { Metadata } from 'next'
+import './globals.css'
+import { AuthProvider } from '@/contexts/AuthContext'
+import AppShell from '@/components/AppShell'
+
+export const metadata: Metadata = {
+  title: 'AeroBridge Dashboard',
+  description: 'Learning Management System — AeroBridge',
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body className="antialiased">
+        <AuthProvider>
+          <AppShell>{children}</AppShell>
+        </AuthProvider>
+      </body>
+    </html>
+  )
+}

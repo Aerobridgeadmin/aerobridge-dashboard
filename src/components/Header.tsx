@@ -1,1 +1,42 @@
-{"data":"J3VzZSBjbGllbnQnCgppbXBvcnQgeyBTZWFyY2gsIEJlbGwsIFVzZXIgfSBmcm9tICdsdWNpZGUtcmVhY3QnCgpleHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBIZWFkZXIoeyB0aXRsZSwgc3VidGl0bGUgfTogeyB0aXRsZTogc3RyaW5nOyBzdWJ0aXRsZT86IHN0cmluZyB9KSB7CiAgcmV0dXJuICgKICAgIDxoZWFkZXIgY2xhc3NOYW1lPSJmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWJldHdlZW4gYm9yZGVyLWIgYm9yZGVyLXN1cmZhY2UtMjAwIGJnLXdoaXRlLzgwIHB4LTggcHktNCBiYWNrZHJvcC1ibHVyLXNtIj4KICAgICAgPGRpdj4KICAgICAgICA8aDIgY2xhc3NOYW1lPSJmb250LWRpc3BsYXkgdGV4dC0yeGwgdGV4dC1zdXJmYWNlLTkwMCI+e3RpdGxlfTwvaDI+CiAgICAgICAge3N1YnRpdGxlICYmIDxwIGNsYXNzTmFtZT0ibXQtMC41IHRleHQtc20gdGV4dC1zdXJmYWNlLTUwMCI+e3N1YnRpdGxlfTwvcD59CiAgICAgIDwvZGl2PgoKICAgICAgPGRpdiBjbGFzc05hbWU9ImZsZXggaXRlbXMtY2VudGVyIGdhcC0zIj4KICAgICAgICB7LyogU2VhcmNoICovfQogICAgICAgIDxkaXYgY2xhc3NOYW1lPSJyZWxhdGl2ZSI+CiAgICAgICAgICA8U2VhcmNoIGNsYXNzTmFtZT0iYWJzb2x1dGUgbGVmdC0zIHRvcC0xLzIgaC00IHctNCAtdHJhbnNsYXRlLXktMS8yIHRleHQtc3VyZmFjZS00MDAiIC8+CiAgICAgICAgICA8aW5wdXQKICAgICAgICAgICAgdHlwZT0idGV4dCIKICAgICAgICAgICAgcGxhY2Vob2xkZXI9IlNlYXJjaC4uLiIKICAgICAgICAgICAgY2xhc3NOYW1lPSJoLTkgdy01NiByb3VuZGVkLWxnIGJvcmRlciBib3JkZXItc3VyZmFjZS0yMDAgYmctc3VyZmFjZS01MCBwbC05IHByLTMgdGV4dC1zbSB0ZXh0LXN1cmZhY2UtNzAwIG91dGxpbmUtbm9uZSB0cmFuc2l0aW9uLWFsbCBwbGFjZWhvbGRlcjp0ZXh0LXN1cmZhY2UtNDAwIGZvY3VzOmJvcmRlci1icmFuZC0zMDAgZm9jdXM6cmluZy0yIGZvY3VzOnJpbmctYnJhbmQtMTAwIgogICAgICAgICAgLz4KICAgICAgICA8L2Rpdj4KCiAgICAgICAgey8qIE5vdGlmaWNhdGlvbnMgKi99CiAgICAgICAgPGJ1dHRvbiBjbGFzc05hbWU9InJlbGF0aXZlIGZsZXggaC05IHctOSBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgcm91bmRlZC1sZyBib3JkZXIgYm9yZGVyLXN1cmZhY2UtMjAwIGJnLXdoaXRlIHRleHQtc3VyZmFjZS01MDAgdHJhbnNpdGlvbi1jb2xvcnMgaG92ZXI6Ymctc3VyZmFjZS01MCBob3Zlcjp0ZXh0LXN1cmZhY2UtNzAwIj4KICAgICAgICAgIDxCZWxsIGNsYXNzTmFtZT0iaC00IHctNCIgLz4KICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT0iYWJzb2x1dGUgLXJpZ2h0LTAuNSAtdG9wLTAuNSBmbGV4IGgtNCB3LTQgaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIHJvdW5kZWQtZnVsbCBiZy1hY2NlbnQtcm9zZSB0ZXh0LVsxMHB4XSBmb250LWJvbGQgdGV4dC13aGl0ZSI+CiAgICAgICAgICAgIDMKICAgICAgICAgIDwvc3Bhbj4KICAgICAgICA8L2J1dHRvbj4KCiAgICAgICAgey8qIFVzZXIgKi99CiAgICAgICAgPGJ1dHRvbiBjbGFzc05hbWU9ImZsZXggaXRlbXMtY2VudGVyIGdhcC0yIHJvdW5kZWQtbGcgYm9yZGVyIGJvcmRlci1zdXJmYWNlLTIwMCBiZy13aGl0ZSBweC0zIHB5LTEuNSB0ZXh0LXNtIHRyYW5zaXRpb24tY29sb3JzIGhvdmVyOmJnLXN1cmZhY2UtNTAiPgogICAgICAgICAgPGRpdiBjbGFzc05hbWU9ImZsZXggaC03IHctNyBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgcm91bmRlZC1mdWxsIGJnLWJyYW5kLTUwMCB0ZXh0LXhzIGZvbnQtc2VtaWJvbGQgdGV4dC13aGl0ZSI+CiAgICAgICAgICAgIEEKICAgICAgICAgIDwvZGl2PgogICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPSJmb250LW1lZGl1bSB0ZXh0LXN1cmZhY2UtNzAwIj5BZG1pbjwvc3Bhbj4KICAgICAgICA8L2J1dHRvbj4KICAgICAgPC9kaXY+CiAgICA8L2hlYWRlcj4KICApCn0K"}
+'use client'
+
+import { Search, Bell } from 'lucide-react'
+import { useAuth } from '@/contexts/AuthContext'
+import Link from 'next/link'
+
+export default function Header({ title, subtitle }: { title: string; subtitle?: string }) {
+  const { profile } = useAuth()
+  const roleBadge = profile?.role === 'admin' ? 'badge-rose' : profile?.role === 'instructor' ? 'badge-blue' : 'badge-green'
+
+  return (
+    <header className="flex items-center justify-between border-b border-surface-200 bg-white px-8 py-4">
+      <div>
+        <h2 className="text-2xl font-bold text-surface-800">{title}</h2>
+        {subtitle && <p className="mt-0.5 text-sm font-medium text-surface-500">{subtitle}</p>}
+      </div>
+
+      <div className="flex items-center gap-3">
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" />
+          <input type="text" placeholder="Search..." className="h-9 w-56 rounded-lg border border-surface-200 bg-surface-50 pl-9 pr-3 text-sm text-surface-700 outline-none transition-all placeholder:text-surface-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-50" />
+        </div>
+
+        <button className="relative flex h-9 w-9 items-center justify-center rounded-lg border border-surface-200 bg-white text-surface-500 transition-colors hover:bg-surface-50 hover:text-surface-700">
+          <Bell className="h-4 w-4" />
+        </button>
+
+        {profile && (
+          <Link href="/settings" className="flex items-center gap-2.5 rounded-lg border border-surface-200 bg-white px-3 py-1.5 transition-colors hover:bg-surface-50">
+            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-brand-700 text-[10px] font-bold text-white">
+              {profile.full_name?.split(' ').map(n => n[0]).join('').slice(0, 2) || '?'}
+            </div>
+            <div className="hidden sm:block">
+              <p className="text-xs font-semibold text-surface-800">{profile.full_name}</p>
+              <span className={`badge ${roleBadge} !px-1.5 !py-0 text-[9px] capitalize`}>{profile.role}</span>
+            </div>
+          </Link>
+        )}
+      </div>
+    </header>
+  )
+}

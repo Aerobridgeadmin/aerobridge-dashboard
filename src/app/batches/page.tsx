@@ -1,1 +1,123 @@
-{"data":"J3VzZSBjbGllbnQnCgppbXBvcnQgSGVhZGVyIGZyb20gJ0AvY29tcG9uZW50cy9IZWFkZXInCmltcG9ydCB7IGJhdGNoZXMgfSBmcm9tICdAL2xpYi9kYXRhJwppbXBvcnQgeyBQbHVzLCBTZWFyY2gsIENhbGVuZGFyLCBVc2VycywgQXJyb3dSaWdodCB9IGZyb20gJ2x1Y2lkZS1yZWFjdCcKCmNvbnN0IHN0YXR1c1N0eWxlczogUmVjb3JkPHN0cmluZywgc3RyaW5nPiA9IHsKICBhY3RpdmU6ICdiZy1lbWVyYWxkLTUwIHRleHQtZW1lcmFsZC03MDAgcmluZy0xIHJpbmctZW1lcmFsZC0yMDAnLAogIHVwY29taW5nOiAnYmctYnJhbmQtNTAgdGV4dC1icmFuZC03MDAgcmluZy0xIHJpbmctYnJhbmQtMjAwJywKICBjb21wbGV0ZWQ6ICdiZy1zdXJmYWNlLTEwMCB0ZXh0LXN1cmZhY2UtNTAwIHJpbmctMSByaW5nLXN1cmZhY2UtMjAwJywKfQoKZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gQmF0Y2hlc1BhZ2UoKSB7CiAgcmV0dXJuICgKICAgIDxkaXYgY2xhc3NOYW1lPSJtaW4taC1zY3JlZW4gYmctc3VyZmFjZS01MCI+CiAgICAgIDxIZWFkZXIgdGl0bGU9IkJhdGNoZXMiIHN1YnRpdGxlPSJHcm91cCBsZWFybmVycyBhbmQgbWFuYWdlIGNvaG9ydHMiIC8+CgogICAgICA8ZGl2IGNsYXNzTmFtZT0icC04Ij4KICAgICAgICA8ZGl2IGNsYXNzTmFtZT0ibWItNiBmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWJldHdlZW4iPgogICAgICAgICAgPGRpdiBjbGFzc05hbWU9InJlbGF0aXZlIj4KICAgICAgICAgICAgPFNlYXJjaCBjbGFzc05hbWU9ImFic29sdXRlIGxlZnQtMyB0b3AtMS8yIGgtNCB3LTQgLXRyYW5zbGF0ZS15LTEvMiB0ZXh0LXN1cmZhY2UtNDAwIiAvPgogICAgICAgICAgICA8aW5wdXQKICAgICAgICAgICAgICB0eXBlPSJ0ZXh0IgogICAgICAgICAgICAgIHBsYWNlaG9sZGVyPSJTZWFyY2ggYmF0Y2hlcy4uLiIKICAgICAgICAgICAgICBjbGFzc05hbWU9ImgtMTAgdy03MiByb3VuZGVkLWxnIGJvcmRlciBib3JkZXItc3VyZmFjZS0yMDAgYmctd2hpdGUgcGwtOSBwci00IHRleHQtc20gb3V0bGluZS1ub25lIHRyYW5zaXRpb24tYWxsIHBsYWNlaG9sZGVyOnRleHQtc3VyZmFjZS00MDAgZm9jdXM6Ym9yZGVyLWJyYW5kLTMwMCBmb2N1czpyaW5nLTIgZm9jdXM6cmluZy1icmFuZC0xMDAiCiAgICAgICAgICAgIC8+CiAgICAgICAgICA8L2Rpdj4KICAgICAgICAgIDxidXR0b24gY2xhc3NOYW1lPSJmbGV4IGl0ZW1zLWNlbnRlciBnYXAtMiByb3VuZGVkLWxnIGJnLWJyYW5kLTYwMCBweC00IHB5LTIuNSB0ZXh0LXNtIGZvbnQtbWVkaXVtIHRleHQtd2hpdGUgc2hhZG93LXNtIHRyYW5zaXRpb24tYWxsIGhvdmVyOmJnLWJyYW5kLTcwMCBob3ZlcjpzaGFkb3ctbWQgYWN0aXZlOnNjYWxlLVswLjk4XSI+CiAgICAgICAgICAgIDxQbHVzIGNsYXNzTmFtZT0iaC00IHctNCIgLz4KICAgICAgICAgICAgQ3JlYXRlIEJhdGNoCiAgICAgICAgICA8L2J1dHRvbj4KICAgICAgICA8L2Rpdj4KCiAgICAgICAgPGRpdiBjbGFzc05hbWU9ImdyaWQgZ3JpZC1jb2xzLTEgZ2FwLTUgbGc6Z3JpZC1jb2xzLTIiPgogICAgICAgICAge2JhdGNoZXMubWFwKChiYXRjaCwgaSkgPT4gKAogICAgICAgICAgICA8ZGl2CiAgICAgICAgICAgICAga2V5PXtiYXRjaC5pZH0KICAgICAgICAgICAgICBjbGFzc05hbWU9ImNhcmQgZ3JvdXAgYW5pbWF0ZS1zbGlkZS11cCBwLTYiCiAgICAgICAgICAgICAgc3R5bGU9e3sgYW5pbWF0aW9uRGVsYXk6IGAke2kgKiA2MH1tc2AsIGFuaW1hdGlvbkZpbGxNb2RlOiAnYm90aCcgfX0KICAgICAgICAgICAgPgogICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSJmbGV4IGl0ZW1zLXN0YXJ0IGp1c3RpZnktYmV0d2VlbiI+CiAgICAgICAgICAgICAgICA8ZGl2PgogICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0iZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTIiPgogICAgICAgICAgICAgICAgICAgIDxoMyBjbGFzc05hbWU9InRleHQtYmFzZSBmb250LXNlbWlib2xkIHRleHQtc3VyZmFjZS05MDAiPntiYXRjaC50aXRsZX08L2gzPgogICAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT17YGJhZGdlIHRleHQtWzEwcHhdICR7c3RhdHVzU3R5bGVzW2JhdGNoLnN0YXR1c119YH0+CiAgICAgICAgICAgICAgICAgICAgICB7YmF0Y2guc3RhdHVzfQogICAgICAgICAgICAgICAgICAgIDwvc3Bhbj4KICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT0ibXQtMSB0ZXh0LXhzIHRleHQtc3VyZmFjZS01MDAiPntiYXRjaC5jb3Vyc2VfdGl0bGV9PC9wPgogICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICA8YnV0dG9uIGNsYXNzTmFtZT0icm91bmRlZC1sZyBwLTIgdGV4dC1zdXJmYWNlLTQwMCBvcGFjaXR5LTAgdHJhbnNpdGlvbi1hbGwgaG92ZXI6Ymctc3VyZmFjZS0xMDAgaG92ZXI6dGV4dC1zdXJmYWNlLTYwMCBncm91cC1ob3ZlcjpvcGFjaXR5LTEwMCI+CiAgICAgICAgICAgICAgICAgIDxBcnJvd1JpZ2h0IGNsYXNzTmFtZT0iaC00IHctNCIgLz4KICAgICAgICAgICAgICAgIDwvYnV0dG9uPgogICAgICAgICAgICAgIDwvZGl2PgoKICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0ibXQtNSBncmlkIGdyaWQtY29scy0zIGdhcC00Ij4KICAgICAgICAgICAgICAgIDxkaXY+CiAgICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT0iZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTEuNSB0ZXh0LVsxMHB4XSB1cHBlcmNhc2UgdHJhY2tpbmctd2lkZXIgdGV4dC1zdXJmYWNlLTQwMCI+CiAgICAgICAgICAgICAgICAgICAgPENhbGVuZGFyIGNsYXNzTmFtZT0iaC0zIHctMyIgLz4gU3RhcnQKICAgICAgICAgICAgICAgICAgPC9wPgogICAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9Im10LTEgdGV4dC1zbSBmb250LW1lZGl1bSB0ZXh0LXN1cmZhY2UtNzAwIj4KICAgICAgICAgICAgICAgICAgICB7bmV3IERhdGUoYmF0Y2guc3RhcnRfZGF0ZSkudG9Mb2NhbGVEYXRlU3RyaW5nKCdlbi1JTicsIHsgZGF5OiAnbnVtZXJpYycsIG1vbnRoOiAnc2hvcnQnIH0pfQogICAgICAgICAgICAgICAgICA8L3A+CiAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgIDxkaXY+CiAgICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT0iZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTEuNSB0ZXh0LVsxMHB4XSB1cHBlcmNhc2UgdHJhY2tpbmctd2lkZXIgdGV4dC1zdXJmYWNlLTQwMCI+CiAgICAgICAgICAgICAgICAgICAgPENhbGVuZGFyIGNsYXNzTmFtZT0iaC0zIHctMyIgLz4gRW5kCiAgICAgICAgICAgICAgICAgIDwvcD4KICAgICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPSJtdC0xIHRleHQtc20gZm9udC1tZWRpdW0gdGV4dC1zdXJmYWNlLTcwMCI+CiAgICAgICAgICAgICAgICAgICAge25ldyBEYXRlKGJhdGNoLmVuZF9kYXRlKS50b0xvY2FsZURhdGVTdHJpbmcoJ2VuLUlOJywgeyBkYXk6ICdudW1lcmljJywgbW9udGg6ICdzaG9ydCcgfSl9CiAgICAgICAgICAgICAgICAgIDwvcD4KICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgPGRpdj4KICAgICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPSJmbGV4IGl0ZW1zLWNlbnRlciBnYXAtMS41IHRleHQtWzEwcHhdIHVwcGVyY2FzZSB0cmFja2luZy13aWRlciB0ZXh0LXN1cmZhY2UtNDAwIj4KICAgICAgICAgICAgICAgICAgICA8VXNlcnMgY2xhc3NOYW1lPSJoLTMgdy0zIiAvPiBTdHVkZW50cwogICAgICAgICAgICAgICAgICA8L3A+CiAgICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT0ibXQtMSB0ZXh0LXNtIGZvbnQtbWVkaXVtIHRleHQtc3VyZmFjZS03MDAiPgogICAgICAgICAgICAgICAgICAgIHtiYXRjaC5zdHVkZW50X2NvdW50fSAvIHtiYXRjaC5tYXhfc3R1ZGVudHN9CiAgICAgICAgICAgICAgICAgIDwvcD4KICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgIDwvZGl2PgoKICAgICAgICAgICAgICB7LyogQ2FwYWNpdHkgYmFyICovfQogICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSJtdC00Ij4KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSJoLTEuNSBvdmVyZmxvdy1oaWRkZW4gcm91bmRlZC1mdWxsIGJnLXN1cmZhY2UtMTAwIj4KICAgICAgICAgICAgICAgICAgPGRpdgogICAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT17YGgtZnVsbCByb3VuZGVkLWZ1bGwgdHJhbnNpdGlvbi1hbGwgZHVyYXRpb24tNzAwICR7CiAgICAgICAgICAgICAgICAgICAgICBiYXRjaC5zdHVkZW50X2NvdW50IC8gYmF0Y2gubWF4X3N0dWRlbnRzID4gMC45CiAgICAgICAgICAgICAgICAgICAgICAgID8gJ2JnLXJvc2UtNTAwJwogICAgICAgICAgICAgICAgICAgICAgICA6IGJhdGNoLnN0dWRlbnRfY291bnQgLyBiYXRjaC5tYXhfc3R1ZGVudHMgPiAwLjcKICAgICAgICAgICAgICAgICAgICAgICAgPyAnYmctYW1iZXItNTAwJwogICAgICAgICAgICAgICAgICAgICAgICA6ICdiZy1icmFuZC01MDAnCiAgICAgICAgICAgICAgICAgICAgfWB9CiAgICAgICAgICAgICAgICAgICAgc3R5bGU9e3sgd2lkdGg6IGAkeyhiYXRjaC5zdHVkZW50X2NvdW50IC8gYmF0Y2gubWF4X3N0dWRlbnRzKSAqIDEwMH0lYCB9fQogICAgICAgICAgICAgICAgICA+PC9kaXY+CiAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT0ibXQtMSB0ZXh0LVsxMHB4XSB0ZXh0LXN1cmZhY2UtNDAwIj4KICAgICAgICAgICAgICAgICAge01hdGgucm91bmQoKGJhdGNoLnN0dWRlbnRfY291bnQgLyBiYXRjaC5tYXhfc3R1ZGVudHMpICogMTAwKX0lIGNhcGFjaXR5CiAgICAgICAgICAgICAgICA8L3A+CiAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgKSl9CiAgICAgICAgPC9kaXY+CiAgICAgIDwvZGl2PgogICAgPC9kaXY+CiAgKQp9Cg=="}
+'use client'
+import { useState, useEffect, FormEvent } from 'react'
+import Header from '@/components/Header'
+import Modal, { FormField, FormInput, FormSelect, FormActions } from '@/components/Modal'
+import EmptyState from '@/components/EmptyState'
+import Toast from '@/components/Toast'
+import { getBatches, getCourses, createBatch, deleteRecord } from '@/lib/data'
+import { Batch, Course } from '@/lib/supabase'
+import { Plus, Search, Calendar, Users, ArrowRight, Loader2, Layers, Trash2 } from 'lucide-react'
+import { RoleVisible } from '@/components/RoleGuard'
+
+const statusStyles: Record<string, string> = {
+  active: 'bg-success-50 text-success-500 ring-1 ring-success-500/20',
+  upcoming: 'bg-brand-50 text-brand-500 ring-1 ring-brand-500/20',
+  completed: 'bg-surface-100 text-surface-500 ring-1 ring-surface-200',
+}
+
+export default function BatchesPage() {
+  const [batches, setBatches] = useState<Batch[]>([])
+  const [courses, setCourses] = useState<Course[]>([])
+  const [loading, setLoading] = useState(true)
+  const [search, setSearch] = useState('')
+  const [showModal, setShowModal] = useState(false)
+  const [form, setForm] = useState({ title: '', course_id: '', course_title: '', start_date: '', end_date: '', max_students: 30, status: 'upcoming' as const })
+  const [saving, setSaving] = useState(false)
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null)
+
+  const load = () => { Promise.all([getBatches(), getCourses()]).then(([b, c]) => { setBatches(b); setCourses(c); setLoading(false) }) }
+  useEffect(() => { load() }, [])
+
+  const filtered = batches.filter(b => b.title.toLowerCase().includes(search.toLowerCase()) || b.course_title?.toLowerCase().includes(search.toLowerCase()))
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
+    setSaving(true)
+    try {
+      const course = courses.find(c => c.id === form.course_id)
+      await createBatch({ ...form, course_title: course?.title || form.course_title || '' })
+      setToast({ message: 'Batch created', type: 'success' })
+      setShowModal(false)
+      load()
+    } catch (err: any) { setToast({ message: err.message, type: 'error' }) }
+    setSaving(false)
+  }
+
+  const handleDelete = async (id: string, title: string) => {
+    if (!confirm(`Delete batch "${title}"?`)) return
+    try { await deleteRecord('batches', id); setToast({ message: 'Batch deleted', type: 'success' }); load() }
+    catch (err: any) { setToast({ message: err.message, type: 'error' }) }
+  }
+
+  return (
+    <div className="min-h-screen bg-surface-50">
+      <Header title="Batches" subtitle="Group learners and manage cohorts" />
+      <div className="p-8">
+        <div className="mb-6 flex items-center justify-between">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" />
+            <input type="text" placeholder="Search batches..." value={search} onChange={e => setSearch(e.target.value)} className="h-10 w-72 rounded-lg border border-surface-200 bg-white pl-9 pr-4 text-sm outline-none transition-all placeholder:text-surface-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-50" />
+          </div>
+          <RoleVisible roles={["admin", "instructor"]}><button onClick={() => { setForm({ title: '', course_id: '', course_title: '', start_date: '', end_date: '', max_students: 30, status: 'upcoming' }); setShowModal(true) }} className="flex items-center gap-2 rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-all hover:bg-brand-600 hover:shadow-md active:scale-[0.98]">
+            <Plus className="h-4 w-4" /> Create Batch
+          </button></RoleVisible>
+        </div>
+
+        {loading ? (
+          <div className="flex justify-center p-12"><Loader2 className="h-8 w-8 animate-spin text-brand-500" /></div>
+        ) : filtered.length === 0 && !search ? (
+          <EmptyState icon={Layers} title="No batches yet" description="Create a batch to group students into cohorts." actionLabel="Create Batch" onAction={() => setShowModal(true)} />
+        ) : (
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+          {filtered.map((batch, i) => (
+            <div key={batch.id} className="card group animate-slide-up p-6" style={{ animationDelay: `${i * 60}ms`, animationFillMode: 'both' }}>
+              <div className="flex items-start justify-between">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-base font-semibold text-surface-900">{batch.title}</h3>
+                    <span className={`badge text-[10px] ${statusStyles[batch.status]}`}>{batch.status}</span>
+                  </div>
+                  <p className="mt-1 text-xs text-surface-500">{batch.course_title}</p>
+                </div>
+                <button onClick={() => handleDelete(batch.id, batch.title)} className="rounded-lg p-2 text-surface-400 opacity-0 transition-all hover:bg-red-50 hover:text-cta-500 group-hover:opacity-100">
+                  <Trash2 className="h-4 w-4" />
+                </button>
+              </div>
+              <div className="mt-5 grid grid-cols-3 gap-4">
+                <div><p className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-surface-400"><Calendar className="h-3 w-3" /> Start</p><p className="mt-1 text-sm font-medium text-surface-700">{new Date(batch.start_date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}</p></div>
+                <div><p className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-surface-400"><Calendar className="h-3 w-3" /> End</p><p className="mt-1 text-sm font-medium text-surface-700">{new Date(batch.end_date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}</p></div>
+                <div><p className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-surface-400"><Users className="h-3 w-3" /> Students</p><p className="mt-1 text-sm font-medium text-surface-700">{batch.student_count} / {batch.max_students}</p></div>
+              </div>
+              <div className="mt-4">
+                <div className="h-1.5 overflow-hidden rounded-full bg-surface-100">
+                  <div className={`h-full rounded-full transition-all duration-700 ${batch.student_count / batch.max_students > 0.9 ? 'bg-cta-500' : batch.student_count / batch.max_students > 0.7 ? 'bg-warning-500' : 'bg-brand-500'}`} style={{ width: `${(batch.student_count / batch.max_students) * 100}%` }}></div>
+                </div>
+                <p className="mt-1 text-[10px] text-surface-400">{Math.round((batch.student_count / batch.max_students) * 100)}% capacity</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        )}
+      </div>
+
+      <Modal open={showModal} onClose={() => setShowModal(false)} title="Create Batch">
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <FormField label="Batch Title" required><FormInput required placeholder="e.g. January 2026 Cohort" value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} /></FormField>
+          <FormField label="Course">
+            <FormSelect value={form.course_id} onChange={e => { const c = courses.find(x => x.id === e.target.value); setForm({ ...form, course_id: e.target.value, course_title: c?.title || '' }) }}>
+              <option value="">Select a course...</option>
+              {courses.map(c => <option key={c.id} value={c.id}>{c.title}</option>)}
+            </FormSelect>
+          </FormField>
+          <div className="grid grid-cols-2 gap-4">
+            <FormField label="Start Date" required><FormInput required type="date" value={form.start_date} onChange={e => setForm({ ...form, start_date: e.target.value })} /></FormField>
+            <FormField label="End Date" required><FormInput required type="date" value={form.end_date} onChange={e => setForm({ ...form, end_date: e.target.value })} /></FormField>
+          </div>
+          <FormField label="Max Students"><FormInput type="number" min={1} value={form.max_students} onChange={e => setForm({ ...form, max_students: Number(e.target.value) })} /></FormField>
+          <FormActions onCancel={() => setShowModal(false)} loading={saving} submitLabel="Create Batch" />
+        </form>
+      </Modal>
+      {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
+    </div>
+  )
+}

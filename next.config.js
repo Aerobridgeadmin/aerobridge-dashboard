@@ -1,1 +1,5 @@
-{"data":"LyoqIEB0eXBlIHtpbXBvcnQoJ25leHQnKS5OZXh0Q29uZmlnfSAqLwpjb25zdCBuZXh0Q29uZmlnID0gewogIHJlYWN0U3RyaWN0TW9kZTogdHJ1ZSwKfQoKbW9kdWxlLmV4cG9ydHMgPSBuZXh0Q29uZmlnCg=="}
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+}
+module.exports = nextConfig

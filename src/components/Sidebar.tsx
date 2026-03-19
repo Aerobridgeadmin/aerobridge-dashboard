@@ -1,1 +1,100 @@
-{"data":"J3VzZSBjbGllbnQnCgppbXBvcnQgTGluayBmcm9tICduZXh0L2xpbmsnCmltcG9ydCB7IHVzZVBhdGhuYW1lIH0gZnJvbSAnbmV4dC9uYXZpZ2F0aW9uJwppbXBvcnQgewogIExheW91dERhc2hib2FyZCwKICBCb29rT3BlbiwKICBVc2VycywKICBMYXllcnMsCiAgQ2xpcGJvYXJkQ2hlY2ssCiAgQXdhcmQsCiAgU2V0dGluZ3MsCiAgQ2hldnJvbkxlZnQsCiAgQ2hldnJvblJpZ2h0LAogIFBsYW5lLAp9IGZyb20gJ2x1Y2lkZS1yZWFjdCcKaW1wb3J0IHsgdXNlU3RhdGUgfSBmcm9tICdyZWFjdCcKCmNvbnN0IG5hdkl0ZW1zID0gWwogIHsgaHJlZjogJy8nLCBsYWJlbDogJ0Rhc2hib2FyZCcsIGljb246IExheW91dERhc2hib2FyZCB9LAogIHsgaHJlZjogJy9jb3Vyc2VzJywgbGFiZWw6ICdDb3Vyc2VzJywgaWNvbjogQm9va09wZW4gfSwKICB7IGhyZWY6ICcvc3R1ZGVudHMnLCBsYWJlbDogJ1N0dWRlbnRzJywgaWNvbjogVXNlcnMgfSwKICB7IGhyZWY6ICcvYmF0Y2hlcycsIGxhYmVsOiAnQmF0Y2hlcycsIGljb246IExheWVycyB9LAogIHsgaHJlZjogJy9xdWl6emVzJywgbGFiZWw6ICdRdWl6emVzJywgaWNvbjogQ2xpcGJvYXJkQ2hlY2sgfSwKICB7IGhyZWY6ICcvY2VydGlmaWNhdGVzJywgbGFiZWw6ICdDZXJ0aWZpY2F0ZXMnLCBpY29uOiBBd2FyZCB9LApdCgpleHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBTaWRlYmFyKCkgewogIGNvbnN0IHBhdGhuYW1lID0gdXNlUGF0aG5hbWUoKQogIGNvbnN0IFtjb2xsYXBzZWQsIHNldENvbGxhcHNlZF0gPSB1c2VTdGF0ZShmYWxzZSkKCiAgcmV0dXJuICgKICAgIDxhc2lkZQogICAgICBjbGFzc05hbWU9e2BmaXhlZCBsZWZ0LTAgdG9wLTAgei00MCBoLXNjcmVlbiBiZy1zdXJmYWNlLTk1MCB0ZXh0LXdoaXRlIHRyYW5zaXRpb24tYWxsIGR1cmF0aW9uLTMwMCBlYXNlLWluLW91dCAkewogICAgICAgIGNvbGxhcHNlZCA/ICd3LVs3MnB4XScgOiAndy1bMjYwcHhdJwogICAgICB9YH0KICAgID4KICAgICAgey8qIExvZ28gKi99CiAgICAgIDxkaXYgY2xhc3NOYW1lPSJmbGV4IGgtMTYgaXRlbXMtY2VudGVyIGdhcC0zIGJvcmRlci1iIGJvcmRlci13aGl0ZS8xMCBweC01Ij4KICAgICAgICA8ZGl2IGNsYXNzTmFtZT0iZmxleCBoLTkgdy05IHNocmluay0wIGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciByb3VuZGVkLWxnIGJnLWJyYW5kLTUwMCI+CiAgICAgICAgICA8UGxhbmUgY2xhc3NOYW1lPSJoLTUgdy01IHRleHQtd2hpdGUiIC8+CiAgICAgICAgPC9kaXY+CiAgICAgICAgeyFjb2xsYXBzZWQgJiYgKAogICAgICAgICAgPGRpdiBjbGFzc05hbWU9ImFuaW1hdGUtZmFkZS1pbiI+CiAgICAgICAgICAgIDxoMSBjbGFzc05hbWU9ImZvbnQtZGlzcGxheSB0ZXh0LWxnIGxlYWRpbmctdGlnaHQgdGV4dC13aGl0ZSI+QWVyb0JyaWRnZTwvaDE+CiAgICAgICAgICAgIDxwIGNsYXNzTmFtZT0idGV4dC1bMTBweF0gdXBwZXJjYXNlIHRyYWNraW5nLVswLjJlbV0gdGV4dC1zdXJmYWNlLTQwMCI+RGFzaGJvYXJkPC9wPgogICAgICAgICAgPC9kaXY+CiAgICAgICAgKX0KICAgICAgPC9kaXY+CgogICAgICB7LyogTmF2ICovfQogICAgICA8bmF2IGNsYXNzTmFtZT0ibXQtNCBmbGV4IGZsZXgtY29sIGdhcC0xIHB4LTMiPgogICAgICAgIHtuYXZJdGVtcy5tYXAoKGl0ZW0pID0+IHsKICAgICAgICAgIGNvbnN0IGlzQWN0aXZlID0gcGF0aG5hbWUgPT09IGl0ZW0uaHJlZgogICAgICAgICAgcmV0dXJuICgKICAgICAgICAgICAgPExpbmsKICAgICAgICAgICAgICBrZXk9e2l0ZW0uaHJlZn0KICAgICAgICAgICAgICBocmVmPXtpdGVtLmhyZWZ9CiAgICAgICAgICAgICAgY2xhc3NOYW1lPXtgZ3JvdXAgZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTMgcm91bmRlZC1sZyBweC0zIHB5LTIuNSB0ZXh0LXNtIGZvbnQtbWVkaXVtIHRyYW5zaXRpb24tYWxsIGR1cmF0aW9uLTE1MCAkewogICAgICAgICAgICAgICAgaXNBY3RpdmUKICAgICAgICAgICAgICAgICAgPyAnYmctYnJhbmQtNTAwLzIwIHRleHQtYnJhbmQtMzAwJwogICAgICAgICAgICAgICAgICA6ICd0ZXh0LXN1cmZhY2UtNDAwIGhvdmVyOmJnLXdoaXRlLzUgaG92ZXI6dGV4dC13aGl0ZScKICAgICAgICAgICAgICB9YH0KICAgICAgICAgICAgICB0aXRsZT17Y29sbGFwc2VkID8gaXRlbS5sYWJlbCA6IHVuZGVmaW5lZH0KICAgICAgICAgICAgPgogICAgICAgICAgICAgIDxpdGVtLmljb24KICAgICAgICAgICAgICAgIGNsYXNzTmFtZT17YGgtWzE4cHhdIHctWzE4cHhdIHNocmluay0wIHRyYW5zaXRpb24tY29sb3JzICR7CiAgICAgICAgICAgICAgICAgIGlzQWN0aXZlID8gJ3RleHQtYnJhbmQtNDAwJyA6ICd0ZXh0LXN1cmZhY2UtNTAwIGdyb3VwLWhvdmVyOnRleHQtc3VyZmFjZS0zMDAnCiAgICAgICAgICAgICAgICB9YH0KICAgICAgICAgICAgICAvPgogICAgICAgICAgICAgIHshY29sbGFwc2VkICYmIDxzcGFuPntpdGVtLmxhYmVsfTwvc3Bhbj59CiAgICAgICAgICAgIDwvTGluaz4KICAgICAgICAgICkKICAgICAgICB9KX0KICAgICAgPC9uYXY+CgogICAgICB7LyogQm90dG9tIHNlY3Rpb24gKi99CiAgICAgIDxkaXYgY2xhc3NOYW1lPSJhYnNvbHV0ZSBib3R0b20tMCBsZWZ0LTAgcmlnaHQtMCBib3JkZXItdCBib3JkZXItd2hpdGUvMTAgcC0zIj4KICAgICAgICA8TGluawogICAgICAgICAgaHJlZj0iIyIKICAgICAgICAgIGNsYXNzTmFtZT0iZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTMgcm91bmRlZC1sZyBweC0zIHB5LTIuNSB0ZXh0LXNtIHRleHQtc3VyZmFjZS00MDAgdHJhbnNpdGlvbi1jb2xvcnMgaG92ZXI6Ymctd2hpdGUvNSBob3Zlcjp0ZXh0LXdoaXRlIgogICAgICAgICAgdGl0bGU9e2NvbGxhcHNlZCA/ICdTZXR0aW5ncycgOiB1bmRlZmluZWR9CiAgICAgICAgPgogICAgICAgICAgPFNldHRpbmdzIGNsYXNzTmFtZT0iaC1bMThweF0gdy1bMThweF0gc2hyaW5rLTAiIC8+CiAgICAgICAgICB7IWNvbGxhcHNlZCAmJiA8c3Bhbj5TZXR0aW5nczwvc3Bhbj59CiAgICAgICAgPC9MaW5rPgoKICAgICAgICA8YnV0dG9uCiAgICAgICAgICBvbkNsaWNrPXsoKSA9PiBzZXRDb2xsYXBzZWQoIWNvbGxhcHNlZCl9CiAgICAgICAgICBjbGFzc05hbWU9Im10LTIgZmxleCB3LWZ1bGwgaXRlbXMtY2VudGVyIGdhcC0zIHJvdW5kZWQtbGcgcHgtMyBweS0yIHRleHQteHMgdGV4dC1zdXJmYWNlLTUwMCB0cmFuc2l0aW9uLWNvbG9ycyBob3ZlcjpiZy13aGl0ZS81IGhvdmVyOnRleHQtc3VyZmFjZS0zMDAiCiAgICAgICAgPgogICAgICAgICAge2NvbGxhcHNlZCA/ICgKICAgICAgICAgICAgPENoZXZyb25SaWdodCBjbGFzc05hbWU9ImgtNCB3LTQgc2hyaW5rLTAiIC8+CiAgICAgICAgICApIDogKAogICAgICAgICAgICA8PgogICAgICAgICAgICAgIDxDaGV2cm9uTGVmdCBjbGFzc05hbWU9ImgtNCB3LTQgc2hyaW5rLTAiIC8+CiAgICAgICAgICAgICAgPHNwYW4+Q29sbGFwc2U8L3NwYW4+CiAgICAgICAgICAgIDwvPgogICAgICAgICAgKX0KICAgICAgICA8L2J1dHRvbj4KICAgICAgPC9kaXY+CiAgICA8L2FzaWRlPgogICkKfQo="}
+'use client'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { LayoutDashboard, BookOpen, Users, Layers, ClipboardCheck, Award, Video, FileText, UserCog, Clock, CalendarDays, ChevronLeft, ChevronRight, Plane, Megaphone, MessageCircle, Settings, LogOut, Shield, Route, BarChart3 } from 'lucide-react'
+import { useState } from 'react'
+import { useAuth } from '@/contexts/AuthContext'
+
+export default function Sidebar() {
+  const pathname = usePathname()
+  const [collapsed, setCollapsed] = useState(false)
+  const { profile, signOut, isAdmin, isInstructor } = useAuth()
+
+  const sections = [
+    { label: 'Overview', items: [
+      { href: '/', label: 'Dashboard', icon: LayoutDashboard },
+      { href: '/schedule', label: 'Schedule', icon: CalendarDays },
+      { href: '/announcements', label: 'Announcements', icon: Megaphone },
+    ]},
+    { label: 'Learning', items: [
+      { href: '/courses', label: 'Courses', icon: BookOpen },
+      { href: '/learning-paths', label: 'Learning Paths', icon: Route },
+      ...(isAdmin || isInstructor ? [{ href: '/batches', label: 'Batches', icon: Layers }] : []),
+      { href: '/live-classes', label: 'Live Classes', icon: Video },
+      { href: '/quizzes', label: 'Quizzes', icon: ClipboardCheck },
+      ...(isAdmin || isInstructor ? [{ href: '/assignments', label: 'Assignments', icon: FileText }] : []),
+      { href: '/certificates', label: 'Certificates', icon: Award },
+      { href: '/discussions', label: 'Discussions', icon: MessageCircle },
+    ]},
+    { label: 'Aviation', items: [
+      { href: '/certifications', label: 'Certifications', icon: Shield },
+      { href: '/logbook', label: 'Flight Logbook', icon: Plane },
+      ...(isAdmin || isInstructor ? [{ href: '/reports', label: 'Reports', icon: BarChart3 }] : []),
+    ]},
+    ...(isAdmin ? [{ label: 'People', items: [
+      { href: '/students', label: 'Students', icon: Users },
+      { href: '/employees', label: 'Staff', icon: UserCog },
+      { href: '/attendance', label: 'Attendance', icon: Clock },
+      { href: '/users', label: 'User Management', icon: Shield },
+    ]}] : isInstructor ? [{ label: 'People', items: [
+      { href: '/students', label: 'Students', icon: Users },
+    ]}] : []),
+  ]
+
+  const roleBadge = profile?.role === 'admin' ? 'bg-cta-500' : profile?.role === 'instructor' ? 'bg-info-500' : 'bg-success-500'
+
+  return (
+    <aside className={`fixed left-0 top-0 z-40 flex h-screen flex-col transition-all duration-300 ${collapsed ? 'w-[68px]' : 'w-[250px]'}`} style={{ backgroundColor: '#0B3D91' }}>
+      <div className="flex h-14 items-center gap-3 border-b border-white/10 px-4">
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/15"><Plane className="h-4 w-4 text-white" /></div>
+        {!collapsed && <div><h1 className="text-[14px] font-extrabold uppercase tracking-wide text-white">AeroBridge</h1></div>}
+      </div>
+
+      <div className="flex-1 overflow-y-auto py-3">
+        {sections.map(s => (
+          <div key={s.label} className="mb-1">
+            {!collapsed && <p className="mb-1 px-5 pt-3 text-[10px] font-semibold uppercase tracking-[0.15em] text-white/30">{s.label}</p>}
+            {s.items.map(item => {
+              const isActive = pathname === item.href
+              return (
+                <Link key={item.href} href={item.href} className={`mx-2 flex items-center gap-2.5 rounded-lg px-3 py-2 text-[13px] transition-all ${isActive ? 'bg-white/15 font-bold text-white' : 'font-medium text-white/60 hover:bg-white/8 hover:text-white'}`} title={collapsed ? item.label : undefined}>
+                  <item.icon className={`h-[16px] w-[16px] shrink-0 ${isActive ? 'text-white' : 'text-white/40'}`} />
+                  {!collapsed && <span>{item.label}</span>}
+                </Link>
+              )
+            })}
+          </div>
+        ))}
+      </div>
+
+      {/* User section */}
+      <div className="border-t border-white/10 p-3">
+        {!collapsed && profile && (
+          <div className="mb-2 rounded-lg bg-white/8 p-3">
+            <div className="flex items-center gap-2.5">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/15 text-[11px] font-bold text-white">
+                {profile.full_name?.split(' ').map(n => n[0]).join('').slice(0, 2) || '?'}
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-xs font-semibold text-white">{profile.full_name || 'User'}</p>
+                <div className="flex items-center gap-1.5">
+                  <span className={`h-1.5 w-1.5 rounded-full ${roleBadge}`}></span>
+                  <span className="text-[10px] capitalize text-white/50">{profile.role}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        <Link href="/settings" className={`mx-0 mb-1 flex items-center gap-2.5 rounded-lg px-3 py-2 text-xs transition-all ${pathname === '/settings' ? 'bg-white/15 font-bold text-white' : 'text-white/50 hover:bg-white/8 hover:text-white/70'}`}>
+          <Settings className="h-4 w-4" />{!collapsed && <span>Settings</span>}
+        </Link>
+        <button onClick={signOut} className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-xs text-white/40 hover:bg-white/8 hover:text-white/70">
+          <LogOut className="h-4 w-4" />{!collapsed && <span>Sign Out</span>}
+        </button>
+        <button onClick={() => setCollapsed(!collapsed)} className="mt-1 flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-xs text-white/30 hover:bg-white/8 hover:text-white/50">
+          {collapsed ? <ChevronRight className="h-4 w-4" /> : <><ChevronLeft className="h-4 w-4" /><span>Collapse</span></>}
+        </button>
+      </div>
+    </aside>
+  )
+}

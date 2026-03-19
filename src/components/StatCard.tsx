@@ -1,1 +1,74 @@
-{"data":"J3VzZSBjbGllbnQnCgppbXBvcnQgeyBMdWNpZGVJY29uIH0gZnJvbSAnbHVjaWRlLXJlYWN0JwoKaW50ZXJmYWNlIFN0YXRDYXJkUHJvcHMgewogIHRpdGxlOiBzdHJpbmcKICB2YWx1ZTogc3RyaW5nIHwgbnVtYmVyCiAgY2hhbmdlPzogc3RyaW5nCiAgY2hhbmdlVHlwZT86ICdwb3NpdGl2ZScgfCAnbmVnYXRpdmUnIHwgJ25ldXRyYWwnCiAgaWNvbjogTHVjaWRlSWNvbgogIGNvbG9yOiAnYmx1ZScgfCAnZW1lcmFsZCcgfCAnYW1iZXInIHwgJ3Jvc2UnIHwgJ3Zpb2xldCcKICBkZWxheT86IG51bWJlcgp9Cgpjb25zdCBjb2xvck1hcCA9IHsKICBibHVlOiB7CiAgICBiZzogJ2JnLWJyYW5kLTUwJywKICAgIGljb246ICd0ZXh0LWJyYW5kLTUwMCcsCiAgICByaW5nOiAncmluZy1icmFuZC0xMDAnLAogIH0sCiAgZW1lcmFsZDogewogICAgYmc6ICdiZy1lbWVyYWxkLTUwJywKICAgIGljb246ICd0ZXh0LWVtZXJhbGQtNTAwJywKICAgIHJpbmc6ICdyaW5nLWVtZXJhbGQtMTAwJywKICB9LAogIGFtYmVyOiB7CiAgICBiZzogJ2JnLWFtYmVyLTUwJywKICAgIGljb246ICd0ZXh0LWFtYmVyLTUwMCcsCiAgICByaW5nOiAncmluZy1hbWJlci0xMDAnLAogIH0sCiAgcm9zZTogewogICAgYmc6ICdiZy1yb3NlLTUwJywKICAgIGljb246ICd0ZXh0LXJvc2UtNTAwJywKICAgIHJpbmc6ICdyaW5nLXJvc2UtMTAwJywKICB9LAogIHZpb2xldDogewogICAgYmc6ICdiZy12aW9sZXQtNTAnLAogICAgaWNvbjogJ3RleHQtdmlvbGV0LTUwMCcsCiAgICByaW5nOiAncmluZy12aW9sZXQtMTAwJywKICB9LAp9CgpleHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBTdGF0Q2FyZCh7IHRpdGxlLCB2YWx1ZSwgY2hhbmdlLCBjaGFuZ2VUeXBlID0gJ25ldXRyYWwnLCBpY29uOiBJY29uLCBjb2xvciwgZGVsYXkgPSAwIH06IFN0YXRDYXJkUHJvcHMpIHsKICBjb25zdCBjb2xvcnMgPSBjb2xvck1hcFtjb2xvcl0KCiAgcmV0dXJuICgKICAgIDxkaXYKICAgICAgY2xhc3NOYW1lPSJjYXJkIGFuaW1hdGUtc2xpZGUtdXAgcC01IgogICAgICBzdHlsZT17eyBhbmltYXRpb25EZWxheTogYCR7ZGVsYXl9bXNgLCBhbmltYXRpb25GaWxsTW9kZTogJ2JvdGgnIH19CiAgICA+CiAgICAgIDxkaXYgY2xhc3NOYW1lPSJmbGV4IGl0ZW1zLXN0YXJ0IGp1c3RpZnktYmV0d2VlbiI+CiAgICAgICAgPGRpdj4KICAgICAgICAgIDxwIGNsYXNzTmFtZT0idGV4dC14cyBmb250LW1lZGl1bSB1cHBlcmNhc2UgdHJhY2tpbmctd2lkZXIgdGV4dC1zdXJmYWNlLTUwMCI+e3RpdGxlfTwvcD4KICAgICAgICAgIDxwIGNsYXNzTmFtZT0ibXQtMiBmb250LWRpc3BsYXkgdGV4dC0zeGwgdGV4dC1zdXJmYWNlLTkwMCI+e3ZhbHVlfTwvcD4KICAgICAgICAgIHtjaGFuZ2UgJiYgKAogICAgICAgICAgICA8cCBjbGFzc05hbWU9e2BtdC0xLjUgdGV4dC14cyBmb250LW1lZGl1bSAkewogICAgICAgICAgICAgIGNoYW5nZVR5cGUgPT09ICdwb3NpdGl2ZScgPyAndGV4dC1lbWVyYWxkLTYwMCcgOgogICAgICAgICAgICAgIGNoYW5nZVR5cGUgPT09ICduZWdhdGl2ZScgPyAndGV4dC1yb3NlLTYwMCcgOgogICAgICAgICAgICAgICd0ZXh0LXN1cmZhY2UtNTAwJwogICAgICAgICAgICB9YH0+CiAgICAgICAgICAgICAge2NoYW5nZX0KICAgICAgICAgICAgPC9wPgogICAgICAgICAgKX0KICAgICAgICA8L2Rpdj4KICAgICAgICA8ZGl2IGNsYXNzTmFtZT17YGZsZXggaC0xMCB3LTEwIGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciByb3VuZGVkLXhsICR7Y29sb3JzLmJnfSByaW5nLTQgJHtjb2xvcnMucmluZ31gfT4KICAgICAgICAgIDxJY29uIGNsYXNzTmFtZT17YGgtNSB3LTUgJHtjb2xvcnMuaWNvbn1gfSAvPgogICAgICAgIDwvZGl2PgogICAgICA8L2Rpdj4KICAgIDwvZGl2PgogICkKfQo="}
+'use client'
+
+import { LucideIcon } from 'lucide-react'
+
+interface StatCardProps {
+  title: string
+  value: string | number
+  change?: string
+  changeType?: 'positive' | 'negative' | 'neutral'
+  icon: LucideIcon
+  color: 'blue' | 'emerald' | 'amber' | 'rose' | 'violet'
+  delay?: number
+}
+
+const colorMap = {
+  blue: {
+    bg: 'rgba(11, 61, 145, 0.08)',
+    icon: '#0B3D91',
+    ring: 'rgba(11, 61, 145, 0.04)',
+  },
+  emerald: {
+    bg: 'rgba(40, 167, 69, 0.1)',
+    icon: '#28a745',
+    ring: 'rgba(40, 167, 69, 0.05)',
+  },
+  amber: {
+    bg: 'rgba(255, 193, 7, 0.12)',
+    icon: '#e0a800',
+    ring: 'rgba(255, 193, 7, 0.06)',
+  },
+  rose: {
+    bg: 'rgba(214, 69, 65, 0.08)',
+    icon: '#D64541',
+    ring: 'rgba(214, 69, 65, 0.04)',
+  },
+  violet: {
+    bg: 'rgba(135, 206, 235, 0.15)',
+    icon: '#17a2b8',
+    ring: 'rgba(135, 206, 235, 0.08)',
+  },
+}
+
+export default function StatCard({ title, value, change, changeType = 'neutral', icon: Icon, color, delay = 0 }: StatCardProps) {
+  const colors = colorMap[color]
+
+  return (
+    <div
+      className="card animate-slide-up p-5"
+      style={{ animationDelay: `${delay}ms`, animationFillMode: 'both' }}
+    >
+      <div className="flex items-start justify-between">
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-wider text-surface-500">{title}</p>
+          <p className="mt-2 text-3xl font-extrabold text-surface-800">{value}</p>
+          {change && (
+            <p className={`mt-1.5 text-xs font-medium ${
+              changeType === 'positive' ? 'text-success-500' :
+              changeType === 'negative' ? 'text-danger-500' :
+              'text-surface-500'
+            }`}>
+              {change}
+            </p>
+          )}
+        </div>
+        <div
+          className="flex h-11 w-11 items-center justify-center rounded-xl"
+          style={{ backgroundColor: colors.bg, boxShadow: `0 0 0 4px ${colors.ring}` }}
+        >
+          <Icon className="h-5 w-5" style={{ color: colors.icon }} />
+        </div>
+      </div>
+    </div>
+  )
+}

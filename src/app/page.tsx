@@ -1,1 +1,287 @@
-{"data":"J3VzZSBjbGllbnQnCgppbXBvcnQgSGVhZGVyIGZyb20gJ0AvY29tcG9uZW50cy9IZWFkZXInCmltcG9ydCBTdGF0Q2FyZCBmcm9tICdAL2NvbXBvbmVudHMvU3RhdENhcmQnCmltcG9ydCB7IHN0YXRzLCByZXZlbnVlRGF0YSwgY291cnNlcywgYWN0aXZpdHlGZWVkIH0gZnJvbSAnQC9saWIvZGF0YScKaW1wb3J0IHsKICBVc2VycywKICBCb29rT3BlbiwKICBMYXllcnMsCiAgQXdhcmQsCiAgVHJlbmRpbmdVcCwKICBUYXJnZXQsCiAgVXNlclBsdXMsCiAgR3JhZHVhdGlvbkNhcCwKICBNZXNzYWdlU3F1YXJlLAogIENsaXBib2FyZENoZWNrLAogIEFycm93VXBSaWdodCwKfSBmcm9tICdsdWNpZGUtcmVhY3QnCgpjb25zdCBhY3Rpdml0eUljb25zOiBSZWNvcmQ8c3RyaW5nLCBhbnk+ID0gewogIGVucm9sbG1lbnQ6IFVzZXJQbHVzLAogIGNvbXBsZXRpb246IEdyYWR1YXRpb25DYXAsCiAgcXVpejogQ2xpcGJvYXJkQ2hlY2ssCiAgY2VydGlmaWNhdGU6IEF3YXJkLAogIGJhdGNoOiBMYXllcnMsCn0KCmNvbnN0IGFjdGl2aXR5Q29sb3JzOiBSZWNvcmQ8c3RyaW5nLCBzdHJpbmc+ID0gewogIGVucm9sbG1lbnQ6ICdiZy1icmFuZC01MCB0ZXh0LWJyYW5kLTUwMCcsCiAgY29tcGxldGlvbjogJ2JnLWVtZXJhbGQtNTAgdGV4dC1lbWVyYWxkLTUwMCcsCiAgcXVpejogJ2JnLXZpb2xldC01MCB0ZXh0LXZpb2xldC01MDAnLAogIGNlcnRpZmljYXRlOiAnYmctYW1iZXItNTAgdGV4dC1hbWJlci01MDAnLAogIGJhdGNoOiAnYmctcm9zZS01MCB0ZXh0LXJvc2UtNTAwJywKfQoKZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gRGFzaGJvYXJkUGFnZSgpIHsKICBjb25zdCBtYXhFbnJvbGxtZW50ID0gTWF0aC5tYXgoLi4ucmV2ZW51ZURhdGEubWFwKChkKSA9PiBkLmVucm9sbG1lbnRzKSkKCiAgcmV0dXJuICgKICAgIDxkaXYgY2xhc3NOYW1lPSJtaW4taC1zY3JlZW4gYmctc3VyZmFjZS01MCI+CiAgICAgIDxIZWFkZXIgdGl0bGU9IkRhc2hib2FyZCIgc3VidGl0bGU9IldlbGNvbWUgYmFjayDigJQgaGVyZSdzIHdoYXQncyBoYXBwZW5pbmcgdG9kYXkiIC8+CgogICAgICA8ZGl2IGNsYXNzTmFtZT0icC04Ij4KICAgICAgICB7LyogU3RhdHMgR3JpZCAqL30KICAgICAgICA8ZGl2IGNsYXNzTmFtZT0iZ3JpZCBncmlkLWNvbHMtMSBnYXAtNSBzbTpncmlkLWNvbHMtMiB4bDpncmlkLWNvbHMtNCI+CiAgICAgICAgICA8U3RhdENhcmQKICAgICAgICAgICAgdGl0bGU9IlRvdGFsIFN0dWRlbnRzIgogICAgICAgICAgICB2YWx1ZT17c3RhdHMudG90YWxTdHVkZW50cy50b0xvY2FsZVN0cmluZygpfQogICAgICAgICAgICBjaGFuZ2U9IisxNTYgdGhpcyBtb250aCIKICAgICAgICAgICAgY2hhbmdlVHlwZT0icG9zaXRpdmUiCiAgICAgICAgICAgIGljb249e1VzZXJzfQogICAgICAgICAgICBjb2xvcj0iYmx1ZSIKICAgICAgICAgICAgZGVsYXk9ezUwfQogICAgICAgICAgLz4KICAgICAgICAgIDxTdGF0Q2FyZAogICAgICAgICAgICB0aXRsZT0iQWN0aXZlIENvdXJzZXMiCiAgICAgICAgICAgIHZhbHVlPXtzdGF0cy50b3RhbENvdXJzZXN9CiAgICAgICAgICAgIGNoYW5nZT0iNSBwdWJsaXNoZWQgdGhpcyBxdWFydGVyIgogICAgICAgICAgICBjaGFuZ2VUeXBlPSJwb3NpdGl2ZSIKICAgICAgICAgICAgaWNvbj17Qm9va09wZW59CiAgICAgICAgICAgIGNvbG9yPSJlbWVyYWxkIgogICAgICAgICAgICBkZWxheT17MTAwfQogICAgICAgICAgLz4KICAgICAgICAgIDxTdGF0Q2FyZAogICAgICAgICAgICB0aXRsZT0iQWN0aXZlIEJhdGNoZXMiCiAgICAgICAgICAgIHZhbHVlPXtzdGF0cy5hY3RpdmVCYXRjaGVzfQogICAgICAgICAgICBjaGFuZ2U9IjMgc3RhcnRpbmcgc29vbiIKICAgICAgICAgICAgY2hhbmdlVHlwZT0ibmV1dHJhbCIKICAgICAgICAgICAgaWNvbj17TGF5ZXJzfQogICAgICAgICAgICBjb2xvcj0iYW1iZXIiCiAgICAgICAgICAgIGRlbGF5PXsxNTB9CiAgICAgICAgICAvPgogICAgICAgICAgPFN0YXRDYXJkCiAgICAgICAgICAgIHRpdGxlPSJDZXJ0aWZpY2F0ZXMgSXNzdWVkIgogICAgICAgICAgICB2YWx1ZT17c3RhdHMuY2VydGlmaWNhdGVzSXNzdWVkLnRvTG9jYWxlU3RyaW5nKCl9CiAgICAgICAgICAgIGNoYW5nZT0iKzg5IHRoaXMgbW9udGgiCiAgICAgICAgICAgIGNoYW5nZVR5cGU9InBvc2l0aXZlIgogICAgICAgICAgICBpY29uPXtBd2FyZH0KICAgICAgICAgICAgY29sb3I9InZpb2xldCIKICAgICAgICAgICAgZGVsYXk9ezIwMH0KICAgICAgICAgIC8+CiAgICAgICAgPC9kaXY+CgogICAgICAgIHsvKiBDaGFydHMgUm93ICovfQogICAgICAgIDxkaXYgY2xhc3NOYW1lPSJtdC04IGdyaWQgZ3JpZC1jb2xzLTEgZ2FwLTYgeGw6Z3JpZC1jb2xzLTMiPgogICAgICAgICAgey8qIEVucm9sbG1lbnQgQ2hhcnQgKi99CiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0iY2FyZCBjb2wtc3Bhbi0yIGFuaW1hdGUtc2xpZGUtdXAgcC02IiBzdHlsZT17eyBhbmltYXRpb25EZWxheTogJzI1MG1zJywgYW5pbWF0aW9uRmlsbE1vZGU6ICdib3RoJyB9fT4KICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9Im1iLTYgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1iZXR3ZWVuIj4KICAgICAgICAgICAgICA8ZGl2PgogICAgICAgICAgICAgICAgPGgzIGNsYXNzTmFtZT0idGV4dC1zbSBmb250LXNlbWlib2xkIHRleHQtc3VyZmFjZS05MDAiPkVucm9sbG1lbnQgJiBDb21wbGV0aW9uczwvaDM+CiAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9InRleHQteHMgdGV4dC1zdXJmYWNlLTUwMCI+TGFzdCA2IG1vbnRocyB0cmVuZDwvcD4KICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0iZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTQgdGV4dC14cyI+CiAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9ImZsZXggaXRlbXMtY2VudGVyIGdhcC0xLjUiPgogICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9ImgtMi41IHctMi41IHJvdW5kZWQtZnVsbCBiZy1icmFuZC01MDAiPjwvc3Bhbj4KICAgICAgICAgICAgICAgICAgRW5yb2xsbWVudHMKICAgICAgICAgICAgICAgIDwvc3Bhbj4KICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT0iZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTEuNSI+CiAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT0iaC0yLjUgdy0yLjUgcm91bmRlZC1mdWxsIGJnLWVtZXJhbGQtNDAwIj48L3NwYW4+CiAgICAgICAgICAgICAgICAgIENvbXBsZXRpb25zCiAgICAgICAgICAgICAgICA8L3NwYW4+CiAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgIDwvZGl2PgoKICAgICAgICAgICAgey8qIFNpbXBsZSBCYXIgQ2hhcnQgKi99CiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSJmbGV4IGl0ZW1zLWVuZCBnYXAtMyIgc3R5bGU9e3sgaGVpZ2h0OiAnMjAwcHgnIH19PgogICAgICAgICAgICAgIHtyZXZlbnVlRGF0YS5tYXAoKGQsIGkpID0+ICgKICAgICAgICAgICAgICAgIDxkaXYga2V5PXtkLm1vbnRofSBjbGFzc05hbWU9ImZsZXggZmxleC0xIGZsZXgtY29sIGl0ZW1zLWNlbnRlciBnYXAtMSI+CiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSJmbGV4IHctZnVsbCBpdGVtcy1lbmQganVzdGlmeS1jZW50ZXIgZ2FwLTEiIHN0eWxlPXt7IGhlaWdodDogJzE4MHB4JyB9fT4KICAgICAgICAgICAgICAgICAgICA8ZGl2CiAgICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU9InctNSByb3VuZGVkLXQtbWQgYmctYnJhbmQtNTAwIHRyYW5zaXRpb24tYWxsIGR1cmF0aW9uLTUwMCIKICAgICAgICAgICAgICAgICAgICAgIHN0eWxlPXt7CiAgICAgICAgICAgICAgICAgICAgICAgIGhlaWdodDogYCR7KGQuZW5yb2xsbWVudHMgLyBtYXhFbnJvbGxtZW50KSAqIDEwMH0lYCwKICAgICAgICAgICAgICAgICAgICAgICAgYW5pbWF0aW9uRGVsYXk6IGAkezMwMCArIGkgKiA4MH1tc2AsCiAgICAgICAgICAgICAgICAgICAgICB9fQogICAgICAgICAgICAgICAgICAgID48L2Rpdj4KICAgICAgICAgICAgICAgICAgICA8ZGl2CiAgICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU9InctNSByb3VuZGVkLXQtbWQgYmctZW1lcmFsZC00MDAgdHJhbnNpdGlvbi1hbGwgZHVyYXRpb24tNTAwIgogICAgICAgICAgICAgICAgICAgICAgc3R5bGU9e3sKICAgICAgICAgICAgICAgICAgICAgICAgaGVpZ2h0OiBgJHsoZC5jb21wbGV0aW9ucyAvIG1heEVucm9sbG1lbnQpICogMTAwfSVgLAogICAgICAgICAgICAgICAgICAgICAgICBhbmltYXRpb25EZWxheTogYCR7MzUwICsgaSAqIDgwfW1zYCwKICAgICAgICAgICAgICAgICAgICAgIH19CiAgICAgICAgICAgICAgICAgICAgPjwvZGl2PgogICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPSJ0ZXh0LVsxMXB4XSB0ZXh0LXN1cmZhY2UtNTAwIj57ZC5tb250aH08L3NwYW4+CiAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICApKX0KICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICA8L2Rpdj4KCiAgICAgICAgICB7LyogQ29tcGxldGlvbiBSYXRlIFJpbmcgKi99CiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0iY2FyZCBhbmltYXRlLXNsaWRlLXVwIHAtNiIgc3R5bGU9e3sgYW5pbWF0aW9uRGVsYXk6ICczMDBtcycsIGFuaW1hdGlvbkZpbGxNb2RlOiAnYm90aCcgfX0+CiAgICAgICAgICAgIDxoMyBjbGFzc05hbWU9InRleHQtc20gZm9udC1zZW1pYm9sZCB0ZXh0LXN1cmZhY2UtOTAwIj5Db21wbGV0aW9uIFJhdGU8L2gzPgogICAgICAgICAgICA8cCBjbGFzc05hbWU9InRleHQteHMgdGV4dC1zdXJmYWNlLTUwMCI+T3ZlcmFsbCBjb3Vyc2UgY29tcGxldGlvbjwvcD4KCiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSJtdC02IGZsZXggZmxleC1jb2wgaXRlbXMtY2VudGVyIj4KICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0icmVsYXRpdmUgaC0zNiB3LTM2Ij4KICAgICAgICAgICAgICAgIDxzdmcgY2xhc3NOYW1lPSJoLWZ1bGwgdy1mdWxsIC1yb3RhdGUtOTAiIHZpZXdCb3g9IjAgMCAzNiAzNiI+CiAgICAgICAgICAgICAgICAgIDxwYXRoCiAgICAgICAgICAgICAgICAgICAgZD0iTTE4IDIuMDg0NWExNS45MTU1IDE1LjkxNTUgMCAwIDEgMCAzMS44MzEgMTUuOTE1NSAxNS45MTU1IDAgMCAxIDAtMzEuODMxIgogICAgICAgICAgICAgICAgICAgIGZpbGw9Im5vbmUiCiAgICAgICAgICAgICAgICAgICAgc3Ryb2tlPSIjZTJlOGYwIgogICAgICAgICAgICAgICAgICAgIHN0cm9rZVdpZHRoPSIzIgogICAgICAgICAgICAgICAgICAvPgogICAgICAgICAgICAgICAgICA8cGF0aAogICAgICAgICAgICAgICAgICAgIGQ9Ik0xOCAyLjA4NDVhMTUuOTE1NSAxNS45MTU1IDAgMCAxIDAgMzEuODMxIDE1LjkxNTUgMTUuOTE1NSAwIDAgMSAwLTMxLjgzMSIKICAgICAgICAgICAgICAgICAgICBmaWxsPSJub25lIgogICAgICAgICAgICAgICAgICAgIHN0cm9rZT0iIzBjOGNlOCIKICAgICAgICAgICAgICAgICAgICBzdHJva2VXaWR0aD0iMyIKICAgICAgICAgICAgICAgICAgICBzdHJva2VEYXNoYXJyYXk9e2Ake3N0YXRzLmNvbXBsZXRpb25SYXRlfSwgMTAwYH0KICAgICAgICAgICAgICAgICAgICBzdHJva2VMaW5lY2FwPSJyb3VuZCIKICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU9InRyYW5zaXRpb24tYWxsIGR1cmF0aW9uLTEwMDAiCiAgICAgICAgICAgICAgICAgIC8+CiAgICAgICAgICAgICAgICA8L3N2Zz4KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSJhYnNvbHV0ZSBpbnNldC0wIGZsZXggZmxleC1jb2wgaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIj4KICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPSJmb250LWRpc3BsYXkgdGV4dC0zeGwgdGV4dC1zdXJmYWNlLTkwMCI+e3N0YXRzLmNvbXBsZXRpb25SYXRlfSU8L3NwYW4+CiAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICA8L2Rpdj4KCiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9Im10LTQgZ3JpZCB3LWZ1bGwgZ3JpZC1jb2xzLTIgZ2FwLTMiPgogICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9InJvdW5kZWQtbGcgYmctc3VyZmFjZS01MCBwLTMgdGV4dC1jZW50ZXIiPgogICAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9ImZvbnQtZGlzcGxheSB0ZXh0LWxnIHRleHQtc3VyZmFjZS05MDAiPjEsODkzPC9wPgogICAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9InRleHQtWzEwcHhdIHVwcGVyY2FzZSB0cmFja2luZy13aWRlciB0ZXh0LXN1cmZhY2UtNTAwIj5Db21wbGV0ZWQ8L3A+CiAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSJyb3VuZGVkLWxnIGJnLXN1cmZhY2UtNTAgcC0zIHRleHQtY2VudGVyIj4KICAgICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPSJmb250LWRpc3BsYXkgdGV4dC1sZyB0ZXh0LXN1cmZhY2UtOTAwIj41MTk8L3A+CiAgICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT0idGV4dC1bMTBweF0gdXBwZXJjYXNlIHRyYWNraW5nLXdpZGVyIHRleHQtc3VyZmFjZS01MDAiPkluIFByb2dyZXNzPC9wPgogICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgPC9kaXY+CiAgICAgICAgPC9kaXY+CgogICAgICAgIHsvKiBCb3R0b20gUm93ICovfQogICAgICAgIDxkaXYgY2xhc3NOYW1lPSJtdC04IGdyaWQgZ3JpZC1jb2xzLTEgZ2FwLTYgeGw6Z3JpZC1jb2xzLTMiPgogICAgICAgICAgey8qIFRvcCBDb3Vyc2VzICovfQogICAgICAgICAgPGRpdiBjbGFzc05hbWU9ImNhcmQgY29sLXNwYW4tMiBhbmltYXRlLXNsaWRlLXVwIHAtNiIgc3R5bGU9e3sgYW5pbWF0aW9uRGVsYXk6ICczNTBtcycsIGFuaW1hdGlvbkZpbGxNb2RlOiAnYm90aCcgfX0+CiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSJtYi00IGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktYmV0d2VlbiI+CiAgICAgICAgICAgICAgPGgzIGNsYXNzTmFtZT0idGV4dC1zbSBmb250LXNlbWlib2xkIHRleHQtc3VyZmFjZS05MDAiPlRvcCBDb3Vyc2VzIGJ5IEVucm9sbG1lbnQ8L2gzPgogICAgICAgICAgICAgIDxhIGhyZWY9Ii9jb3Vyc2VzIiBjbGFzc05hbWU9ImZsZXggaXRlbXMtY2VudGVyIGdhcC0xIHRleHQteHMgZm9udC1tZWRpdW0gdGV4dC1icmFuZC02MDAgaG92ZXI6dGV4dC1icmFuZC03MDAiPgogICAgICAgICAgICAgICAgVmlldyBhbGwgPEFycm93VXBSaWdodCBjbGFzc05hbWU9ImgtMyB3LTMiIC8+CiAgICAgICAgICAgICAgPC9hPgogICAgICAgICAgICA8L2Rpdj4KCiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSJzcGFjZS15LTMiPgogICAgICAgICAgICAgIHtjb3Vyc2VzCiAgICAgICAgICAgICAgICAuZmlsdGVyKChjKSA9PiBjLnB1Ymxpc2hlZCkKICAgICAgICAgICAgICAgIC5zb3J0KChhLCBiKSA9PiBiLmVucm9sbGVkX2NvdW50IC0gYS5lbnJvbGxlZF9jb3VudCkKICAgICAgICAgICAgICAgIC5zbGljZSgwLCA0KQogICAgICAgICAgICAgICAgLm1hcCgoY291cnNlLCBpKSA9PiB7CiAgICAgICAgICAgICAgICAgIGNvbnN0IG1heEVucm9sbGVkID0gY291cnNlc1swXS5lbnJvbGxlZF9jb3VudCB8fCAxCiAgICAgICAgICAgICAgICAgIHJldHVybiAoCiAgICAgICAgICAgICAgICAgICAgPGRpdiBrZXk9e2NvdXJzZS5pZH0gY2xhc3NOYW1lPSJncm91cCBmbGV4IGl0ZW1zLWNlbnRlciBnYXAtNCByb3VuZGVkLWxnIHAtMyB0cmFuc2l0aW9uLWNvbG9ycyBob3ZlcjpiZy1zdXJmYWNlLTUwIj4KICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSJmbGV4IGgtOSB3LTkgc2hyaW5rLTAgaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIHJvdW5kZWQtbGcgYmctc3VyZmFjZS0xMDAgZm9udC1tb25vIHRleHQtc20gZm9udC1zZW1pYm9sZCB0ZXh0LXN1cmZhY2UtNTAwIj4KICAgICAgICAgICAgICAgICAgICAgICAge1N0cmluZyhpICsgMSkucGFkU3RhcnQoMiwgJzAnKX0KICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9Im1pbi13LTAgZmxleC0xIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPSJ0cnVuY2F0ZSB0ZXh0LXNtIGZvbnQtbWVkaXVtIHRleHQtc3VyZmFjZS05MDAiPntjb3Vyc2UudGl0bGV9PC9wPgogICAgICAgICAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9InRleHQteHMgdGV4dC1zdXJmYWNlLTUwMCI+e2NvdXJzZS5pbnN0cnVjdG9yfTwvcD4KICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9InctMzIiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0iaC0xLjUgb3ZlcmZsb3ctaGlkZGVuIHJvdW5kZWQtZnVsbCBiZy1zdXJmYWNlLTEwMCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdgogICAgICAgICAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPSJoLWZ1bGwgcm91bmRlZC1mdWxsIGJnLWJyYW5kLTUwMCB0cmFuc2l0aW9uLWFsbCBkdXJhdGlvbi03MDAiCiAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdHlsZT17eyB3aWR0aDogYCR7KGNvdXJzZS5lbnJvbGxlZF9jb3VudCAvIDcyOCkgKiAxMDB9JWAgfX0KICAgICAgICAgICAgICAgICAgICAgICAgICA+PC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9InctMTIgdGV4dC1yaWdodCB0ZXh0LXNtIGZvbnQtc2VtaWJvbGQgdGV4dC1zdXJmYWNlLTcwMCI+CiAgICAgICAgICAgICAgICAgICAgICAgIHtjb3Vyc2UuZW5yb2xsZWRfY291bnR9CiAgICAgICAgICAgICAgICAgICAgICA8L3NwYW4+CiAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICkKICAgICAgICAgICAgICAgIH0pfQogICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgIDwvZGl2PgoKICAgICAgICAgIHsvKiBBY3Rpdml0eSBGZWVkICovfQogICAgICAgICAgPGRpdiBjbGFzc05hbWU9ImNhcmQgYW5pbWF0ZS1zbGlkZS11cCBwLTYiIHN0eWxlPXt7IGFuaW1hdGlvbkRlbGF5OiAnNDAwbXMnLCBhbmltYXRpb25GaWxsTW9kZTogJ2JvdGgnIH19PgogICAgICAgICAgICA8aDMgY2xhc3NOYW1lPSJtYi00IHRleHQtc20gZm9udC1zZW1pYm9sZCB0ZXh0LXN1cmZhY2UtOTAwIj5SZWNlbnQgQWN0aXZpdHk8L2gzPgoKICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9InNwYWNlLXktNCI+CiAgICAgICAgICAgICAge2FjdGl2aXR5RmVlZC5tYXAoKGl0ZW0sIGkpID0+IHsKICAgICAgICAgICAgICAgIGNvbnN0IEljb25Db21wID0gYWN0aXZpdHlJY29uc1tpdGVtLnR5cGVdIHx8IE1lc3NhZ2VTcXVhcmUKICAgICAgICAgICAgICAgIGNvbnN0IGNvbG9yQ2xhc3MgPSBhY3Rpdml0eUNvbG9yc1tpdGVtLnR5cGVdIHx8ICdiZy1zdXJmYWNlLTEwMCB0ZXh0LXN1cmZhY2UtNTAwJwogICAgICAgICAgICAgICAgcmV0dXJuICgKICAgICAgICAgICAgICAgICAgPGRpdiBrZXk9e2l9IGNsYXNzTmFtZT0iZmxleCBnYXAtMyI+CiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9e2BmbGV4IGgtOCB3LTggc2hyaW5rLTAgaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIHJvdW5kZWQtbGcgJHtjb2xvckNsYXNzfWB9PgogICAgICAgICAgICAgICAgICAgICAgPEljb25Db21wIGNsYXNzTmFtZT0iaC0zLjUgdy0zLjUiIC8+CiAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9Im1pbi13LTAiPgogICAgICAgICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPSJ0ZXh0LXhzIGxlYWRpbmctcmVsYXhlZCB0ZXh0LXN1cmZhY2UtNzAwIj57aXRlbS50ZXh0fTwvcD4KICAgICAgICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT0ibXQtMC41IHRleHQtWzEwcHhdIHRleHQtc3VyZmFjZS00MDAiPntpdGVtLnRpbWV9PC9wPgogICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICkKICAgICAgICAgICAgICB9KX0KICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICA8L2Rpdj4KICAgICAgICA8L2Rpdj4KICAgICAgPC9kaXY+CiAgICA8L2Rpdj4KICApCn0K"}
+'use client'
+
+import { useState, useEffect } from 'react'
+import Header from '@/components/Header'
+import StatCard from '@/components/StatCard'
+import { getDashboardStats, getCourses, getActivityFeed, getMonthlyStats } from '@/lib/data'
+import { DashboardStats, Course } from '@/lib/supabase'
+import {
+  Users, BookOpen, Layers, Award,
+  UserPlus, GraduationCap, MessageSquare, ClipboardCheck,
+  ArrowUpRight, Loader2, Video, FileText, UserCog, Plus,
+} from 'lucide-react'
+import Link from 'next/link'
+
+const activityIcons: Record<string, any> = {
+  enrollment: UserPlus,
+  completion: GraduationCap,
+  quiz: ClipboardCheck,
+  certificate: Award,
+  batch: Layers,
+}
+
+const activityColors: Record<string, string> = {
+  enrollment: 'bg-brand-50 text-brand-500',
+  completion: 'bg-success-50 text-success-500',
+  quiz: 'bg-info-50 text-info-500',
+  certificate: 'bg-warning-50 text-warning-500',
+  batch: 'bg-cta-500/10 text-cta-500',
+}
+
+export default function DashboardPage() {
+  const [stats, setStats] = useState<DashboardStats | null>(null)
+  const [courses, setCourses] = useState<Course[]>([])
+  const [activityFeed, setActivityFeed] = useState<any[]>([])
+  const [monthlyData, setMonthlyData] = useState<{ month: string; enrollments: number; completions: number }[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function loadData() {
+      const [s, c, a, m] = await Promise.all([
+        getDashboardStats(),
+        getCourses(),
+        getActivityFeed(),
+        getMonthlyStats(),
+      ])
+      setStats(s)
+      setCourses(c)
+      setActivityFeed(a)
+      setMonthlyData(m)
+      setLoading(false)
+    }
+    loadData()
+  }, [])
+
+  if (loading || !stats) {
+    return (
+      <div className="min-h-screen bg-surface-50">
+        <Header title="Dashboard" subtitle="Welcome back — here's what's happening today" />
+        <div className="flex items-center justify-center p-20">
+          <Loader2 className="h-8 w-8 animate-spin text-brand-500" />
+        </div>
+      </div>
+    )
+  }
+
+  const isEmpty = stats.totalStudents === 0 && stats.totalCourses === 0 && stats.activeStaff === 0
+  const maxEnrollment = monthlyData.length > 0 ? Math.max(...monthlyData.map(d => d.enrollments), 1) : 1
+
+  return (
+    <div className="min-h-screen bg-surface-50">
+      <Header title="Dashboard" subtitle="Welcome back — here's what's happening today" />
+
+      <div className="p-8">
+        {/* Welcome banner for empty state */}
+        {isEmpty && (
+          <div className="mb-8 animate-slide-up rounded-xl border border-brand-200 bg-gradient-to-br from-brand-500 via-brand-600 to-brand-700 p-8 text-white">
+            <h2 className="text-2xl font-extrabold">Welcome to AeroBridge LMS</h2>
+            <p className="mt-2 max-w-lg text-sm font-medium text-white/80">
+              Get started by adding your first course, enrolling students, and building your training program.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link href="/courses" className="flex items-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-brand-600 shadow-sm transition-all hover:bg-white/90">
+                <Plus className="h-4 w-4" /> Create Course
+              </Link>
+              <Link href="/students" className="flex items-center gap-2 rounded-lg bg-white/15 px-4 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/25">
+                <UserPlus className="h-4 w-4" /> Add Students
+              </Link>
+              <Link href="/employees" className="flex items-center gap-2 rounded-lg bg-white/15 px-4 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/25">
+                <UserCog className="h-4 w-4" /> Add Staff
+              </Link>
+            </div>
+          </div>
+        )}
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+          <StatCard title="Total Students" value={stats.totalStudents.toLocaleString()} change={stats.recentEnrollments > 0 ? `+${stats.recentEnrollments} this month` : 'No enrollments yet'} changeType={stats.recentEnrollments > 0 ? 'positive' : 'neutral'} icon={Users} color="blue" delay={50} />
+          <StatCard title="Active Courses" value={stats.totalCourses} change={stats.totalCourses > 0 ? `${courses.filter(c => c.published).length} published` : 'Create your first course'} changeType={stats.totalCourses > 0 ? 'positive' : 'neutral'} icon={BookOpen} color="emerald" delay={100} />
+          <StatCard title="Active Batches" value={stats.activeBatches} change={stats.activeBatches > 0 ? 'Running now' : 'No active batches'} changeType="neutral" icon={Layers} color="amber" delay={150} />
+          <StatCard title="Certificates Issued" value={stats.certificatesIssued.toLocaleString()} change={stats.certificatesIssued > 0 ? 'Total awarded' : 'None issued yet'} changeType={stats.certificatesIssued > 0 ? 'positive' : 'neutral'} icon={Award} color="violet" delay={200} />
+        </div>
+
+        {/* Secondary Stats */}
+        <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-3">
+          <StatCard title="Active Staff" value={stats.activeStaff} change={stats.activeStaff > 0 ? 'Team members' : 'Add staff members'} changeType="neutral" icon={UserCog} color="blue" delay={250} />
+          <StatCard title="Upcoming Classes" value={stats.upcomingClasses} change={stats.upcomingClasses > 0 ? 'Scheduled' : 'None scheduled'} changeType={stats.upcomingClasses > 0 ? 'positive' : 'neutral'} icon={Video} color="emerald" delay={300} />
+          <StatCard title="Active Assignments" value={stats.activeAssignments} change={stats.activeAssignments > 0 ? 'In progress' : 'No active assignments'} changeType="neutral" icon={FileText} color="amber" delay={350} />
+        </div>
+
+        {/* Charts Row */}
+        <div className="mt-8 grid grid-cols-1 gap-6 xl:grid-cols-3">
+          {/* Enrollment Chart */}
+          <div className="card col-span-2 animate-slide-up p-6" style={{ animationDelay: '250ms', animationFillMode: 'both' }}>
+            <div className="mb-6 flex items-center justify-between">
+              <div>
+                <h3 className="text-sm font-semibold text-surface-900">Enrollment & Completions</h3>
+                <p className="text-xs text-surface-500">Monthly trend</p>
+              </div>
+              <div className="flex items-center gap-4 text-xs">
+                <span className="flex items-center gap-1.5">
+                  <span className="h-2.5 w-2.5 rounded-full bg-brand-500"></span>
+                  Enrollments
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <span className="h-2.5 w-2.5 rounded-full bg-success-500"></span>
+                  Completions
+                </span>
+              </div>
+            </div>
+
+            {monthlyData.length > 0 ? (
+              <div className="flex items-end gap-3" style={{ height: '200px' }}>
+                {monthlyData.map((d, i) => (
+                  <div key={d.month} className="flex flex-1 flex-col items-center gap-1">
+                    <div className="flex w-full items-end justify-center gap-1" style={{ height: '180px' }}>
+                      <div
+                        className="w-5 rounded-t-md bg-brand-500 transition-all duration-500"
+                        style={{ height: `${(d.enrollments / maxEnrollment) * 100}%`, animationDelay: `${300 + i * 80}ms` }}
+                      ></div>
+                      <div
+                        className="w-5 rounded-t-md bg-success-500 transition-all duration-500"
+                        style={{ height: `${(d.completions / maxEnrollment) * 100}%`, animationDelay: `${350 + i * 80}ms` }}
+                      ></div>
+                    </div>
+                    <span className="text-[11px] text-surface-500">{d.month}</span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center py-12 text-center">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-surface-100">
+                  <Users className="h-6 w-6 text-surface-300" />
+                </div>
+                <p className="mt-3 text-sm font-medium text-surface-500">No enrollment data yet</p>
+                <p className="mt-1 text-xs text-surface-400">Chart will populate as students enroll</p>
+              </div>
+            )}
+          </div>
+
+          {/* Completion Rate Ring */}
+          <div className="card animate-slide-up p-6" style={{ animationDelay: '300ms', animationFillMode: 'both' }}>
+            <h3 className="text-sm font-semibold text-surface-900">Completion Rate</h3>
+            <p className="text-xs text-surface-500">Overall course completion</p>
+            <div className="mt-6 flex flex-col items-center">
+              <div className="relative h-36 w-36">
+                <svg className="h-full w-full -rotate-90" viewBox="0 0 36 36">
+                  <path d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" fill="none" stroke="#e2e8f0" strokeWidth="3" />
+                  <path d="M18 2.0845a15.9155 15.9155 0 0 1 0 31.831 15.9155 15.9155 0 0 1 0-31.831" fill="none" stroke="#0B3D91" strokeWidth="3" strokeDasharray={`${stats.completionRate}, 100`} strokeLinecap="round" className="transition-all duration-1000" />
+                </svg>
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                  <span className="text-3xl font-extrabold text-surface-900">{stats.completionRate}%</span>
+                </div>
+              </div>
+              <div className="mt-4 grid w-full grid-cols-2 gap-3">
+                <div className="rounded-lg bg-surface-50 p-3 text-center">
+                  <p className="text-lg font-bold text-surface-900">{stats.certificatesIssued}</p>
+                  <p className="text-[10px] uppercase tracking-wider text-surface-500">Completed</p>
+                </div>
+                <div className="rounded-lg bg-surface-50 p-3 text-center">
+                  <p className="text-lg font-bold text-surface-900">{Math.max(0, stats.totalStudents - stats.certificatesIssued)}</p>
+                  <p className="text-[10px] uppercase tracking-wider text-surface-500">In Progress</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Row */}
+        <div className="mt-8 grid grid-cols-1 gap-6 xl:grid-cols-3">
+          {/* Top Courses or Getting Started */}
+          <div className="card col-span-2 animate-slide-up p-6" style={{ animationDelay: '350ms', animationFillMode: 'both' }}>
+            <div className="mb-4 flex items-center justify-between">
+              <h3 className="text-sm font-semibold text-surface-900">{courses.length > 0 ? 'Top Courses by Enrollment' : 'Quick Start Guide'}</h3>
+              {courses.length > 0 && (
+                <Link href="/courses" className="flex items-center gap-1 text-xs font-medium text-brand-500 hover:text-brand-600">
+                  View all <ArrowUpRight className="h-3 w-3" />
+                </Link>
+              )}
+            </div>
+
+            {courses.length > 0 ? (
+              <div className="space-y-3">
+                {courses
+                  .filter(c => c.published)
+                  .sort((a, b) => b.enrolled_count - a.enrolled_count)
+                  .slice(0, 5)
+                  .map((course, i) => {
+                    const topEnrolled = courses.reduce((max, c) => Math.max(max, c.enrolled_count), 1)
+                    return (
+                      <div key={course.id} className="group flex items-center gap-4 rounded-lg p-3 transition-colors hover:bg-surface-50">
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-surface-100 font-mono text-sm font-semibold text-surface-500">
+                          {String(i + 1).padStart(2, '0')}
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <p className="truncate text-sm font-medium text-surface-900">{course.title}</p>
+                          <p className="text-xs text-surface-500">{course.instructor}</p>
+                        </div>
+                        <div className="w-32">
+                          <div className="h-1.5 overflow-hidden rounded-full bg-surface-100">
+                            <div className="h-full rounded-full bg-brand-500 transition-all duration-700" style={{ width: `${(course.enrolled_count / (topEnrolled || 1)) * 100}%` }}></div>
+                          </div>
+                        </div>
+                        <span className="w-12 text-right text-sm font-semibold text-surface-700">{course.enrolled_count}</span>
+                      </div>
+                    )
+                  })}
+                {courses.filter(c => c.published).length === 0 && (
+                  <p className="py-6 text-center text-sm text-surface-400">No published courses yet. Publish a course to see it here.</p>
+                )}
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {[
+                  { step: '01', title: 'Create your first course', desc: 'Add learning content for your students', href: '/courses', done: stats.totalCourses > 0 },
+                  { step: '02', title: 'Add students', desc: 'Enroll learners in your platform', href: '/students', done: stats.totalStudents > 0 },
+                  { step: '03', title: 'Add staff members', desc: 'Set up instructors and administrators', href: '/employees', done: stats.activeStaff > 0 },
+                  { step: '04', title: 'Schedule a live class', desc: 'Set up your first virtual session', href: '/live-classes', done: stats.upcomingClasses > 0 },
+                  { step: '05', title: 'Create a quiz', desc: 'Assess student knowledge', href: '/quizzes', done: false },
+                ].map((item) => (
+                  <Link key={item.step} href={item.href} className="flex items-center gap-4 rounded-lg p-3 transition-colors hover:bg-surface-50">
+                    <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg font-mono text-sm font-semibold ${item.done ? 'bg-success-50 text-success-500' : 'bg-surface-100 text-surface-500'}`}>
+                      {item.done ? '✓' : item.step}
+                    </div>
+                    <div className="flex-1">
+                      <p className={`text-sm font-medium ${item.done ? 'text-surface-400 line-through' : 'text-surface-900'}`}>{item.title}</p>
+                      <p className="text-xs text-surface-500">{item.desc}</p>
+                    </div>
+                    <ArrowUpRight className="h-4 w-4 text-surface-300" />
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Activity Feed */}
+          <div className="card animate-slide-up p-6" style={{ animationDelay: '400ms', animationFillMode: 'both' }}>
+            <h3 className="mb-4 text-sm font-semibold text-surface-900">Recent Activity</h3>
+            {activityFeed.length > 0 ? (
+              <div className="space-y-4">
+                {activityFeed.map((item, i) => {
+                  const IconComp = activityIcons[item.type] || MessageSquare
+                  const colorClass = activityColors[item.type] || 'bg-surface-100 text-surface-500'
+                  return (
+                    <div key={i} className="flex gap-3">
+                      <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${colorClass}`}>
+                        <IconComp className="h-3.5 w-3.5" />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-xs leading-relaxed text-surface-700">{item.text}</p>
+                        <p className="mt-0.5 text-[10px] text-surface-400">{item.time}</p>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            ) : (
+              <div className="flex flex-col items-center py-6 text-center">
+                <MessageSquare className="h-8 w-8 text-surface-200" />
+                <p className="mt-2 text-xs text-surface-400">Activity will appear here as you use the platform</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}

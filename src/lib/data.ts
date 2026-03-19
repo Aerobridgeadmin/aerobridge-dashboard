@@ -1,1 +1,218 @@
-{"data":"aW1wb3J0IHsgQ291cnNlLCBTdHVkZW50LCBCYXRjaCwgUXVpeiwgQ2VydGlmaWNhdGUsIERhc2hib2FyZFN0YXRzIH0gZnJvbSAnLi9zdXBhYmFzZScKCmV4cG9ydCBjb25zdCBzdGF0czogRGFzaGJvYXJkU3RhdHMgPSB7CiAgdG90YWxTdHVkZW50czogMjg0NywKICB0b3RhbENvdXJzZXM6IDQyLAogIGFjdGl2ZUJhdGNoZXM6IDEyLAogIGNlcnRpZmljYXRlc0lzc3VlZDogMTg5MywKICByZWNlbnRFbnJvbGxtZW50czogMTU2LAogIGNvbXBsZXRpb25SYXRlOiA3OC41LAp9CgpleHBvcnQgY29uc3QgcmV2ZW51ZURhdGEgPSBbCiAgeyBtb250aDogJ1NlcCcsIGVucm9sbG1lbnRzOiAxODAsIGNvbXBsZXRpb25zOiAxMjAgfSwKICB7IG1vbnRoOiAnT2N0JywgZW5yb2xsbWVudHM6IDIyMCwgY29tcGxldGlvbnM6IDE2NSB9LAogIHsgbW9udGg6ICdOb3YnLCBlbnJvbGxtZW50czogMTk1LCBjb21wbGV0aW9uczogMTQyIH0sCiAgeyBtb250aDogJ0RlYycsIGVucm9sbG1lbnRzOiAyNTAsIGNvbXBsZXRpb25zOiAxODggfSwKICB7IG1vbnRoOiAnSmFuJywgZW5yb2xsbWVudHM6IDMxMCwgY29tcGxldGlvbnM6IDIzMCB9LAogIHsgbW9udGg6ICdGZWInLCBlbnJvbGxtZW50czogMjg1LCBjb21wbGV0aW9uczogMjEwIH0sCl0KCmV4cG9ydCBjb25zdCBjb3Vyc2VzOiBDb3Vyc2VbXSA9IFsKICB7CiAgICBpZDogJzEnLAogICAgdGl0bGU6ICdJbnRyb2R1Y3Rpb24gdG8gRHJvbmUgT3BlcmF0aW9ucycsCiAgICBkZXNjcmlwdGlvbjogJ0xlYXJuIHRoZSBmdW5kYW1lbnRhbHMgb2YgVUFWIGZsaWdodCwgcmVndWxhdGlvbnMsIGFuZCBzYWZldHkgcHJvdG9jb2xzIGZvciBwcm9mZXNzaW9uYWwgZHJvbmUgb3BlcmF0aW9ucy4nLAogICAgcHVibGlzaGVkOiB0cnVlLAogICAgaW5zdHJ1Y3RvcjogJ0NhcHQuIFJhdmkgTWVub24nLAogICAgY2F0ZWdvcnk6ICdPcGVyYXRpb25zJywKICAgIGNoYXB0ZXJzX2NvdW50OiA4LAogICAgbGVzc29uc19jb3VudDogMzIsCiAgICBlbnJvbGxlZF9jb3VudDogNDg1LAogICAgY3JlYXRlZF9hdDogJzIwMjUtMDktMTUnLAogICAgdXBkYXRlZF9hdDogJzIwMjYtMDEtMjAnLAogIH0sCiAgewogICAgaWQ6ICcyJywKICAgIHRpdGxlOiAnQWR2YW5jZWQgRmxpZ2h0IFBsYW5uaW5nICYgTmF2aWdhdGlvbicsCiAgICBkZXNjcmlwdGlvbjogJ01hc3RlciByb3V0ZSBwbGFubmluZywgYWlyc3BhY2UgY2xhc3NpZmljYXRpb24sIGFuZCBOT1RBTSBpbnRlcnByZXRhdGlvbiBmb3IgY29tcGxleCBtaXNzaW9ucy4nLAogICAgcHVibGlzaGVkOiB0cnVlLAogICAgaW5zdHJ1Y3RvcjogJ0RyLiBQcml5YSBTaGFybWEnLAogICAgY2F0ZWdvcnk6ICdOYXZpZ2F0aW9uJywKICAgIGNoYXB0ZXJzX2NvdW50OiA2LAogICAgbGVzc29uc19jb3VudDogMjQsCiAgICBlbnJvbGxlZF9jb3VudDogMzEyLAogICAgY3JlYXRlZF9hdDogJzIwMjUtMTAtMDEnLAogICAgdXBkYXRlZF9hdDogJzIwMjYtMDItMDUnLAogIH0sCiAgewogICAgaWQ6ICczJywKICAgIHRpdGxlOiAnREdDQSBSZW1vdGUgUGlsb3QgQ2VydGlmaWNhdGlvbicsCiAgICBkZXNjcmlwdGlvbjogJ0NvbXByZWhlbnNpdmUgcHJlcGFyYXRpb24gZm9yIHRoZSBER0NBIFJlbW90ZSBQaWxvdCBMaWNlbnNlIGV4YW1pbmF0aW9uIGFuZCBjZXJ0aWZpY2F0aW9uLicsCiAgICBwdWJsaXNoZWQ6IHRydWUsCiAgICBpbnN0cnVjdG9yOiAnV2cgQ2RyLiBBbmlsIEthcG9vciAoUmV0ZCknLAogICAgY2F0ZWdvcnk6ICdDZXJ0aWZpY2F0aW9uJywKICAgIGNoYXB0ZXJzX2NvdW50OiAxMiwKICAgIGxlc3NvbnNfY291bnQ6IDQ4LAogICAgZW5yb2xsZWRfY291bnQ6IDcyOCwKICAgIGNyZWF0ZWRfYXQ6ICcyMDI1LTA4LTIwJywKICAgIHVwZGF0ZWRfYXQ6ICcyMDI2LTAyLTE4JywKICB9LAogIHsKICAgIGlkOiAnNCcsCiAgICB0aXRsZTogJ0FlcmlhbCBTdXJ2ZXkgJiBNYXBwaW5nJywKICAgIGRlc2NyaXB0aW9uOiAnVGVjaG5pcXVlcyBmb3IgcGhvdG9ncmFtbWV0cnksIExpREFSIG9wZXJhdGlvbnMsIGFuZCBHSVMgZGF0YSBwcm9jZXNzaW5nIGZyb20gZHJvbmUgc3VydmV5cy4nLAogICAgcHVibGlzaGVkOiB0cnVlLAogICAgaW5zdHJ1Y3RvcjogJ0RyLiBQcml5YSBTaGFybWEnLAogICAgY2F0ZWdvcnk6ICdUZWNobmljYWwnLAogICAgY2hhcHRlcnNfY291bnQ6IDEwLAogICAgbGVzc29uc19jb3VudDogNDAsCiAgICBlbnJvbGxlZF9jb3VudDogMjU2LAogICAgY3JlYXRlZF9hdDogJzIwMjUtMTEtMTAnLAogICAgdXBkYXRlZF9hdDogJzIwMjYtMDEtMzAnLAogIH0sCiAgewogICAgaWQ6ICc1JywKICAgIHRpdGxlOiAnRHJvbmUgTWFpbnRlbmFuY2UgJiBSZXBhaXInLAogICAgZGVzY3JpcHRpb246ICdIYW5kcy1vbiB0cmFpbmluZyBmb3IgVUFWIG1haW50ZW5hbmNlLCB0cm91Ymxlc2hvb3RpbmcsIGFuZCBmaWVsZCByZXBhaXIgcHJvY2VkdXJlcy4nLAogICAgcHVibGlzaGVkOiBmYWxzZSwKICAgIGluc3RydWN0b3I6ICdSYWplc2ggS3VtYXInLAogICAgY2F0ZWdvcnk6ICdUZWNobmljYWwnLAogICAgY2hhcHRlcnNfY291bnQ6IDcsCiAgICBsZXNzb25zX2NvdW50OiAyOCwKICAgIGVucm9sbGVkX2NvdW50OiAwLAogICAgY3JlYXRlZF9hdDogJzIwMjYtMDEtMDUnLAogICAgdXBkYXRlZF9hdDogJzIwMjYtMDItMjAnLAogIH0sCiAgewogICAgaWQ6ICc2JywKICAgIHRpdGxlOiAnRW1lcmdlbmN5IFByb2NlZHVyZXMgJiBSaXNrIE1hbmFnZW1lbnQnLAogICAgZGVzY3JpcHRpb246ICdTYWZldHkgcHJvdG9jb2xzLCBlbWVyZ2VuY3kgbGFuZGluZyBwcm9jZWR1cmVzLCBhbmQgb3BlcmF0aW9uYWwgcmlzayBhc3Nlc3NtZW50IGZyYW1ld29ya3MuJywKICAgIHB1Ymxpc2hlZDogdHJ1ZSwKICAgIGluc3RydWN0b3I6ICdDYXB0LiBSYXZpIE1lbm9uJywKICAgIGNhdGVnb3J5OiAnU2FmZXR5JywKICAgIGNoYXB0ZXJzX2NvdW50OiA1LAogICAgbGVzc29uc19jb3VudDogMjAsCiAgICBlbnJvbGxlZF9jb3VudDogMTg5LAogICAgY3JlYXRlZF9hdDogJzIwMjUtMTItMDEnLAogICAgdXBkYXRlZF9hdDogJzIwMjYtMDItMTAnLAogIH0sCl0KCmV4cG9ydCBjb25zdCBzdHVkZW50czogU3R1ZGVudFtdID0gWwogIHsgaWQ6ICcxJywgbmFtZTogJ0FhcmF2IFBhdGVsJywgZW1haWw6ICdhYXJhdi5wQGVtYWlsLmNvbScsIGVucm9sbGVkX2NvdXJzZXM6IDMsIGNvbXBsZXRlZF9jb3Vyc2VzOiAyLCBwcm9ncmVzczogODUsIGpvaW5lZF9hdDogJzIwMjUtMDktMjAnIH0sCiAgeyBpZDogJzInLCBuYW1lOiAnU25laGEgUmVkZHknLCBlbWFpbDogJ3NuZWhhLnJAZW1haWwuY29tJywgZW5yb2xsZWRfY291cnNlczogMiwgY29tcGxldGVkX2NvdXJzZXM6IDEsIHByb2dyZXNzOiA3Miwgam9pbmVkX2F0OiAnMjAyNS0xMC0wNScgfSwKICB7IGlkOiAnMycsIG5hbWU6ICdWaWtyYW0gU2luZ2gnLCBlbWFpbDogJ3Zpa3JhbS5zQGVtYWlsLmNvbScsIGVucm9sbGVkX2NvdXJzZXM6IDQsIGNvbXBsZXRlZF9jb3Vyc2VzOiAzLCBwcm9ncmVzczogOTEsIGpvaW5lZF9hdDogJzIwMjUtMDgtMTUnIH0sCiAgeyBpZDogJzQnLCBuYW1lOiAnQW5hbnlhIEd1cHRhJywgZW1haWw6ICdhbmFueWEuZ0BlbWFpbC5jb20nLCBlbnJvbGxlZF9jb3Vyc2VzOiAxLCBjb21wbGV0ZWRfY291cnNlczogMCwgcHJvZ3Jlc3M6IDM0LCBqb2luZWRfYXQ6ICcyMDI2LTAxLTEwJyB9LAogIHsgaWQ6ICc1JywgbmFtZTogJ1JvaGl0IERlc2htdWtoJywgZW1haWw6ICdyb2hpdC5kQGVtYWlsLmNvbScsIGVucm9sbGVkX2NvdXJzZXM6IDIsIGNvbXBsZXRlZF9jb3Vyc2VzOiAyLCBwcm9ncmVzczogMTAwLCBqb2luZWRfYXQ6ICcyMDI1LTA5LTAxJyB9LAogIHsgaWQ6ICc2JywgbmFtZTogJ01lZXJhIE5haXInLCBlbWFpbDogJ21lZXJhLm5AZW1haWwuY29tJywgZW5yb2xsZWRfY291cnNlczogMywgY29tcGxldGVkX2NvdXJzZXM6IDEsIHByb2dyZXNzOiA1OCwgam9pbmVkX2F0OiAnMjAyNS0xMS0yMCcgfSwKICB7IGlkOiAnNycsIG5hbWU6ICdLYXJ0aGlrIEl5ZXInLCBlbWFpbDogJ2thcnRoaWsuaUBlbWFpbC5jb20nLCBlbnJvbGxlZF9jb3Vyc2VzOiAyLCBjb21wbGV0ZWRfY291cnNlczogMSwgcHJvZ3Jlc3M6IDY3LCBqb2luZWRfYXQ6ICcyMDI1LTEyLTE1JyB9LAogIHsgaWQ6ICc4JywgbmFtZTogJ0RpdnlhIEpvc2hpJywgZW1haWw6ICdkaXZ5YS5qQGVtYWlsLmNvbScsIGVucm9sbGVkX2NvdXJzZXM6IDEsIGNvbXBsZXRlZF9jb3Vyc2VzOiAxLCBwcm9ncmVzczogMTAwLCBqb2luZWRfYXQ6ICcyMDI2LTAxLTIyJyB9LApdCgpleHBvcnQgY29uc3QgYmF0Y2hlczogQmF0Y2hbXSA9IFsKICB7IGlkOiAnMScsIHRpdGxlOiAnQmF0Y2ggQWxwaGEg4oCUIFExIDIwMjYnLCBjb3Vyc2VfaWQ6ICczJywgY291cnNlX3RpdGxlOiAnREdDQSBSZW1vdGUgUGlsb3QgQ2VydGlmaWNhdGlvbicsIHN0YXJ0X2RhdGU6ICcyMDI2LTAxLTE1JywgZW5kX2RhdGU6ICcyMDI2LTAzLTE1Jywgc3R1ZGVudF9jb3VudDogMjgsIG1heF9zdHVkZW50czogMzAsIHN0YXR1czogJ2FjdGl2ZScgfSwKICB7IGlkOiAnMicsIHRpdGxlOiAnQmF0Y2ggQnJhdm8g4oCUIERyb25lIE9wcycsIGNvdXJzZV9pZDogJzEnLCBjb3Vyc2VfdGl0bGU6ICdJbnRyb2R1Y3Rpb24gdG8gRHJvbmUgT3BlcmF0aW9ucycsIHN0YXJ0X2RhdGU6ICcyMDI2LTAyLTAxJywgZW5kX2RhdGU6ICcyMDI2LTAzLTMwJywgc3R1ZGVudF9jb3VudDogMjIsIG1heF9zdHVkZW50czogMjUsIHN0YXR1czogJ2FjdGl2ZScgfSwKICB7IGlkOiAnMycsIHRpdGxlOiAnQmF0Y2ggQ2hhcmxpZSDigJQgTmF2aWdhdGlvbicsIGNvdXJzZV9pZDogJzInLCBjb3Vyc2VfdGl0bGU6ICdBZHZhbmNlZCBGbGlnaHQgUGxhbm5pbmcgJiBOYXZpZ2F0aW9uJywgc3RhcnRfZGF0ZTogJzIwMjYtMDMtMTAnLCBlbmRfZGF0ZTogJzIwMjYtMDUtMTAnLCBzdHVkZW50X2NvdW50OiA4LCBtYXhfc3R1ZGVudHM6IDIwLCBzdGF0dXM6ICd1cGNvbWluZycgfSwKICB7IGlkOiAnNCcsIHRpdGxlOiAnQmF0Y2ggRGVsdGEg4oCUIFN1cnZleSBRNCcsIGNvdXJzZV9pZDogJzQnLCBjb3Vyc2VfdGl0bGU6ICdBZXJpYWwgU3VydmV5ICYgTWFwcGluZycsIHN0YXJ0X2RhdGU6ICcyMDI1LTEwLTAxJywgZW5kX2RhdGU6ICcyMDI1LTEyLTE1Jywgc3R1ZGVudF9jb3VudDogMjUsIG1heF9zdHVkZW50czogMjUsIHN0YXR1czogJ2NvbXBsZXRlZCcgfSwKICB7IGlkOiAnNScsIHRpdGxlOiAnQmF0Y2ggRWNobyDigJQgU2FmZXR5JywgY291cnNlX2lkOiAnNicsIGNvdXJzZV90aXRsZTogJ0VtZXJnZW5jeSBQcm9jZWR1cmVzICYgUmlzayBNYW5hZ2VtZW50Jywgc3RhcnRfZGF0ZTogJzIwMjYtMDItMTUnLCBlbmRfZGF0ZTogJzIwMjYtMDQtMTUnLCBzdHVkZW50X2NvdW50OiAxOCwgbWF4X3N0dWRlbnRzOiAyMCwgc3RhdHVzOiAnYWN0aXZlJyB9LApdCgpleHBvcnQgY29uc3QgcXVpenplczogUXVpeltdID0gWwogIHsgaWQ6ICcxJywgdGl0bGU6ICdBaXJzcGFjZSBDbGFzc2lmaWNhdGlvbiBRdWl6JywgY291cnNlX2lkOiAnMicsIGNvdXJzZV90aXRsZTogJ0FkdmFuY2VkIEZsaWdodCBQbGFubmluZyAmIE5hdmlnYXRpb24nLCBxdWVzdGlvbnNfY291bnQ6IDIwLCBhdmdfc2NvcmU6IDc2LCBhdHRlbXB0czogMjQ1LCBwYXNzaW5nX3Njb3JlOiA3MCB9LAogIHsgaWQ6ICcyJywgdGl0bGU6ICdER0NBIE1vY2sgRXhhbSDigJQgTW9kdWxlIEEnLCBjb3Vyc2VfaWQ6ICczJywgY291cnNlX3RpdGxlOiAnREdDQSBSZW1vdGUgUGlsb3QgQ2VydGlmaWNhdGlvbicsIHF1ZXN0aW9uc19jb3VudDogNTAsIGF2Z19zY29yZTogNjgsIGF0dGVtcHRzOiA1MTIsIHBhc3Npbmdfc2NvcmU6IDYwIH0sCiAgeyBpZDogJzMnLCB0aXRsZTogJ1NhZmV0eSBQcm90b2NvbHMgQXNzZXNzbWVudCcsIGNvdXJzZV9pZDogJzYnLCBjb3Vyc2VfdGl0bGU6ICdFbWVyZ2VuY3kgUHJvY2VkdXJlcyAmIFJpc2sgTWFuYWdlbWVudCcsIHF1ZXN0aW9uc19jb3VudDogMTUsIGF2Z19zY29yZTogODIsIGF0dGVtcHRzOiAxNjcsIHBhc3Npbmdfc2NvcmU6IDc1IH0sCiAgeyBpZDogJzQnLCB0aXRsZTogJ1ByZS1GbGlnaHQgQ2hlY2tsaXN0IEtub3dsZWRnZScsIGNvdXJzZV9pZDogJzEnLCBjb3Vyc2VfdGl0bGU6ICdJbnRyb2R1Y3Rpb24gdG8gRHJvbmUgT3BlcmF0aW9ucycsIHF1ZXN0aW9uc19jb3VudDogMjUsIGF2Z19zY29yZTogODgsIGF0dGVtcHRzOiAzOTgsIHBhc3Npbmdfc2NvcmU6IDcwIH0sCiAgeyBpZDogJzUnLCB0aXRsZTogJ0dJUyAmIE1hcHBpbmcgRnVuZGFtZW50YWxzJywgY291cnNlX2lkOiAnNCcsIGNvdXJzZV90aXRsZTogJ0FlcmlhbCBTdXJ2ZXkgJiBNYXBwaW5nJywgcXVlc3Rpb25zX2NvdW50OiAzMCwgYXZnX3Njb3JlOiA3MSwgYXR0ZW1wdHM6IDE4OSwgcGFzc2luZ19zY29yZTogNjUgfSwKXQoKZXhwb3J0IGNvbnN0IGNlcnRpZmljYXRlczogQ2VydGlmaWNhdGVbXSA9IFsKICB7IGlkOiAnMScsIHN0dWRlbnRfbmFtZTogJ1Zpa3JhbSBTaW5naCcsIGNvdXJzZV90aXRsZTogJ0RHQ0EgUmVtb3RlIFBpbG90IENlcnRpZmljYXRpb24nLCBpc3N1ZWRfYXQ6ICcyMDI2LTAyLTE1JywgY2VydGlmaWNhdGVfaWQ6ICdBRVJPLTIwMjYtMDg5MScgfSwKICB7IGlkOiAnMicsIHN0dWRlbnRfbmFtZTogJ1JvaGl0IERlc2htdWtoJywgY291cnNlX3RpdGxlOiAnSW50cm9kdWN0aW9uIHRvIERyb25lIE9wZXJhdGlvbnMnLCBpc3N1ZWRfYXQ6ICcyMDI2LTAyLTEwJywgY2VydGlmaWNhdGVfaWQ6ICdBRVJPLTIwMjYtMDg4NycgfSwKICB7IGlkOiAnMycsIHN0dWRlbnRfbmFtZTogJ0FhcmF2IFBhdGVsJywgY291cnNlX3RpdGxlOiAnQWR2YW5jZWQgRmxpZ2h0IFBsYW5uaW5nICYgTmF2aWdhdGlvbicsIGlzc3VlZF9hdDogJzIwMjYtMDEtMjgnLCBjZXJ0aWZpY2F0ZV9pZDogJ0FFUk8tMjAyNi0wODU0JyB9LAogIHsgaWQ6ICc0Jywgc3R1ZGVudF9uYW1lOiAnRGl2eWEgSm9zaGknLCBjb3Vyc2VfdGl0bGU6ICdFbWVyZ2VuY3kgUHJvY2VkdXJlcyAmIFJpc2sgTWFuYWdlbWVudCcsIGlzc3VlZF9hdDogJzIwMjYtMDItMjAnLCBjZXJ0aWZpY2F0ZV9pZDogJ0FFUk8tMjAyNi0wOTAzJyB9LAogIHsgaWQ6ICc1Jywgc3R1ZGVudF9uYW1lOiAnUm9oaXQgRGVzaG11a2gnLCBjb3Vyc2VfdGl0bGU6ICdER0NBIFJlbW90ZSBQaWxvdCBDZXJ0aWZpY2F0aW9uJywgaXNzdWVkX2F0OiAnMjAyNi0wMS0xNScsIGNlcnRpZmljYXRlX2lkOiAnQUVSTy0yMDI2LTA4MTInIH0sCiAgeyBpZDogJzYnLCBzdHVkZW50X25hbWU6ICdTbmVoYSBSZWRkeScsIGNvdXJzZV90aXRsZTogJ0ludHJvZHVjdGlvbiB0byBEcm9uZSBPcGVyYXRpb25zJywgaXNzdWVkX2F0OiAnMjAyNi0wMi0xOCcsIGNlcnRpZmljYXRlX2lkOiAnQUVSTy0yMDI2LTA4OTgnIH0sCl0KCmV4cG9ydCBjb25zdCBhY3Rpdml0eUZlZWQgPSBbCiAgeyB0eXBlOiAnZW5yb2xsbWVudCcsIHRleHQ6ICdBbmFueWEgR3VwdGEgZW5yb2xsZWQgaW4gREdDQSBSZW1vdGUgUGlsb3QgQ2VydGlmaWNhdGlvbicsIHRpbWU6ICcyIGhvdXJzIGFnbycgfSwKICB7IHR5cGU6ICdjb21wbGV0aW9uJywgdGV4dDogJ0RpdnlhIEpvc2hpIGNvbXBsZXRlZCBFbWVyZ2VuY3kgUHJvY2VkdXJlcyAmIFJpc2sgTWFuYWdlbWVudCcsIHRpbWU6ICc1IGhvdXJzIGFnbycgfSwKICB7IHR5cGU6ICdxdWl6JywgdGV4dDogJ1Zpa3JhbSBTaW5naCBzY29yZWQgOTIlIG9uIERHQ0EgTW9jayBFeGFtIOKAlCBNb2R1bGUgQScsIHRpbWU6ICc4IGhvdXJzIGFnbycgfSwKICB7IHR5cGU6ICdjZXJ0aWZpY2F0ZScsIHRleHQ6ICdDZXJ0aWZpY2F0ZSBpc3N1ZWQgdG8gRGl2eWEgSm9zaGkgZm9yIEVtZXJnZW5jeSBQcm9jZWR1cmVzJywgdGltZTogJzEgZGF5IGFnbycgfSwKICB7IHR5cGU6ICdiYXRjaCcsIHRleHQ6ICdCYXRjaCBDaGFybGllIOKAlCBOYXZpZ2F0aW9uIGlzIG5vdyBvcGVuIGZvciBlbnJvbGxtZW50JywgdGltZTogJzEgZGF5IGFnbycgfSwKICB7IHR5cGU6ICdlbnJvbGxtZW50JywgdGV4dDogJ0thcnRoaWsgSXllciBlbnJvbGxlZCBpbiBBZXJpYWwgU3VydmV5ICYgTWFwcGluZycsIHRpbWU6ICcyIGRheXMgYWdvJyB9LApdCg=="}
+import { supabase, Course, Student, Batch, Quiz, Certificate, LiveClass, Assignment, Employee, Attendance, ScheduleEvent, Announcement, Discussion, DashboardStats } from './supabase'
+
+// ── READ ──
+export async function getCourses(): Promise<Course[]> {
+  const { data } = await supabase.from('courses').select('*').order('created_at', { ascending: false })
+  return data ?? []
+}
+export async function getStudents(): Promise<Student[]> {
+  const { data } = await supabase.from('students').select('*').order('joined_at', { ascending: false })
+  return data ?? []
+}
+export async function getBatches(): Promise<Batch[]> {
+  const { data } = await supabase.from('batches').select('*').order('start_date', { ascending: false })
+  return data ?? []
+}
+export async function getQuizzes(): Promise<Quiz[]> {
+  const { data } = await supabase.from('quizzes').select('*').order('title')
+  return data ?? []
+}
+export async function getCertificates(): Promise<Certificate[]> {
+  const { data } = await supabase.from('certificates').select('*').order('issued_at', { ascending: false })
+  return data ?? []
+}
+export async function getLiveClasses(): Promise<LiveClass[]> {
+  const { data } = await supabase.from('live_classes').select('*').order('start_time', { ascending: true })
+  return data ?? []
+}
+export async function getAssignments(): Promise<Assignment[]> {
+  const { data } = await supabase.from('assignments').select('*').order('due_date', { ascending: true })
+  return data ?? []
+}
+export async function getEmployees(): Promise<Employee[]> {
+  const { data } = await supabase.from('employees').select('*').order('name')
+  return data ?? []
+}
+export async function getAttendance(): Promise<Attendance[]> {
+  const { data } = await supabase.from('attendance').select('*').order('date', { ascending: false })
+  return data ?? []
+}
+export async function getSchedule(): Promise<ScheduleEvent[]> {
+  const { data } = await supabase.from('schedule').select('*').order('start_time', { ascending: true })
+  return data ?? []
+}
+export async function getAnnouncements(): Promise<Announcement[]> {
+  const { data } = await supabase.from('announcements').select('*').order('created_at', { ascending: false })
+  return data ?? []
+}
+export async function getDiscussions(): Promise<Discussion[]> {
+  const { data } = await supabase.from('discussions').select('*').order('created_at', { ascending: false })
+  return data ?? []
+}
+export async function getDashboardStats(): Promise<DashboardStats> {
+  const { data } = await supabase.from('dashboard_stats').select('*').single()
+  return data ?? { totalStudents:0,totalCourses:0,activeBatches:0,certificatesIssued:0,recentEnrollments:0,completionRate:0,activeStaff:0,upcomingClasses:0,activeAssignments:0 }
+}
+export async function getActivityFeed() {
+  const { data } = await supabase.from('activity_feed').select('*').order('created_at', { ascending: false }).limit(6)
+  return data ?? []
+}
+
+// ── CREATE ──
+export async function createCourse(course: Partial<Course>) {
+  const { data, error } = await supabase.from('courses').insert(course).select().single()
+  if (error) throw error
+  return data
+}
+export async function createStudent(student: Partial<Student>) {
+  const { data, error } = await supabase.from('students').insert(student).select().single()
+  if (error) throw error
+  return data
+}
+export async function createBatch(batch: Partial<Batch>) {
+  const { data, error } = await supabase.from('batches').insert(batch).select().single()
+  if (error) throw error
+  return data
+}
+export async function createQuiz(quiz: Partial<Quiz>) {
+  const { data, error } = await supabase.from('quizzes').insert(quiz).select().single()
+  if (error) throw error
+  return data
+}
+export async function createCertificate(cert: Partial<Certificate>) {
+  const { data, error } = await supabase.from('certificates').insert(cert).select().single()
+  if (error) throw error
+  return data
+}
+export async function createLiveClass(cls: Partial<LiveClass>) {
+  const { data, error } = await supabase.from('live_classes').insert(cls).select().single()
+  if (error) throw error
+  return data
+}
+export async function createAssignment(assignment: Partial<Assignment>) {
+  const { data, error } = await supabase.from('assignments').insert(assignment).select().single()
+  if (error) throw error
+  return data
+}
+export async function createEmployee(emp: Partial<Employee>) {
+  const { data, error } = await supabase.from('employees').insert(emp).select().single()
+  if (error) throw error
+  return data
+}
+export async function createAttendance(record: Partial<Attendance>) {
+  const { data, error } = await supabase.from('attendance').insert(record).select().single()
+  if (error) throw error
+  return data
+}
+export async function createScheduleEvent(event: Partial<ScheduleEvent>) {
+  const { data, error } = await supabase.from('schedule').insert(event).select().single()
+  if (error) throw error
+  return data
+}
+export async function createAnnouncement(ann: Partial<Announcement>) {
+  const { data, error } = await supabase.from('announcements').insert(ann).select().single()
+  if (error) throw error
+  return data
+}
+export async function createDiscussion(disc: Partial<Discussion>) {
+  const { data, error } = await supabase.from('discussions').insert(disc).select().single()
+  if (error) throw error
+  return data
+}
+
+// ── UPDATE ──
+export async function updateCourse(id: string, updates: Partial<Course>) {
+  const { data, error } = await supabase.from('courses').update({ ...updates, updated_at: new Date().toISOString() }).eq('id', id).select().single()
+  if (error) throw error
+  return data
+}
+
+// ── DELETE ──
+export async function deleteRecord(table: string, id: string) {
+  const { error } = await supabase.from(table).delete().eq('id', id)
+  if (error) throw error
+}
+
+// ── AVIATION: CERTIFICATIONS ──
+export async function getCertificationTypes() {
+  const { data } = await supabase.from('certification_types').select('*').order('name')
+  return data ?? []
+}
+export async function getUserCertifications(userId?: string) {
+  let q = supabase.from('user_certifications').select('*, certification_types(*)').order('expiry_date', { ascending: true })
+  if (userId) q = q.eq('user_id', userId)
+  const { data } = await q
+  return data ?? []
+}
+export async function createUserCertification(cert: any) {
+  const { data, error } = await supabase.from('user_certifications').insert(cert).select().single()
+  if (error) throw error
+  return data
+}
+export async function createCertificationType(ct: any) {
+  const { data, error } = await supabase.from('certification_types').insert(ct).select().single()
+  if (error) throw error
+  return data
+}
+
+// ── AVIATION: FLIGHT LOG ──
+export async function getFlightLog(userId?: string) {
+  let q = supabase.from('flight_log').select('*').order('date', { ascending: false })
+  if (userId) q = q.eq('user_id', userId)
+  const { data } = await q
+  return data ?? []
+}
+export async function getFlightLogSummary(userId: string) {
+  const { data } = await supabase.from('flight_log_summary').select('*').eq('user_id', userId).single()
+  return data
+}
+export async function createFlightLogEntry(entry: any) {
+  const { data, error } = await supabase.from('flight_log').insert(entry).select().single()
+  if (error) throw error
+  return data
+}
+
+// ── AVIATION: LEARNING PATHS ──
+export async function getLearningPaths() {
+  const { data } = await supabase.from('learning_paths').select('*').order('created_at', { ascending: false })
+  return data ?? []
+}
+export async function getLearningPathCourses(pathId: string) {
+  const { data } = await supabase.from('learning_path_courses').select('*, courses(*)').eq('learning_path_id', pathId).order('sort_order')
+  return data ?? []
+}
+export async function createLearningPath(path: any) {
+  const { data, error } = await supabase.from('learning_paths').insert(path).select().single()
+  if (error) throw error
+  return data
+}
+export async function addCourseToPath(pathId: string, courseId: string, sortOrder: number) {
+  const { error } = await supabase.from('learning_path_courses').insert({ learning_path_id: pathId, course_id: courseId, sort_order: sortOrder })
+  if (error) throw error
+}
+
+// ── GAMIFICATION ──
+export async function getLeaderboard() {
+  const { data } = await supabase.from('leaderboard').select('*').order('rank').limit(20)
+  return data ?? []
+}
+export async function awardPoints(userId: string, points: number, action: string, description: string) {
+  await supabase.from('user_points').insert({ user_id: userId, points, action, description })
+}
+
+// ── COMPLIANCE ──
+export async function getComplianceOverview() {
+  const { data } = await supabase.from('compliance_overview').select('*')
+  return data ?? []
+}
+
+// ── MONTHLY STATS ──
+export async function getMonthlyStats(): Promise<{ month: string; enrollments: number; completions: number }[]> {
+  const { data } = await supabase.from('monthly_stats').select('*').order('month_key', { ascending: true })
+  return data ?? []
+}
+
+// ── ACTIVITY FEED HELPER ──
+export async function logActivity(type: string, text: string) {
+  await supabase.from('activity_feed').insert({ type, text, time: 'Just now' })
+}
