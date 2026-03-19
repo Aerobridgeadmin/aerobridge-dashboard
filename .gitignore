@@ -4,3 +4,4 @@ node_modules
 .env*.local
 out
 tsconfig.tsbuildinfo
+supabase/.temp/

@@ -27,18 +27,26 @@ export default function LoginPage() {
   return (
     <div className="flex min-h-screen">
       {/* Left panel — brand */}
-      <div className="hidden w-[480px] flex-col justify-between bg-gradient-to-br from-brand-500 via-brand-600 to-brand-700 p-10 lg:flex">
-        <div>
-          <img src="/images/logo-light.png" alt="AeroBridge" className="h-10 object-contain" />
-          <p className="mt-2 text-sm font-medium text-white/60">Aviation Education Platform</p>
+      <div className="relative hidden w-[480px] flex-col justify-between overflow-hidden bg-gradient-to-br from-brand-500 via-brand-600 to-brand-700 p-10 lg:flex">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ccircle%20cx%3D%222%22%20cy%3D%222%22%20r%3D%221.5%22%20fill%3D%22rgba(255%2C255%2C255%2C0.04)%22%2F%3E%3C%2Fsvg%3E')]"></div>
+        <div className="relative z-10">
+          <div className="flex items-center gap-4">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 p-2 shadow-lg backdrop-blur-sm ring-1 ring-white/20">
+              <img src="/images/logo-light.png" alt="AeroBridge" className="h-12 w-12 object-contain" />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold text-white tracking-tight">AeroBridge</h1>
+              <p className="text-sm font-medium text-white/60">Aviation Education Platform</p>
+            </div>
+          </div>
         </div>
-        <div>
+        <div className="relative z-10">
           <h2 className="text-3xl font-extrabold leading-tight text-white">Clear English.<br />Confident flights.</h2>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/70">
             From classroom to cockpit, in one clear language. Manage courses, track certifications, and prepare for ICAO/FAA tests.
           </p>
         </div>
-        <div className="text-xs text-white/30">© {new Date().getFullYear()} AeroBridge. All rights reserved.</div>
+        <div className="relative z-10 text-xs text-white/30">© {new Date().getFullYear()} AeroBridge. All rights reserved.</div>
       </div>
 
       {/* Right panel — form */}

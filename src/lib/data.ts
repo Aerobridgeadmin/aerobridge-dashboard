@@ -1,4 +1,4 @@
-import { supabase, Course, Student, Batch, Quiz, Certificate, LiveClass, Assignment, Employee, Attendance, ScheduleEvent, Announcement, Discussion, DashboardStats, UserCertification, CertificationType, FlightLogEntry, LearningPath } from './supabase'
+import { supabase, Course, Student, Batch, Quiz, Certificate, LiveClass, Assignment, Employee, Attendance, ScheduleEvent, Announcement, Discussion, DashboardStats, UserCertification, CertificationType, FlightLogEntry, LearningPath, CourseContent, QuizQuestion } from './supabase'
 
 // ── QUERY HELPER ──
 async function query<T>(
@@ -213,6 +213,50 @@ export async function getLeaderboard() {
 export async function awardPoints(userId: string, points: number, action: string, description: string) {
   const { error } = await supabase.from('user_points').insert({ user_id: userId, points, action, description })
   if (error) throw new Error(`Failed to award points: ${error.message}`)
+}
+
+// ── COURSE CONTENT ──
+export async function getCourseContent(courseId: string): Promise<CourseContent[]> {
+  const { data } = await supabase.from('course_content').select('*').eq('course_id', courseId).order('sort_order')
+  return data ?? []
+}
+export async function createCourseContent(content: Partial<CourseContent>) {
+  const { data, error } = await supabase.from('course_content').insert(content).select().single()
+  if (error) throw error
+  return data
+}
+
+// ── QUIZ QUESTIONS ──
+export async function getQuizQuestions(quizId: string): Promise<QuizQuestion[]> {
+  const { data } = await supabase.from('quiz_questions').select('*').eq('quiz_id', quizId).order('sort_order')
+  return data ?? []
+}
+export async function createQuizQuestion(q: Partial<QuizQuestion>) {
+  const { data, error } = await supabase.from('quiz_questions').insert(q).select().single()
+  if (error) throw error
+  return data
+}
+
+// ── BULK SEED ──
+export async function bulkInsertCourses(courses: Partial<Course>[]) {
+  const { data, error } = await supabase.from('courses').insert(courses).select()
+  if (error) throw error
+  return data
+}
+export async function bulkInsertQuizzes(quizzes: Partial<Quiz>[]) {
+  const { data, error } = await supabase.from('quizzes').insert(quizzes).select()
+  if (error) throw error
+  return data
+}
+export async function bulkInsertCourseContent(content: Partial<CourseContent>[]) {
+  const { data, error } = await supabase.from('course_content').insert(content).select()
+  if (error) throw error
+  return data
+}
+export async function bulkInsertQuizQuestions(questions: Partial<QuizQuestion>[]) {
+  const { data, error } = await supabase.from('quiz_questions').insert(questions).select()
+  if (error) throw error
+  return data
 }
 
 // ── COMPLIANCE ──

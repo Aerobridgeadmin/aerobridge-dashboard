@@ -6,7 +6,8 @@ import EmptyState from '@/components/EmptyState'
 import Toast from '@/components/Toast'
 import { getQuizzes, getCourses, createQuiz, deleteRecord } from '@/lib/data'
 import { Quiz, Course } from '@/lib/supabase'
-import { Plus, Search, HelpCircle, Users, Loader2, ClipboardCheck, Trash2 } from 'lucide-react'
+import { Plus, Search, HelpCircle, Users, Loader2, ClipboardCheck, Trash2, PlayCircle } from 'lucide-react'
+import Link from 'next/link'
 import { RoleVisible } from '@/components/RoleGuard'
 
 export default function QuizzesPage() {
@@ -60,6 +61,9 @@ export default function QuizzesPage() {
                 <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-surface-100"><div className="relative h-full overflow-hidden rounded-full"><div className={`h-full rounded-full transition-all duration-700 ${quiz.avg_score >= quiz.passing_score ? 'bg-success-500' : 'bg-cta-500'}`} style={{ width: `${quiz.avg_score}%` }}></div><div className="absolute top-0 h-full w-0.5 bg-surface-900/30" style={{ left: `${quiz.passing_score}%` }}></div></div></div>
                 <p className="mt-1 text-[10px] text-surface-400">Passing score: {quiz.passing_score}%</p>
               </div>
+              <Link href={`/quizzes/${quiz.id}`} className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-brand-50 py-2.5 text-xs font-semibold text-brand-600 transition-all hover:bg-brand-100">
+                <PlayCircle className="h-3.5 w-3.5" /> Take Quiz
+              </Link>
             </div>
           ))}
         </div>

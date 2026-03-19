@@ -7,7 +7,8 @@ import EmptyState from '@/components/EmptyState'
 import Toast from '@/components/Toast'
 import { getCourses, createCourse, updateCourse, deleteRecord, logActivity } from '@/lib/data'
 import { Course } from '@/lib/supabase'
-import { Plus, BookOpen, Users, Layers2, Search, Loader2, Edit2, Trash2, MoreVertical, Eye, EyeOff } from 'lucide-react'
+import { Plus, BookOpen, Users, Layers2, Search, Loader2, Edit2, Trash2, MoreVertical, Eye, EyeOff, ExternalLink } from 'lucide-react'
+import Link from 'next/link'
 import { RoleVisible } from '@/components/RoleGuard'
 
 const categoryColors: Record<string, string> = {
@@ -16,7 +17,7 @@ const categoryColors: Record<string, string> = {
   Certification: 'badge-amber',
   Technical: 'bg-violet-50 text-violet-700',
   Safety: 'badge-rose',
-  General: 'bg-sky-50 text-sky-light',
+  General: 'bg-sky-50 text-sky-700',
 }
 const categories = ['Operations', 'Navigation', 'Certification', 'Technical', 'Safety', 'General']
 
@@ -165,9 +166,9 @@ export default function CoursesPage() {
                     <span className="flex items-center gap-1"><Layers2 className="h-3.5 w-3.5" />{course.chapters_count} chapters</span>
                     <span className="flex items-center gap-1"><BookOpen className="h-3.5 w-3.5" />{course.lessons_count} lessons</span>
                   </div>
-                  <span className="flex items-center gap-1 text-xs font-semibold text-surface-700">
-                    <Users className="h-3.5 w-3.5 text-brand-500" />{course.enrolled_count}
-                  </span>
+                  <Link href={`/courses/${course.id}`} className="flex items-center gap-1 text-xs font-semibold text-brand-500 hover:text-brand-600 transition-colors">
+                    View <ExternalLink className="h-3 w-3" />
+                  </Link>
                 </div>
               </div>
             </div>

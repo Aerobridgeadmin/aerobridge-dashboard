@@ -141,6 +141,18 @@ export interface LearningPathCourse {
   courses?: Course
 }
 
+export interface QuizQuestion {
+  id: string; quiz_id: string; question_text: string
+  options: string[]; correct_answer: number; explanation?: string
+  sort_order: number; created_at: string
+}
+
+export interface QuizAttempt {
+  id: string; quiz_id: string; user_id: string; score: number
+  passed: boolean; answers: Record<string, number>
+  started_at: string; completed_at?: string
+}
+
 export interface Badge {
   id: string; name: string; description?: string; icon: string; color: string
   requirement_type: string; requirement_value: number
