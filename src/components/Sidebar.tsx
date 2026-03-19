@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, BookOpen, Users, Layers, ClipboardCheck, Award, Video, FileText, UserCog, Clock, CalendarDays, ChevronLeft, ChevronRight, Plane, Megaphone, MessageCircle, Settings, LogOut, Shield, Route, BarChart3, Database } from 'lucide-react'
+import { LayoutDashboard, BookOpen, Users, Layers, ClipboardCheck, Award, Video, FileText, UserCog, Clock, CalendarDays, ChevronLeft, ChevronRight, Plane, Megaphone, MessageCircle, Settings, LogOut, Shield, Route, BarChart3, Database, Mail } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
 
 interface SidebarProps {
@@ -42,6 +42,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
     ]},
     { label: 'Admin', items: [
       { href: '/admin/seed-courses', label: 'Seed Courses', icon: Database },
+      { href: '/admin/email-templates', label: 'Email Templates', icon: Mail },
     ]}] : isInstructor ? [{ label: 'People', items: [
       { href: '/students', label: 'Students', icon: Users },
     ]}] : []),

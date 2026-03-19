@@ -153,6 +153,16 @@ export interface QuizAttempt {
   started_at: string; completed_at?: string
 }
 
+export interface EmailTemplate {
+  id: string; template_key: string; name: string; subject: string
+  html_body: string; description?: string; variables: string[]
+  is_active: boolean; updated_at: string; created_at: string
+}
+
+export interface EmailSetting {
+  id: string; setting_key: string; setting_value: string; updated_at: string
+}
+
 export interface Badge {
   id: string; name: string; description?: string; icon: string; color: string
   requirement_type: string; requirement_value: number

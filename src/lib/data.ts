@@ -1,4 +1,4 @@
-import { supabase, Course, Student, Batch, Quiz, Certificate, LiveClass, Assignment, Employee, Attendance, ScheduleEvent, Announcement, Discussion, DashboardStats, UserCertification, CertificationType, FlightLogEntry, LearningPath, CourseContent, QuizQuestion } from './supabase'
+import { supabase, Course, Student, Batch, Quiz, Certificate, LiveClass, Assignment, Employee, Attendance, ScheduleEvent, Announcement, Discussion, DashboardStats, UserCertification, CertificationType, FlightLogEntry, LearningPath, CourseContent, QuizQuestion, EmailTemplate, EmailSetting } from './supabase'
 
 // ── QUERY HELPER ──
 async function query<T>(
@@ -257,6 +257,27 @@ export async function bulkInsertQuizQuestions(questions: Partial<QuizQuestion>[]
   const { data, error } = await supabase.from('quiz_questions').insert(questions).select()
   if (error) throw error
   return data
+}
+
+// ── EMAIL TEMPLATES ──
+export async function getEmailTemplates(): Promise<EmailTemplate[]> {
+  const { data } = await supabase.from('email_templates').select('*').order('template_key')
+  return data ?? []
+}
+export async function updateEmailTemplate(id: string, updates: Partial<EmailTemplate>) {
+  const { data, error } = await supabase.from('email_templates').update({ ...updates, updated_at: new Date().toISOString() }).eq('id', id).select().single()
+  if (error) throw error
+  return data
+}
+export async function getEmailSettings(): Promise<Record<string, string>> {
+  const { data } = await supabase.from('email_settings').select('*')
+  const settings: Record<string, string> = {}
+  data?.forEach((s: EmailSetting) => { settings[s.setting_key] = s.setting_value })
+  return settings
+}
+export async function updateEmailSetting(key: string, value: string) {
+  const { error } = await supabase.from('email_settings').update({ setting_value: value, updated_at: new Date().toISOString() }).eq('setting_key', key)
+  if (error) throw error
 }
 
 // ── COMPLIANCE ──
