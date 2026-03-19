@@ -2,12 +2,15 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { LayoutDashboard, BookOpen, Users, Layers, ClipboardCheck, Award, Video, FileText, UserCog, Clock, CalendarDays, ChevronLeft, ChevronRight, Plane, Megaphone, MessageCircle, Settings, LogOut, Shield, Route, BarChart3 } from 'lucide-react'
-import { useState } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
 
-export default function Sidebar() {
+interface SidebarProps {
+  collapsed: boolean
+  onToggle: () => void
+}
+
+export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
   const pathname = usePathname()
-  const [collapsed, setCollapsed] = useState(false)
   const { profile, signOut, isAdmin, isInstructor } = useAuth()
 
   const sections = [
@@ -44,7 +47,7 @@ export default function Sidebar() {
   const roleBadge = profile?.role === 'admin' ? 'bg-cta-500' : profile?.role === 'instructor' ? 'bg-info-500' : 'bg-success-500'
 
   return (
-    <aside className={`fixed left-0 top-0 z-40 flex h-screen flex-col transition-all duration-300 ${collapsed ? 'w-[68px]' : 'w-[250px]'}`} style={{ backgroundColor: '#0B3D91' }}>
+    <aside className={`fixed left-0 top-0 z-40 flex h-screen flex-col transition-all duration-300 ${collapsed ? 'w-[68px]' : 'w-[250px]'} bg-brand-700`}>
       <div className="flex h-14 items-center gap-3 border-b border-white/10 px-4">
         <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/15"><Plane className="h-4 w-4 text-white" /></div>
         {!collapsed && <div><h1 className="text-[14px] font-extrabold uppercase tracking-wide text-white">AeroBridge</h1></div>}
@@ -91,7 +94,7 @@ export default function Sidebar() {
         <button onClick={signOut} className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-xs text-white/40 hover:bg-white/8 hover:text-white/70">
           <LogOut className="h-4 w-4" />{!collapsed && <span>Sign Out</span>}
         </button>
-        <button onClick={() => setCollapsed(!collapsed)} className="mt-1 flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-xs text-white/30 hover:bg-white/8 hover:text-white/50">
+        <button onClick={onToggle} className="mt-1 flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-xs text-white/30 hover:bg-white/8 hover:text-white/50">
           {collapsed ? <ChevronRight className="h-4 w-4" /> : <><ChevronLeft className="h-4 w-4" /><span>Collapse</span></>}
         </button>
       </div>

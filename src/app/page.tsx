@@ -34,23 +34,42 @@ export default function DashboardPage() {
   const [activityFeed, setActivityFeed] = useState<any[]>([])
   const [monthlyData, setMonthlyData] = useState<{ month: string; enrollments: number; completions: number }[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     async function loadData() {
-      const [s, c, a, m] = await Promise.all([
-        getDashboardStats(),
-        getCourses(),
-        getActivityFeed(),
-        getMonthlyStats(),
-      ])
-      setStats(s)
-      setCourses(c)
-      setActivityFeed(a)
-      setMonthlyData(m)
-      setLoading(false)
+      try {
+        const [s, c, a, m] = await Promise.all([
+          getDashboardStats(),
+          getCourses(),
+          getActivityFeed(),
+          getMonthlyStats(),
+        ])
+        setStats(s)
+        setCourses(c)
+        setActivityFeed(a)
+        setMonthlyData(m)
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to load dashboard data')
+      } finally {
+        setLoading(false)
+      }
     }
     loadData()
   }, [])
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-surface-50">
+        <Header title="Dashboard" subtitle="Welcome back — here's what's happening today" />
+        <div className="flex flex-col items-center justify-center p-20 text-center">
+          <p className="text-sm text-red-500 mb-2">Something went wrong loading the dashboard.</p>
+          <p className="text-xs text-surface-400">{error}</p>
+          <button onClick={() => window.location.reload()} className="mt-4 rounded-lg bg-brand-500 px-4 py-2 text-sm text-white hover:bg-brand-600">Retry</button>
+        </div>
+      </div>
+    )
+  }
 
   if (loading || !stats) {
     return (

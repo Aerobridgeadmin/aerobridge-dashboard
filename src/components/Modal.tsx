@@ -1,6 +1,6 @@
 'use client'
 import { X } from 'lucide-react'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useCallback } from 'react'
 
 interface ModalProps {
   open: boolean
@@ -12,20 +12,33 @@ interface ModalProps {
 
 export default function Modal({ open, onClose, title, children, width = 'max-w-lg' }: ModalProps) {
   const overlayRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  const handleEscape = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Escape') onClose()
+  }, [onClose])
 
   useEffect(() => {
-    if (open) document.body.style.overflow = 'hidden'
-    else document.body.style.overflow = ''
-    return () => { document.body.style.overflow = '' }
-  }, [open])
+    if (open) {
+      document.body.style.overflow = 'hidden'
+      document.addEventListener('keydown', handleEscape)
+      contentRef.current?.focus()
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+      document.removeEventListener('keydown', handleEscape)
+    }
+  }, [open, handleEscape])
 
   if (!open) return null
   return (
-    <div ref={overlayRef} className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm" onClick={e => { if (e.target === overlayRef.current) onClose() }}>
-      <div className={`${width} w-full mx-4 animate-slide-up rounded-xl bg-white shadow-elevated`}>
+    <div ref={overlayRef} role="dialog" aria-modal="true" aria-labelledby="modal-title" className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm" onClick={e => { if (e.target === overlayRef.current) onClose() }}>
+      <div ref={contentRef} tabIndex={-1} className={`${width} w-full mx-4 animate-slide-up rounded-xl bg-white shadow-elevated outline-none`}>
         <div className="flex items-center justify-between border-b border-surface-100 px-6 py-4">
-          <h3 className="text-base font-bold text-surface-800">{title}</h3>
-          <button onClick={onClose} className="rounded-lg p-1.5 text-surface-400 transition-colors hover:bg-surface-100 hover:text-surface-600"><X className="h-4 w-4" /></button>
+          <h3 id="modal-title" className="text-base font-bold text-surface-800">{title}</h3>
+          <button onClick={onClose} aria-label="Close dialog" className="rounded-lg p-1.5 text-surface-400 transition-colors hover:bg-surface-100 hover:text-surface-600"><X className="h-4 w-4" /></button>
         </div>
         <div className="px-6 py-5">{children}</div>
       </div>

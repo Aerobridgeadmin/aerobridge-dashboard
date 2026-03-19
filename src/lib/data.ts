@@ -1,60 +1,64 @@
-import { supabase, Course, Student, Batch, Quiz, Certificate, LiveClass, Assignment, Employee, Attendance, ScheduleEvent, Announcement, Discussion, DashboardStats } from './supabase'
+import { supabase, Course, Student, Batch, Quiz, Certificate, LiveClass, Assignment, Employee, Attendance, ScheduleEvent, Announcement, Discussion, DashboardStats, UserCertification, CertificationType, FlightLogEntry, LearningPath } from './supabase'
+
+// ── QUERY HELPER ──
+async function query<T>(
+  table: string,
+  options?: { order?: string; ascending?: boolean; limit?: number; single?: boolean; filter?: { col: string; val: string } }
+): Promise<T> {
+  let q = supabase.from(table).select('*')
+  if (options?.filter) q = q.eq(options.filter.col, options.filter.val)
+  if (options?.order) q = q.order(options.order, { ascending: options.ascending ?? false })
+  if (options?.limit) q = q.limit(options.limit)
+  const result = options?.single ? await (q as any).single() : await q
+  if (result.error) throw new Error(`Failed to fetch ${table}: ${result.error.message}`)
+  return (result.data ?? (options?.single ? null : [])) as T
+}
 
 // ── READ ──
 export async function getCourses(): Promise<Course[]> {
-  const { data } = await supabase.from('courses').select('*').order('created_at', { ascending: false })
-  return data ?? []
+  return query('courses', { order: 'created_at' })
 }
 export async function getStudents(): Promise<Student[]> {
-  const { data } = await supabase.from('students').select('*').order('joined_at', { ascending: false })
-  return data ?? []
+  return query('students', { order: 'joined_at' })
 }
 export async function getBatches(): Promise<Batch[]> {
-  const { data } = await supabase.from('batches').select('*').order('start_date', { ascending: false })
-  return data ?? []
+  return query('batches', { order: 'start_date' })
 }
 export async function getQuizzes(): Promise<Quiz[]> {
-  const { data } = await supabase.from('quizzes').select('*').order('title')
-  return data ?? []
+  return query('quizzes', { order: 'title', ascending: true })
 }
 export async function getCertificates(): Promise<Certificate[]> {
-  const { data } = await supabase.from('certificates').select('*').order('issued_at', { ascending: false })
-  return data ?? []
+  return query('certificates', { order: 'issued_at' })
 }
 export async function getLiveClasses(): Promise<LiveClass[]> {
-  const { data } = await supabase.from('live_classes').select('*').order('start_time', { ascending: true })
-  return data ?? []
+  return query('live_classes', { order: 'start_time', ascending: true })
 }
 export async function getAssignments(): Promise<Assignment[]> {
-  const { data } = await supabase.from('assignments').select('*').order('due_date', { ascending: true })
-  return data ?? []
+  return query('assignments', { order: 'due_date', ascending: true })
 }
 export async function getEmployees(): Promise<Employee[]> {
-  const { data } = await supabase.from('employees').select('*').order('name')
-  return data ?? []
+  return query('employees', { order: 'name', ascending: true })
 }
 export async function getAttendance(): Promise<Attendance[]> {
-  const { data } = await supabase.from('attendance').select('*').order('date', { ascending: false })
-  return data ?? []
+  return query('attendance', { order: 'date' })
 }
 export async function getSchedule(): Promise<ScheduleEvent[]> {
-  const { data } = await supabase.from('schedule').select('*').order('start_time', { ascending: true })
-  return data ?? []
+  return query('schedule', { order: 'start_time', ascending: true })
 }
 export async function getAnnouncements(): Promise<Announcement[]> {
-  const { data } = await supabase.from('announcements').select('*').order('created_at', { ascending: false })
-  return data ?? []
+  return query('announcements', { order: 'created_at' })
 }
 export async function getDiscussions(): Promise<Discussion[]> {
-  const { data } = await supabase.from('discussions').select('*').order('created_at', { ascending: false })
-  return data ?? []
+  return query('discussions', { order: 'created_at' })
 }
 export async function getDashboardStats(): Promise<DashboardStats> {
-  const { data } = await supabase.from('dashboard_stats').select('*').single()
+  const { data, error } = await supabase.from('dashboard_stats').select('*').single()
+  if (error) console.error('Dashboard stats fetch failed:', error.message)
   return data ?? { totalStudents:0,totalCourses:0,activeBatches:0,certificatesIssued:0,recentEnrollments:0,completionRate:0,activeStaff:0,upcomingClasses:0,activeAssignments:0 }
 }
 export async function getActivityFeed() {
-  const { data } = await supabase.from('activity_feed').select('*').order('created_at', { ascending: false }).limit(6)
+  const { data, error } = await supabase.from('activity_feed').select('*').order('created_at', { ascending: false }).limit(6)
+  if (error) console.error('Activity feed fetch failed:', error.message)
   return data ?? []
 }
 
@@ -128,7 +132,17 @@ export async function updateCourse(id: string, updates: Partial<Course>) {
 }
 
 // ── DELETE ──
+const DELETABLE_TABLES = [
+  'courses', 'students', 'batches', 'quizzes', 'certificates',
+  'live_classes', 'assignments', 'employees', 'attendance',
+  'schedule', 'announcements', 'discussions', 'certification_types',
+  'user_certifications', 'flight_log', 'learning_paths',
+] as const
+
 export async function deleteRecord(table: string, id: string) {
+  if (!DELETABLE_TABLES.includes(table as any)) {
+    throw new Error(`Delete not allowed on table: ${table}`)
+  }
   const { error } = await supabase.from(table).delete().eq('id', id)
   if (error) throw error
 }
@@ -144,12 +158,12 @@ export async function getUserCertifications(userId?: string) {
   const { data } = await q
   return data ?? []
 }
-export async function createUserCertification(cert: any) {
+export async function createUserCertification(cert: Partial<UserCertification>) {
   const { data, error } = await supabase.from('user_certifications').insert(cert).select().single()
   if (error) throw error
   return data
 }
-export async function createCertificationType(ct: any) {
+export async function createCertificationType(ct: Partial<CertificationType>) {
   const { data, error } = await supabase.from('certification_types').insert(ct).select().single()
   if (error) throw error
   return data
@@ -166,7 +180,7 @@ export async function getFlightLogSummary(userId: string) {
   const { data } = await supabase.from('flight_log_summary').select('*').eq('user_id', userId).single()
   return data
 }
-export async function createFlightLogEntry(entry: any) {
+export async function createFlightLogEntry(entry: Partial<FlightLogEntry>) {
   const { data, error } = await supabase.from('flight_log').insert(entry).select().single()
   if (error) throw error
   return data
@@ -181,7 +195,7 @@ export async function getLearningPathCourses(pathId: string) {
   const { data } = await supabase.from('learning_path_courses').select('*, courses(*)').eq('learning_path_id', pathId).order('sort_order')
   return data ?? []
 }
-export async function createLearningPath(path: any) {
+export async function createLearningPath(path: Partial<LearningPath>) {
   const { data, error } = await supabase.from('learning_paths').insert(path).select().single()
   if (error) throw error
   return data
@@ -197,7 +211,8 @@ export async function getLeaderboard() {
   return data ?? []
 }
 export async function awardPoints(userId: string, points: number, action: string, description: string) {
-  await supabase.from('user_points').insert({ user_id: userId, points, action, description })
+  const { error } = await supabase.from('user_points').insert({ user_id: userId, points, action, description })
+  if (error) throw new Error(`Failed to award points: ${error.message}`)
 }
 
 // ── COMPLIANCE ──
@@ -214,5 +229,6 @@ export async function getMonthlyStats(): Promise<{ month: string; enrollments: n
 
 // ── ACTIVITY FEED HELPER ──
 export async function logActivity(type: string, text: string) {
-  await supabase.from('activity_feed').insert({ type, text, time: 'Just now' })
+  const { error } = await supabase.from('activity_feed').insert({ type, text, time: 'Just now' })
+  if (error) console.error('Failed to log activity:', error.message)
 }

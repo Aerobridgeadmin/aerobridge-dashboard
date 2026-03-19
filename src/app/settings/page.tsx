@@ -12,7 +12,7 @@ export default function SettingsPage() {
   const [notifs, setNotifs] = useState({ email_announcements: true, email_assignments: true, email_grades: true, email_discussions: true, email_schedule: true })
   const [saving, setSaving] = useState(false)
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null)
-  const [passwords, setPasswords] = useState({ newPassword: '', confirmPassword: '' })
+  const [passwords, setPasswords] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' })
   const [changingPassword, setChangingPassword] = useState(false)
 
   useEffect(() => {
@@ -34,12 +34,16 @@ export default function SettingsPage() {
 
   const handlePasswordChange = async (e: FormEvent) => {
     e.preventDefault()
-    if (passwords.newPassword.length < 6) { setToast({ message: 'Password must be at least 6 characters', type: 'error' }); return }
+    if (!passwords.currentPassword) { setToast({ message: 'Enter your current password', type: 'error' }); return }
+    if (passwords.newPassword.length < 8) { setToast({ message: 'Password must be at least 8 characters', type: 'error' }); return }
+    if (!/[A-Z]/.test(passwords.newPassword) || !/[0-9]/.test(passwords.newPassword)) { setToast({ message: 'Password must include an uppercase letter and a number', type: 'error' }); return }
     if (passwords.newPassword !== passwords.confirmPassword) { setToast({ message: 'Passwords do not match', type: 'error' }); return }
     setChangingPassword(true)
+    const { error: verifyError } = await supabase.auth.signInWithPassword({ email: user?.email || '', password: passwords.currentPassword })
+    if (verifyError) { setToast({ message: 'Current password is incorrect', type: 'error' }); setChangingPassword(false); return }
     const { error } = await supabase.auth.updateUser({ password: passwords.newPassword })
     setToast(error ? { message: error.message, type: 'error' } : { message: 'Password updated', type: 'success' })
-    setPasswords({ newPassword: '', confirmPassword: '' })
+    setPasswords({ currentPassword: '', newPassword: '', confirmPassword: '' })
     setChangingPassword(false)
   }
 
@@ -121,14 +125,20 @@ export default function SettingsPage() {
         <form onSubmit={handlePasswordChange} className="mt-6">
           <div className="card p-6">
             <h3 className="mb-4 flex items-center gap-2 text-sm font-bold text-surface-800"><Key className="h-4 w-4 text-brand-500" /> Change Password</h3>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-4">
               <div>
-                <label className="mb-1.5 block text-xs font-semibold text-surface-600">New Password</label>
-                <input type="password" placeholder="Min. 6 characters" value={passwords.newPassword} onChange={e => setPasswords({ ...passwords, newPassword: e.target.value })} className="h-10 w-full rounded-lg border border-surface-200 bg-white px-3 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-50" />
+                <label className="mb-1.5 block text-xs font-semibold text-surface-600">Current Password</label>
+                <input type="password" placeholder="Enter current password" value={passwords.currentPassword} onChange={e => setPasswords({ ...passwords, currentPassword: e.target.value })} className="h-10 w-full rounded-lg border border-surface-200 bg-white px-3 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-50" />
               </div>
-              <div>
-                <label className="mb-1.5 block text-xs font-semibold text-surface-600">Confirm Password</label>
-                <input type="password" placeholder="••••••••" value={passwords.confirmPassword} onChange={e => setPasswords({ ...passwords, confirmPassword: e.target.value })} className="h-10 w-full rounded-lg border border-surface-200 bg-white px-3 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-50" />
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="mb-1.5 block text-xs font-semibold text-surface-600">New Password</label>
+                  <input type="password" placeholder="Min. 8 chars, uppercase + number" value={passwords.newPassword} onChange={e => setPasswords({ ...passwords, newPassword: e.target.value })} className="h-10 w-full rounded-lg border border-surface-200 bg-white px-3 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-50" />
+                </div>
+                <div>
+                  <label className="mb-1.5 block text-xs font-semibold text-surface-600">Confirm Password</label>
+                  <input type="password" placeholder="••••••••" value={passwords.confirmPassword} onChange={e => setPasswords({ ...passwords, confirmPassword: e.target.value })} className="h-10 w-full rounded-lg border border-surface-200 bg-white px-3 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-50" />
+                </div>
               </div>
             </div>
             <button type="submit" disabled={changingPassword || !passwords.newPassword} className="mt-4 flex items-center gap-2 rounded-lg border border-surface-200 bg-white px-4 py-2 text-sm font-medium text-surface-700 hover:bg-surface-50 disabled:opacity-50">

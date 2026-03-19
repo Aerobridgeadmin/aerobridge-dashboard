@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 export default function SignupPage() {
   const { signUp } = useAuth()
-  const [form, setForm] = useState({ name: '', email: '', password: '', confirmPassword: '', role: 'student' })
+  const [form, setForm] = useState({ name: '', email: '', password: '', confirmPassword: '' })
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -16,20 +16,16 @@ export default function SignupPage() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setError('')
-    if (form.password.length < 6) { setError('Password must be at least 6 characters'); return }
+    if (form.password.length < 8) { setError('Password must be at least 8 characters'); return }
+    if (!/[A-Z]/.test(form.password) || !/[0-9]/.test(form.password)) { setError('Password must include an uppercase letter and a number'); return }
     if (form.password !== form.confirmPassword) { setError('Passwords do not match'); return }
     setLoading(true)
-    const { error } = await signUp(form.email, form.password, { full_name: form.name, role: form.role })
+    const { error } = await signUp(form.email, form.password, { full_name: form.name })
     if (error) setError(error.message)
     else setSuccess(true)
     setLoading(false)
   }
 
-  const roles = [
-    { value: 'student', label: 'Student', desc: 'Enroll in courses and track progress' },
-    { value: 'instructor', label: 'Instructor', desc: 'Create courses and manage content' },
-    { value: 'admin', label: 'Admin', desc: 'Full platform management access' },
-  ]
 
   if (success) {
     return (
@@ -85,17 +81,6 @@ export default function SignupPage() {
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" />
                 <input type="email" required placeholder="you@company.com" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} className="h-11 w-full rounded-lg border border-surface-200 bg-white pl-10 pr-4 text-sm text-surface-800 outline-none transition-all placeholder:text-surface-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-50" />
-              </div>
-            </div>
-            <div>
-              <label className="mb-1.5 block text-xs font-semibold text-surface-600">I am a...</label>
-              <div className="grid grid-cols-3 gap-2">
-                {roles.map(r => (
-                  <button key={r.value} type="button" onClick={() => setForm({ ...form, role: r.value })} className={`rounded-lg border-2 p-2.5 text-center transition-all ${form.role === r.value ? 'border-brand-500 bg-brand-50' : 'border-surface-200 bg-white hover:border-surface-300'}`}>
-                    <p className={`text-xs font-bold ${form.role === r.value ? 'text-brand-600' : 'text-surface-700'}`}>{r.label}</p>
-                    <p className="mt-0.5 text-[10px] text-surface-500">{r.desc}</p>
-                  </button>
-                ))}
               </div>
             </div>
             <div>

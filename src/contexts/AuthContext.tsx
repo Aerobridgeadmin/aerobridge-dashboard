@@ -82,7 +82,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { error } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { full_name: meta.full_name, role: meta.role || 'student' } },
+      options: { data: { full_name: meta.full_name, role: 'student' } },
     })
     return { error }
   }
