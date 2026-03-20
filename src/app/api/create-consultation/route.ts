@@ -25,48 +25,109 @@ function buildEmail(p: {
   const startStr = start.toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' })
   const endStr = end.toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' })
 
-  return `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"/></head>
-<body style="margin:0;padding:0;background:#f1f5f9;font-family:'Segoe UI',Arial,sans-serif;">
-<table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 0;">
+  return `<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AeroBridge</title>
+<style>*{box-sizing:border-box;margin:0;padding:0;}body{background:#f0f4f8;font-family:'Segoe UI',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;}a{color:#1d4ed8;text-decoration:none;}</style>
+</head>
+<body style="background:#f0f4f8;margin:0;padding:0;">
+<div style="display:none;max-height:0;overflow:hidden;color:#f0f4f8;font-size:1px;">Tu consulta gratuita de 15 min con AeroBridge está confirmada &nbsp;&#847;&nbsp;&#847;&nbsp;&#847;</div>
+
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f0f4f8;padding:32px 16px;">
 <tr><td align="center">
-<table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);">
-<tr><td style="background:linear-gradient(135deg,#0f2b5b 0%,#1d4ed8 100%);padding:36px 40px;text-align:center;">
-<h1 style="color:#ffffff;font-size:22px;font-weight:700;margin:0 0 6px;">¡Bienvenido/a a AeroBridge!</h1>
-<p style="color:#93c5fd;font-size:14px;margin:0;">Tu consulta gratuita de 15 minutos está confirmada</p>
-</td></tr>
-<tr><td style="padding:36px 40px;">
-<p style="color:#334155;font-size:15px;margin:0 0 20px;">Hola <strong>${p.studentName}</strong>,</p>
-<p style="color:#64748b;font-size:14px;line-height:1.7;margin:0 0 28px;">
-Nos da mucho gusto que hayas elegido AeroBridge para iniciar tu camino en la aviación.
-Hemos agendado una consulta gratuita de 15 minutos para que puedas resolver tus dudas con nuestro equipo.
-</p>
-<table width="100%" cellpadding="0" cellspacing="0" style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;margin-bottom:28px;">
-<tr><td style="padding:20px 24px;border-bottom:1px solid #e2e8f0;">
-<p style="margin:0;font-size:17px;font-weight:700;color:#0f172a;">Consulta Gratuita — AeroBridge</p>
-</td></tr>
-<tr><td style="padding:20px 24px;">
-<p style="margin:0 0 8px;font-size:13px;font-weight:600;color:#1e293b;">📅 ${dateStr}</p>
-<p style="margin:0;font-size:13px;color:#64748b;">🕐 ${startStr} – ${endStr}</p>
-</td></tr>
-</table>
-<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
-<tr><td align="center">
-<a href="${p.meetLink}" style="display:inline-block;background:#1d4ed8;color:#ffffff;font-size:14px;font-weight:600;padding:14px 32px;border-radius:8px;text-decoration:none;">
-Unirse a Google Meet →
-</a>
-</td></tr>
-</table>
-<p style="color:#94a3b8;font-size:12px;margin:0 0 8px;">
-Enlace directo: <a href="${p.meetLink}" style="color:#1d4ed8;">${p.meetLink}</a>
-</p>
-<hr style="border:none;border-top:1px solid #e2e8f0;margin:24px 0;"/>
-<p style="color:#64748b;font-size:13px;">
-Si tienes preguntas, escríbenos a <a href="mailto:${p.adminEmail}" style="color:#1d4ed8;">${p.adminEmail}</a>.
-</p>
-</td></tr>
-<tr><td style="background:#f8fafc;border-top:1px solid #e2e8f0;padding:20px 40px;text-align:center;">
-<p style="margin:0;font-size:11px;color:#94a3b8;">© ${new Date().getFullYear()} AeroBridge · <a href="https://aerobridge.cl" style="color:#64748b;text-decoration:none;">aerobridge.cl</a></p>
-</td></tr>
+<table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
+
+  <!-- HEADER -->
+  <tr>
+    <td style="background:linear-gradient(135deg,#0a1f45 0%,#0f2b5b 50%,#1a3a73 100%);border-radius:16px 16px 0 0;padding:32px 40px;text-align:center;">
+      <img src="https://dashboard.aerobridge.cl/images/logo-light.png" alt="AeroBridge" height="44" style="display:block;margin:0 auto;max-width:200px;"/>
+    </td>
+  </tr>
+
+  <!-- BODY -->
+  <tr>
+    <td style="background:#ffffff;padding:40px 40px 32px;border-left:1px solid #e2e8f0;border-right:1px solid #e2e8f0;">
+
+      <span style="display:inline-block;background:#f0fdf415;color:#059669;font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;padding:4px 12px;border-radius:20px;border:1px solid #bbf7d0;margin-bottom:20px;">Consulta confirmada ✓</span>
+
+      <h1 style="font-size:26px;font-weight:800;color:#0f172a;letter-spacing:-0.5px;margin:0 0 8px;line-height:1.3;">¡Tu consulta gratuita está agendada!</h1>
+      <p style="font-size:15px;color:#475569;line-height:1.75;margin:0 0 24px;">
+        Hola <strong style="color:#1e293b;">${p.studentName}</strong>, nos da mucho gusto que hayas elegido AeroBridge para iniciar tu camino en la aviación. A continuación encontrarás los detalles de tu sesión.
+      </p>
+
+      <!-- Meeting details card -->
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;margin-bottom:28px;">
+        <tr>
+          <td style="background:linear-gradient(135deg,#0f2b5b,#1d4ed8);padding:14px 20px;">
+            <p style="font-size:13px;font-weight:700;color:#ffffff;margin:0;letter-spacing:0.3px;">📅 Detalles de la reunión</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="padding:14px 20px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px;color:#94a3b8;width:35%;border-bottom:1px solid #f1f5f9;">Título</td>
+                <td style="padding:14px 20px;font-size:14px;font-weight:600;color:#1e293b;border-bottom:1px solid #f1f5f9;">Consulta Gratuita 15 min — AeroBridge</td>
+              </tr>
+              <tr>
+                <td style="padding:14px 20px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px;color:#94a3b8;border-bottom:1px solid #f1f5f9;">Fecha</td>
+                <td style="padding:14px 20px;font-size:14px;font-weight:600;color:#1e293b;border-bottom:1px solid #f1f5f9;">${dateStr}</td>
+              </tr>
+              <tr>
+                <td style="padding:14px 20px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px;color:#94a3b8;border-bottom:1px solid #f1f5f9;">Horario</td>
+                <td style="padding:14px 20px;font-size:14px;font-weight:600;color:#1e293b;border-bottom:1px solid #f1f5f9;">${startStr} – ${endStr} (Chile)</td>
+              </tr>
+              <tr>
+                <td style="padding:14px 20px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px;color:#94a3b8;">Plataforma</td>
+                <td style="padding:14px 20px;font-size:14px;font-weight:600;color:#1e293b;">Google Meet (enlace abajo)</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+
+      <!-- CTA -->
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 20px;">
+        <tr><td align="center">
+          <a href="${p.meetLink}" style="display:inline-block;background:linear-gradient(135deg,#1d4ed8,#2563eb);color:#ffffff;font-family:'Segoe UI',Helvetica,Arial,sans-serif;font-size:15px;font-weight:700;letter-spacing:0.3px;padding:14px 36px;border-radius:10px;text-decoration:none;box-shadow:0 4px 14px rgba(29,78,216,0.35);">
+            Unirse a Google Meet →
+          </a>
+        </td></tr>
+      </table>
+
+      <!-- Link fallback -->
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:28px;">
+        <tr><td style="background:#f0f7ff;border:1px solid #bfdbfe;border-radius:10px;padding:14px 18px;">
+          <p style="font-size:12px;color:#64748b;margin:0 0 4px;font-weight:600;">O copia este enlace en tu navegador:</p>
+          <a href="${p.meetLink}" style="font-size:13px;color:#1d4ed8;word-break:break-all;font-family:monospace;">${p.meetLink}</a>
+        </td></tr>
+      </table>
+
+      <hr style="border:none;border-top:1px solid #e2e8f0;margin:0 0 24px;"/>
+      <p style="font-size:14px;color:#64748b;line-height:1.7;margin:0;">
+        ¿Tienes preguntas antes de la sesión? Escríbenos a
+        <a href="mailto:${p.adminEmail}" style="color:#1d4ed8;font-weight:600;">${p.adminEmail}</a>
+        y te responderemos lo antes posible.
+      </p>
+
+    </td>
+  </tr>
+
+  <!-- FOOTER -->
+  <tr>
+    <td style="background:#f8fafc;border:1px solid #e2e8f0;border-top:none;border-radius:0 0 16px 16px;padding:24px 40px;text-align:center;">
+      <p style="font-size:12px;color:#94a3b8;margin:0 0 6px;">© ${new Date().getFullYear()} AeroBridge · Formación aeronáutica profesional</p>
+      <p style="font-size:11px;color:#cbd5e1;margin:0;">
+        <a href="https://aerobridge.cl" style="color:#94a3b8;">aerobridge.cl</a>
+        &nbsp;·&nbsp;
+        <a href="mailto:${p.adminEmail}" style="color:#94a3b8;">${p.adminEmail}</a>
+      </p>
+    </td>
+  </tr>
+
 </table>
 </td></tr>
 </table>
@@ -95,7 +156,6 @@ export async function POST(req: NextRequest) {
     // ── Google Calendar ──
     const clientEmail = process.env.GOOGLE_CLIENT_EMAIL
     const rawKey = process.env.GOOGLE_PRIVATE_KEY
-    // Vercel stores multiline values as literal \n — convert back to real newlines
     const privateKey = rawKey?.replace(/\\n/g, '\n')
     const calendarId = process.env.GOOGLE_CALENDAR_ID || 'primary'
 
@@ -192,7 +252,6 @@ export async function POST(req: NextRequest) {
       emailSent,
       startTime: startDateTime.toISOString(),
       endTime: endDateTime.toISOString(),
-      // Surface errors in response so frontend can show them
       ...(calendarError && { calendarError }),
       ...(emailError && { emailError }),
     })
