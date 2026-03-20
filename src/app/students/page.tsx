@@ -9,6 +9,7 @@ import { getStudents, createStudent, deleteRecord, logActivity } from '@/lib/dat
 import { Student } from '@/lib/supabase'
 import { Plus, Search, Mail, Loader2, Users, Trash2, Video, CheckCircle2, CalendarDays, Clock } from 'lucide-react'
 import RoleGuard from '@/components/RoleGuard'
+import { gtagConsultationBooked, gtagStudentAdded } from '@/lib/gtag'
 
 const SERVICE_TYPES = [
   {
@@ -90,11 +91,13 @@ export default function StudentsPage() {
           startTime: data.startTime,
           emailSent: data.emailSent,
         })
+        gtagConsultationBooked()
         setShowModal(false)
         setForm({ name: '', email: '', serviceType: 'free_consultation', consultationDate: '', consultationTime: '' })
         load()
       } else {
         setToast({ message: `Student "${form.name}" added successfully`, type: 'success' })
+        gtagStudentAdded()
         setShowModal(false)
         setForm({ name: '', email: '', serviceType: 'free_consultation', consultationDate: '', consultationTime: '' })
         load()
