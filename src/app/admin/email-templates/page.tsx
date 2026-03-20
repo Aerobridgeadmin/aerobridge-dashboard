@@ -170,7 +170,7 @@ export default function EmailTemplatesPage() {
           <FormField label="Subject Line"><FormInput value={form.subject} onChange={e => setForm({ ...form, subject: e.target.value })} /></FormField>
           <FormField label="Description"><FormInput value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} /></FormField>
           <FormField label="HTML Body">
-            <FormTextarea rows={16} value={form.html_body} onChange={e => setForm({ ...form, html_body: e.target.value })} className="font-mono text-xs" />
+            <FormTextarea rows={16} value={form.html_body} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, html_body: e.target.value })} className="font-mono text-xs" />
           </FormField>
           {editing?.variables && editing.variables.length > 0 && (
             <div>
