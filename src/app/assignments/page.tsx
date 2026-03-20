@@ -37,7 +37,7 @@ export default function AssignmentsPage() {
       <Header title="Assignments" subtitle="Track and manage coursework submissions" />
       <div className="p-8">
         <div className="mb-6 flex items-center justify-between">
-          <div className="relative"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" /><input type="text" placeholder="Search assignments..." value={search} onChange={e => setSearch(e.target.value)} className="h-10 w-72 rounded-lg border border-surface-200 bg-white pl-9 pr-4 text-sm outline-none transition-all placeholder:text-surface-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-50" /></div>
+          <div className="relative"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" /><input type="text" placeholder="Search assignments..." value={search} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setSearch(e.target.value)} className="h-10 w-72 rounded-lg border border-surface-200 bg-white pl-9 pr-4 text-sm outline-none transition-all placeholder:text-surface-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-50" /></div>
           <RoleVisible roles={["admin", "instructor"]}><button onClick={() => { setForm({ title: '', course_id: '', course_title: '', description: '', due_date: '', max_score: 100, status: 'active' }); setShowModal(true) }} className="flex items-center gap-2 rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-brand-600 active:scale-[0.98]"><Plus className="h-4 w-4" /> New Assignment</button></RoleVisible>
         </div>
         {loading ? <div className="flex justify-center p-12"><Loader2 className="h-8 w-8 animate-spin text-brand-500" /></div>
@@ -71,14 +71,14 @@ export default function AssignmentsPage() {
       </div>
       <Modal open={showModal} onClose={() => setShowModal(false)} title="New Assignment">
         <form onSubmit={handleSubmit} className="space-y-4">
-          <FormField label="Title" required><FormInput required placeholder="Assignment title" value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} /></FormField>
-          <FormField label="Course"><FormSelect value={form.course_id} onChange={e => { const c = courses.find(x => x.id === e.target.value); setForm({ ...form, course_id: e.target.value, course_title: c?.title || '' }) }}><option value="">Select course...</option>{courses.map(c => <option key={c.id} value={c.id}>{c.title}</option>)}</FormSelect></FormField>
-          <FormField label="Description"><FormTextarea rows={2} placeholder="Instructions..." value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} /></FormField>
+          <FormField label="Title" required><FormInput required placeholder="Assignment title" value={form.title} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, title: e.target.value })} /></FormField>
+          <FormField label="Course"><FormSelect value={form.course_id} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { const c = courses.find(x => x.id === e.target.value); setForm({ ...form, course_id: e.target.value, course_title: c?.title || '' }) }}><option value="">Select course...</option>{courses.map(c => <option key={c.id} value={c.id}>{c.title}</option>)}</FormSelect></FormField>
+          <FormField label="Description"><FormTextarea rows={2} placeholder="Instructions..." value={form.description} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, description: e.target.value })} /></FormField>
           <div className="grid grid-cols-2 gap-4">
-            <FormField label="Due Date"><FormInput type="date" value={form.due_date} onChange={e => setForm({ ...form, due_date: e.target.value })} /></FormField>
-            <FormField label="Max Score"><FormInput type="number" min={1} value={form.max_score} onChange={e => setForm({ ...form, max_score: Number(e.target.value) })} /></FormField>
+            <FormField label="Due Date"><FormInput type="date" value={form.due_date} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, due_date: e.target.value })} /></FormField>
+            <FormField label="Max Score"><FormInput type="number" min={1} value={form.max_score} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, max_score: Number(e.target.value) })} /></FormField>
           </div>
-          <FormField label="Status"><FormSelect value={form.status} onChange={e => setForm({ ...form, status: e.target.value as any })}><option value="active">Active</option><option value="draft">Draft</option></FormSelect></FormField>
+          <FormField label="Status"><FormSelect value={form.status} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, status: e.target.value as any })}><option value="active">Active</option><option value="draft">Draft</option></FormSelect></FormField>
           <FormActions onCancel={() => setShowModal(false)} loading={saving} submitLabel="Create" />
         </form>
       </Modal>

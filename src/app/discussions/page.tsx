@@ -59,7 +59,7 @@ export default function DiscussionsPage() {
           <div className="flex items-center gap-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" />
-              <input type="text" placeholder="Search discussions..." value={search} onChange={e => setSearch(e.target.value)} className="h-10 w-72 rounded-lg border border-surface-200 bg-white pl-9 pr-4 text-sm outline-none transition-all placeholder:text-surface-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-50" />
+              <input type="text" placeholder="Search discussions..." value={search} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setSearch(e.target.value)} className="h-10 w-72 rounded-lg border border-surface-200 bg-white pl-9 pr-4 text-sm outline-none transition-all placeholder:text-surface-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-50" />
             </div>
             <div className="flex items-center gap-3 text-xs text-surface-500">
               <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-success-500"></span>{discussions.filter(d => d.is_resolved).length} resolved</span>
@@ -119,17 +119,17 @@ export default function DiscussionsPage() {
       <Modal open={showModal} onClose={() => setShowModal(false)} title="New Discussion">
         <form onSubmit={handleSubmit} className="space-y-4">
           <FormField label="Title" required>
-            <FormInput required placeholder="What's your question or topic?" value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} />
+            <FormInput required placeholder="What's your question or topic?" value={form.title} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, title: e.target.value })} />
           </FormField>
           <FormField label="Content" required>
-            <FormTextarea required rows={4} placeholder="Describe your question or share your thoughts..." value={form.content} onChange={e => setForm({ ...form, content: e.target.value })} />
+            <FormTextarea required rows={4} placeholder="Describe your question or share your thoughts..." value={form.content} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, content: e.target.value })} />
           </FormField>
           <div className="grid grid-cols-2 gap-4">
             <FormField label="Author" required>
-              <FormInput required placeholder="Your name" value={form.author} onChange={e => setForm({ ...form, author: e.target.value })} />
+              <FormInput required placeholder="Your name" value={form.author} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, author: e.target.value })} />
             </FormField>
             <FormField label="Course (optional)">
-              <FormSelect value={form.course_id} onChange={e => setForm({ ...form, course_id: e.target.value })}>
+              <FormSelect value={form.course_id} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, course_id: e.target.value })}>
                 <option value="">General</option>
                 {courses.map(c => <option key={c.id} value={c.id}>{c.title}</option>)}
               </FormSelect>

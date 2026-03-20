@@ -58,7 +58,7 @@ export default function AnnouncementsPage() {
         <div className="mb-6 flex items-center justify-between">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" />
-            <input type="text" placeholder="Search announcements..." value={search} onChange={e => setSearch(e.target.value)} className="h-10 w-72 rounded-lg border border-surface-200 bg-white pl-9 pr-4 text-sm outline-none transition-all placeholder:text-surface-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-50" />
+            <input type="text" placeholder="Search announcements..." value={search} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setSearch(e.target.value)} className="h-10 w-72 rounded-lg border border-surface-200 bg-white pl-9 pr-4 text-sm outline-none transition-all placeholder:text-surface-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-50" />
           </div>
           <RoleVisible roles={['admin', 'instructor']}>
           <button onClick={() => { setForm({ title: '', content: '', author: '', course_id: '', priority: 'normal', pinned: false }); setShowModal(true) }} className="flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:opacity-90 active:scale-[0.98]" style={{ backgroundColor: '#D64541' }}>
@@ -116,17 +116,17 @@ export default function AnnouncementsPage() {
       <Modal open={showModal} onClose={() => setShowModal(false)} title="New Announcement">
         <form onSubmit={handleSubmit} className="space-y-4">
           <FormField label="Title" required>
-            <FormInput required placeholder="Announcement title" value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} />
+            <FormInput required placeholder="Announcement title" value={form.title} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, title: e.target.value })} />
           </FormField>
           <FormField label="Content" required>
-            <FormTextarea required rows={4} placeholder="Write your announcement..." value={form.content} onChange={e => setForm({ ...form, content: e.target.value })} />
+            <FormTextarea required rows={4} placeholder="Write your announcement..." value={form.content} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, content: e.target.value })} />
           </FormField>
           <div className="grid grid-cols-2 gap-4">
             <FormField label="Author" required>
-              <FormInput required placeholder="Your name" value={form.author} onChange={e => setForm({ ...form, author: e.target.value })} />
+              <FormInput required placeholder="Your name" value={form.author} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, author: e.target.value })} />
             </FormField>
             <FormField label="Priority">
-              <FormSelect value={form.priority} onChange={e => setForm({ ...form, priority: e.target.value as any })}>
+              <FormSelect value={form.priority} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, priority: e.target.value as any })}>
                 <option value="low">Low</option>
                 <option value="normal">Normal</option>
                 <option value="high">High</option>
@@ -135,7 +135,7 @@ export default function AnnouncementsPage() {
             </FormField>
           </div>
           <FormField label="Course (optional)">
-            <FormSelect value={form.course_id} onChange={e => setForm({ ...form, course_id: e.target.value })}>
+            <FormSelect value={form.course_id} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, course_id: e.target.value })}>
               <option value="">All — General announcement</option>
               {courses.map(c => <option key={c.id} value={c.id}>{c.title}</option>)}
             </FormSelect>

@@ -71,7 +71,7 @@ export default function OnboardingPage() {
               </div>
               <div>
                 <label className="mb-1.5 block text-xs font-semibold text-surface-600">Bio</label>
-                <textarea rows={3} placeholder="Tell us about yourself..." value={form.bio} onChange={e => setForm({ ...form, bio: e.target.value })} className="w-full rounded-lg border border-surface-200 bg-white px-3 py-2 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-50" />
+                <textarea rows={3} placeholder="Tell us about yourself..." value={form.bio} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, bio: e.target.value })} className="w-full rounded-lg border border-surface-200 bg-white px-3 py-2 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-50" />
               </div>
             </div>
           )}

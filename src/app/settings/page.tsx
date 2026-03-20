@@ -163,7 +163,7 @@ export default function SettingsPage() {
               </div>
               <div>
                 <label className="mb-1.5 block text-xs font-semibold text-surface-600">Bio</label>
-                <textarea rows={3} placeholder="Tell us about yourself..." value={form.bio} onChange={e => setForm({ ...form, bio: e.target.value })} className="w-full rounded-lg border border-surface-200 bg-white px-3 py-2 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-50" />
+                <textarea rows={3} placeholder="Tell us about yourself..." value={form.bio} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, bio: e.target.value })} className="w-full rounded-lg border border-surface-200 bg-white px-3 py-2 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-50" />
               </div>
             </div>
           </div>
@@ -300,11 +300,11 @@ export default function SettingsPage() {
       {/* Edit Template Modal */}
       <Modal open={!!editing} onClose={() => setEditing(null)} title={`Edit: ${editing?.name || ''}`}>
         <form onSubmit={handleTemplateSave} className="space-y-4">
-          <FormField label="Template Name"><FormInput value={templateForm.name} onChange={e => setTemplateForm({ ...templateForm, name: e.target.value })} /></FormField>
-          <FormField label="Subject Line"><FormInput value={templateForm.subject} onChange={e => setTemplateForm({ ...templateForm, subject: e.target.value })} /></FormField>
-          <FormField label="Description"><FormInput value={templateForm.description} onChange={e => setTemplateForm({ ...templateForm, description: e.target.value })} /></FormField>
+          <FormField label="Template Name"><FormInput value={templateForm.name} onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setTemplateForm({ ...templateForm, name: e.target.value })} /></FormField>
+          <FormField label="Subject Line"><FormInput value={templateForm.subject} onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setTemplateForm({ ...templateForm, subject: e.target.value })} /></FormField>
+          <FormField label="Description"><FormInput value={templateForm.description} onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setTemplateForm({ ...templateForm, description: e.target.value })} /></FormField>
           <FormField label="HTML Body">
-            <FormTextarea rows={16} value={templateForm.html_body} onChange={e => setTemplateForm({ ...templateForm, html_body: e.target.value })} className="font-mono text-xs" />
+            <FormTextarea rows={16} value={templateForm.html_body} onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setTemplateForm({ ...templateForm, html_body: e.target.value })} className="font-mono text-xs" />
           </FormField>
           {editing?.variables && editing.variables.length > 0 && (
             <div>

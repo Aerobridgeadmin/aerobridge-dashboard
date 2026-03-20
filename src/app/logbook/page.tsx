@@ -87,7 +87,7 @@ export default function LogbookPage() {
         )}
 
         <div className="mb-6 flex items-center justify-between">
-          <div className="relative"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" /><input type="text" placeholder="Search flights..." value={search} onChange={e => setSearch(e.target.value)} className="h-10 w-72 rounded-lg border border-surface-200 bg-white pl-9 pr-4 text-sm outline-none transition-all placeholder:text-surface-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-50" /></div>
+          <div className="relative"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" /><input type="text" placeholder="Search flights..." value={search} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setSearch(e.target.value)} className="h-10 w-72 rounded-lg border border-surface-200 bg-white pl-9 pr-4 text-sm outline-none transition-all placeholder:text-surface-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-50" /></div>
           <button onClick={() => { setForm({ ...form, date: new Date().toISOString().split('T')[0] }); setShowModal(true) }} className="flex items-center gap-2 rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-brand-600 active:scale-[0.98]"><Plus className="h-4 w-4" /> Log Flight</button>
         </div>
 
@@ -131,14 +131,14 @@ export default function LogbookPage() {
       <Modal open={showModal} onClose={() => setShowModal(false)} title="Log Flight" width="max-w-2xl">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-3 gap-4">
-            <FormField label="Date" required><FormInput required type="date" value={form.date} onChange={e => setForm({ ...form, date: e.target.value })} /></FormField>
-            <FormField label="Aircraft Type"><FormInput placeholder="e.g. C172" value={form.aircraft_type} onChange={e => setForm({ ...form, aircraft_type: e.target.value })} /></FormField>
-            <FormField label="Registration"><FormInput placeholder="e.g. N12345" value={form.aircraft_registration} onChange={e => setForm({ ...form, aircraft_registration: e.target.value })} /></FormField>
+            <FormField label="Date" required><FormInput required type="date" value={form.date} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, date: e.target.value })} /></FormField>
+            <FormField label="Aircraft Type"><FormInput placeholder="e.g. C172" value={form.aircraft_type} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, aircraft_type: e.target.value })} /></FormField>
+            <FormField label="Registration"><FormInput placeholder="e.g. N12345" value={form.aircraft_registration} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, aircraft_registration: e.target.value })} /></FormField>
           </div>
           <div className="grid grid-cols-3 gap-4">
-            <FormField label="Departure"><FormInput placeholder="KJFK" value={form.departure_location} onChange={e => setForm({ ...form, departure_location: e.target.value })} /></FormField>
-            <FormField label="Arrival"><FormInput placeholder="KLGA" value={form.arrival_location} onChange={e => setForm({ ...form, arrival_location: e.target.value })} /></FormField>
-            <FormField label="Flight Type"><FormSelect value={form.flight_type} onChange={e => setForm({ ...form, flight_type: e.target.value })}>{Object.entries(flightTypeLabels).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</FormSelect></FormField>
+            <FormField label="Departure"><FormInput placeholder="KJFK" value={form.departure_location} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, departure_location: e.target.value })} /></FormField>
+            <FormField label="Arrival"><FormInput placeholder="KLGA" value={form.arrival_location} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, arrival_location: e.target.value })} /></FormField>
+            <FormField label="Flight Type"><FormSelect value={form.flight_type} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, flight_type: e.target.value })}>{Object.entries(flightTypeLabels).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</FormSelect></FormField>
           </div>
           <p className="text-xs font-semibold text-surface-600 pt-2">Hours</p>
           <div className="grid grid-cols-4 gap-3">
@@ -150,23 +150,23 @@ export default function LogbookPage() {
             ].map(f => (
               <div key={f.key}>
                 <label className="mb-1 block text-[10px] font-medium text-surface-500">{f.label}</label>
-                <FormInput type="number" step="0.1" min="0" value={(form as any)[f.key]} onChange={e => setForm({ ...form, [f.key]: Number(e.target.value) })} />
+                <FormInput type="number" step="0.1" min="0" value={(form as any)[f.key]} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, [f.key]: Number(e.target.value) })} />
               </div>
             ))}
           </div>
           <p className="text-xs font-semibold text-surface-600 pt-2">Landings & Approaches</p>
           <div className="grid grid-cols-3 gap-4">
-            <div><label className="mb-1 block text-[10px] font-medium text-surface-500">Day Landings</label><FormInput type="number" min="0" value={form.landings_day} onChange={e => setForm({ ...form, landings_day: Number(e.target.value) })} /></div>
-            <div><label className="mb-1 block text-[10px] font-medium text-surface-500">Night Landings</label><FormInput type="number" min="0" value={form.landings_night} onChange={e => setForm({ ...form, landings_night: Number(e.target.value) })} /></div>
-            <div><label className="mb-1 block text-[10px] font-medium text-surface-500">Approaches</label><FormInput type="number" min="0" value={form.approaches} onChange={e => setForm({ ...form, approaches: Number(e.target.value) })} /></div>
+            <div><label className="mb-1 block text-[10px] font-medium text-surface-500">Day Landings</label><FormInput type="number" min="0" value={form.landings_day} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, landings_day: Number(e.target.value) })} /></div>
+            <div><label className="mb-1 block text-[10px] font-medium text-surface-500">Night Landings</label><FormInput type="number" min="0" value={form.landings_night} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, landings_night: Number(e.target.value) })} /></div>
+            <div><label className="mb-1 block text-[10px] font-medium text-surface-500">Approaches</label><FormInput type="number" min="0" value={form.approaches} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, approaches: Number(e.target.value) })} /></div>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <FormField label="Instructor"><FormInput placeholder="Name" value={form.instructor_name} onChange={e => setForm({ ...form, instructor_name: e.target.value })} /></FormField>
+            <FormField label="Instructor"><FormInput placeholder="Name" value={form.instructor_name} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, instructor_name: e.target.value })} /></FormField>
             <div className="flex items-end pb-1">
               <label className="flex items-center gap-2.5"><input type="checkbox" checked={form.instructor_endorsement} onChange={e => setForm({ ...form, instructor_endorsement: e.target.checked })} className="h-4 w-4 rounded border-surface-300 text-brand-500 focus:ring-brand-500" /><span className="text-sm font-medium text-surface-700">Instructor Endorsement</span></label>
             </div>
           </div>
-          <FormField label="Remarks"><FormTextarea rows={2} placeholder="Notes about this flight..." value={form.remarks} onChange={e => setForm({ ...form, remarks: e.target.value })} /></FormField>
+          <FormField label="Remarks"><FormTextarea rows={2} placeholder="Notes about this flight..." value={form.remarks} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, remarks: e.target.value })} /></FormField>
           <FormActions onCancel={() => setShowModal(false)} loading={saving} submitLabel="Log Flight" />
         </form>
       </Modal>

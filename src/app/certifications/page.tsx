@@ -91,7 +91,7 @@ export default function CertificationsPage() {
         {/* Filter tabs + search */}
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="relative"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" /><input type="text" placeholder="Search certifications..." value={search} onChange={e => setSearch(e.target.value)} className="h-10 w-72 rounded-lg border border-surface-200 bg-white pl-9 pr-4 text-sm outline-none transition-all placeholder:text-surface-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-50" /></div>
+            <div className="relative"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" /><input type="text" placeholder="Search certifications..." value={search} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setSearch(e.target.value)} className="h-10 w-72 rounded-lg border border-surface-200 bg-white pl-9 pr-4 text-sm outline-none transition-all placeholder:text-surface-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-50" /></div>
             <div className="flex gap-1">
               {(['all', 'active', 'expiring_soon', 'expired'] as const).map(s => (
                 <button key={s} onClick={() => setStatusFilter(s)} className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${statusFilter === s ? 'bg-brand-500 text-white' : 'bg-surface-100 text-surface-600 hover:bg-surface-200'}`}>
@@ -161,20 +161,20 @@ export default function CertificationsPage() {
       <Modal open={showModal} onClose={() => setShowModal(false)} title="Add Certification" width="max-w-xl">
         <form onSubmit={handleSubmit} className="space-y-4">
           <FormField label="Certification Type" required>
-            <FormSelect required value={form.certification_type_id} onChange={e => setForm({ ...form, certification_type_id: e.target.value })}>
+            <FormSelect required value={form.certification_type_id} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, certification_type_id: e.target.value })}>
               <option value="">Select type...</option>
               {certTypes.map((t: any) => <option key={t.id} value={t.id}>{t.name} ({t.authority})</option>)}
             </FormSelect>
           </FormField>
           <div className="grid grid-cols-2 gap-4">
-            <FormField label="Certificate Number"><FormInput placeholder="e.g. 1234567" value={form.certificate_number} onChange={e => setForm({ ...form, certificate_number: e.target.value })} /></FormField>
-            <FormField label="Issuing Authority"><FormInput placeholder="e.g. FAA" value={form.issuing_authority} onChange={e => setForm({ ...form, issuing_authority: e.target.value })} /></FormField>
+            <FormField label="Certificate Number"><FormInput placeholder="e.g. 1234567" value={form.certificate_number} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, certificate_number: e.target.value })} /></FormField>
+            <FormField label="Issuing Authority"><FormInput placeholder="e.g. FAA" value={form.issuing_authority} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, issuing_authority: e.target.value })} /></FormField>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <FormField label="Issue Date" required><FormInput required type="date" value={form.issued_date} onChange={e => setForm({ ...form, issued_date: e.target.value })} /></FormField>
-            <FormField label="Expiry Date"><FormInput type="date" value={form.expiry_date} onChange={e => setForm({ ...form, expiry_date: e.target.value })} /><p className="mt-1 text-[10px] text-surface-400">Auto-calculated if left blank</p></FormField>
+            <FormField label="Issue Date" required><FormInput required type="date" value={form.issued_date} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, issued_date: e.target.value })} /></FormField>
+            <FormField label="Expiry Date"><FormInput type="date" value={form.expiry_date} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, expiry_date: e.target.value })} /><p className="mt-1 text-[10px] text-surface-400">Auto-calculated if left blank</p></FormField>
           </div>
-          <FormField label="Notes"><FormTextarea rows={2} placeholder="Any additional notes..." value={form.notes} onChange={e => setForm({ ...form, notes: e.target.value })} /></FormField>
+          <FormField label="Notes"><FormTextarea rows={2} placeholder="Any additional notes..." value={form.notes} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, notes: e.target.value })} /></FormField>
           <FormActions onCancel={() => setShowModal(false)} loading={saving} submitLabel="Add Certification" />
         </form>
       </Modal>
