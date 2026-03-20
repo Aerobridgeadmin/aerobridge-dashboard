@@ -1,4 +1,4 @@
-import { createBrowserClient } from '@supabase/ssr'
+import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -9,9 +9,33 @@ if (!supabaseUrl || !supabaseAnonKey) {
   )
 }
 
-// createBrowserClient stores auth state (incl. PKCE verifier) in cookies
-// so the server-side /auth/callback can read it via @supabase/ssr createServerClient
-export const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey)
+// Use createClient with cookie-based storage so the PKCE verifier is accessible
+// to the server-side /auth/callback route (which uses @supabase/ssr createServerClient).
+// We avoid createBrowserClient from @supabase/ssr because it uses the Web Locks API
+// which deadlocks in Next.js (lock not released within 5000ms).
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    flowType: 'pkce',
+    storage: typeof window !== 'undefined' ? {
+      getItem: (key) => {
+        // Check cookies first (for PKCE verifier compatibility with server callback)
+        const match = document.cookie.match(new RegExp('(^| )' + key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '=([^;]+)'))
+        if (match) return decodeURIComponent(match[2])
+        return localStorage.getItem(key)
+      },
+      setItem: (key, value) => {
+        // Write to both cookie and localStorage
+        const maxAge = 60 * 60 * 24 * 365
+        document.cookie = `${key}=${encodeURIComponent(value)}; path=/; max-age=${maxAge}; SameSite=Lax; Secure`
+        localStorage.setItem(key, value)
+      },
+      removeItem: (key) => {
+        document.cookie = `${key}=; path=/; max-age=0`
+        localStorage.removeItem(key)
+      },
+    } : undefined,
+  },
+})
 
 export interface Course {
   id: string; title: string; description: string; image_url?: string; published: boolean
