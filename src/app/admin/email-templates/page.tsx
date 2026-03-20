@@ -170,7 +170,7 @@ export default function EmailTemplatesPage() {
           <FormField label="Subject Line"><FormInput value={form.subject} onChange={e => setForm({ ...form, subject: e.target.value })} /></FormField>
           <FormField label="Description"><FormInput value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} /></FormField>
           <FormField label="HTML Body">
-            <FormTextarea rows={16} value={form.html_body} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, html_body: e.target.value })} className="font-mono text-xs" />
+            <FormTextarea rows={16} value={form.html_body} onChange={(e) => setForm({ ...form, html_body: e.target.value })} className="font-mono text-xs" />
           </FormField>
           {editing?.variables && editing.variables.length > 0 && (
             <div>
@@ -218,14 +218,14 @@ export default function EmailTemplatesPage() {
             (requires 2FA enabled).
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <FormField label="SMTP Host"><FormInput placeholder="smtp.gmail.com" value={smtpForm.smtp_host} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSmtpForm({ ...smtpForm, smtp_host: e.target.value })} /></FormField>
-            <FormField label="Port"><FormInput placeholder="587" value={smtpForm.smtp_port} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSmtpForm({ ...smtpForm, smtp_port: e.target.value })} /></FormField>
+            <FormField label="SMTP Host"><FormInput placeholder="smtp.gmail.com" value={smtpForm.smtp_host} onChange={(e) => setSmtpForm({ ...smtpForm, smtp_host: e.target.value })} /></FormField>
+            <FormField label="Port"><FormInput placeholder="587" value={smtpForm.smtp_port} onChange={(e) => setSmtpForm({ ...smtpForm, smtp_port: e.target.value })} /></FormField>
           </div>
-          <FormField label="SMTP Username (Email)"><FormInput placeholder="noreply@aerobridge.cl" value={smtpForm.smtp_user} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSmtpForm({ ...smtpForm, smtp_user: e.target.value })} /></FormField>
-          <FormField label="SMTP Password / App Password"><FormInput type="password" placeholder="App password from Google" value={smtpForm.smtp_pass} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSmtpForm({ ...smtpForm, smtp_pass: e.target.value })} /></FormField>
+          <FormField label="SMTP Username (Email)"><FormInput placeholder="noreply@aerobridge.cl" value={smtpForm.smtp_user} onChange={(e) => setSmtpForm({ ...smtpForm, smtp_user: e.target.value })} /></FormField>
+          <FormField label="SMTP Password / App Password"><FormInput type="password" placeholder="App password from Google" value={smtpForm.smtp_pass} onChange={(e) => setSmtpForm({ ...smtpForm, smtp_pass: e.target.value })} /></FormField>
           <div className="grid grid-cols-2 gap-4">
-            <FormField label="From Email"><FormInput placeholder="noreply@aerobridge.cl" value={smtpForm.from_email} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSmtpForm({ ...smtpForm, from_email: e.target.value })} /></FormField>
-            <FormField label="From Name"><FormInput placeholder="AeroBridge" value={smtpForm.from_name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSmtpForm({ ...smtpForm, from_name: e.target.value })} /></FormField>
+            <FormField label="From Email"><FormInput placeholder="noreply@aerobridge.cl" value={smtpForm.from_email} onChange={(e) => setSmtpForm({ ...smtpForm, from_email: e.target.value })} /></FormField>
+            <FormField label="From Name"><FormInput placeholder="AeroBridge" value={smtpForm.from_name} onChange={(e) => setSmtpForm({ ...smtpForm, from_name: e.target.value })} /></FormField>
           </div>
           <FormActions onCancel={() => setShowSmtp(false)} loading={saving} submitLabel="Save SMTP Settings" />
         </form>

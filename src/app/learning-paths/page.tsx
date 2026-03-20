@@ -43,7 +43,7 @@ export default function LearningPathsPage() {
       <Header title="Learning Paths" subtitle="Structured course sequences with prerequisites" />
       <div className="p-8">
         <div className="mb-6 flex items-center justify-between">
-          <div className="relative"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" /><input type="text" placeholder="Search paths..." value={search} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setSearch(e.target.value)} className="h-10 w-72 rounded-lg border border-surface-200 bg-white pl-9 pr-4 text-sm outline-none transition-all placeholder:text-surface-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-50" /></div>
+          <div className="relative"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" /><input type="text" placeholder="Search paths..." value={search} onChange={(e) => setSearch(e.target.value)} className="h-10 w-72 rounded-lg border border-surface-200 bg-white pl-9 pr-4 text-sm outline-none transition-all placeholder:text-surface-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-50" /></div>
           <RoleVisible roles={['admin', 'instructor']}>
             <button onClick={() => { setForm({ title: '', description: '', category: 'aviation', target_role: 'all', estimated_hours: 0, published: false }); setShowModal(true) }} className="flex items-center gap-2 rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-brand-600 active:scale-[0.98]"><Plus className="h-4 w-4" /> Create Path</button>
           </RoleVisible>
@@ -93,11 +93,11 @@ export default function LearningPathsPage() {
 
       <Modal open={showModal} onClose={() => setShowModal(false)} title="Create Learning Path">
         <form onSubmit={handleSubmit} className="space-y-4">
-          <FormField label="Path Title" required><FormInput required placeholder="e.g. Part 107 Drone Pilot Certification" value={form.title} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, title: e.target.value })} /></FormField>
-          <FormField label="Description"><FormTextarea rows={3} placeholder="What will learners achieve..." value={form.description} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, description: e.target.value })} /></FormField>
+          <FormField label="Path Title" required><FormInput required placeholder="e.g. Part 107 Drone Pilot Certification" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} /></FormField>
+          <FormField label="Description"><FormTextarea rows={3} placeholder="What will learners achieve..." value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} /></FormField>
           <div className="grid grid-cols-2 gap-4">
-            <FormField label="Target Role"><FormSelect value={form.target_role} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, target_role: e.target.value })}>{Object.entries(roleLabels).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</FormSelect></FormField>
-            <FormField label="Estimated Hours"><FormInput type="number" min={0} value={form.estimated_hours} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, estimated_hours: Number(e.target.value) })} /></FormField>
+            <FormField label="Target Role"><FormSelect value={form.target_role} onChange={(e) => setForm({ ...form, target_role: e.target.value })}>{Object.entries(roleLabels).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</FormSelect></FormField>
+            <FormField label="Estimated Hours"><FormInput type="number" min={0} value={form.estimated_hours} onChange={(e) => setForm({ ...form, estimated_hours: Number(e.target.value) })} /></FormField>
           </div>
           <label className="flex items-center gap-2.5 pt-1"><input type="checkbox" checked={form.published} onChange={e => setForm({ ...form, published: e.target.checked })} className="h-4 w-4 rounded border-surface-300 text-brand-500 focus:ring-brand-500" /><span className="text-sm font-medium text-surface-700">Publish immediately</span></label>
           <FormActions onCancel={() => setShowModal(false)} loading={saving} submitLabel="Create Path" />

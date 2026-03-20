@@ -102,7 +102,7 @@ export default function CoursesPage() {
         <div className="mb-6 flex items-center justify-between">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" />
-            <input type="text" placeholder="Search courses..." value={search} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setSearch(e.target.value)} className="h-10 w-72 rounded-lg border border-surface-200 bg-white pl-9 pr-4 text-sm outline-none transition-all placeholder:text-surface-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-50" />
+            <input type="text" placeholder="Search courses..." value={search} onChange={(e) => setSearch(e.target.value)} className="h-10 w-72 rounded-lg border border-surface-200 bg-white pl-9 pr-4 text-sm outline-none transition-all placeholder:text-surface-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-50" />
           </div>
           <RoleVisible roles={['admin', 'instructor']}>
             <button onClick={openCreate} className="flex items-center gap-2 rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-all hover:bg-brand-600 hover:shadow-md active:scale-[0.98]">
@@ -181,27 +181,27 @@ export default function CoursesPage() {
       <Modal open={showModal} onClose={() => setShowModal(false)} title={editingCourse ? 'Edit Course' : 'Create New Course'}>
         <form onSubmit={handleSubmit} className="space-y-4">
           <FormField label="Course Title" required>
-            <FormInput required placeholder="e.g. Drone Operations Fundamentals" value={form.title} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, title: e.target.value })} />
+            <FormInput required placeholder="e.g. Drone Operations Fundamentals" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
           </FormField>
           <FormField label="Description">
-            <FormTextarea rows={3} placeholder="Brief description of the course..." value={form.description} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, description: e.target.value })} />
+            <FormTextarea rows={3} placeholder="Brief description of the course..." value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
           </FormField>
           <div className="grid grid-cols-2 gap-4">
             <FormField label="Instructor" required>
-              <FormInput required placeholder="Instructor name" value={form.instructor} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, instructor: e.target.value })} />
+              <FormInput required placeholder="Instructor name" value={form.instructor} onChange={(e) => setForm({ ...form, instructor: e.target.value })} />
             </FormField>
             <FormField label="Category" required>
-              <FormSelect value={form.category} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, category: e.target.value })}>
+              <FormSelect value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })}>
                 {categories.map(c => <option key={c} value={c}>{c}</option>)}
               </FormSelect>
             </FormField>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <FormField label="Chapters">
-              <FormInput type="number" min={0} value={form.chapters_count} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, chapters_count: Number(e.target.value) })} />
+              <FormInput type="number" min={0} value={form.chapters_count} onChange={(e) => setForm({ ...form, chapters_count: Number(e.target.value) })} />
             </FormField>
             <FormField label="Lessons">
-              <FormInput type="number" min={0} value={form.lessons_count} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setForm({ ...form, lessons_count: Number(e.target.value) })} />
+              <FormInput type="number" min={0} value={form.lessons_count} onChange={(e) => setForm({ ...form, lessons_count: Number(e.target.value) })} />
             </FormField>
           </div>
           <label className="flex items-center gap-2.5 pt-1">
