@@ -157,7 +157,7 @@ export async function POST(req: NextRequest) {
     // ── Create Google Meet via Calendar API ──
     const clientEmail = process.env.GOOGLE_CLIENT_EMAIL
     const privateKey = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n')
-    const calendarId = process.env.GOOGLE_CALENDAR_ID || 'primary'
+    const calendarId = process.env.GOOGLE_CALENDAR_ID || 'admin@aerobridge.cl'
 
     if (clientEmail && privateKey) {
       try {
