@@ -74,20 +74,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   useEffect(() => {
-    // Get initial session
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      setUser(user)
-      if (user) fetchProfile(user.id).then(() => setLoading(false))
-      else setLoading(false)
+    // Failsafe: never stay loading more than 4 seconds
+    const timeout = setTimeout(() => setLoading(false), 4000)
+
+    // getSession reads from storage instantly — no network call needed
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      const currentUser = session?.user ?? null
+      setUser(currentUser)
+      if (currentUser) {
+        fetchProfile(currentUser.id)
+          .catch(() => null)
+          .finally(() => { clearTimeout(timeout); setLoading(false) })
+      } else {
+        clearTimeout(timeout)
+        setLoading(false)
+      }
+    }).catch(() => {
+      clearTimeout(timeout)
+      setLoading(false)
     })
 
-    // Listen for changes
+    // Listen for auth state changes (login, logout, token refresh)
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (_event, session) => {
         const currentUser = session?.user ?? null
         setUser(currentUser)
         if (currentUser) {
-          await fetchProfile(currentUser.id)
+          try { await fetchProfile(currentUser.id) } catch {}
         } else {
           setProfile(null)
         }
@@ -95,7 +108,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     )
 
-    return () => subscription.unsubscribe()
+    return () => { subscription.unsubscribe(); clearTimeout(timeout) }
   }, [])
 
   const signIn = async (email: string, password: string) => {
