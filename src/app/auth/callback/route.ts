@@ -7,17 +7,21 @@ export async function GET(request: NextRequest) {
   const redirectTo = request.nextUrl.clone()
 
   if (code) {
-    let response = NextResponse.next({ request })
+    // We collect cookies that need to be set during exchangeCodeForSession
+    const cookiesToSet: { name: string; value: string; options: any }[] = []
+
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
       {
         cookies: {
           getAll() { return request.cookies.getAll() },
-          setAll(cookiesToSet) {
-            cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
-            response = NextResponse.next({ request })
-            cookiesToSet.forEach(({ name, value, options }) => response.cookies.set(name, value, options))
+          setAll(incoming) {
+            // Buffer them — we'll attach to whichever response we return
+            incoming.forEach(c => {
+              request.cookies.set(c.name, c.value)
+              cookiesToSet.push(c)
+            })
           },
         },
       }
@@ -39,7 +43,12 @@ export async function GET(request: NextRequest) {
 
       redirectTo.pathname = '/'
       redirectTo.searchParams.delete('code')
-      return NextResponse.redirect(redirectTo)
+      // Build the redirect and attach all session cookies to it
+      const redirectResponse = NextResponse.redirect(redirectTo)
+      cookiesToSet.forEach(({ name, value, options }) =>
+        redirectResponse.cookies.set(name, value, options)
+      )
+      return redirectResponse
     }
   }
 
