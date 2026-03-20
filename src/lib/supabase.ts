@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js'
+import { createBrowserClient } from '@supabase/ssr'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -9,7 +9,9 @@ if (!supabaseUrl || !supabaseAnonKey) {
   )
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+// createBrowserClient stores auth state (incl. PKCE verifier) in cookies
+// so the server-side /auth/callback can read it via @supabase/ssr createServerClient
+export const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey)
 
 export interface Course {
   id: string; title: string; description: string; image_url?: string; published: boolean
