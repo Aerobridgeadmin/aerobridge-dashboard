@@ -9,31 +9,14 @@ if (!supabaseUrl || !supabaseAnonKey) {
   )
 }
 
-// Use createClient with cookie-based storage so the PKCE verifier is accessible
-// to the server-side /auth/callback route (which uses @supabase/ssr createServerClient).
-// We avoid createBrowserClient from @supabase/ssr because it uses the Web Locks API
-// which deadlocks in Next.js (lock not released within 5000ms).
+// Implicit flow: token comes back in the URL hash after Google redirect.
+// The client library detects the hash automatically — no server-side code
+// exchange or PKCE verifier cookie sync needed.
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
-    flowType: 'pkce',
-    storage: typeof window !== 'undefined' ? {
-      getItem: (key) => {
-        // Check cookies first (for PKCE verifier compatibility with server callback)
-        const match = document.cookie.match(new RegExp('(^| )' + key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '=([^;]+)'))
-        if (match) return decodeURIComponent(match[2])
-        return localStorage.getItem(key)
-      },
-      setItem: (key, value) => {
-        // Write to both cookie and localStorage
-        const maxAge = 60 * 60 * 24 * 365
-        document.cookie = `${key}=${encodeURIComponent(value)}; path=/; max-age=${maxAge}; SameSite=Lax; Secure`
-        localStorage.setItem(key, value)
-      },
-      removeItem: (key) => {
-        document.cookie = `${key}=; path=/; max-age=0`
-        localStorage.removeItem(key)
-      },
-    } : undefined,
+    flowType: 'implicit',
+    detectSessionInUrl: true,
+    persistSession: true,
   },
 })
 
