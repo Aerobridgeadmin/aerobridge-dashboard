@@ -15,14 +15,14 @@ const SERVICE_TYPES = [
     id: 'free_consultation',
     label: 'Free 15-min Consultation',
     description: 'Schedule a free intro call via Google Meet',
-    icon: '🗓️',
+    
     requiresSchedule: true,
   },
   {
     id: 'standard_enrollment',
     label: 'Standard Enrollment',
     description: 'Enroll student directly into courses',
-    icon: '📚',
+    
     requiresSchedule: false,
   },
 ]
@@ -222,7 +222,7 @@ export default function StudentsPage() {
                   />
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
-                      <span className="text-base">{svc.icon}</span>
+                      
                       <span className={`text-sm font-semibold ${form.serviceType === svc.id ? 'text-brand-700' : 'text-surface-800'}`}>{svc.label}</span>
                     </div>
                     <p className="mt-0.5 text-xs text-surface-500">{svc.description}</p>

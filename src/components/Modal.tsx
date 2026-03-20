@@ -1,6 +1,6 @@
 'use client'
 import { X } from 'lucide-react'
-import { useEffect, useRef, useCallback } from 'react'
+import { useEffect, useRef } from 'react'
 
 interface ModalProps {
   open: boolean
@@ -12,33 +12,46 @@ interface ModalProps {
 
 export default function Modal({ open, onClose, title, children, width = 'max-w-lg' }: ModalProps) {
   const overlayRef = useRef<HTMLDivElement>(null)
-  const contentRef = useRef<HTMLDivElement>(null)
-
-  const handleEscape = useCallback((e: KeyboardEvent) => {
-    if (e.key === 'Escape') onClose()
-  }, [onClose])
+  const hasAutoFocused = useRef(false)
 
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = 'hidden'
-      document.addEventListener('keydown', handleEscape)
-      contentRef.current?.focus()
-    } else {
+    if (!open) {
+      hasAutoFocused.current = false
       document.body.style.overflow = ''
+      return
     }
+
+    document.body.style.overflow = 'hidden'
+    hasAutoFocused.current = false
+
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', handleEscape)
     return () => {
       document.body.style.overflow = ''
       document.removeEventListener('keydown', handleEscape)
     }
-  }, [open, handleEscape])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]) // intentionally exclude onClose — we don't want to re-run on every render
 
   if (!open) return null
+
   return (
-    <div ref={overlayRef} role="dialog" aria-modal="true" aria-labelledby="modal-title" className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm" onClick={e => { if (e.target === overlayRef.current) onClose() }}>
-      <div ref={contentRef} tabIndex={-1} className={`${width} w-full mx-4 animate-slide-up rounded-xl bg-white shadow-elevated outline-none`}>
+    <div
+      ref={overlayRef}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
+      onClick={e => { if (e.target === overlayRef.current) onClose() }}
+    >
+      <div className={`${width} w-full mx-4 animate-slide-up rounded-xl bg-white shadow-elevated outline-none`}>
         <div className="flex items-center justify-between border-b border-surface-100 px-6 py-4">
           <h3 id="modal-title" className="text-base font-bold text-surface-800">{title}</h3>
-          <button onClick={onClose} aria-label="Close dialog" className="rounded-lg p-1.5 text-surface-400 transition-colors hover:bg-surface-100 hover:text-surface-600"><X className="h-4 w-4" /></button>
+          <button onClick={onClose} aria-label="Close dialog" className="rounded-lg p-1.5 text-surface-400 transition-colors hover:bg-surface-100 hover:text-surface-600">
+            <X className="h-4 w-4" />
+          </button>
         </div>
         <div className="px-6 py-5">{children}</div>
       </div>
@@ -46,7 +59,6 @@ export default function Modal({ open, onClose, title, children, width = 'max-w-l
   )
 }
 
-// Reusable form field components
 export function FormField({ label, children, required }: { label: string; children: React.ReactNode; required?: boolean }) {
   return (
     <div>
@@ -62,7 +74,7 @@ export function FormInput({ ...props }: React.InputHTMLAttributes<HTMLInputEleme
   return <input {...props} className="h-10 w-full rounded-lg border border-surface-200 bg-white px-3 text-sm text-surface-800 outline-none transition-all placeholder:text-surface-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-50" />
 }
 
-export function FormTextarea({ ...props }: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
+export function FormTextarea({ ...props }: React.TextareaAttributes<HTMLTextAreaElement>) {
   return <textarea {...props} className="w-full rounded-lg border border-surface-200 bg-white px-3 py-2.5 text-sm text-surface-800 outline-none transition-all placeholder:text-surface-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-50" />
 }
 
