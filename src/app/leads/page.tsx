@@ -268,7 +268,7 @@ export default function LeadsPage() {
         )}
 
         {totalPages > 1 && (
-          <div className="mt-4"><Pagination page={page} totalPages={totalPages} onPageChange={setPage} /></div>
+          <div className="mt-4"><Pagination currentPage={page} totalItems={filtered.length} pageSize={ITEMS_PER_PAGE} onPageChange={setPage} /></div>
         )}
       </div>
 
