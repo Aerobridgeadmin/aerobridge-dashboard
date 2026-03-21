@@ -273,7 +273,7 @@ export default function LeadsPage() {
       </div>
 
       {/* Lead Detail Modal */}
-      <Modal open={detailOpen} onClose={() => setDetailOpen(false)} title="Lead Details" size="lg">
+      <Modal open={detailOpen} onClose={() => setDetailOpen(false)} title="Lead Details" width="max-w-2xl">
         {selectedLead && (() => {
           const sc = STATUS_CONFIG[selectedLead.status] || STATUS_CONFIG.new
           const StatusIcon = sc.icon
