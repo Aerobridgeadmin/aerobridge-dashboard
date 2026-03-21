@@ -7,6 +7,7 @@ import Pagination from '@/components/Pagination'
 import Toast from '@/components/Toast'
 import { getLeads, updateLead, deleteRecord } from '@/lib/data'
 import { Lead } from '@/lib/supabase'
+import RoleGuard from '@/components/RoleGuard'
 import {
   Target, Search, Filter, MoreHorizontal, Mail, Phone, Video,
   Calendar, Clock, CheckCircle2, XCircle, UserCheck, AlertCircle,
@@ -139,6 +140,7 @@ export default function LeadsPage() {
   }
 
   return (
+    <RoleGuard allowed={['admin']}>
     <div className="min-h-screen bg-surface-50">
       <Header title="Leads" subtitle="Free consultation pipeline — website bookings & conversions" />
 
@@ -405,5 +407,6 @@ export default function LeadsPage() {
 
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
     </div>
+    </RoleGuard>
   )
 }

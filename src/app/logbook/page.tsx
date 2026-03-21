@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect, FormEvent } from 'react'
 import Header from '@/components/Header'
+import RoleGuard from '@/components/RoleGuard'
 import Modal, { FormField, FormInput, FormSelect, FormTextarea, FormActions } from '@/components/Modal'
 import EmptyState from '@/components/EmptyState'
 import Toast from '@/components/Toast'
@@ -56,6 +57,7 @@ export default function LogbookPage() {
   const isCurrent = currency90 >= 3
 
   return (
+    <RoleGuard allowed={['admin', 'instructor', 'student']}>
     <div className="min-h-screen bg-surface-50">
       <Header title="Flight Logbook" subtitle="Track flight hours, landings, and currency" />
       <div className="p-8">
@@ -172,5 +174,6 @@ export default function LogbookPage() {
       </Modal>
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
     </div>
+    </RoleGuard>
   )
 }

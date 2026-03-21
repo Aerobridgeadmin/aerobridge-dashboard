@@ -2,6 +2,7 @@
 
 import { useState, useEffect, FormEvent } from 'react'
 import Header from '@/components/Header'
+import RoleGuard from '@/components/RoleGuard'
 import Modal, { FormField, FormInput, FormTextarea, FormActions } from '@/components/Modal'
 import Toast from '@/components/Toast'
 import { getEmailTemplates, updateEmailTemplate, getEmailSettings, updateEmailSetting } from '@/lib/data'
@@ -79,6 +80,7 @@ export default function EmailTemplatesPage() {
   }
 
   return (
+    <RoleGuard allowed={['admin']}>
     <div className="min-h-screen bg-surface-50">
       <Header title="Email Templates" subtitle="Manage AeroBridge-branded email templates stored in the database" />
 
@@ -233,5 +235,6 @@ export default function EmailTemplatesPage() {
 
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
     </div>
+    </RoleGuard>
   )
 }
