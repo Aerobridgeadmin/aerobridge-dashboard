@@ -3,6 +3,16 @@ import { google } from 'googleapis'
 import nodemailer from 'nodemailer'
 import { createClient } from '@supabase/supabase-js'
 
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type',
+}
+
+export async function OPTIONS() {
+  return NextResponse.json({}, { headers: corsHeaders })
+}
+
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -137,10 +147,10 @@ function buildEmail(p: {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { studentName, studentEmail, consultationDate, consultationTime } = body
+    const { studentName, studentEmail, consultationDate, consultationTime, phone, interest, message, utm_source, utm_campaign, utm_medium } = body
 
     if (!studentName || !studentEmail || !consultationDate || !consultationTime) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400, headers: corsHeaders })
     }
 
     const ADMIN_EMAIL = 'admin@aerobridge.cl'
@@ -150,6 +160,7 @@ export async function POST(req: NextRequest) {
     let meetLink = 'https://meet.google.com'
     let eventCreated = false
     let calendarError = ''
+    let calendarEventId = ''
     let emailSent = false
     let emailError = ''
 
@@ -174,7 +185,7 @@ export async function POST(req: NextRequest) {
           sendUpdates: 'all',
           requestBody: {
             summary: `Consulta Gratuita 15 min — ${studentName}`,
-            description: `Consulta gratuita con ${studentName} (${studentEmail}).`,
+            description: `Consulta gratuita con ${studentName} (${studentEmail}).\nInterés: ${interest || 'General'}\n${message ? `Mensaje: ${message}` : ''}`,
             start: { dateTime: startDateTime.toISOString(), timeZone: 'America/Santiago' },
             end: { dateTime: endDateTime.toISOString(), timeZone: 'America/Santiago' },
             attendees: [
@@ -197,6 +208,7 @@ export async function POST(req: NextRequest) {
         meetLink = event.data.conferenceData?.entryPoints?.[0]?.uri
           || event.data.hangoutLink
           || 'https://meet.google.com'
+        calendarEventId = event.data.id || ''
         eventCreated = true
       } catch (err: any) {
         calendarError = err.message
@@ -204,6 +216,32 @@ export async function POST(req: NextRequest) {
       }
     } else {
       calendarError = `Credentials missing — clientEmail:${!!clientEmail} privateKey:${!!privateKey}`
+    }
+
+    // ── Save lead to Supabase ──
+    let leadId = ''
+    try {
+      const { data: lead, error: leadErr } = await supabase.from('leads').insert({
+        name: studentName,
+        email: studentEmail,
+        phone: phone || null,
+        interest: interest || 'general',
+        message: message || null,
+        source: 'website',
+        utm_source: utm_source || null,
+        utm_campaign: utm_campaign || null,
+        utm_medium: utm_medium || null,
+        status: eventCreated ? 'scheduled' : 'new',
+        consultation_date: startDateTime.toISOString(),
+        consultation_end: endDateTime.toISOString(),
+        meet_link: meetLink !== 'https://meet.google.com' ? meetLink : null,
+        calendar_event_id: calendarEventId || null,
+      }).select().single()
+
+      if (leadErr) console.error('Lead insert error:', leadErr.message)
+      else leadId = lead?.id || ''
+    } catch (err: any) {
+      console.error('Lead save error:', err.message)
     }
 
     // ── Email ──
@@ -247,6 +285,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
+      leadId,
       meetLink,
       eventCreated,
       emailSent,
@@ -254,9 +293,9 @@ export async function POST(req: NextRequest) {
       endTime: endDateTime.toISOString(),
       ...(calendarError && { calendarError }),
       ...(emailError && { emailError }),
-    })
+    }, { headers: corsHeaders })
   } catch (err: any) {
     console.error('Consultation API error:', err)
-    return NextResponse.json({ error: err.message || 'Internal error' }, { status: 500 })
+    return NextResponse.json({ error: err.message || 'Internal error' }, { status: 500, headers: corsHeaders })
   }
 }

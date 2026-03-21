@@ -97,10 +97,21 @@ export interface Discussion {
   replies_count: number; is_resolved: boolean; created_at: string
 }
 
+export interface Lead {
+  id: string; name: string; email: string; phone?: string
+  interest?: string; message?: string; source?: string
+  utm_campaign?: string; utm_source?: string; utm_medium?: string
+  consultation_date?: string; consultation_end?: string
+  meet_link?: string; calendar_event_id?: string
+  status: 'new' | 'scheduled' | 'completed' | 'no_show' | 'converted' | 'cancelled'
+  notes?: string; created_at: string; updated_at?: string
+}
+
 export interface DashboardStats {
   totalStudents: number; totalCourses: number; activeBatches: number
   certificatesIssued: number; recentEnrollments: number; completionRate: number
   activeStaff: number; upcomingClasses: number; activeAssignments: number
+  totalLeads?: number; upcomingConsultations?: number; convertedLeads?: number
 }
 
 // ── Aviation-specific types ──

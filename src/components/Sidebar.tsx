@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation'
 import {
   LayoutDashboard, BookOpen, Users, Layers, ClipboardCheck, Award, Video,
   FileText, UserCog, Clock, CalendarDays, ChevronLeft, ChevronRight, Plane,
-  Megaphone, MessageCircle, Settings, LogOut, Shield, Route, BarChart3
+  Megaphone, MessageCircle, Settings, LogOut, Shield, Route, BarChart3, Target
 } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
 
@@ -20,6 +20,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
   const adminSections = [
     { label: 'Overview', items: [
       { href: '/', label: 'Dashboard', icon: LayoutDashboard },
+      { href: '/leads', label: 'Leads', icon: Target },
       { href: '/schedule', label: 'Schedule', icon: CalendarDays },
     ]},
     { label: 'Management', items: [
