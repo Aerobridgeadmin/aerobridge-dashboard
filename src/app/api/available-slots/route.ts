@@ -54,6 +54,7 @@ export async function GET(req: NextRequest) {
           email: clientEmail,
           key: privateKey,
           scopes: ['https://www.googleapis.com/auth/calendar.readonly'],
+          subject: 'admin@aerobridge.cl',
         })
 
         const calendar = google.calendar({ version: 'v3', auth })

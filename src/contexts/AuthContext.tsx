@@ -74,8 +74,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   useEffect(() => {
-    // Failsafe: never stay loading more than 4 seconds
-    const timeout = setTimeout(() => setLoading(false), 4000)
+    // Failsafe: never stay loading more than 2 seconds
+    const timeout = setTimeout(() => setLoading(false), 2000)
 
     // getSession reads from storage instantly — no network call needed
     supabase.auth.getSession().then(({ data: { session } }) => {

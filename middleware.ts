@@ -27,11 +27,19 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  const { data: { user } } = await supabase.auth.getUser()
+  // getSession reads from the cookie — instant, no network call.
+  // getUser() validates against Supabase server (slow) — not needed in middleware.
+  const { data: { session } } = await supabase.auth.getSession()
+  const user = session?.user ?? null
 
   const isPublicRoute = publicRoutes.some(route =>
     request.nextUrl.pathname.startsWith(route)
   )
+
+  // Also allow API routes through without auth check
+  if (request.nextUrl.pathname.startsWith('/api/')) {
+    return response
+  }
 
   if (!user && !isPublicRoute) {
     const url = request.nextUrl.clone()

@@ -175,7 +175,8 @@ export async function POST(req: NextRequest) {
         const auth = new google.auth.JWT({
           email: clientEmail,
           key: privateKey,
-          scopes: ['https://www.googleapis.com/auth/calendar.events'],
+          scopes: ['https://www.googleapis.com/auth/calendar', 'https://www.googleapis.com/auth/calendar.events'],
+          subject: ADMIN_EMAIL,
         })
 
         const calendar = google.calendar({ version: 'v3', auth })
@@ -185,7 +186,7 @@ export async function POST(req: NextRequest) {
           sendUpdates: 'all',
           requestBody: {
             summary: `Consulta Gratuita 15 min — ${studentName}`,
-            description: `Consulta gratuita con ${studentName} (${studentEmail}).\nInterés: ${interest || 'General'}\n${message ? `Mensaje: ${message}` : ''}`,
+            description: `Consulta gratuita con ${studentName}\nEmail: ${studentEmail}\nTeléfono: ${phone || 'N/A'}\nInterés: ${interest || 'General'}\n${message ? `Mensaje: ${message}` : ''}`,
             start: { dateTime: startDateTime.toISOString(), timeZone: 'America/Santiago' },
             end: { dateTime: endDateTime.toISOString(), timeZone: 'America/Santiago' },
             attendees: [
