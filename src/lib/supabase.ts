@@ -92,6 +92,7 @@ export interface DashboardStats {
   totalStudents: number; totalCourses: number; activeBatches: number
   certificatesIssued: number; recentEnrollments: number; completionRate: number
   activeStaff: number; upcomingClasses: number; activeAssignments: number
+  totalLeads?: number; upcomingConsultations?: number; convertedLeads?: number
 }
 
 // ── Aviation-specific types ──
