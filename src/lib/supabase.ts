@@ -173,6 +173,15 @@ export interface LeaderboardEntry {
   total_points: number; badge_count: number; rank: number
 }
 
+export interface Lead {
+  id: string; name: string; email: string; phone?: string
+  interest?: string; message?: string; notes?: string
+  consultation_date?: string; meet_link?: string
+  status: 'new' | 'scheduled' | 'completed' | 'no_show' | 'converted' | 'cancelled'
+  source?: string; utm_source?: string; utm_campaign?: string
+  created_at: string
+}
+
 // ── Exam Prep types ──
 
 export type ExamAuthority = 'FAA' | 'ICAO' | 'EASA'

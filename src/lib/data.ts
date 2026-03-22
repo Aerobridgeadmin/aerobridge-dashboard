@@ -1,4 +1,4 @@
-import { supabase, Course, Student, Batch, Quiz, Certificate, LiveClass, Assignment, Employee, Attendance, ScheduleEvent, Announcement, Discussion, DashboardStats, UserCertification, CertificationType, FlightLogEntry, LearningPath, CourseContent, QuizQuestion, EmailTemplate, EmailSetting, ExamCategory, ExamQuestion, ExamAttempt, ExamAuthority } from './supabase'
+import { supabase, Course, Student, Batch, Quiz, Certificate, LiveClass, Assignment, Employee, Attendance, ScheduleEvent, Announcement, Discussion, DashboardStats, UserCertification, CertificationType, FlightLogEntry, LearningPath, CourseContent, QuizQuestion, EmailTemplate, EmailSetting, ExamCategory, ExamQuestion, ExamAttempt, ExamAuthority, Lead } from './supabase'
 
 // ── QUERY HELPER ──
 async function query<T>(
@@ -136,7 +136,7 @@ const DELETABLE_TABLES = [
   'courses', 'students', 'batches', 'quizzes', 'certificates',
   'live_classes', 'assignments', 'employees', 'attendance',
   'schedule', 'announcements', 'discussions', 'certification_types',
-  'user_certifications', 'flight_log', 'learning_paths',
+  'user_certifications', 'flight_log', 'learning_paths', 'leads',
 ] as const
 
 export async function deleteRecord(table: string, id: string) {
@@ -269,6 +269,18 @@ export async function getComplianceOverview() {
 export async function getMonthlyStats(): Promise<{ month: string; enrollments: number; completions: number }[]> {
   const { data } = await supabase.from('monthly_stats').select('*').order('month_key', { ascending: true })
   return data ?? []
+}
+
+// ── LEADS ──
+export async function getLeads(): Promise<Lead[]> {
+  const { data, error } = await supabase.from('leads').select('*').order('created_at', { ascending: false })
+  if (error) throw new Error(`Failed to fetch leads: ${error.message}`)
+  return data ?? []
+}
+export async function updateLead(id: string, updates: Partial<Lead>) {
+  const { data, error } = await supabase.from('leads').update(updates).eq('id', id).select().single()
+  if (error) throw error
+  return data
 }
 
 // ── ACTIVITY FEED HELPER ──
