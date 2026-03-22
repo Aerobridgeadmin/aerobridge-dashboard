@@ -3,12 +3,13 @@
 import { useState, useEffect } from 'react'
 import Header from '@/components/Header'
 import StatCard from '@/components/StatCard'
-import { getDashboardStats, getCourses, getActivityFeed, getMonthlyStats } from '@/lib/data'
-import { DashboardStats, Course } from '@/lib/supabase'
+import { getDashboardStats, getCourses, getActivityFeed, getMonthlyStats, getLeads } from '@/lib/data'
+import { DashboardStats, Course, Lead } from '@/lib/supabase'
+import { useAuth } from '@/contexts/AuthContext'
 import {
   Users, BookOpen, Layers, Award,
   UserPlus, GraduationCap, MessageSquare, ClipboardCheck,
-  ArrowUpRight, Loader2, Video, FileText, UserCog, Plus,
+  ArrowUpRight, Loader2, Video, FileText, UserCog, Plus, Target, TrendingUp, CalendarCheck,
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -29,6 +30,7 @@ const activityColors: Record<string, string> = {
 }
 
 export default function DashboardPage() {
+  const { profile, isAdmin, isInstructor } = useAuth()
   const [stats, setStats] = useState<DashboardStats | null>(null)
   const [courses, setCourses] = useState<Course[]>([])
   const [activityFeed, setActivityFeed] = useState<any[]>([])
@@ -58,10 +60,13 @@ export default function DashboardPage() {
     loadData()
   }, [])
 
+  const greeting = profile?.full_name ? `Welcome back, ${profile.full_name.split(' ')[0]}` : 'Welcome back'
+  const subtitle = isAdmin ? 'Here\'s your business at a glance' : isInstructor ? 'Here\'s your teaching overview' : 'Here\'s your learning progress'
+
   if (error) {
     return (
       <div className="min-h-screen bg-surface-50">
-        <Header title="Dashboard" subtitle="Welcome back — here's what's happening today" />
+        <Header title={greeting} subtitle={subtitle} />
         <div className="flex flex-col items-center justify-center p-20 text-center">
           <p className="text-sm text-red-500 mb-2">Something went wrong loading the dashboard.</p>
           <p className="text-xs text-surface-400">{error}</p>
@@ -74,7 +79,7 @@ export default function DashboardPage() {
   if (loading || !stats) {
     return (
       <div className="min-h-screen bg-surface-50">
-        <Header title="Dashboard" subtitle="Welcome back — here's what's happening today" />
+        <Header title={greeting} subtitle={subtitle} />
         <div className="flex items-center justify-center p-20">
           <Loader2 className="h-8 w-8 animate-spin text-brand-500" />
         </div>
@@ -87,11 +92,11 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-surface-50">
-      <Header title="Dashboard" subtitle="Welcome back — here's what's happening today" />
+      <Header title={greeting} subtitle={subtitle} />
 
       <div className="p-8">
-        {/* Welcome banner for empty state */}
-        {isEmpty && (
+        {/* Welcome banner for empty state (admin only) */}
+        {isAdmin && isEmpty && (
           <div className="mb-8 animate-slide-up rounded-xl border border-brand-200 bg-gradient-to-br from-brand-500 via-brand-600 to-brand-700 p-8 text-white">
             <h2 className="text-2xl font-extrabold">Welcome to AeroBridge LMS</h2>
             <p className="mt-2 max-w-lg text-sm font-medium text-white/80">
@@ -119,12 +124,30 @@ export default function DashboardPage() {
           <StatCard title="Certificates Issued" value={stats.certificatesIssued.toLocaleString()} change={stats.certificatesIssued > 0 ? 'Total awarded' : 'None issued yet'} changeType={stats.certificatesIssued > 0 ? 'positive' : 'neutral'} icon={Award} color="violet" delay={200} />
         </div>
 
-        {/* Secondary Stats */}
-        <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-3">
-          <StatCard title="Active Staff" value={stats.activeStaff} change={stats.activeStaff > 0 ? 'Team members' : 'Add staff members'} changeType="neutral" icon={UserCog} color="blue" delay={250} />
-          <StatCard title="Upcoming Classes" value={stats.upcomingClasses} change={stats.upcomingClasses > 0 ? 'Scheduled' : 'None scheduled'} changeType={stats.upcomingClasses > 0 ? 'positive' : 'neutral'} icon={Video} color="emerald" delay={300} />
-          <StatCard title="Active Assignments" value={stats.activeAssignments} change={stats.activeAssignments > 0 ? 'In progress' : 'No active assignments'} changeType="neutral" icon={FileText} color="amber" delay={350} />
-        </div>
+        {/* Admin: Leads Pipeline + Operational Stats */}
+        {isAdmin && (
+          <>
+            <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-3">
+              <StatCard title="Total Leads" value={stats.totalLeads ?? 0} change="From website" changeType="neutral" icon={Target} color="blue" delay={220} />
+              <StatCard title="Upcoming Consultations" value={stats.upcomingConsultations ?? 0} change={stats.upcomingConsultations ? 'Scheduled' : 'None upcoming'} changeType={stats.upcomingConsultations ? 'positive' : 'neutral'} icon={CalendarCheck} color="emerald" delay={240} />
+              <StatCard title="Converted Leads" value={stats.convertedLeads ?? 0} change={stats.totalLeads ? `${Math.round(((stats.convertedLeads ?? 0) / stats.totalLeads) * 100)}% rate` : 'No leads yet'} changeType={stats.convertedLeads ? 'positive' : 'neutral'} icon={TrendingUp} color="amber" delay={260} />
+            </div>
+            <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-3">
+              <StatCard title="Active Staff" value={stats.activeStaff} change={stats.activeStaff > 0 ? 'Team members' : 'Add staff members'} changeType="neutral" icon={UserCog} color="blue" delay={280} />
+              <StatCard title="Upcoming Classes" value={stats.upcomingClasses} change={stats.upcomingClasses > 0 ? 'Scheduled' : 'None scheduled'} changeType={stats.upcomingClasses > 0 ? 'positive' : 'neutral'} icon={Video} color="emerald" delay={300} />
+              <StatCard title="Active Assignments" value={stats.activeAssignments} change={stats.activeAssignments > 0 ? 'In progress' : 'No active assignments'} changeType="neutral" icon={FileText} color="amber" delay={320} />
+            </div>
+          </>
+        )}
+
+        {/* Instructor: Teaching Stats */}
+        {isInstructor && (
+          <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-3">
+            <StatCard title="Upcoming Classes" value={stats.upcomingClasses} change={stats.upcomingClasses > 0 ? 'Scheduled' : 'None scheduled'} changeType={stats.upcomingClasses > 0 ? 'positive' : 'neutral'} icon={Video} color="blue" delay={250} />
+            <StatCard title="Active Assignments" value={stats.activeAssignments} change={stats.activeAssignments > 0 ? 'In progress' : 'No active assignments'} changeType="neutral" icon={FileText} color="emerald" delay={300} />
+            <StatCard title="Completion Rate" value={`${stats.completionRate}%`} change="Average across courses" changeType="neutral" icon={GraduationCap} color="amber" delay={350} />
+          </div>
+        )}
 
         {/* Charts Row */}
         <div className="mt-8 grid grid-cols-1 gap-6 xl:grid-cols-3">
