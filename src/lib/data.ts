@@ -1,4 +1,4 @@
-import { supabase, Course, Student, Batch, Quiz, Certificate, LiveClass, Assignment, Employee, Attendance, ScheduleEvent, Announcement, Discussion, DashboardStats, UserCertification, CertificationType, FlightLogEntry, LearningPath, CourseContent, QuizQuestion, EmailTemplate, EmailSetting, Lead } from './supabase'
+import { supabase, Course, Student, Batch, Quiz, Certificate, LiveClass, Assignment, Employee, Attendance, ScheduleEvent, Announcement, Discussion, DashboardStats, UserCertification, CertificationType, FlightLogEntry, LearningPath, CourseContent, QuizQuestion, EmailTemplate, EmailSetting, ExamCategory, ExamQuestion, ExamAttempt, ExamAuthority } from './supabase'
 
 // ── QUERY HELPER ──
 async function query<T>(
@@ -136,7 +136,7 @@ const DELETABLE_TABLES = [
   'courses', 'students', 'batches', 'quizzes', 'certificates',
   'live_classes', 'assignments', 'employees', 'attendance',
   'schedule', 'announcements', 'discussions', 'certification_types',
-  'user_certifications', 'flight_log', 'learning_paths', 'leads',
+  'user_certifications', 'flight_log', 'learning_paths',
 ] as const
 
 export async function deleteRecord(table: string, id: string) {
@@ -259,23 +259,6 @@ export async function updateEmailSetting(key: string, value: string) {
   if (error) throw error
 }
 
-// ── LEADS ──
-export async function getLeads(): Promise<Lead[]> {
-  const { data, error } = await supabase.from('leads').select('*').order('created_at', { ascending: false })
-  if (error) console.error('Leads fetch failed:', error.message)
-  return data ?? []
-}
-export async function createLead(lead: Partial<Lead>) {
-  const { data, error } = await supabase.from('leads').insert(lead).select().single()
-  if (error) throw error
-  return data
-}
-export async function updateLead(id: string, updates: Partial<Lead>) {
-  const { data, error } = await supabase.from('leads').update({ ...updates, updated_at: new Date().toISOString() }).eq('id', id).select().single()
-  if (error) throw error
-  return data
-}
-
 // ── COMPLIANCE ──
 export async function getComplianceOverview() {
   const { data } = await supabase.from('compliance_overview').select('*')
@@ -292,4 +275,68 @@ export async function getMonthlyStats(): Promise<{ month: string; enrollments: n
 export async function logActivity(type: string, text: string) {
   const { error } = await supabase.from('activity_feed').insert({ type, text, time: 'Just now' })
   if (error) console.error('Failed to log activity:', error.message)
+}
+
+// ── EXAM PREP ──
+export async function getExamCategories(authority?: ExamAuthority): Promise<ExamCategory[]> {
+  let q = supabase.from('exam_categories').select('*').eq('published', true).order('sort_order')
+  if (authority) q = q.eq('authority', authority)
+  const { data } = await q
+  return data ?? []
+}
+
+export async function getExamCategory(id: string): Promise<ExamCategory | null> {
+  const { data } = await supabase.from('exam_categories').select('*').eq('id', id).single()
+  return data
+}
+
+export async function getExamQuestions(categoryId: string, limit?: number): Promise<ExamQuestion[]> {
+  let q = supabase.from('exam_questions').select('*').eq('category_id', categoryId).order('sort_order')
+  if (limit) q = q.limit(limit)
+  const { data } = await q
+  return data ?? []
+}
+
+export async function getExamQuestionsByTopic(topicId: string): Promise<ExamQuestion[]> {
+  const { data } = await supabase.from('exam_questions').select('*').eq('topic_id', topicId).order('sort_order')
+  return data ?? []
+}
+
+export async function createExamAttempt(attempt: Partial<ExamAttempt>) {
+  const { data, error } = await supabase.from('exam_attempts').insert(attempt).select().single()
+  if (error) throw error
+  return data
+}
+
+export async function getExamAttempts(userId: string, categoryId?: string): Promise<ExamAttempt[]> {
+  let q = supabase.from('exam_attempts').select('*').eq('user_id', userId).order('completed_at', { ascending: false })
+  if (categoryId) q = q.eq('category_id', categoryId)
+  const { data } = await q
+  return data ?? []
+}
+
+export async function getExamProgress(userId: string): Promise<any[]> {
+  const { data } = await supabase.from('exam_progress').select('*').eq('user_id', userId)
+  return data ?? []
+}
+
+export async function searchExamQuestions(query: string, authority?: ExamAuthority): Promise<ExamQuestion[]> {
+  let q = supabase.from('exam_questions').select('*, exam_categories!inner(authority, name)')
+  q = q.ilike('question_text', `%${query}%`)
+  if (authority) q = q.eq('exam_categories.authority', authority)
+  q = q.limit(50)
+  const { data } = await q
+  return data ?? []
+}
+
+export async function createExamCategory(cat: Partial<ExamCategory>) {
+  const { data, error } = await supabase.from('exam_categories').insert(cat).select().single()
+  if (error) throw error
+  return data
+}
+
+export async function createExamQuestion(q: Partial<ExamQuestion>) {
+  const { data, error } = await supabase.from('exam_questions').insert(q).select().single()
+  if (error) throw error
+  return data
 }

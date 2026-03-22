@@ -1,12 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import {
-  LayoutDashboard, BookOpen, Users, Layers, ClipboardCheck, Award, Video,
-  FileText, UserCog, Clock, CalendarDays, ChevronLeft, ChevronRight, Plane,
-  Megaphone, MessageCircle, Settings, LogOut, Shield, Route, BarChart3, Target,
-  Mail, GraduationCap
-} from 'lucide-react'
+import { LayoutDashboard, BookOpen, GraduationCap, Users, Layers, ClipboardCheck, Award, Video, FileText, UserCog, Clock, CalendarDays, ChevronLeft, ChevronRight, Plane, Megaphone, MessageCircle, Settings, LogOut, Shield, Route, BarChart3, Mail } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
 
 interface SidebarProps {
@@ -18,108 +13,51 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
   const pathname = usePathname()
   const { profile, signOut, isAdmin, isInstructor } = useAuth()
 
-  // ──────────────────────────────────────────────
-  // ADMIN — Full access. Business owner view.
-  // Sees leads pipeline, all students, staff,
-  // full course management, analytics, system config.
-  // ──────────────────────────────────────────────
-  const adminSections = [
+  const sections = [
     { label: 'Overview', items: [
-      { href: '/',          label: 'Dashboard',  icon: LayoutDashboard },
-      { href: '/leads',     label: 'Leads',      icon: Target },
-      { href: '/schedule',  label: 'Schedule',   icon: CalendarDays },
-    ]},
-    { label: 'Teaching', items: [
-      { href: '/courses',       label: 'Courses',        icon: BookOpen },
-      { href: '/learning-paths',label: 'Learning Paths',  icon: Route },
-      { href: '/batches',       label: 'Batches',         icon: Layers },
-      { href: '/live-classes',  label: 'Live Classes',    icon: Video },
-      { href: '/quizzes',       label: 'Quizzes',         icon: ClipboardCheck },
-      { href: '/assignments',   label: 'Assignments',     icon: FileText },
-    ]},
-    { label: 'People', items: [
-      { href: '/students',  label: 'Students',       icon: Users },
-      { href: '/employees', label: 'Staff',          icon: UserCog },
-      { href: '/certificates', label: 'Certificates', icon: Award },
-    ]},
-    { label: 'Communication', items: [
-      { href: '/announcements', label: 'Announcements', icon: Megaphone },
-      { href: '/discussions',   label: 'Discussions',    icon: MessageCircle },
-    ]},
-    { label: 'Analytics', items: [
-      { href: '/reports',    label: 'Reports',    icon: BarChart3 },
-      { href: '/attendance', label: 'Attendance', icon: Clock },
-    ]},
-    { label: 'System', items: [
-      { href: '/admin/email-templates', label: 'Email Templates', icon: Mail },
-    ]},
-  ]
-
-  // ──────────────────────────────────────────────
-  // INSTRUCTOR — Teaching-focused.
-  // Can manage assigned courses, run live classes,
-  // grade quizzes/assignments, view their students.
-  // Cannot see leads, staff, email config, or reports.
-  // ──────────────────────────────────────────────
-  const instructorSections = [
-    { label: 'Overview', items: [
-      { href: '/',          label: 'Dashboard',    icon: LayoutDashboard },
-      { href: '/schedule',  label: 'Schedule',     icon: CalendarDays },
-    ]},
-    { label: 'Teaching', items: [
-      { href: '/courses',      label: 'My Courses',   icon: BookOpen },
-      { href: '/batches',      label: 'Batches',      icon: Layers },
-      { href: '/live-classes', label: 'Live Classes',  icon: Video },
-      { href: '/quizzes',      label: 'Quizzes',      icon: ClipboardCheck },
-      { href: '/assignments',  label: 'Assignments',  icon: FileText },
-    ]},
-    { label: 'Students', items: [
-      { href: '/students',      label: 'My Students',    icon: Users },
-      { href: '/certificates',  label: 'Certificates',   icon: Award },
-      { href: '/announcements', label: 'Announcements',  icon: Megaphone },
-      { href: '/discussions',   label: 'Discussions',     icon: MessageCircle },
-    ]},
-  ]
-
-  // ──────────────────────────────────────────────
-  // STUDENT — Learning-focused.
-  // Can browse courses, take quizzes, join live classes,
-  // view their certifications, track flight hours.
-  // Cannot manage anything — read/participate only.
-  // ──────────────────────────────────────────────
-  const studentSections = [
-    { label: 'Overview', items: [
-      { href: '/',              label: 'Dashboard',     icon: LayoutDashboard },
-      { href: '/schedule',      label: 'Schedule',      icon: CalendarDays },
+      { href: '/', label: 'Dashboard', icon: LayoutDashboard },
+      { href: '/schedule', label: 'Schedule', icon: CalendarDays },
       { href: '/announcements', label: 'Announcements', icon: Megaphone },
     ]},
     { label: 'Learning', items: [
-      { href: '/courses',        label: 'My Courses',      icon: BookOpen },
-      { href: '/learning-paths', label: 'Learning Paths',   icon: Route },
-      { href: '/live-classes',   label: 'Live Classes',     icon: Video },
-      { href: '/quizzes',        label: 'Quizzes',          icon: ClipboardCheck },
-      { href: '/assignments',    label: 'Assignments',      icon: FileText },
-    ]},
-    { label: 'Progress', items: [
-      { href: '/certificates',  label: 'Certificates',  icon: Award },
-      { href: '/discussions',   label: 'Discussions',    icon: MessageCircle },
+      { href: '/courses', label: 'Courses', icon: BookOpen },
+      { href: '/courses/exam-prep', label: 'Exam Prep', icon: GraduationCap },
+      { href: '/learning-paths', label: 'Learning Paths', icon: Route },
+      ...(isAdmin || isInstructor ? [{ href: '/batches', label: 'Batches', icon: Layers }] : []),
+      { href: '/live-classes', label: 'Live Classes', icon: Video },
+      { href: '/quizzes', label: 'Quizzes', icon: ClipboardCheck },
+      ...(isAdmin || isInstructor ? [{ href: '/assignments', label: 'Assignments', icon: FileText }] : []),
+      { href: '/certificates', label: 'Certificates', icon: Award },
+      { href: '/discussions', label: 'Discussions', icon: MessageCircle },
     ]},
     { label: 'Aviation', items: [
-      { href: '/certifications', label: 'Certifications',  icon: Shield },
-      { href: '/logbook',        label: 'Flight Logbook',  icon: Plane },
+      { href: '/certifications', label: 'Certifications', icon: Shield },
+      { href: '/logbook', label: 'Flight Logbook', icon: Plane },
+      ...(isAdmin || isInstructor ? [{ href: '/reports', label: 'Reports', icon: BarChart3 }] : []),
     ]},
+    ...(isAdmin ? [{ label: 'People', items: [
+      { href: '/students', label: 'Students', icon: Users },
+      { href: '/employees', label: 'Staff', icon: UserCog },
+      { href: '/attendance', label: 'Attendance', icon: Clock },
+      { href: '/users', label: 'User Management', icon: Shield },
+    ]},
+    { label: 'Admin', items: [
+      { href: '/admin/email-templates', label: 'Email Templates', icon: Mail },
+    ]}] : isInstructor ? [{ label: 'People', items: [
+      { href: '/students', label: 'Students', icon: Users },
+    ]}] : []),
   ]
 
-  const sections = isAdmin ? adminSections : isInstructor ? instructorSections : studentSections
   const roleBadge = profile?.role === 'admin' ? 'bg-cta-500' : profile?.role === 'instructor' ? 'bg-info-500' : 'bg-success-500'
 
   return (
     <aside className={`fixed left-0 top-0 z-40 flex h-screen flex-col transition-all duration-300 ${collapsed ? 'w-[68px]' : 'w-[250px]'} bg-brand-700`}>
       <div className="flex h-14 items-center gap-3 border-b border-white/10 px-4">
-        {collapsed
-          ? <img src="/images/logo-light.png" alt="AeroBridge" className="h-8 w-8 shrink-0 object-contain" />
-          : <img src="/images/logo-light.png" alt="AeroBridge" className="h-9 object-contain" />
-        }
+        {collapsed ? (
+          <img src="/images/logo-light.png" alt="AeroBridge" className="h-8 w-8 shrink-0 object-contain" />
+        ) : (
+          <img src="/images/logo-light.png" alt="AeroBridge" className="h-9 object-contain" />
+        )}
       </div>
 
       <div className="flex-1 overflow-y-auto py-3">
@@ -129,9 +67,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
             {s.items.map(item => {
               const isActive = pathname === item.href
               return (
-                <Link key={item.href} href={item.href}
-                  className={`mx-2 flex items-center gap-2.5 rounded-lg px-3 py-2 text-[13px] transition-all ${isActive ? 'bg-white/15 font-bold text-white' : 'font-medium text-white/60 hover:bg-white/8 hover:text-white'}`}
-                  title={collapsed ? item.label : undefined}>
+                <Link key={item.href} href={item.href} className={`mx-2 flex items-center gap-2.5 rounded-lg px-3 py-2 text-[13px] transition-all ${isActive ? 'bg-white/15 font-bold text-white' : 'font-medium text-white/60 hover:bg-white/8 hover:text-white'}`} title={collapsed ? item.label : undefined}>
                   <item.icon className={`h-[16px] w-[16px] shrink-0 ${isActive ? 'text-white' : 'text-white/40'}`} />
                   {!collapsed && <span>{item.label}</span>}
                 </Link>
@@ -141,6 +77,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
         ))}
       </div>
 
+      {/* User section */}
       <div className="border-t border-white/10 p-3">
         {!collapsed && profile && (
           <div className="mb-2 rounded-lg bg-white/8 p-3">

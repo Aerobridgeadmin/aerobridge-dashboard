@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js'
+import { createBrowserClient } from '@supabase/ssr'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -9,16 +9,7 @@ if (!supabaseUrl || !supabaseAnonKey) {
   )
 }
 
-// Implicit flow: token comes back in the URL hash after Google redirect.
-// The client library detects the hash automatically — no server-side code
-// exchange or PKCE verifier cookie sync needed.
-export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    flowType: 'implicit',
-    detectSessionInUrl: true,
-    persistSession: true,
-  },
-})
+export const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey)
 
 export interface Course {
   id: string; title: string; description: string; image_url?: string; published: boolean
@@ -97,21 +88,10 @@ export interface Discussion {
   replies_count: number; is_resolved: boolean; created_at: string
 }
 
-export interface Lead {
-  id: string; name: string; email: string; phone?: string
-  interest?: string; message?: string; source?: string
-  utm_campaign?: string; utm_source?: string; utm_medium?: string
-  consultation_date?: string; consultation_end?: string
-  meet_link?: string; calendar_event_id?: string
-  status: 'new' | 'scheduled' | 'completed' | 'no_show' | 'converted' | 'cancelled'
-  notes?: string; created_at: string; updated_at?: string
-}
-
 export interface DashboardStats {
   totalStudents: number; totalCourses: number; activeBatches: number
   certificatesIssued: number; recentEnrollments: number; completionRate: number
   activeStaff: number; upcomingClasses: number; activeAssignments: number
-  totalLeads?: number; upcomingConsultations?: number; convertedLeads?: number
 }
 
 // ── Aviation-specific types ──
@@ -191,4 +171,75 @@ export interface Badge {
 export interface LeaderboardEntry {
   user_id: string; full_name: string; role: string; avatar_url?: string
   total_points: number; badge_count: number; rank: number
+}
+
+// ── Exam Prep types ──
+
+export type ExamAuthority = 'FAA' | 'ICAO' | 'EASA'
+
+export interface ExamCategory {
+  id: string
+  authority: ExamAuthority
+  code: string
+  name: string
+  description: string
+  question_count: number
+  time_limit_minutes: number
+  passing_score: number
+  icon: string
+  color: string
+  topics: ExamTopic[]
+  difficulty: 'beginner' | 'intermediate' | 'advanced' | 'expert'
+  sort_order: number
+  published: boolean
+  created_at: string
+}
+
+export interface ExamTopic {
+  id: string
+  category_id: string
+  code: string
+  name: string
+  description: string
+  question_count: number
+  sort_order: number
+}
+
+export interface ExamQuestion {
+  id: string
+  category_id: string
+  topic_id?: string
+  question_text: string
+  options: string[]
+  correct_answer: number
+  explanation: string
+  reference?: string
+  difficulty: 'easy' | 'medium' | 'hard'
+  sort_order: number
+  created_at: string
+}
+
+export interface ExamAttempt {
+  id: string
+  user_id: string
+  category_id: string
+  score: number
+  total_questions: number
+  correct_answers: number
+  passed: boolean
+  time_spent_seconds: number
+  answers: Record<string, number>
+  started_at: string
+  completed_at?: string
+}
+
+export interface ExamProgress {
+  category_id: string
+  category_name: string
+  authority: ExamAuthority
+  attempts: number
+  best_score: number
+  last_score: number
+  last_attempt_at: string
+  passed: boolean
 }
