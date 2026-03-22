@@ -74,6 +74,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   useEffect(() => {
+    // onAuthStateChange fires INITIAL_SESSION on setup — no separate getSession needed.
+    // Calling both causes lock contention on the auth token.
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (_event, session) => {
         const currentUser = session?.user ?? null
@@ -86,13 +88,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setLoading(false)
       }
     )
-
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      const currentUser = session?.user ?? null
-      setUser(currentUser)
-      if (currentUser) fetchProfile(currentUser.id).then(() => setLoading(false))
-      else setLoading(false)
-    })
 
     return () => subscription.unsubscribe()
   }, [])
