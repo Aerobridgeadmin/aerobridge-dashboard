@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, BookOpen, GraduationCap, Users, Layers, ClipboardCheck, Award, Video, FileText, UserCog, Clock, CalendarDays, ChevronLeft, ChevronRight, Plane, Megaphone, MessageCircle, Settings, LogOut, Shield, Route, BarChart3, Mail } from 'lucide-react'
+import { LayoutDashboard, BookOpen, GraduationCap, BookMarked, Users, Layers, ClipboardCheck, Award, Video, FileText, UserCog, Clock, CalendarDays, ChevronLeft, ChevronRight, Plane, Megaphone, MessageCircle, Settings, LogOut, Shield, Route, BarChart3, Mail } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
 
 interface SidebarProps {
@@ -22,6 +22,7 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
     { label: 'Learning', items: [
       { href: '/courses', label: 'Courses', icon: BookOpen },
       { href: '/courses/exam-prep', label: 'Exam Prep', icon: GraduationCap },
+      { href: '/courses/exam-prep/study', label: 'Study Materials', icon: BookMarked },
       { href: '/learning-paths', label: 'Learning Paths', icon: Route },
       ...(isAdmin || isInstructor ? [{ href: '/batches', label: 'Batches', icon: Layers }] : []),
       { href: '/live-classes', label: 'Live Classes', icon: Video },

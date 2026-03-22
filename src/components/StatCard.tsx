@@ -33,15 +33,11 @@ const colorMap = {
     icon: '#D64541',
     ring: 'rgba(214, 69, 65, 0.04)',
   },
-  violet: {
-    bg: 'rgba(135, 206, 235, 0.15)',
-    icon: '#17a2b8',
-    ring: 'rgba(135, 206, 235, 0.08)',
-  },
 }
 
 export default function StatCard({ title, value, change, changeType = 'neutral', icon: Icon, color, delay = 0 }: StatCardProps) {
-  const colors = colorMap[color]
+  const isViolet = color === 'violet'
+  const colors = isViolet ? undefined : colorMap[color as keyof typeof colorMap]
 
   return (
     <div
@@ -63,10 +59,13 @@ export default function StatCard({ title, value, change, changeType = 'neutral',
           )}
         </div>
         <div
-          className="flex h-11 w-11 items-center justify-center rounded-xl"
-          style={{ backgroundColor: colors.bg, boxShadow: `0 0 0 4px ${colors.ring}` }}
+          className={`flex h-11 w-11 items-center justify-center rounded-xl ${isViolet ? 'bg-violet-100 ring-4 ring-violet-50' : ''}`}
+          style={!isViolet && colors ? { backgroundColor: colors.bg, boxShadow: `0 0 0 4px ${colors.ring}` } : undefined}
         >
-          <Icon className="h-5 w-5" style={{ color: colors.icon }} />
+          <Icon
+            className={`h-5 w-5 ${isViolet ? 'text-violet-600' : ''}`}
+            style={!isViolet && colors ? { color: colors.icon } : undefined}
+          />
         </div>
       </div>
     </div>
