@@ -1,7 +1,7 @@
 import { createBrowserClient } from '@supabase/ssr'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
 if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error(
@@ -9,13 +9,24 @@ if (!supabaseUrl || !supabaseAnonKey) {
   )
 }
 
-export const supabase = createBrowserClient(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    flowType: 'pkce',
-    persistSession: true,
-    detectSessionInUrl: true,
-  },
-})
+const _global = globalThis as unknown as {
+  __supabase?: ReturnType<typeof createBrowserClient>
+}
+
+function getClient() {
+  if (_global.__supabase) return _global.__supabase
+  const client = createBrowserClient(supabaseUrl, supabaseAnonKey, {
+    auth: {
+      flowType: 'pkce',
+      persistSession: true,
+      detectSessionInUrl: true,
+    },
+  })
+  if (typeof window !== 'undefined') _global.__supabase = client
+  return client
+}
+
+export const supabase = getClient()
 
 export interface Course {
   id: string; title: string; description: string; image_url?: string; published: boolean
