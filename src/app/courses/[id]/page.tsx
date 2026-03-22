@@ -34,8 +34,8 @@ export default function CourseDetailPage() {
       ])
       if (courseRes.data) setCourse(courseRes.data)
       if (contentRes.data) {
-        setContent(contentRes.data)
-        const chapters = contentRes.data.filter(c => c.type === 'chapter')
+        setContent(contentRes.data as CourseContent[])
+        const chapters = (contentRes.data as CourseContent[]).filter((c: CourseContent) => c.type === 'chapter')
         if (chapters.length > 0) setExpandedChapters(new Set([chapters[0].id]))
       }
       if (quizzesRes.data) setQuizzes(quizzesRes.data)
@@ -44,8 +44,8 @@ export default function CourseDetailPage() {
     load()
   }, [courseId])
 
-  const chapters = content.filter(c => c.type === 'chapter')
-  const getChapterLessons = (chapterId: string) => content.filter(c => c.parent_id === chapterId)
+  const chapters = content.filter((c: CourseContent) => c.type === 'chapter')
+  const getChapterLessons = (chapterId: string) => content.filter((c: CourseContent) => c.parent_id === chapterId)
   const toggleChapter = (id: string) => {
     setExpandedChapters(prev => {
       const next = new Set(prev)
@@ -55,8 +55,8 @@ export default function CourseDetailPage() {
   }
 
   const totalDuration = content
-    .filter(c => c.type === 'lesson')
-    .reduce((sum, c) => sum + (c.duration_minutes || 0), 0)
+    .filter((c: CourseContent) => c.type === 'lesson')
+    .reduce((sum: number, c: CourseContent) => sum + (c.duration_minutes || 0), 0)
 
   const typeIcon = (type: string) => {
     switch (type) {
@@ -118,7 +118,7 @@ export default function CourseDetailPage() {
                     </div>
                     <div className="flex items-center gap-2 text-white/90">
                       <BookOpen className="h-4 w-4" />
-                      <span className="text-sm">{content.filter(c => c.type === 'lesson').length} lessons</span>
+                      <span className="text-sm">{content.filter((c: CourseContent) => c.type === 'lesson').length} lessons</span>
                     </div>
                     <div className="flex items-center gap-2 text-white/90">
                       <Clock className="h-4 w-4" />
@@ -172,7 +172,7 @@ export default function CourseDetailPage() {
                   {chapters.map((chapter, ci) => {
                     const lessons = getChapterLessons(chapter.id)
                     const isExpanded = expandedChapters.has(chapter.id)
-                    const chapterDuration = lessons.reduce((sum, l) => sum + (l.duration_minutes || 0), 0)
+                    const chapterDuration = lessons.reduce((sum: number, l: CourseContent) => sum + (l.duration_minutes || 0), 0)
 
                     return (
                       <div key={chapter.id}>
@@ -277,7 +277,7 @@ export default function CourseDetailPage() {
                 </div>
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-surface-500">Lessons</span>
-                  <span className="font-medium text-surface-800">{content.filter(c => c.type === 'lesson').length}</span>
+                  <span className="font-medium text-surface-800">{content.filter((c: CourseContent) => c.type === 'lesson').length}</span>
                 </div>
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-surface-500">Duration</span>
