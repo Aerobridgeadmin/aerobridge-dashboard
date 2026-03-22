@@ -5,87 +5,24 @@ import Link from 'next/link'
 import Header from '@/components/Header'
 import Tabs from '@/components/Tabs'
 import { Badge } from '@/components/Badge'
-import { getExamCategories } from '@/lib/data'
-import type { ExamCategory, ExamTopic } from '@/lib/supabase'
+import { getExamCategories, getAllStudyMaterials } from '@/lib/data'
+import type { ExamCategory, ExamTopic, StudyMaterial } from '@/lib/supabase'
 import { useAuth } from '@/contexts/AuthContext'
 import {
   BookMarked,
+  BookOpen,
+  Brain,
+  Calculator,
   ChevronDown,
   ChevronUp,
   ClipboardList,
+  ExternalLink,
   GraduationCap,
+  Lightbulb,
   Loader2,
 } from 'lucide-react'
 
 type AuthorityTab = 'all' | 'FAA' | 'ICAO'
-
-type TopicStudyGuide = {
-  keyConcepts: string[]
-  formulas?: string[]
-  references: string[]
-}
-
-const STUDY_BY_TOPIC_ID: Record<string, TopicStudyGuide> = {
-  'par-regs': {
-    keyConcepts: [
-      'Passenger currency: within the preceding 90 days, three takeoffs and three landings in the same category, class, and type (if a type rating is required).',
-      'Night passenger carrying: three full-stop takeoffs and full-stop landings during night (1 hour after sunset to 1 hour before sunrise) in the same 90-day window.',
-      'Flight review (BFR): required at least every 24 calendar months per §61.56 to act as PIC.',
-    ],
-    formulas: [
-      'VFR weather minimums — Class B: 3 SM, clear of clouds. Class C & D: 3 SM, 500 ft below / 1,000 ft above / 2,000 ft horizontal from clouds.',
-      'Class E below 10,000 ft MSL: same as C/D (3 SM, 500/1,000/2,000). Class G day: 1 SM, clear of clouds (higher minimums apply at night).',
-      'Mnemonic ARROW — Airworthiness certificate, Registration, Radio station license (if required), Operating limitations (POH/AFM), Weight & balance data.',
-    ],
-    references: ['14 CFR §61.57', '14 CFR §61.56', '14 CFR §91.155', '14 CFR §91.203'],
-  },
-  'par-aero': {
-    keyConcepts: [
-      'Four forces: lift opposes weight; thrust opposes drag. In steady level flight they balance in pairs.',
-      'Angle of attack (AOA) is the angle between the wing chord line and the relative wind — not the same as pitch attitude.',
-      'Load factor in level turns increases with bank angle: approximately 1.15 G at 30°, 1.41 G at 45°, and 2 G at 60°.',
-    ],
-    formulas: [
-      'Stall speed rises with load factor: Vs_new ≈ Vs × √(load factor). Higher G means a higher indicated stall speed.',
-    ],
-    references: ['FAA Pilot’s Handbook of Aeronautical Knowledge', 'FAA Airplane Flying Handbook'],
-  },
-  'par-wx': {
-    keyConcepts: [
-      'Standard atmosphere (ISA) at sea level: 15 °C and 29.92 inHg; approximate lapse rate ~2 °C per 1,000 ft in the troposphere.',
-      'Rough cloud-base estimate (AGL): (temperature − dewpoint) ÷ 4.4 × 1,000 ft — useful for convective cumulus formation.',
-      'METAR groups (typical order): station identifier, date/time, wind, visibility, present weather, clouds, temperature/dewpoint, altimeter.',
-    ],
-    references: ['FAA Aviation Weather Handbook', 'AC 00-6'],
-  },
-  '050-atm': {
-    keyConcepts: [
-      'ICAO ISA: 15 °C at MSL, tropopause at 36,090 ft with temperature −56.5 °C; mean lapse rate 6.5 °C per km below the tropopause.',
-      'Dry adiabatic lapse rate (DALR): about 3 °C per 1,000 ft for unsaturated rising/sinking parcels.',
-      'Saturated adiabatic lapse rate (SALR): roughly 1.5 °C per 1,000 ft (varies with moisture content).',
-    ],
-    references: ['ICAO Doc 7488 — Manual of the ICAO Standard Atmosphere', 'ICAO Annex 3'],
-  },
-  '050-wind': {
-    keyConcepts: [
-      'Jet stream: narrow band of strong winds in the upper troposphere; for exam and planning purposes a core speed of at least about 60 kt is often used as a practical minimum threshold.',
-    ],
-    references: ['ICAO Annex 3', 'WMO / aviation meteorology references'],
-  },
-  '040-phys': {
-    keyConcepts: [
-      'Time of useful consciousness (approximate): FL250 about 3–5 min, FL300 about 1–2 min, FL350 about 30–60 s, FL400 about 15–20 s without supplemental oxygen.',
-      'IMSAFE — Illness, Medication, Stress, Alcohol, Fatigue, Eating: a self-assessment checklist before flight.',
-    ],
-    references: ['ICAO Doc 8984 — Human Factors Training Manual', 'FAA Aeromedical Factors (PHAK)'],
-  },
-  '040-crm': {
-    keyConcepts: [
-      'CRM model pillars: Communication, Situational awareness, Decision making, Teamwork, and Workload management — integrated to support safe operations.',
-    ],
-    references: ['ICAO Doc 9683 — Human Factors Training Manual', 'AC 120-51 (crew resource management)'],
-  },
-}
 
 const accentBarMap: Record<string, string> = {
   blue: 'bg-blue-500',
@@ -100,16 +37,13 @@ const accentBarMap: Record<string, string> = {
   teal: 'bg-teal-500',
 }
 
-const PLACEHOLDER_GUIDE =
-  'Detailed study guide coming soon. Review the reference materials and practice with the quiz below.'
-
 function normalizeTopics(topics: ExamCategory['topics']): ExamTopic[] {
   if (!topics) return []
   if (Array.isArray(topics)) return topics as ExamTopic[]
   if (typeof topics === 'string') {
     try {
       const parsed = JSON.parse(topics)
-      return Array.isArray(parsed) ? parsed : []
+      return Array.isArray(parsed) ? (parsed as ExamTopic[]) : []
     } catch {
       return []
     }
@@ -127,16 +61,42 @@ function authorityBadgeVariant(authority: ExamCategory['authority']) {
   return 'amber' as const
 }
 
-function getStudyGuide(topicId: string): TopicStudyGuide | null {
-  return STUDY_BY_TOPIC_ID[topicId] ?? null
+function materialLookupKey(categoryId: string, topicId: string) {
+  return `${categoryId}:${topicId}`
+}
+
+function coerceStringArray(value: unknown): string[] {
+  if (!Array.isArray(value)) return []
+  return value.filter((item): item is string => typeof item === 'string')
+}
+
+function normalizeStudyMaterial(row: StudyMaterial): StudyMaterial {
+  return {
+    ...row,
+    key_concepts: coerceStringArray(row.key_concepts),
+    formulas: coerceStringArray(row.formulas),
+    mnemonics: coerceStringArray(row.mnemonics),
+    references: coerceStringArray(row.references),
+    tips: coerceStringArray(row.tips),
+  }
 }
 
 export default function ExamPrepStudyPage() {
   const { user } = useAuth()
   const [categories, setCategories] = useState<ExamCategory[]>([])
+  const [studyMaterials, setStudyMaterials] = useState<StudyMaterial[]>([])
   const [loading, setLoading] = useState(true)
   const [tab, setTab] = useState<AuthorityTab>('all')
+  const [searchQuery, setSearchQuery] = useState('')
   const [openTopicIds, setOpenTopicIds] = useState<Set<string>>(new Set())
+
+  const topicMaterialMap = useMemo(() => {
+    const map = new Map<string, StudyMaterial>()
+    for (const m of studyMaterials) {
+      map.set(materialLookupKey(m.category_id, m.topic_id), normalizeStudyMaterial(m))
+    }
+    return map
+  }, [studyMaterials])
 
   const toggleTopic = useCallback((topicId: string) => {
     setOpenTopicIds(prev => {
@@ -152,10 +112,16 @@ export default function ExamPrepStudyPage() {
     ;(async () => {
       setLoading(true)
       try {
-        const cats = await getExamCategories()
-        if (!cancelled) setCategories(cats)
+        const [cats, materials] = await Promise.all([getExamCategories(), getAllStudyMaterials()])
+        if (!cancelled) {
+          setCategories(cats)
+          setStudyMaterials(materials)
+        }
       } catch {
-        if (!cancelled) setCategories([])
+        if (!cancelled) {
+          setCategories([])
+          setStudyMaterials([])
+        }
       } finally {
         if (!cancelled) setLoading(false)
       }
@@ -165,11 +131,31 @@ export default function ExamPrepStudyPage() {
     }
   }, [user?.id])
 
-  const filtered = useMemo(() => {
+  const byAuthority = useMemo(() => {
     if (tab === 'all') return categories
     if (tab === 'FAA') return categories.filter(c => c.authority === 'FAA')
     return categories.filter(c => c.authority === 'ICAO' || c.authority === 'EASA')
   }, [categories, tab])
+
+  const searchLower = searchQuery.trim().toLowerCase()
+
+  const filtered = useMemo(() => {
+    if (!searchLower) return byAuthority
+    return byAuthority.filter(cat => {
+      const topics = sortTopics(normalizeTopics(cat.topics))
+      const inMeta =
+        cat.name.toLowerCase().includes(searchLower) ||
+        (cat.description ?? '').toLowerCase().includes(searchLower) ||
+        (cat.code ?? '').toLowerCase().includes(searchLower)
+      const inTopics = topics.some(
+        t =>
+          t.name.toLowerCase().includes(searchLower) ||
+          (t.description ?? '').toLowerCase().includes(searchLower) ||
+          (t.code ?? '').toLowerCase().includes(searchLower)
+      )
+      return inMeta || inTopics
+    })
+  }, [byAuthority, searchLower])
 
   const faaCount = useMemo(() => categories.filter(c => c.authority === 'FAA').length, [categories])
   const icaoCount = useMemo(
@@ -209,13 +195,23 @@ export default function ExamPrepStudyPage() {
           </div>
         </div>
 
+        <div className="mb-6">
+          <label htmlFor="study-search" className="sr-only">
+            Search courses
+          </label>
+          <input
+            id="study-search"
+            type="search"
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            placeholder="Search courses and topics…"
+            className="w-full max-w-md rounded-xl border border-surface-200 bg-white px-4 py-2.5 text-sm text-surface-800 shadow-sm outline-none ring-brand-500/0 transition-shadow placeholder:text-surface-400 focus:border-brand-300 focus:ring-2 focus:ring-brand-500/20"
+          />
+        </div>
+
         <div className="mb-8">
           <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-surface-500">Filter by authority</p>
-          <Tabs
-            tabs={tabItems}
-            activeTab={tab}
-            onChange={id => setTab(id as AuthorityTab)}
-          />
+          <Tabs tabs={tabItems} activeTab={tab} onChange={id => setTab(id as AuthorityTab)} />
         </div>
 
         {loading ? (
@@ -262,7 +258,9 @@ export default function ExamPrepStudyPage() {
                         ) : (
                           topics.map(topic => {
                             const open = openTopicIds.has(topic.id)
-                            const guide = getStudyGuide(topic.id)
+                            const material = topicMaterialMap.get(materialLookupKey(category.id, topic.id))
+                            const md = material?.content_markdown?.trim()
+
                             return (
                               <li
                                 key={topic.id}
@@ -303,65 +301,116 @@ export default function ExamPrepStudyPage() {
 
                                 {open ? (
                                   <div className="border-t border-surface-100 bg-surface-50/60 px-4 py-4 sm:px-6">
-                                    <div className="space-y-4">
-                                      <div>
-                                        <p className="text-[11px] font-bold uppercase tracking-wider text-brand-600">
-                                          Key concepts
-                                        </p>
-                                        {guide ? (
-                                          <ul className="mt-2 list-disc space-y-1.5 pl-5 text-sm text-surface-700">
-                                            {guide.keyConcepts.map(line => (
-                                              <li key={line}>{line}</li>
-                                            ))}
-                                          </ul>
-                                        ) : (
-                                          <p className="mt-2 text-sm leading-relaxed text-surface-600">
-                                            {PLACEHOLDER_GUIDE}
-                                          </p>
-                                        )}
-                                      </div>
+                                    {material ? (
+                                      <div className="space-y-4">
+                                        {md ? (
+                                          <div className="rounded-lg border border-surface-200 bg-white px-3 py-3">
+                                            <p className="text-[11px] font-bold uppercase tracking-wider text-surface-500">
+                                              Study notes
+                                            </p>
+                                            <div className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-surface-700">
+                                              {md}
+                                            </div>
+                                          </div>
+                                        ) : null}
 
-                                      {guide?.formulas && guide.formulas.length > 0 ? (
                                         <div>
-                                          <p className="text-[11px] font-bold uppercase tracking-wider text-surface-500">
-                                            Formulas & mnemonics
+                                          <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-brand-600">
+                                            <BookOpen className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                                            Key concepts
                                           </p>
                                           <ul className="mt-2 list-disc space-y-1.5 pl-5 text-sm text-surface-700">
-                                            {guide.formulas.map(line => (
+                                            {material.key_concepts.map(line => (
                                               <li key={line}>{line}</li>
                                             ))}
                                           </ul>
                                         </div>
-                                      ) : null}
 
-                                      {guide?.references && guide.references.length > 0 ? (
-                                        <div>
-                                          <p className="text-[11px] font-bold uppercase tracking-wider text-surface-500">
-                                            Official references
-                                          </p>
-                                          <ul className="mt-2 space-y-1 text-sm text-surface-600">
-                                            {guide.references.map(ref => (
-                                              <li key={ref} className="flex gap-2">
-                                                <span className="text-brand-500" aria-hidden>
-                                                  ·
-                                                </span>
-                                                <span>{ref}</span>
-                                              </li>
-                                            ))}
-                                          </ul>
+                                        {material.formulas.length > 0 ? (
+                                          <div>
+                                            <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-surface-500">
+                                              <Calculator className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                                              Formulas & rules
+                                            </p>
+                                            <ul className="mt-2 list-disc space-y-1.5 pl-5 text-sm text-surface-700">
+                                              {material.formulas.map(line => (
+                                                <li key={line}>{line}</li>
+                                              ))}
+                                            </ul>
+                                          </div>
+                                        ) : null}
+
+                                        {material.mnemonics.length > 0 ? (
+                                          <div>
+                                            <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-surface-500">
+                                              <Brain className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                                              Mnemonics
+                                            </p>
+                                            <ul className="mt-2 list-disc space-y-1.5 pl-5 text-sm text-surface-700">
+                                              {material.mnemonics.map(line => (
+                                                <li key={line}>{line}</li>
+                                              ))}
+                                            </ul>
+                                          </div>
+                                        ) : null}
+
+                                        {material.tips.length > 0 ? (
+                                          <div>
+                                            <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-surface-500">
+                                              <Lightbulb className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                                              Study tips
+                                            </p>
+                                            <ul className="mt-2 list-disc space-y-1.5 pl-5 text-sm text-surface-700">
+                                              {material.tips.map(line => (
+                                                <li key={line}>{line}</li>
+                                              ))}
+                                            </ul>
+                                          </div>
+                                        ) : null}
+
+                                        {material.references.length > 0 ? (
+                                          <div>
+                                            <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-surface-500">
+                                              <ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                                              References
+                                            </p>
+                                            <ul className="mt-2 space-y-1 text-sm text-surface-600">
+                                              {material.references.map(ref => (
+                                                <li key={ref} className="flex gap-2">
+                                                  <span className="text-brand-500" aria-hidden>
+                                                    ·
+                                                  </span>
+                                                  <span>{ref}</span>
+                                                </li>
+                                              ))}
+                                            </ul>
+                                          </div>
+                                        ) : null}
+
+                                        <div className="flex flex-wrap gap-2 pt-1">
+                                          <Link
+                                            href={`/courses/exam-prep/${category.id}?topic=${encodeURIComponent(topic.id)}`}
+                                            className="inline-flex items-center gap-2 rounded-lg border border-brand-200 bg-white px-4 py-2 text-sm font-semibold text-brand-700 shadow-sm transition-all hover:border-brand-300 hover:bg-brand-50"
+                                          >
+                                            <ClipboardList className="h-4 w-4 shrink-0" aria-hidden />
+                                            Practice Quiz
+                                          </Link>
                                         </div>
-                                      ) : null}
-
-                                      <div className="flex flex-wrap gap-2 pt-1">
-                                        <Link
-                                          href={`/courses/exam-prep/${category.id}?topic=${encodeURIComponent(topic.id)}`}
-                                          className="inline-flex items-center gap-2 rounded-lg border border-brand-200 bg-white px-4 py-2 text-sm font-semibold text-brand-700 shadow-sm transition-all hover:border-brand-300 hover:bg-brand-50"
-                                        >
-                                          <ClipboardList className="h-4 w-4 shrink-0" aria-hidden />
-                                          Practice Quiz
-                                        </Link>
                                       </div>
-                                    </div>
+                                    ) : (
+                                      <div className="space-y-4">
+                                        <p className="text-sm text-surface-600">Study guide coming soon.</p>
+                                        <div className="flex flex-wrap gap-2 pt-1">
+                                          <Link
+                                            href={`/courses/exam-prep/${category.id}?topic=${encodeURIComponent(topic.id)}`}
+                                            className="inline-flex items-center gap-2 rounded-lg border border-brand-200 bg-white px-4 py-2 text-sm font-semibold text-brand-700 shadow-sm transition-all hover:border-brand-300 hover:bg-brand-50"
+                                          >
+                                            <ClipboardList className="h-4 w-4 shrink-0" aria-hidden />
+                                            Practice Quiz
+                                          </Link>
+                                        </div>
+                                      </div>
+                                    )}
                                   </div>
                                 ) : null}
                               </li>

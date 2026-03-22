@@ -1,4 +1,4 @@
-import { supabase, Course, Student, Batch, Quiz, Certificate, LiveClass, Assignment, Employee, Attendance, ScheduleEvent, Announcement, Discussion, DashboardStats, UserCertification, CertificationType, FlightLogEntry, LearningPath, CourseContent, QuizQuestion, EmailTemplate, EmailSetting, ExamCategory, ExamQuestion, ExamAttempt, ExamAuthority, Lead } from './supabase'
+import { supabase, Course, Student, Batch, Quiz, Certificate, LiveClass, Assignment, Employee, Attendance, ScheduleEvent, Announcement, Discussion, DashboardStats, UserCertification, CertificationType, FlightLogEntry, LearningPath, CourseContent, QuizQuestion, EmailTemplate, EmailSetting, ExamCategory, ExamQuestion, ExamAttempt, ExamAuthority, Lead, StudyMaterial } from './supabase'
 
 // ── QUERY HELPER ──
 async function query<T>(
@@ -349,6 +349,23 @@ export async function createExamCategory(cat: Partial<ExamCategory>) {
 
 export async function createExamQuestion(q: Partial<ExamQuestion>) {
   const { data, error } = await supabase.from('exam_questions').insert(q).select().single()
+  if (error) throw error
+  return data
+}
+
+// ── STUDY MATERIALS ──
+export async function getStudyMaterials(categoryId: string): Promise<StudyMaterial[]> {
+  const { data } = await supabase.from('study_materials').select('*').eq('category_id', categoryId).order('sort_order')
+  return data ?? []
+}
+
+export async function getAllStudyMaterials(): Promise<StudyMaterial[]> {
+  const { data } = await supabase.from('study_materials').select('*').order('sort_order')
+  return data ?? []
+}
+
+export async function upsertStudyMaterial(material: Partial<StudyMaterial>) {
+  const { data, error } = await supabase.from('study_materials').upsert(material, { onConflict: 'category_id,topic_id' }).select().single()
   if (error) throw error
   return data
 }

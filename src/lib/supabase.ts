@@ -270,3 +270,17 @@ export interface ExamProgress {
   last_attempt_at: string
   passed: boolean
 }
+
+export interface StudyMaterial {
+  id: string
+  category_id: string
+  topic_id: string
+  key_concepts: string[]
+  formulas: string[]
+  mnemonics: string[]
+  references: string[]
+  tips: string[]
+  content_markdown: string
+  sort_order: number
+  created_at: string
+}
